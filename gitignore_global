@@ -1,0 +1,7 @@
+tags
+*.iml
+build
+build/*
+*.swp
+*/.*.swp
+*.DS_Store
