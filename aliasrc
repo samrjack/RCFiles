@@ -12,3 +12,22 @@ alias logout='exit'
 alias ls='ls -bF --color'
 alias mv='mv -i'
 alias rm='rm -i'
+
+# Aliases
+alias ls='ls -G'
+alias ll='ls -lah'
+alias la='ls -a'
+alias l='ls -CF'
+alias clc='clear'
+alias dev='ssh samja.aka.corp.amazon.com'
+alias ctags="`brew --prefix`/bin/ctags"
+alias :q="exit"
+
+alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,build,.idea} --exclude={tags}"
+
+# From https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs#answer-9074343
+alias gl1=" git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias gl="gl1"
+alias lg="gl"
+
