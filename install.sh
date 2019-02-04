@@ -8,7 +8,7 @@
 filesInFolder=(*);
 
 # Names of files to be ignored during copying
-removeFiles=(README.md install.sh git_install.sh update.sh);
+removeFiles=(README.md install.sh git_install.sh update.sh .git);
 
 # File for installing programs, plugins, etc.
 externalInstall=git_install.sh;
@@ -21,7 +21,7 @@ for file in ${removeFiles[*]}; do
 done;
 
 # Run any other installs that are needed for the RC files such as plugins
-if [-f $externalInstall]; then
+if [ -f $externalInstall ]; then
     chmod +x $externalInstall;
     ./$externalInstall;
 fi
