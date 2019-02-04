@@ -18,8 +18,6 @@ alias ls='ls -G'
 alias ll='ls -lah'
 alias la='ls -a'
 alias l='ls -CF'
-alias clc='clear'
-alias dev='ssh samja.aka.corp.amazon.com'
 alias ctags="`brew --prefix`/bin/ctags"
 alias :q="exit"
 

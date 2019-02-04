@@ -6,7 +6,7 @@
 [core]
 	pager = less -FMRiX
 	editor = vim
-	excludesfile = ~/RCFiles/gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
 [alias]
