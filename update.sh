@@ -23,7 +23,7 @@ for file in ${filesInFolder[*]}; do
     fromLocation="$HOME/.$file";
     if [ -f $fromLocation ]; then
         cp $fromLocation ./$file;
-        echo $toLocation;
+        echo $fromLocation;
     fi
 done
 

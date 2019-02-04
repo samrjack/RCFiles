@@ -3,5 +3,7 @@ tags
 build
 build/*
 *.swp
+*.swo
 */.*.swp
+*/.*.swo
 *.DS_Store
