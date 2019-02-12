@@ -40,6 +40,9 @@ Plugin 'luochen1990/rainbow'
 " Indentation guide
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" Fuzzy File Finder
+Plugin 'kien/ctrlp.vim'
+
 """"""""""""""""""" Plugins end """""""""""""""""""
 
 call vundle#end()            " All plugins before here
@@ -66,6 +69,9 @@ map <leader>r :RainbowParenthesesToggleAll<CR>
 
 " Indentation guide
 map <leader>i :IndentGuidesToggle<CR>
+
+" Fuzzy finding files
+cmap ep CtrlP
 
 " Colors
 colorscheme desert
