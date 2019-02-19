@@ -43,6 +43,12 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " Fuzzy File Finder
 Plugin 'kien/ctrlp.vim'
 
+" JS React highlighting
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 """"""""""""""""""" Plugins end """""""""""""""""""
 
 call vundle#end()            " All plugins before here
