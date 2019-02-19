@@ -40,6 +40,12 @@ Plugin 'luochen1990/rainbow'
 " Indentation guide
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" JS React highlighting
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 """"""""""""""""""" Plugins end """""""""""""""""""
 
 call vundle#end()            " All plugins before here
