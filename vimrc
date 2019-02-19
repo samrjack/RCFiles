@@ -61,6 +61,7 @@ map <C-n> :NERDTreeToggle<CR>
 " Undo tree options
 " Use leader z to open undo
 map <leader>z :UndotreeToggle<CR>
+:let g:NERDTreeWinSize=60
 
 " Open NERDTree automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
