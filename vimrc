@@ -145,7 +145,7 @@ set backspace=indent,eol,start
 set redrawtime=10000
 
 " Meta changes
-silent execute '!mkdir "~/.swap"'
+silent !mkdir ~/.swap > /dev/null 2>&1
 set backupdir=~/.swap//,.,/tmp//
 set directory=~/.swap//,.,/tmp//
 
