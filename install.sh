@@ -30,7 +30,7 @@ fi
 
 for file in ${filesInFolder[*]}; do
     toLocation="$HOME/.$file";
-    cp ./$file $toLocation;
+    ln -s ./$file $toLocation;
     echo $toLocation;
 done
 

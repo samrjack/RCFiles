@@ -8,4 +8,4 @@
 (require 'org)
 ;; Make Org mode work with files ending in .org
 (add-to-list 'auto-mode-alist '("\\.og$" . org-mode))
-;; The above is the default in recent emacs
+;; The above is the default in recent emacs 
