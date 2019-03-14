@@ -9,6 +9,7 @@ if [ ! -d $vundleDirectory ]; then
 fi
 
 vundleName="Vundle.vim";
-if [ ! -d $vundleName ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git "$vundleDirectory/Vundle.vim";
+vundlePath="$vundleDirectory/$vundleName"
+if [ ! -d "$vundlePath" ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git "$vundlePath";
 fi

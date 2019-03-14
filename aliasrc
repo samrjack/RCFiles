@@ -6,6 +6,8 @@ alias l='ls -CF'
 alias clc='clear'
 alias :q="exit"
 
+# Let there be color in grep!
+export GREP_COLOR='01;36'
 alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,build,.idea} --exclude={tags}"
 
 # From https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs#answer-9074343
