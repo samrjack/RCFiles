@@ -143,3 +143,5 @@ inoremap jk <esc>
 
 set backspace=indent,eol,start
 set redrawtime=10000
+
+autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
