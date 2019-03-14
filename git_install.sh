@@ -5,7 +5,7 @@
 
 vundleDirectory="$HOME/.vim/bundle";
 if [ ! -d $vundleDirectory ]; then
-    mkdir $vundleDirectory;
+    mkdir -vp $vundleDirectory;
 fi
 
 vundleName="Vundle.vim";
