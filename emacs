@@ -9,6 +9,8 @@
 ;; Make Org mode work with files ending in .org
 (add-to-list 'auto-mode-alist '("\\.og$" . org-mode))
 ;; The above is the default in recent emacs
+(setq backup-directory-alist `(("." . "~/.swap")))
+(setq backup-by-copying t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
