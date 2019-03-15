@@ -1,13 +1,23 @@
 # Aliases
-alias ls='ls -G'
-alias ll='ls -lah'
-alias la='ls -a'
-alias l='ls -CF'
-alias clc='clear'
-alias :q="exit"
+alias ls='ls -GbF --color'
+alias ll='ls -alh --color'
+alias la='ls -A --color'
+alias l='ls -CFlh --color'
 
-# Let there be color in grep!
-export GREP_COLOR='01;36'
+alias clc='clear'
+
+alias :q="exit"
+alias logout='exit'
+
+alias g++='g++ -Wall -g -std=c++0x'
+alias g++p='g++ -pthread -std=c++11'
+alias gccp='gcc -lpthread -Wall -Werror'
+alias gcc='gcc -Wall -Werror'
+
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
 alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,build,.idea} --exclude={tags}"
 
 # From https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs#answer-9074343
@@ -15,3 +25,4 @@ alias gl1=" git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias gl="gl1"
 alias lg="gl"
+
