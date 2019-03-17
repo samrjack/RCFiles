@@ -10,8 +10,27 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;;;;;;;;;;;;;;;;;;;;;;; Start package installs ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Standard packages to install
+
+;;;;; Evil Mode packages ;;;;;
+(use-package evil
+  :ensure t)
+
+(use-package evil-escape
+  :ensure t)
+
+;;;;; Org Mode Packages ;;;;;
+(use-package org
+  :ensure t)
+
+;; Org bullet points look nice
+(use-package org-bullets
+  :ensure t
+  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+;;;;; Packages for general environment changes ;;;;;
+;; Allows you to try a package before installing
 (use-package try
   :ensure t)
 
@@ -28,12 +47,8 @@
     (global-set-key [remap other-window] 'ace-window)
     (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))) ))))
   
-;; Org bullet points look nice
-(use-package org-bullets
-  :ensure t
-  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-;; Game related
+;;;;; Game related ;;;;;
 (use-package 2048-game
   :ensure t)
 
@@ -52,7 +67,7 @@
 (use-package threes
   :ensure t)
 
-;; Others that looked interesting
+;;;;; Others that looked interesting ;;;;;
 (use-package suggest
   :ensure t)
 
