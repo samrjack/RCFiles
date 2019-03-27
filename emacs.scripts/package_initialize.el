@@ -60,6 +60,11 @@
 (use-package company
   :ensure t)
 
+;; Themes
+(use-package dracula-theme
+  :ensure t
+  :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+
 ;;;;; Game related ;;;;;
 (use-package 2048-game
   :ensure t)
