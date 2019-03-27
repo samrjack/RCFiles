@@ -9,45 +9,53 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 """"""""""""""""""" All plugins here """""""""""""""""""
+""""" Syntax """""
+    " Syntax highlighting for perl-mason
+    Plugin 'aming/vim-mason'
 
-" Syntax highlighting for perl-mason
-Plugin 'aming/vim-mason'
+    " Haskell folding capability
+    Plugin 'vim-scripts/haskellFold'
 
-" Nerd tree directory navigator
-Plugin 'scrooloose/nerdtree'
+    " JS React highlighting
+    " Plugin 'pangloss/vim-javascript'
+    " Plugin 'maxmellon/vim-jsx-pretty'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'
 
-" NERDTree git plugin
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+""""" Navigation """""
+    " Nerd tree directory navigator
+    Plugin 'scrooloose/nerdtree'
 
-" Undo tree plugin
-Plugin 'mbbill/undotree'
+    " Fuzzy File Finder
+    Plugin 'kien/ctrlp.vim'
 
-" Allow for surrounding notation
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
+""""" Viewing """""
+    " Differenc color parentheses
+    Plugin 'kien/rainbow_parentheses.vim'
+    Plugin 'luochen1990/rainbow'
 
-" Haskell folding capability
-Plugin 'vim-scripts/haskellFold'
+    " Indentation guide
+    Plugin 'nathanaelkane/vim-indent-guides'
 
-" Git
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+    " Dracula theme
+    Plugin 'dracula/vim'
 
-" Differenc color parentheses
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'luochen1990/rainbow'
+""""" Editing """""
+    " Undo tree plugin
+    Plugin 'mbbill/undotree'
 
-" Indentation guide
-Plugin 'nathanaelkane/vim-indent-guides'
+    " Allow for surrounding notation
+    Plugin 'tpope/vim-surround'
+    Plugin 'tpope/vim-repeat'
 
-" Fuzzy File Finder
-Plugin 'kien/ctrlp.vim'
+""""" GIT """""
+    " NERDTree git plugin
+    Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-" JS React highlighting
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'maxmellon/vim-jsx-pretty'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+    " Git
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-rhubarb'
 
 """"""""""""""""""" Plugins end """""""""""""""""""
 
@@ -55,99 +63,125 @@ call vundle#end()            " All plugins before here
 filetype plugin indent on    " turn filetypes back on
 filetype on
 
-" Nerd tree options
-" Use CTRL-n to open NERDtree
-map <C-n> :NERDTreeToggle<CR>
-" Undo tree options
-" Use leader z to open undo
-map <leader>z :UndotreeToggle<CR>
-:let g:NERDTreeWinSize=60
+""""""""""""""""""" Configure Plugin values and mappings """""""""""""""""""
+""""" Navigation """""
+    " Nerd tree options
+    " Use CTRL-n to open NERDtree
+    map <C-n> :NERDTreeToggle<CR>
+    " Undo tree options
+    " Use leader z to open undo
+    map <leader>z :UndotreeToggle<CR>
 
-" Open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    " Resize NERDTree window to be bigger than standard
+    :let g:NERDTreeWinSize=80
 
-" Git plugin settings
-set updatetime=100
-nnoremap <Leader>gb :Gblame<CR>
+    " Don't let NERDTree quit after selecting a file
+    let NERDTreeQuitOnOpen=0
 
-" Rainbow parentheses
-map <leader>r :RainbowParenthesesToggleAll<CR>
+    " Open NERDTree automatically when vim starts up on opening a directory
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    
+    " Fuzzy finding files
+    cnoreabbrev ep CtrlP
 
-" Indentation guide
-map <leader>i :IndentGuidesToggle<CR>
+""""" Viewing """""
+    " Rainbow parentheses
+    nnoremap <leader>r :RainbowParenthesesToggleAll<CR>
 
-" Fuzzy finding files
-cmap ep CtrlP
+    " Indentation guide
+    nnoremap <leader>i :IndentGuidesToggle<CR>
 
-" Colors
-colorscheme desert
-syntax enable          " Enable syntax processing
-set colorcolumn=100    " Hilights the 80th column
-" Sets column color to grey
-highlight ColorColumn ctermbg=8
+""""" Editing """""
+    " Undo Tree
+    nnoremap <Leader>u :UndotreeToggle<CR>
 
-" Tabs
-set smarttab           " Indents to the correct spot first time
-set shiftwidth=4       " Code defaults to 4 space indents
-set tabstop=4          " Number of visual spaces per TAB
-set softtabstop=4      " Number of spaces in a tab when editing
-set autoindent         " Automatically indents when enter is pressed
-set expandtab          " Makes all tabs into spaces
+""""" GIT """""
+    " Git plugin settings
+    set updatetime=2000
+    let g:gitgutter_map_keys = 0
+    nnoremap <Leader>gb :Gblame<CR>
+    nnoremap <Leader>gx :GitGutterSignsToggle<CR>
+    nnoremap <Leader>gh :GitGutterLineHighlightsToggle<CR>
+    nnoremap <Leader>gn :GitGutterNextHunk<CR>
+    nnoremap <Leader>gp :GitGutterPrevHunk<CR>
+    nnoremap <Leader>gf :GitGutterFold<CR>
+    nnoremap <Leader>ga :GitGutterStageHunk<CR>
+    nnoremap <Leader>gu :GitGutterUndoHunk<CR>
+    nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
 
-" UI
-set relativenumber     " Show line numbers relative to cursor
-set number             " Shows the line number of the current line.
-set showcmd            " Shows the most recent command
-set cursorline         " Highlight current line
-filetype indent on     " Load filetype-specific indent files
-set wildmenu           " Visual autocomplete for command menue
-set lazyredraw         " Redraw only when needed
-set showmatch          " Highlight matching [{()}]
-set ruler
+""""""""""""""""""" Environment Values """""""""""""""""""
+""""" Colors """""
+    " colorscheme dracula
+    colorscheme desert
+    syntax enable          " Enable syntax processing
+    set colorcolumn=100    " Hilights the 100th column
+    " Sets column color to grey
+    highlight ColorColumn ctermbg=8
 
-" Searching
-set incsearch          " Search as characters are entered
-set hlsearch           " Highlight search matches
-set dictionary=/usr/share/dict/words "dictionary for searching
+""""" Tabs """""
+    set smarttab           " Indents to the correct spot first time
+    set shiftwidth=4       " Code defaults to 4 space indents
+    set tabstop=4          " Number of visual spaces per TAB
+    set softtabstop=4      " Number of spaces in a tab when editing
+    set autoindent         " Automatically indents when enter is pressed
+    set expandtab          " Makes all tabs into spaces
 
-" Folding
-set foldenable         " Enables code folding
-set foldnestmax=10     " Prevents too many folds
-nnoremap <space> za
-                       " Set space to close folds
-set foldmethod=indent  " Default to using indentation for folds
-set foldlevelstart=20  " Start with all folds open
+""""" UI """""
+    set relativenumber     " Show line numbers relative to cursor
+    set number             " Shows the line number of the current line.
+    set showcmd            " Shows the most recent command
+    set cursorline         " Highlight current line
+    filetype indent on     " Load filetype-specific indent files
+    set wildmenu           " Visual autocomplete for command menue
+    set lazyredraw         " Redraw only when needed
+    set showmatch          " Highlight matching [{()}]
+    set ruler
 
-" Note, perl automatically sets foldmethod in the syntax file
-autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
-autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+""""" Searching """""
+    set incsearch          " Search as characters are entered
+    set hlsearch           " Highlight search matches
+    set dictionary=/usr/share/dict/words "dictionary for searching
 
-" Remaps
-nnoremap gV `[v`]
-                       " Highlight last inserted text
-noremap <C-i> ^
-                       " Go to beginning of line
-noremap <C-a> $
-                       " Go to end of line
-noremap <C-j> kddpkJ
-                       " Joins the previous line to the end of the current line (J in the oppisite direction)
+""""" Folding """""
+    set foldenable         " Enables code folding
+    set foldnestmax=100    " Prevents too many folds
+    nnoremap <space> za
+                           " Set space to close folds
+    set foldmethod=indent  " Default to using indentation for folds
+    set foldlevelstart=20  " Start with all folds open
 
-" Insert mode moveing
-inoremap <C-h> <Right>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap jk <esc>
-                       " jk kes act as esc together
+""""" Remaps """""
+    nnoremap gV `[v`]
+                           " Highlight last inserted text
+    noremap <C-i> ^
+                           " Go to beginning of line
+    noremap <C-a> $
+                           " Go to end of line
+    noremap <C-j> kddpkJ
+                           " Joins the previous line to the end of the current line (J in the oppisite direction)
+    noremap <C-l> :redraw<CR>:syntax sync fromstart<CR>
+                           " Changes the ctrl-l redraw to also redraw syntax
+                           " highlighting
 
-set backspace=indent,eol,start
-set redrawtime=10000
+""""" Insert mode moveing """""
+    inoremap <C-h> <Right>
+    inoremap <C-j> <Down>
+    inoremap <C-k> <Up>
+    inoremap <C-l> <Right>
+    inoremap jk <esc>
+                           " jk kes act as esc together
 
-" Meta changes
-silent !mkdir ~/.swap > /dev/null 2>&1
-set backupdir=~/.swap//,.,/tmp//
-set directory=~/.swap//,.,/tmp//
+    set backspace=indent,eol,start
+    set redrawtime=10000
 
-" File Specific changes
-autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
+""""" Meta changes """""
+    silent !mkdir ~/.swap > /dev/null 2>&1
+    set backupdir=~/.swap//,.,/tmp//
+    set directory=~/.swap//,.,/tmp//
+
+""""" File Specific changes """""
+    "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
+
+    "Note, perl automatically sets foldmethod in the syntax file
+    autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
+    autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
