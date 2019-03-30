@@ -39,6 +39,12 @@ Plugin 'VundleVim/Vundle.vim'
 
     " Dracula theme
     Plugin 'dracula/vim'
+    
+    " Badwolf theme
+    Plugin 'sjl/badwolf'
+    
+    " Colorful status bar
+    Plugin 'itchyny/lightline.vim'
 
 """"" Editing """""
     " Undo tree plugin
@@ -47,6 +53,9 @@ Plugin 'VundleVim/Vundle.vim'
     " Allow for surrounding notation
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-repeat'
+    
+    " Allow for easy commenting
+    Plugin 'tomtom/tcomment_vim'
 
 """"" GIT """""
     " NERDTree git plugin
