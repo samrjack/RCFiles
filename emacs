@@ -16,7 +16,7 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(package-selected-packages
    (quote
-    (ivy which-key use-package try threes suggest sudoku steam org-bullets minesweeper mines key-chord helm evil-visual-mark-mode evil-escape eshell-up eshell-prompt-extras eshell-git-prompt ereader ace-window 2048-game))))
+    (company auto-complete ivy which-key use-package try threes suggest sudoku steam org-bullets minesweeper mines key-chord helm evil-visual-mark-mode evil-escape eshell-up eshell-prompt-extras eshell-git-prompt ereader ace-window 2048-game))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -50,6 +50,16 @@
 (use-package ivy
   :ensure t)
 
+;;;;; Editing Features ;;;;;
+(use-package auto-complete
+  :ensure t
+  :init (progn
+	  (ac-config-default)
+	  (global-auto-complete-mode t)))
+
+(use-package company
+  :ensure t)
+
 ;;;;; Game related ;;;;;
 (use-package 2048-game
   :ensure t)
