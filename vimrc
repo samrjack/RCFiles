@@ -42,6 +42,9 @@ Plugin 'VundleVim/Vundle.vim'
     
     " Badwolf theme
     Plugin 'sjl/badwolf'
+
+    " Gruvbox theme
+    Plugin 'morhetz/gruvbox'
     
     " Colorful status bar
     Plugin 'itchyny/lightline.vim'
@@ -65,6 +68,10 @@ Plugin 'VundleVim/Vundle.vim'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'tpope/vim-fugitive'
     Plugin 'tpope/vim-rhubarb'
+
+""""" Other """""
+    " Calandar
+    Plugin 'mattn/calendar-vim'
 
 """"""""""""""""""" Plugins end """""""""""""""""""
 
@@ -118,6 +125,10 @@ filetype on
     nnoremap <Leader>gu :GitGutterUndoHunk<CR>
     nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
 
+""""" Other """""
+    " Calandar
+    nnoremap <Leader>c :Calendar<CR>
+
 """"""""""""""""""" Environment Values """""""""""""""""""
 """"" Colors """""
     " colorscheme dracula
@@ -136,7 +147,7 @@ filetype on
     set expandtab          " Makes all tabs into spaces
 
 """"" UI """""
-    set relativenumber     " Show line numbers relative to cursor
+    " set relativenumber     " Show line numbers relative to cursor
     set number             " Shows the line number of the current line.
     set showcmd            " Shows the most recent command
     set cursorline         " Highlight current line
