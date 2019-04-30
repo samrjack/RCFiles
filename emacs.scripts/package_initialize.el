@@ -24,6 +24,9 @@
 (use-package org
   :ensure t)
 
+(use-package evil-org
+  :ensure t)
+
 ;; Org bullet points look nice
 (use-package org-bullets
   :ensure t
