@@ -48,6 +48,9 @@ Plugin 'VundleVim/Vundle.vim'
     
     " Colorful status bar
     Plugin 'itchyny/lightline.vim'
+    
+    " Hex Color viewing
+    Plugin 'gu-fan/colorv.vim'
 
 """"" Editing """""
     " Undo tree plugin
@@ -106,6 +109,15 @@ filetype on
 
     " Indentation guide
     nnoremap <leader>i :IndentGuidesToggle<CR>
+    
+    " Colorschemes
+    cnoreabbrev badwolf colorscheme badwolf
+    cnoreabbrev dracula colorscheme dracula
+    cnoreabbrev gruvbox colorscheme gruvbox
+
+    " To see lightline
+    set laststatus=2
+    set noshowmode
 
 """"" Editing """""
     " Undo Tree

@@ -13,13 +13,13 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(custom-enabled-themes (quote (dracula)))
+ '(custom-enabled-themes (quote (misterioso)))
  '(custom-safe-themes
    (quote
     ("274fa62b00d732d093fc3f120aca1b31a6bb484492f31081c1814a858e25c72e" default)))
  '(package-selected-packages
    (quote
-    (dracula-theme ivy which-key use-package try threes suggest sudoku steam org-bullets minesweeper mines key-chord helm evil-visual-mark-mode evil-escape eshell-up eshell-prompt-extras eshell-git-prompt ereader ace-window 2048-game))))
+    (evil-org dracula-theme ivy which-key use-package try threes suggest sudoku steam org-bullets minesweeper mines key-chord helm evil-visual-mark-mode evil-escape eshell-up eshell-prompt-extras eshell-git-prompt ereader ace-window 2048-game))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
