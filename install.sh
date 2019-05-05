@@ -8,7 +8,7 @@
 filesInFolder=(*);
 
 # Names of files to be ignored during copying
-removeFiles=(README.md install.sh i3 git_install.sh update.sh .git);
+removeFiles=(README.md install.sh i3 git_install.sh update.sh compton .git);
 
 # File for installing programs, plugins, etc.
 externalInstall=git_install.sh;

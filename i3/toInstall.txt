@@ -1,0 +1,16 @@
+i3
+i3status
+i3lock
+i3lock-fancy
+i3block
+
+xbacklight
+alsa-utils 
+pulseaudio
+xss-lock
+
+feh
+arandr
+lxappearance
+rofi
+compton

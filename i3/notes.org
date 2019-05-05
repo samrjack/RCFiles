@@ -1,0 +1,23 @@
+
+Setting background image
+    feh --bg-scale <Absolute path to wallpaper>
+    exec_always feh --bg-scale <Absolute path to wallpaper>
+
+Organizing monitors
+    Launch arandr from dmenue
+    exec_always <Paste results of saving in arandr>
+
+Naming workspaces
+    In config, rename workspaces to whatever they should now be named. Be consistant.
+
+Default moving program to a particular window
+    1. Go to terminal and type xprop. Select desired application.
+    1. Find line for WM_CLASS
+    1. go to config and type:
+        assign [class="<class name>"] $<workspace name>
+
+    To auto-open program when i3 is launched
+        exec <program name>
+
+use nice symbol in names:
+    go to https://fontawesome.com/cheatsheet and copy the icon you want, paste it where you want it. Awesome font should already be installed from todo file.
