@@ -71,6 +71,9 @@ Plugin 'VundleVim/Vundle.vim'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'tpope/vim-fugitive'
     Plugin 'tpope/vim-rhubarb'
+    
+    " Git Messenge
+    Plugin 'rhysd/git-messenger.vim'
 
 """"" Other """""
     " Calandar
@@ -127,6 +130,7 @@ filetype on
     " Git plugin settings
     set updatetime=2000
     let g:gitgutter_map_keys = 0
+    let g:git_messenger_always_into_popup = 1
     nnoremap <Leader>gb :Gblame<CR>
     nnoremap <Leader>gx :GitGutterSignsToggle<CR>
     nnoremap <Leader>gh :GitGutterLineHighlightsToggle<CR>
@@ -136,6 +140,7 @@ filetype on
     nnoremap <Leader>ga :GitGutterStageHunk<CR>
     nnoremap <Leader>gu :GitGutterUndoHunk<CR>
     nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
+    nnoremap <Leader>gm :GitMessenger<CR>
 
 """"" Other """""
     " Calandar
