@@ -1,0 +1,6 @@
+setup backlight. If xbacklight doesn't work, follow https://unix.stackexchange.com/questions/301724/xbacklight-not-working
+
+https://github.com/FortAwesome/Font-Awesome - go to releases and download most recent
+find awesome font file somewhere in the zips and copy it to ~/.fonts folder.
+
+

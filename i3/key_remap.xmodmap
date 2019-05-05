@@ -1,0 +1,26 @@
+! -*- coding: utf-8 -*-
+!
+! 2019/04/30
+! File for making any key swaps on keyboard.
+!
+! Use 'xev -event keyboard' to find key number and current binding
+!
+! Mapping of last row of keys
+! Key 32  - Control_L
+! Key 133 - Super_L
+! Key 64  - Alt_L
+!
+! Key 65  - " "
+!
+! Key 108 - Alt_R
+! (fn key with no keycode)
+! key 105 - Control_R
+
+clear mod1
+clear mod4
+keycode 133 = Alt_L
+keycode 64  = Super_L
+keycode 108 = Super_R
+add mod1 = Alt_L
+add mod4 = Super_L Super_R
+
