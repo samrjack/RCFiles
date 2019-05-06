@@ -186,6 +186,7 @@ filetype on
                            " Set space to close folds
     set foldmethod=indent  " Default to using indentation for folds
     set foldlevelstart=20  " Start with all folds open
+    set foldignore=""      " Doesn't ignore any characters when deciding fold level
 
 """"" Remaps """""
     nnoremap gV `[v`]
