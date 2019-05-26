@@ -128,7 +128,7 @@ filetype on
 
 """"" GIT """""
     " Git plugin settings
-    set updatetime=2000
+    set updatetime=500
     let g:gitgutter_map_keys = 0
     let g:git_messenger_always_into_popup = 1
     nnoremap <Leader>gb :Gblame<CR>
