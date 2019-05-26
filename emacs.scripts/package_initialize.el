@@ -60,9 +60,6 @@
 	  (ac-config-default)
 	  (global-auto-complete-mode t)))
 
-(use-package company
-  :ensure t)
-
 ;; Themes
 (use-package dracula-theme
   :ensure t
