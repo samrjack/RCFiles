@@ -8,6 +8,8 @@
     # Set lock screen if laptop is closed.
     exec --no-startup-id xss-lock -- ~/.i3/lock.sh
 
+    # Set up features
+
     # Set the mod key to be windows start keys (or cmd if swaped correctly).
     set $mod Mod4
 
@@ -17,8 +19,11 @@
     # Start wifi program
     exec --no-startup-id nm-applet
 
+    # Start bluetooth program
+    exec --no-startup-id blueman-applet
+
     # Set background image
-    exec_always feh --bg-scale /home/sam/Pictures/backgrounds/White-Tree-Desktop-Background.jpg
+    exec_always feh --bg-fill /home/sam/Pictures/backgrounds/background
 
     # Allow transparent windows
     exec --no-startup-id compton -f
@@ -81,6 +86,25 @@
     # Screen Shots
     bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
     bindsym Control+Print exec gnome-screenshot -a
+
+    # Brightness mode
+        mode "brightness" {
+            # These bindings trigger as soon as you enter the brightness mode
+            
+            bindsym j exec xbacklight -dec 8
+            bindsym k exec xbacklight -inc 8
+
+            # same bindings, but for the arrow keys
+            bindsym Down exec xbacklight -dec 8
+            bindsym Up exec xbacklight -inc 8
+
+            # back to normal: Enter or Escape
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+
+        bindsym $mod+b mode "brightness"
+
 
 # Colorscheme
     # gruvbox colorscheme
@@ -197,26 +221,26 @@
 
     # resize window
         mode "resize" {
-                # These bindings trigger as soon as you enter the resize mode
+            # These bindings trigger as soon as you enter the resize mode
 
-                # Pressing left will shrink the window’s width.
-                # Pressing right will grow the window’s width.
-                # Pressing up will shrink the window’s height.
-                # Pressing down will grow the window’s height.
-                bindsym h resize shrink width 4 px or 4 ppt
-                bindsym j resize grow height 4 px or 4 ppt
-                bindsym k resize shrink height 4 px or 4 ppt
-                bindsym l resize grow width 4 px or 4 ppt
+            # Pressing left will shrink the window’s width.
+            # Pressing right will grow the window’s width.
+            # Pressing up will shrink the window’s height.
+            # Pressing down will grow the window’s height.
+            bindsym h resize shrink width 4 px or 4 ppt
+            bindsym j resize grow height 4 px or 4 ppt
+            bindsym k resize shrink height 4 px or 4 ppt
+            bindsym l resize grow width 4 px or 4 ppt
 
-                # same bindings, but for the arrow keys
-                bindsym Left resize shrink width 4 px or 4 ppt
-                bindsym Down resize grow height 4 px or 4 ppt
-                bindsym Up resize shrink height 4 px or 4 ppt
-                bindsym Right resize grow width 4 px or 4 ppt
+            # same bindings, but for the arrow keys
+            bindsym Left resize shrink width 4 px or 4 ppt
+            bindsym Down resize grow height 4 px or 4 ppt
+            bindsym Up resize shrink height 4 px or 4 ppt
+            bindsym Right resize grow width 4 px or 4 ppt
 
-                # back to normal: Enter or Escape
-                bindsym Return mode "default"
-                bindsym Escape mode "default"
+            # back to normal: Enter or Escape
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
         }
 
         bindsym $mod+r mode "resize"

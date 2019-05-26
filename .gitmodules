@@ -1,0 +1,3 @@
+[submodule "i3Scripts"]
+	path = i3/scripts
+	url = https://github.com/vivien/i3blocks-contrib

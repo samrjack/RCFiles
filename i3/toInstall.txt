@@ -16,3 +16,6 @@ rofi
 compton
 
 ranger
+
+blueman
+pavucontrol
