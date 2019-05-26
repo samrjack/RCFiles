@@ -3,6 +3,8 @@
 ;; All loading happens in init.el
 (load "~/.emacs.scripts/init.el")
 
+(x-focus-fram nil)
+
 ;; Required so emacs can add it's own values when desired.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
