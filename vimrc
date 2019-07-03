@@ -22,6 +22,9 @@ Plugin 'VundleVim/Vundle.vim'
     Plugin 'pangloss/vim-javascript'
     Plugin 'mxw/vim-jsx'
 
+    " Larg syntax highlighting package
+    Plugin 'sheerun/vim-polyglot'
+
 """"" Navigation """""
     " Nerd tree directory navigator
     Plugin 'scrooloose/nerdtree'
@@ -36,21 +39,28 @@ Plugin 'VundleVim/Vundle.vim'
 
     " Indentation guide
     Plugin 'nathanaelkane/vim-indent-guides'
-
-    " Dracula theme
-    Plugin 'dracula/vim'
-    
-    " Badwolf theme
-    Plugin 'sjl/badwolf'
-
-    " Gruvbox theme
-    Plugin 'morhetz/gruvbox'
     
     " Colorful status bar
     Plugin 'itchyny/lightline.vim'
     
     " Hex Color viewing
     Plugin 'gu-fan/colorv.vim'
+    
+    """ Themes
+        " Dracula theme
+        Plugin 'dracula/vim'
+        
+        " Badwolf theme
+        Plugin 'sjl/badwolf'
+
+        " Gruvbox theme
+        Plugin 'morhetz/gruvbox'
+
+        " Green forest dark theme
+        Plugin 'sainnhe/vim-color-forest-night'
+
+        " Sacred forest
+        Plugin 'KKPMW/sacredforest-vim'
 
 """"" Editing """""
     " Undo tree plugin
@@ -107,8 +117,11 @@ filetype on
     cnoreabbrev ep CtrlP
 
 """"" Viewing """""
+    
+    let g:rainbow_active = 0
     " Rainbow parentheses
-    nnoremap <leader>r :RainbowParenthesesToggleAll<CR>
+    " nnoremap <leader>r :RainbowParenthesesToggleAll<CR>
+    nnoremap <leader>r :RainbowToggle<CR>
 
     " Indentation guide
     nnoremap <leader>i :IndentGuidesToggle<CR>
@@ -140,6 +153,7 @@ filetype on
     nnoremap <Leader>ga :GitGutterStageHunk<CR>
     nnoremap <Leader>gu :GitGutterUndoHunk<CR>
     nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
+    nnoremap <Leader>gd :Gdiff<CR>
     nnoremap <Leader>gm :GitMessenger<CR>
 
 """"" Other """""
@@ -148,10 +162,18 @@ filetype on
 
 """"""""""""""""""" Environment Values """""""""""""""""""
 """"" Colors """""
+    "enables true color for themes
+    if exists('+termguicolors')
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        set termguicolors
+    endif
+
     " colorscheme dracula
-    colorscheme desert
+    " colorscheme desert
+    colorscheme forest-night
     syntax enable          " Enable syntax processing
-    set colorcolumn=100    " Hilights the 100th column
+    set colorcolumn=120    " Hilights the 100th column
     " Sets column color to grey
     highlight ColorColumn ctermbg=8
 
@@ -218,9 +240,14 @@ filetype on
     set directory=~/.swap//,.,/tmp//
 
 """"" File Specific changes """""
+" Set default file type for files without so that they can have basic
+" hilighting functionality.
+au BufNewFile,BufRead * if &ft == '' | set filetype=c | endif
+
     "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
     autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
 
     "Note, perl automatically sets foldmethod in the syntax file
     autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
     autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+
