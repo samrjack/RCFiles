@@ -2,6 +2,8 @@ tags
 *.iml
 build
 build/*
+annotation-generated-src
+annotation-generated-src/*
 *.swp
 *.swo
 */.*.swp

@@ -1,209 +1,282 @@
 set nocompatible      " VI improve allowed
 filetype off
 
+function! IsVundleInstalled()
+    let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+    return filereadable(vundle_readme)
+endfunction
+" Install vundle if needed
+	let vundlePreviouslyInstalled=1
+	if !IsVundleInstalled() && executable('git')
+	    echo "Installing Vundle.."
+	    echo ""
+	    silent !mkdir -p ~/.vim/bundle
+	    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	    let vundlePreviouslyInstalled=0
+	endif
+
+    if IsVundleInstalled()
+        set rtp+=~/.vim/bundle/Vundle.vim/
+        call vundle#rc()
+
+        " let Vundle manage Vundle, required
+        Plugin 'VundleVim/Vundle.vim'
+        if vundlePreviouslyInstalled == 0
+            echo "Installing Bundles, please ignore key map error messages"
+            echo ""
+            :PluginInstall
+        endif
+    endif
+" END - Setting up Vundle
+
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if IsVundleInstalled()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
+    " let Vundle manage Vundle
+    Plugin 'VundleVim/Vundle.vim'
 
-""""""""""""""""""" All plugins here """""""""""""""""""
-""""" Syntax """""
-    " Syntax highlighting for perl-mason
-    Plugin 'aming/vim-mason'
+    """"""""""""""""""" All plugins here """""""""""""""""""
+    """"" Syntax """""
+        " Syntax highlighting for perl-mason
+        Plugin 'aming/vim-mason'
 
-    " Haskell folding capability
-    Plugin 'vim-scripts/haskellFold'
+        " Haskell folding capability
+        Plugin 'vim-scripts/haskellFold'
 
-    " JS React highlighting
-    " Plugin 'pangloss/vim-javascript'
-    " Plugin 'maxmellon/vim-jsx-pretty'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'mxw/vim-jsx'
+        " JS React highlighting
+        " Plugin 'pangloss/vim-javascript'
+        " Plugin 'maxmellon/vim-jsx-pretty'
+        Plugin 'pangloss/vim-javascript'
+        Plugin 'mxw/vim-jsx'
 
-    " Larg syntax highlighting package
-    Plugin 'sheerun/vim-polyglot'
+        " Larg syntax highlighting package
+        Plugin 'sheerun/vim-polyglot'
 
-""""" Navigation """""
-    " Nerd tree directory navigator
-    Plugin 'scrooloose/nerdtree'
+        " Tmux environment
+        Plugin 'tmux-plugins/vim-tmux'
 
-    " Fuzzy File Finder
-    Plugin 'kien/ctrlp.vim'
+        " Allow Ansi color escape characters to be shown
+        Plugin 'powerman/vim-plugin-AnsiEsc'
+     
+        " Python IDE style completion
+        " Plugin 'python-mode/python-mode'
 
-""""" Viewing """""
-    " Differenc color parentheses
-    Plugin 'kien/rainbow_parentheses.vim'
-    Plugin 'luochen1990/rainbow'
+    """"" Navigation """""
+        " Nerd tree directory navigator
+        Plugin 'scrooloose/nerdtree'
 
-    " Indentation guide
-    Plugin 'nathanaelkane/vim-indent-guides'
-    
-    " Colorful status bar
-    Plugin 'itchyny/lightline.vim'
-    
-    " Hex Color viewing
-    Plugin 'gu-fan/colorv.vim'
-    
-    """ Themes
-        " Dracula theme
-        Plugin 'dracula/vim'
+        " Fuzzy File Finder
+        Plugin 'kien/ctrlp.vim'
+
+    """"" Viewing """""
+        " Differenc color parentheses
+        Plugin 'kien/rainbow_parentheses.vim'
+        Plugin 'luochen1990/rainbow'
+
+        " Indentation guide
+        Plugin 'nathanaelkane/vim-indent-guides'
         
-        " Badwolf theme
-        Plugin 'sjl/badwolf'
+        " Colorful status bar
+        Plugin 'itchyny/lightline.vim'
+        
+        " Hex Color viewing
+        Plugin 'gu-fan/colorv.vim'
+        
+        """ Themes
+            " Dracula theme
+            Plugin 'dracula/vim'
+            
+            " Badwolf theme
+            Plugin 'sjl/badwolf'
 
-        " Gruvbox theme
-        Plugin 'morhetz/gruvbox'
+            " Gruvbox theme
+            Plugin 'morhetz/gruvbox'
 
-        " Green forest dark theme
-        Plugin 'sainnhe/vim-color-forest-night'
+            " Green forest dark theme
+            Plugin 'sainnhe/vim-color-forest-night'
 
-        " Sacred forest
-        Plugin 'KKPMW/sacredforest-vim'
+            " Sacred forest
+            Plugin 'KKPMW/sacredforest-vim'
 
-""""" Editing """""
-    " Undo tree plugin
-    Plugin 'mbbill/undotree'
+    """"" Editing """""
+        " Undo tree plugin
+        Plugin 'mbbill/undotree'
 
-    " Allow for surrounding notation
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-repeat'
-    
-    " Allow for easy commenting
-    Plugin 'tomtom/tcomment_vim'
+        " Allow for surrounding notation
+        Plugin 'tpope/vim-surround'
+        Plugin 'tpope/vim-repeat'
+        
+        " Allow for easy commenting
+        Plugin 'tomtom/tcomment_vim'
 
-    " Commenting plugin
-    Plugin 'scrooloose/nerdcommenter'
+        " Commenting plugin
+        Plugin 'scrooloose/nerdcommenter'
 
-""""" GIT """""
-    " NERDTree git plugin
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
+        " Incrementer works with dates too
+        Plugin 'tpope/vim-speeddating'
 
-    " Git
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-rhubarb'
-    
-    " Git Messenge
-    Plugin 'rhysd/git-messenger.vim'
+        " Working with CSVs
+        Plugin 'chrisbra/csv.vim'
 
-""""" Other """""
-    " Calandar
-    Plugin 'mattn/calendar-vim'
+    """"" GIT """""
+        " NERDTree git plugin
+        Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-""""""""""""""""""" Plugins end """""""""""""""""""
+        " Git
+        Plugin 'airblade/vim-gitgutter'
+        Plugin 'tpope/vim-fugitive'
+        Plugin 'tpope/vim-rhubarb'
+        
+        " Git Messenge
+        Plugin 'rhysd/git-messenger.vim'
 
-call vundle#end()            " All plugins before here
+    """"" Other """""
+        " Calandar
+        Plugin 'mattn/calendar-vim'
+
+        " Save file view after exiting file
+        Plugin 'vim-scripts/restore_view.vim'
+
+        " Access Databases
+        Plugin 'tpope/vim-dadbod'
+
+    """"""""""""""""""" Plugins end """""""""""""""""""
+
+    call vundle#end()            " All plugins before here
+endif
+
 filetype plugin indent on    " turn filetypes back on
 filetype on
 
 """"""""""""""""""" Configure Plugin values and mappings """""""""""""""""""
-""""" Navigation """""
-    " Nerd tree options
-    " Use CTRL-n to open NERDtree
-    map <C-n> :NERDTreeToggle<CR>
-    " Undo tree options
-    " Use leader z to open undo
-    map <leader>z :UndotreeToggle<CR>
+if IsVundleInstalled()
+    """"" Navigation """""
+        " Nerd tree options
+        " Use CTRL-n to open NERDtree
+        map <C-n> :NERDTreeToggle<CR>
+        " Undo tree options
+        " Use leader z to open undo
+        map <leader>z :UndotreeToggle<CR>
 
-    " Resize NERDTree window to be bigger than standard
-    :let g:NERDTreeWinSize=80
+        " Resize NERDTree window to be bigger than standard
+        :let g:NERDTreeWinSize=80
 
-    " Don't let NERDTree quit after selecting a file
-    let NERDTreeQuitOnOpen=0
+        " Don't let NERDTree quit after selecting a file
+        let NERDTreeQuitOnOpen=0
 
-    " Open NERDTree automatically when vim starts up on opening a directory
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    
-    " Fuzzy finding files
-    cnoreabbrev ep CtrlP
+        " Open NERDTree automatically when vim starts up on opening a directory
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+        
+        " Fuzzy finding files
+        cnoreabbrev ep CtrlP
 
-""""" Viewing """""
-    
-    let g:rainbow_active = 0
-    " Rainbow parentheses
-    " nnoremap <leader>r :RainbowParenthesesToggleAll<CR>
-    nnoremap <leader>r :RainbowToggle<CR>
+    """"" Viewing """""
+        
+        let g:rainbow_active = 0
+        " Rainbow parentheses
+        " nnoremap <leader>r :RainbowParenthesesToggleAll<CR>
+        nnoremap <leader>r :RainbowToggle<CR>
 
-    " Indentation guide
-    nnoremap <leader>i :IndentGuidesToggle<CR>
-    
-    " Colorschemes
-    cnoreabbrev badwolf colorscheme badwolf
-    cnoreabbrev dracula colorscheme dracula
-    cnoreabbrev gruvbox colorscheme gruvbox
+        " Indentation guide
+        nnoremap <leader>i :IndentGuidesToggle<CR>
+        
+        " Colorschemes
+        " cnoreabbrev badwolf colorscheme badwolf
+        " cnoreabbrev dracula colorscheme dracula
+        " cnoreabbrev gruvbox colorscheme gruvbox
 
-    " To see lightline
-    set laststatus=2
-    set noshowmode
+        " To see lightline
+        set laststatus=2
+        set noshowmode
 
-""""" Editing """""
-    " Undo Tree
-    nnoremap <Leader>u :UndotreeToggle<CR>
+    """"" Editing """""
+        " Undo Tree
+        nnoremap <Leader>u :UndotreeToggle<CR>
 
-    " Commenter settings
-        " Add spaces after comment delimiters by default
-        let g:NERDSpaceDelims = 1
+        " Commenter settings
+            " Add spaces after comment delimiters by default
+            let g:NERDSpaceDelims = 1
 
-        " Use compact syntax for prettified multi-line comments
-        let g:NERDCompactSexyComs = 1
+            " Use compact syntax for prettified multi-line comments
+            let g:NERDCompactSexyComs = 1
 
-        " Align line-wise comment delimiters flush left instead of following code indentation
-        let g:NERDDefaultAlign = 'left'
+            " Align line-wise comment delimiters flush left instead of following code indentation
+            let g:NERDDefaultAlign = 'left'
 
-        " Set a language to use its alternate delimiters by default
-        let g:NERDAltDelims_java = 1
+            " Set a language to use its alternate delimiters by default
+            let g:NERDAltDelims_java = 1
 
-        " Add your own custom formats or override the defaults
-        " let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+            " Add your own custom formats or override the defaults
+            " let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 
-        " Allow commenting and inverting empty lines (useful when commenting a region)
-        let g:NERDCommentEmptyLines = 1
+            " Allow commenting and inverting empty lines (useful when commenting a region)
+            let g:NERDCommentEmptyLines = 1
 
-        " Enable trimming of trailing whitespace when uncommenting
-        let g:NERDTrimTrailingWhitespace = 1
+            " Enable trimming of trailing whitespace when uncommenting
+            let g:NERDTrimTrailingWhitespace = 1
 
-        " Enable NERDCommenterToggle to check all selected lines is commented or not
-        let g:NERDToggleCheckAllLines = 1
+            " Enable NERDCommenterToggle to check all selected lines is commented or not
+            let g:NERDToggleCheckAllLines = 1
 
-""""" GIT """""
-    " Git plugin settings
-    set updatetime=500
-    let g:gitgutter_map_keys = 0
-    let g:git_messenger_always_into_popup = 1
-    nnoremap <Leader>gb :Gblame<CR>
-    nnoremap <Leader>gx :GitGutterSignsToggle<CR>
-    nnoremap <Leader>gh :GitGutterLineHighlightsToggle<CR>
-    nnoremap <Leader>gn :GitGutterNextHunk<CR>
-    nnoremap <Leader>gp :GitGutterPrevHunk<CR>
-    nnoremap <Leader>gf :GitGutterFold<CR>
-    nnoremap <Leader>ga :GitGutterStageHunk<CR>
-    nnoremap <Leader>gu :GitGutterUndoHunk<CR>
-    nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
-    nnoremap <Leader>gd :Gdiff<CR>
-    nnoremap <Leader>gm :GitMessenger<CR>
+    """"" GIT """""
+        " Git plugin settings
+        set updatetime=500
+        let g:gitgutter_map_keys = 0
+        let g:git_messenger_always_into_popup = 1
+        nnoremap <Leader>gb :Gblame<CR>
+        nnoremap <Leader>gx :GitGutterSignsToggle<CR>
+        nnoremap <Leader>gh :GitGutterLineHighlightsToggle<CR>
+        nnoremap <Leader>gn :GitGutterNextHunk<CR>
+        nnoremap <Leader>gp :GitGutterPrevHunk<CR>
+        nnoremap <Leader>gf :GitGutterFold<CR>
+        nnoremap <Leader>ga :GitGutterStageHunk<CR>
+        nnoremap <Leader>gu :GitGutterUndoHunk<CR>
+        nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
+        nnoremap <Leader>gd :Gdiff<CR>
+        nnoremap <Leader>gm :GitMessenger<CR>
 
-""""" Other """""
-    " Calandar
-    nnoremap <Leader>c :Calendar<CR>
+    """"" Other """""
+        " Calandar
+        nnoremap <Leader>c :Calendar<CR>
+
+        " Saved view parameters
+        set viewoptions=cursor,folds,slash,unix
+        " let g:skipview_files = ['*\.vim']
+endif
 
 """"""""""""""""""" Environment Values """""""""""""""""""
 """"" Colors """""
-    "enables true color for themes
-    if exists('+termguicolors')
-        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-        set termguicolors
-    endif
+    " enables true color for themes
+        if exists('+termguicolors')
+            let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+            let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+            set termguicolors
+        endif
 
-    " colorscheme dracula
-    " colorscheme desert
-    colorscheme forest-night
+    " Set colorscheme
+        try
+            colorscheme forest-night
+        catch
+            try
+                colorscheme dracula
+            catch
+                try
+                    colorscheme desert
+                catch
+                    echo "no colorschemes avaliable"
+                endtry
+            endtry
+        endtry
+
     syntax enable          " Enable syntax processing
-    set colorcolumn=120    " Hilights the 100th column
-    " Sets column color to grey
-    highlight ColorColumn ctermbg=8
+    
+    if exists('colorcolumn')
+        set colorcolumn=120    " Highlights the nth column
+        " Sets column color to grey
+        highlight ColorColumn ctermbg=8
+    endif
 
 """"" Tabs """""
     set smarttab           " Indents to the correct spot first time
@@ -241,9 +314,9 @@ filetype on
 """"" Remaps """""
     nnoremap gV `[v`]
                            " Highlight last inserted text
-    noremap <C-i> ^
+    " noremap <C-i> ^
                            " Go to beginning of line
-    noremap <C-a> $
+    " noremap <C-a> $
                            " Go to end of line
     noremap <C-j> kddpkJ
                            " Joins the previous line to the end of the current line (J in the oppisite direction)
@@ -268,9 +341,9 @@ filetype on
     set directory=~/.swap//,.,/tmp//
 
 """"" File Specific changes """""
-" Set default file type for files without so that they can have basic
-" hilighting functionality.
-au BufNewFile,BufRead * if &ft == '' | set filetype=c | endif
+    " Set default file type for files without so that they can have basic
+    " hilighting functionality.
+    au BufNewFile,BufRead * if &ft == '' | set filetype=c | endif
 
     "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
     autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
@@ -278,4 +351,5 @@ au BufNewFile,BufRead * if &ft == '' | set filetype=c | endif
     "Note, perl automatically sets foldmethod in the syntax file
     autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
     autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+
 
