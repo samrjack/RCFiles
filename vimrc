@@ -39,6 +39,9 @@ if IsVundleInstalled()
 
     """"""""""""""""""" All plugins here """""""""""""""""""
     """"" Syntax """""
+        " Org mode
+        Plugin 'jceb/vim-orgmode'
+
         " Syntax highlighting for perl-mason
         Plugin 'aming/vim-mason'
 
@@ -100,6 +103,12 @@ if IsVundleInstalled()
             " Sacred forest
             Plugin 'KKPMW/sacredforest-vim'
 
+            " Nord colorscheme
+            Plugin 'arcticicestudio/nord-vim'
+
+            " Lightline themes
+            Plugin 'sainnhe/lightline_foobar.vim'
+
     """"" Editing """""
         " Undo tree plugin
         Plugin 'mbbill/undotree'
@@ -119,6 +128,9 @@ if IsVundleInstalled()
 
         " Working with CSVs
         Plugin 'chrisbra/csv.vim'
+
+        " Multiple cursors
+        " Plugin 'terryma/vim-multiple-cursors'
 
     """"" GIT """""
         " NERDTree git plugin
@@ -173,7 +185,6 @@ if IsVundleInstalled()
         cnoreabbrev ep CtrlP
 
     """"" Viewing """""
-        
         let g:rainbow_active = 0
         " Rainbow parentheses
         " nnoremap <leader>r :RainbowParenthesesToggleAll<CR>
@@ -190,6 +201,9 @@ if IsVundleInstalled()
         " To see lightline
         set laststatus=2
         set noshowmode
+        let g:lightline =  {
+            \     'colorscheme': 'sacredforest_alter'
+            \  }
 
     """"" Editing """""
         " Undo Tree
@@ -219,6 +233,10 @@ if IsVundleInstalled()
 
             " Enable NERDCommenterToggle to check all selected lines is commented or not
             let g:NERDToggleCheckAllLines = 1
+
+        " CSV table manipulation
+            " Arrange the table so it's columns align
+            nnoremap <Leader>ta :%ArrangeCol<CR>
 
     """"" GIT """""
         " Git plugin settings
@@ -278,7 +296,7 @@ endif
         highlight ColorColumn ctermbg=8
     endif
 
-""""" Tabs """""
+""""" Indentation """""
     set smarttab           " Indents to the correct spot first time
     set shiftwidth=4       " Code defaults to 4 space indents
     set tabstop=4          " Number of visual spaces per TAB
@@ -288,7 +306,8 @@ endif
 
 """"" UI """""
     " set relativenumber     " Show line numbers relative to cursor
-    set number             " Shows the line number of the current line.
+    set confirm            " Asks to save before quiting a file instead of preventing quit
+    set number             " Shows the line number of the current line
     set showcmd            " Shows the most recent command
     set cursorline         " Highlight current line
     filetype indent on     " Load filetype-specific indent files
@@ -314,10 +333,6 @@ endif
 """"" Remaps """""
     nnoremap gV `[v`]
                            " Highlight last inserted text
-    " noremap <C-i> ^
-                           " Go to beginning of line
-    " noremap <C-a> $
-                           " Go to end of line
     noremap <C-j> kddpkJ
                            " Joins the previous line to the end of the current line (J in the oppisite direction)
     noremap <C-l> :redraw<CR>:syntax sync fromstart<CR>
@@ -351,5 +366,4 @@ endif
     "Note, perl automatically sets foldmethod in the syntax file
     autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
     autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-
 
