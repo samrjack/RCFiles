@@ -363,7 +363,10 @@ endif
     "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
     autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
 
-    "Note, perl automatically sets foldmethod in the syntax file
+    " Note, perl automatically sets foldmethod in the syntax file
     autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
     autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 
+    " Makes command 'ScratchBuffer' force the current buffer to become a
+    " scratch buffer.
+    command! ScratchBuffer setlocal buftype=nofile bufhidden=hide noswapfile
