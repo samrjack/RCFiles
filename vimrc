@@ -193,11 +193,6 @@ if IsVundleInstalled()
         " Indentation guide
         nnoremap <leader>i :IndentGuidesToggle<CR>
         
-        " Colorschemes
-        " cnoreabbrev badwolf colorscheme badwolf
-        " cnoreabbrev dracula colorscheme dracula
-        " cnoreabbrev gruvbox colorscheme gruvbox
-
         " To see lightline
         set laststatus=2
         set noshowmode
@@ -243,7 +238,21 @@ if IsVundleInstalled()
         set updatetime=500
         let g:gitgutter_map_keys = 0
         let g:git_messenger_always_into_popup = 1
-        nnoremap <Leader>gb :Gblame<CR>
+
+        " Function for toggling on and off git blame so I don't need to
+        " directly close it.
+        function! s:ToggleBlame()
+            if &l:filetype ==# 'fugitiveblame'
+                close
+            else
+                Gblame
+            endif
+        endfunction
+            
+        nnoremap <Leader>gb :call <SID>ToggleBlame()<CR>
+        nnoremap <Leader>gd :Gdiff<CR>
+        nnoremap <Leader>gs :Gstatus<CR>
+        nnoremap <Leader>ge :Gedit<CR>
         nnoremap <Leader>gx :GitGutterSignsToggle<CR>
         nnoremap <Leader>gh :GitGutterLineHighlightsToggle<CR>
         nnoremap <Leader>gn :GitGutterNextHunk<CR>
@@ -252,7 +261,6 @@ if IsVundleInstalled()
         nnoremap <Leader>ga :GitGutterStageHunk<CR>
         nnoremap <Leader>gu :GitGutterUndoHunk<CR>
         nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
-        nnoremap <Leader>gd :Gdiff<CR>
         nnoremap <Leader>gm :GitMessenger<CR>
 
     """"" Other """""
@@ -278,12 +286,16 @@ endif
             colorscheme forest-night
         catch
             try
-                colorscheme dracula
+                colorscheme gruvbox
             catch
                 try
-                    colorscheme desert
+                    colorscheme dracula
                 catch
-                    echo "no colorschemes avaliable"
+                    try
+                        colorscheme desert
+                    catch
+                        echo "no colorschemes avaliable"
+                    endtry
                 endtry
             endtry
         endtry
@@ -338,6 +350,11 @@ endif
     noremap <C-l> :redraw<CR>:syntax sync fromstart<CR>
                            " Changes the ctrl-l redraw to also redraw syntax
                            " highlighting
+    nnoremap <Leader>s :source $MYVIMRC<CR>
+                           " Re-sources the vimrc file.
+    nnoremap <Leader>S :source %<CR>
+                           " Sources the current file. Used when testing new
+                           " features.
 
 """"" Insert mode moveing """""
     inoremap <C-h> <Right>
@@ -349,6 +366,7 @@ endif
 
     set backspace=indent,eol,start
     set redrawtime=10000
+    set lazyredraw
 
 """"" Meta changes """""
     silent !mkdir ~/.swap > /dev/null 2>&1
@@ -356,17 +374,44 @@ endif
     set directory=~/.swap//,.,/tmp//
 
 """"" File Specific changes """""
-    " Set default file type for files without so that they can have basic
-    " hilighting functionality.
-    au BufNewFile,BufRead * if &ft == '' | set filetype=c | endif
-
-    "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
-    autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
-
-    " Note, perl automatically sets foldmethod in the syntax file
-    autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
-    autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-
-    " Makes command 'ScratchBuffer' force the current buffer to become a
+    " Makes command 'TurnOnScratchBuffer' force the current buffer to become a
     " scratch buffer.
-    command! ScratchBuffer setlocal buftype=nofile bufhidden=hide noswapfile
+    command! -bar TurnOnScratchBuffer setlocal buftype=nofile bufhidden=hide noswapfile
+    command! -bar TurnOffScratchBuffer setlocal buftype= bufhidden= swapfile
+    command! -bar NewScratch new | TurnOnScratchBuffer
+
+    augroup remove_quite_prompt 
+        autocmd!
+        autocmd StdinReadPre * TurnOnScratchBuffer
+        autocmd VimEnter * 
+            \   if @% == '' && &buftype == ''
+            \ |     TurnOnScratchBuffer
+            \ | endif
+        autocmd BufWritePost * ++nested
+            \   if (empty(bufname()) || bufname() == '-stdin-') && &buftype == 'nofile'
+            \ |     TurnOffScratchBuffer
+            \ |     setlocal nomodified
+            \ |     edit <afile>
+            \ | endif
+    augroup END
+
+    " augroup AutoSaveFolds
+    "     autocmd!
+    "     autocmd BufWinLeave * mkview
+    "     autocmd BufWinEnter * silent loadview
+    " augroup END
+
+    augroup filetype_syntax_changes
+        autocmd!
+        " Set default file type for files without so that they can have basic
+        " hilighting functionality.
+        autocmd BufNewFile,BufRead * if &ft == '' | setlocal filetype=c | endif
+
+        "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
+        autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
+
+        " Note, perl automatically sets foldmethod in the syntax file
+        autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
+        autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+    augroup END
+

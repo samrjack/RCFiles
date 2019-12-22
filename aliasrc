@@ -1,5 +1,5 @@
 # Aliases
-alias ls='ls -GbF --color'
+alias ls='ls -GbF'
 alias ll='ls -Galh'
 alias la='ls -GhA'
 alias l='ls -GCFlh'
