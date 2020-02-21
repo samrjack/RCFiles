@@ -12,103 +12,124 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;; Start package installs ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;; Org Mode Packages ;;;;;
+    (use-package org
+    :ensure t)
+ 
+    ;; Org bullet points look nice
+    (use-package org-bullets
+    :ensure t
+    :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;;;;; Evil Mode packages ;;;;;
-(use-package evil
-  :ensure t)
+    (use-package evil
+    :ensure t)
 
-(use-package evil-escape
-  :ensure t)
+    (use-package evil-escape
+    :ensure t)
 
-;;;;; Org Mode Packages ;;;;;
-(use-package org
-  :ensure t)
+    (use-package evil-org
+    :ensure t)
 
-(use-package evil-org
-  :ensure t)
+    (use-package evil-visual-mark-mode
+    :ensure t)
 
-;; Org bullet points look nice
-(use-package org-bullets
-  :ensure t
-  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;;;;; Programming language environments ;;;;;
+    ;; Haskell
+    (use-package intero
+    :ensure t)
+
+    (use-package dante
+    :ensure t)
 
 ;;;;; Packages for general environment changes ;;;;;
-;; Allows you to try a package before installing
-(use-package try
-  :ensure t)
+    ;; Allows you to try a package before installing
+    (use-package try
+        :ensure t)
 
-;; Hints what keys can be pressed from ctrl-x or other leaders
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
+    ;; Hints what keys can be pressed from ctrl-x or other leaders
+    (use-package which-key
+	:ensure t
+	:config (which-key-mode))
 
 
-;; Windows Managment
-(use-package ace-window
-  :ensure t
-  :config (progn
-    (global-set-key [remap other-window] 'ace-window)
-    (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))) ))))
-  
-(use-package ivy
-  :ensure t)
+    ;; Windows Managment
+    (use-package ace-window
+	:ensure t
+	:config (progn
+	    (global-set-key [remap other-window] 'ace-window)
+	    (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))) ))))
+
+    (use-package ivy
+	:ensure t)
+
+    ;; osx application stuff
+    (use-package xclip
+	:ensure t)
+    
 
 ;;;;; Editing Features ;;;;;
-(use-package auto-complete
-  :ensure t
-  :init (progn
-	  (ac-config-default)
-	  (global-auto-complete-mode t)))
+    (use-package auto-complete
+	:ensure t
+	:init (progn
+		(ac-config-default)
+		(global-auto-complete-mode t)))
 
-;; Themes
-(use-package dracula-theme
-  :ensure t
-  :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+    (use-package rainbow-delimiters
+      :ensure t
+      :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+        
 
-(use-package gruvbox-theme
-  :ensure t
-  :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+    ;; Themes
+    (use-package dracula-theme
+	:ensure t
+	:config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+
+    (use-package gruvbox-theme
+	:ensure t
+	:config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+
+;;;;; Git ;;;;;
+    (use-package magit
+	:ensure t)
 
 ;;;;; Game related ;;;;;
-(use-package 2048-game
-  :ensure t)
+    (use-package 2048-game
+	:ensure t)
 
-(use-package mines
-  :ensure t)
+    (use-package mines
+	:ensure t)
 
-(use-package minesweeper
-  :ensure t)
+    (use-package minesweeper
+	:ensure t)
 
-(use-package steam
-  :ensure t)
+    (use-package steam
+	:ensure t)
 
-(use-package sudoku
-  :ensure t)
+    (use-package sudoku
+	:ensure t)
 
-(use-package threes
-  :ensure t)
+    (use-package threes
+	:ensure t)
 
-;;;;; Others that looked interesting ;;;;;
-(use-package suggest
-  :ensure t)
+    ;;;;; Others that looked interesting ;;;;;
+    (use-package suggest
+	:ensure t)
 
-(use-package ereader
-  :ensure t)
+    (use-package ereader
+	:ensure t)
 
-(use-package eshell-git-prompt
-  :ensure t)
+    (use-package eshell-git-prompt
+	:ensure t)
 
-(use-package eshell-prompt-extras
-  :ensure t)
+    (use-package eshell-prompt-extras
+	:ensure t)
 
-(use-package eshell-up
-  :ensure t)
+    (use-package eshell-up
+	:ensure t)
 
-(use-package helm
-  :ensure t)
-
-(use-package evil-visual-mark-mode
-  :ensure t)
+    (use-package helm
+	:ensure t)
 
 
 
