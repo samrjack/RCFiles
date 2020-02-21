@@ -86,6 +86,9 @@ if IsVundleInstalled()
         
         " Hex Color viewing
         Plugin 'gu-fan/colorv.vim'
+
+        " Terminal escape color viewing
+        Plugin 'chrisbra/Colorizer'
         
         """ Themes
             " Dracula theme
