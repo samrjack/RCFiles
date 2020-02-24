@@ -15,33 +15,41 @@
 
 ;;;;; Org Mode Packages ;;;;;
     (use-package org
-    :ensure t)
+        :ensure t)
  
     ;; Org bullet points look nice
     (use-package org-bullets
-    :ensure t
-    :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+        :ensure t
+        :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;;;;; Evil Mode packages ;;;;;
     (use-package evil
-    :ensure t)
+        :ensure t)
 
     (use-package evil-escape
-    :ensure t)
+        :ensure t)
 
     (use-package evil-org
-    :ensure t)
+        :ensure t
+        :after org
+        :config
+        (add-hook 'org-mode-hook 'evil-org-mode)
+        (add-hook 'evil-org-mode-hook
+              (lambda ()
+                  (evil-org-set-key-theme)))
+        (require 'evil-org-agenda))
+	
 
     (use-package evil-visual-mark-mode
-    :ensure t)
+        :ensure t)
 
 ;;;;; Programming language environments ;;;;;
     ;; Haskell
     (use-package intero
-    :ensure t)
+        :ensure t)
 
     (use-package dante
-    :ensure t)
+        :ensure t)
 
 ;;;;; Packages for general environment changes ;;;;;
     ;; Allows you to try a package before installing
@@ -50,87 +58,87 @@
 
     ;; Hints what keys can be pressed from ctrl-x or other leaders
     (use-package which-key
-	:ensure t
-	:config (which-key-mode))
+        :ensure t
+        :config (which-key-mode))
 
 
     ;; Windows Managment
     (use-package ace-window
-	:ensure t
-	:config (progn
-	    (global-set-key [remap other-window] 'ace-window)
-	    (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))) ))))
+        :ensure t
+        :config (progn
+            (global-set-key [remap other-window] 'ace-window)
+            (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))) ))))
 
     (use-package ivy
-	:ensure t)
+        :ensure t)
 
     ;; osx application stuff
     (use-package xclip
-	:ensure t)
+        :ensure t)
     
 
 ;;;;; Editing Features ;;;;;
     (use-package auto-complete
-	:ensure t
-	:init (progn
-		(ac-config-default)
-		(global-auto-complete-mode t)))
+        :ensure t
+        :init (progn
+            (ac-config-default)
+            (global-auto-complete-mode t)))
 
     (use-package rainbow-delimiters
-      :ensure t
-      :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+        :ensure t
+        :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
         
 
     ;; Themes
     (use-package dracula-theme
-	:ensure t
-	:config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+        :ensure t
+        :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
 
     (use-package gruvbox-theme
-	:ensure t
-	:config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+        :ensure t
+        :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
 
 ;;;;; Git ;;;;;
     (use-package magit
-	:ensure t)
+        :ensure t)
 
 ;;;;; Game related ;;;;;
     (use-package 2048-game
-	:ensure t)
+        :ensure t)
 
     (use-package mines
-	:ensure t)
+        :ensure t)
 
     (use-package minesweeper
-	:ensure t)
+        :ensure t)
 
     (use-package steam
-	:ensure t)
+        :ensure t)
 
     (use-package sudoku
-	:ensure t)
+        :ensure t)
 
     (use-package threes
-	:ensure t)
+        :ensure t)
 
     ;;;;; Others that looked interesting ;;;;;
     (use-package suggest
-	:ensure t)
+        :ensure t)
 
     (use-package ereader
-	:ensure t)
+        :ensure t)
 
     (use-package eshell-git-prompt
-	:ensure t)
+        :ensure t)
 
     (use-package eshell-prompt-extras
-	:ensure t)
+        :ensure t)
 
     (use-package eshell-up
-	:ensure t)
+        :ensure t)
 
     (use-package helm
-	:ensure t)
+        :ensure t)
 
 
 
