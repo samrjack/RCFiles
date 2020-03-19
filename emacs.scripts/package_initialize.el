@@ -98,6 +98,10 @@
         :ensure t
         :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
 
+    (use-package professional-theme
+        :ensure t
+        :config (add-to-list 'custom-theme-load-path "~/.emacs.d/themes"))
+
 ;;;;; Git ;;;;;
     (use-package magit
         :ensure t)
