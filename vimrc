@@ -109,6 +109,9 @@ if IsVundleInstalled()
             " Nord colorscheme
             Plugin 'arcticicestudio/nord-vim'
 
+            "Oceanic colorscheme
+            Plugin 'mhartington/oceanic-next'
+
             " Lightline themes
             Plugin 'sainnhe/lightline_foobar.vim'
 
