@@ -393,8 +393,8 @@ endif
             \   if @% == '' && &buftype == ''
             \ |     TurnOnScratchBuffer
             \ | endif
-        autocmd BufWritePost * ++nested
-            \   if (empty(bufname()) || bufname() == '-stdin-') && &buftype == 'nofile'
+        autocmd BufWritePost * nested
+            \   if ((empty(bufname("%")) || bufname("%") == '-stdin-') && &buftype == 'nofile')
             \ |     TurnOffScratchBuffer
             \ |     setlocal nomodified
             \ |     edit <afile>
