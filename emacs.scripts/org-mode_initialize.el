@@ -9,6 +9,11 @@
 ;; Adds pretty blue links to export instead of default black links.
 (setq org-latex-packages-alist '("\\hypersetup{colorlinks=true,linkcolor=blue}"))
 
+;; Org mode options
+(setq org-special-ctrl-a/e t)
+(setq org-startup-indented t)
+(setq org-startup-with-inline-images t)
+
 ;; Enable Org mode
 (require 'org)
 
@@ -18,5 +23,8 @@
 (setq org-default-notes-file (concat org-directory "refile.org"))
 
 ;;
-;; Key bindings
+;; Global key bindings
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c b") 'org-switchb)
