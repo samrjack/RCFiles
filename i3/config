@@ -107,9 +107,12 @@
             bindsym --release Down exec pkill -SIGRTMIN+10 i3blocks
             bindsym --release Up   exec pkill -SIGRTMIN+10 i3blocks
 
-            # back to normal: Enter or Escape
+            # Return to normal mode
             bindsym Return mode "default"
             bindsym Escape mode "default"
+
+            bindsym b      mode "default"
+            bindsym $mod+b mode "default"
         }
 
         bindsym $mod+b mode "brightness"
