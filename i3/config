@@ -172,6 +172,9 @@
     #bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg" -bg "$bg" -fg "$fg" -hlbg "$bg" -hlfg "#9575cd" -font "System San Francisco Display 18"
     # bindsym $mod+d exec dmenu_run
 
+    # show app finder to find less used apps
+    bindsym $mod+Shift+d exec xfce4-appfinder
+
     # Splitting direction
         # split in horizontal(inline) orientation
         bindsym $mod+i split h
