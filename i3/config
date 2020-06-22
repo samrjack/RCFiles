@@ -94,8 +94,8 @@
 
     # Brightness mode
         mode "brightness" {
-            # These bindings trigger as soon as you enter the brightness mode
             
+            # These bindings trigger as soon as you enter the brightness mode
             bindsym j exec xbacklight -dec 8
             bindsym k exec xbacklight -inc 8
             bindsym --release j exec pkill -SIGRTMIN+10 i3blocks
