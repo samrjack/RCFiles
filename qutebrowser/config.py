@@ -380,6 +380,12 @@ c.colors.tabs.selected.odd.fg = 'white'
 # Type: QtColor
 c.colors.webpage.bg = 'white'
 
+# Force prefers-color-scheme: dark colors for websites.
+# Type: Bool
+# On QtWebEngine, this setting requires Qt 5.14 or newer.
+# On QtWebKit, this setting is unavailable.
+c.colors.webpage.prefers_color_scheme_dark = True
+
 # Number of commands to save in the command history. 0: no history / -1:
 # unlimited
 # Type: Int
@@ -765,6 +771,18 @@ c.fonts.completion.entry = '10pt monospace'
 # Type: QtFont
 c.fonts.debug_console = '10pt monospace'
 
+# Default font families to use. Whenever "default_family" is used in a font
+# setting, it’s replaced with the fonts listed here. If set to an empty value,
+# a system-specific monospace default is used.
+# Type: List of Font, or Font
+c.fonts.default_family = ["xos4 Terminus", 'Terminus', 'Monospace', "DejaVu Sans Mono", 'Monaco', "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", 'Courier', "Liberation Mono", 'monospace', 'Fixed', 'Consolas', 'Terminal']
+
+# Default font size to use. Whenever "default_size" is used in a font setting,
+# it’s replaced with the size listed here. Valid values are either a float
+# value with a "pt" suffix, or an integer value with a "px" suffix.
+# Type: String
+c.fonts.default_size = '10pt'
+
 # Font used for the downloadbar.
 # Type: Font
 c.fonts.downloads = '10pt monospace'
@@ -788,11 +806,6 @@ c.fonts.messages.info = '10pt monospace'
 # Font used for warning messages.
 # Type: Font
 c.fonts.messages.warning = '10pt monospace'
-
-# Default monospace fonts. Whenever "monospace" is used in a font
-# setting, it's replaced with the fonts listed here.
-# Type: Font
-c.fonts.monospace = '"xos4 Terminus", Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
 
 # Font used for prompts.
 # Type: Font
