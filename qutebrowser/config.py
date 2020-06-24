@@ -432,10 +432,18 @@ c.completion.timestamp_format = '%Y-%m-%d'
 # Type: Bool
 c.completion.use_best_match = True
 
+# A list of patterns which should not be shown in the history. This only affects
+# the completion. Matching URLs are still saved in the history (and visible on
+# the qute://history page), but hidden in the completion. Changing this setting
+# will cause the completion history to be regenerated on the next start, which
+# will take a short while. This setting requires a restart.
+# Type: List of UrlPattern
+c.completion.web_history.exclude = []
+
 # Number of URLs to show in the web history. 0: no history / -1:
 # unlimited
 # Type: Int
-c.completion.web_history_max_items = -1
+c.completion.web_history.max_items = -1
 
 # Require a confirmation before quitting the application.
 # Type: ConfirmQuit
@@ -1023,8 +1031,14 @@ c.qt.force_platform = None
 
 # Force software rendering for QtWebEngine. This is needed for
 # QtWebEngine to work with Nouveau drivers.
-# Type: Bool
-c.qt.force_software_rendering = False
+# Type: String
+# Valid values:
+#   - software-opengl: Tell LibGL to use a software implementation of GL (LIBGL_ALWAYS_SOFTWARE / QT_XCB_FORCE_SOFTWARE_OPENGL)
+#   - qt-quick: Tell Qt Quick to use a software renderer instead of OpenGL. (QT_QUICK_BACKEND=software)
+#   - chromium: Tell Chromium to disable GPU support and use Skia software rendering instead. (--disable-gpu)
+#   - none: Don't force software rendering
+# This setting is only avaliable with the QtWebEngine backend.
+c.qt.force_software_rendering = "none"
 
 # Turn on Qt HighDPI scaling. This is equivalent to setting
 # QT_AUTO_SCREEN_SCALE_FACTOR=1 in the environment. It's off by default
@@ -1033,9 +1047,13 @@ c.qt.force_software_rendering = False
 # Type: Bool
 c.qt.highdpi = False
 
-# Show a scrollbar.
-# Type: Bool
-c.scrolling.bar = True
+# When to show the scrollbar.
+# Type: String
+# Valid values:
+#   - always: Always show the scrollbar.
+#   - never: Never show the scrollbar.
+#   - when-searching: Show the scrollbar when searching for text in the webpage. With the QtWebKit backend, this is equal to never.
+c.scrolling.bar = "always"
 
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
@@ -1155,9 +1173,13 @@ c.tabs.close_mouse_button_on_bar = 'new-tab'
 # Type: Float
 c.tabs.favicons.scale = 1.0
 
-# Show favicons in the tab bar.
-# Type: Bool
-c.tabs.favicons.show = True
+# When to show favicons in the tab bar.
+# Type: String
+# Valid values:
+#   - always: Always show favicons.
+#   - never: Always hide favicons.
+#   - pinned: Show favicons only on pinned tabs.
+c.tabs.favicons.show = "always"
 
 # Padding (in pixels) for tab indicators.
 # Type: Padding
@@ -1176,6 +1198,28 @@ c.tabs.indicator.width = 3
 #   - default-page: Load the default page.
 #   - close: Close the window.
 c.tabs.last_close = 'ignore'
+
+# Maximum width (in pixels) of tabs (-1 for no maximum). This setting only
+# applies when tabs are horizontal. This setting does not apply to pinned
+# tabs, unless tabs.pinned.shrink is False. This setting may not apply
+# properly if max_width is smaller than the minimum size of tab contents,
+# or smaller than tabs.min_width.
+# Type: Int
+c.tabs.max_width = -1
+
+# Minimum width (in pixels) of tabs (-1 for the default minimum size behavior).
+# This setting only applies when tabs are horizontal. This setting does not
+# apply to pinned tabs, unless tabs.pinned.shrink is False.
+# Type: Int
+c.tabs.min_width = -1
+
+# When switching tabs, what input mode is applied
+# Type: String
+# Valid values:
+#   - persist: Retain the current mode.
+#   - restore: Restore previously saved mode.
+#   - normal: Always revert to normal mode.
+c.tabs.mode_on_change = "restore"
 
 # Switch between tabs using the mouse wheel.
 # Type: Bool
@@ -1202,10 +1246,6 @@ c.tabs.new_position.unrelated = 'last'
 # Padding (in pixels) around text for tabs.
 # Type: Padding
 c.tabs.padding = {'top': 0, 'bottom': 0, 'left': 5, 'right': 5}
-
-# Stay in insert/passthrough mode when switching tabs.
-# Type: Bool
-c.tabs.persist_mode_on_change = False
 
 # Shrink pinned tabs down to their contents.
 # Type: Bool
@@ -1265,7 +1305,7 @@ c.tabs.title.alignment = 'left'
 # is enabled. * `{current_url}`: URL of the current web page. *
 # `{protocol}`: Protocol (http/https/...) of the current web page.
 # Type: FormatString
-c.tabs.title.format = '{index}: {title}'
+c.tabs.title.format = '{index}: {current_title}'
 
 # Format to use for the tab title for pinned tabs. The same placeholders
 # like for `tabs.title.format` are defined.
@@ -1325,12 +1365,12 @@ c.url.yank_ignored_parameters = ['ref', 'utm_source', 'utm_medium', 'utm_campaig
 
 # Hide the window decoration when using wayland.
 # Type: Bool
-c.window.hide_wayland_decoration = False
+c.window.hide_decoration = False
 
 # Format to use for the window title. The same placeholders like for
 # `tabs.title.format` are defined.
 # Type: FormatString
-c.window.title_format = '{perc}{title}{title_sep}qutebrowser'
+c.window.title_format = '{perc}{current_title}{title_sep}qutebrowser'
 
 # Default zoom level.
 # Type: Perc
