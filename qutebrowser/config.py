@@ -1210,7 +1210,7 @@ c.tabs.indicator.width = 3
 #   - startpage: Load the start page.
 #   - default-page: Load the default page.
 #   - close: Close the window.
-c.tabs.last_close = 'ignore'
+c.tabs.last_close = 'close'
 
 # Maximum width (in pixels) of tabs (-1 for no maximum). This setting only
 # applies when tabs are horizontal. This setting does not apply to pinned
@@ -1648,6 +1648,23 @@ config.bind('<Ctrl-X><Ctrl-E>', 'open-editor', mode='insert')
 config.bind('<Escape>', 'leave-mode', mode='insert')
 config.bind('<Shift-Ins>', 'insert-text {primary}', mode='insert')
 
+    # Recreated readline bindings for insert mode
+config.bind('<Ctrl-h>', 'fake-key <Backspace>', 'insert')
+config.bind('<Ctrl-a>', 'fake-key <Home>', 'insert')
+config.bind('<Ctrl-e>', 'fake-key <End>', 'insert')
+config.bind('<Ctrl-b>', 'fake-key <Left>', 'insert')
+config.bind('<Mod1-b>', 'fake-key <Ctrl-Left>', 'insert')
+config.bind('<Ctrl-f>', 'fake-key <Right>', 'insert')
+config.bind('<Mod1-f>', 'fake-key <Ctrl-Right>', 'insert')
+config.bind('<Ctrl-p>', 'fake-key <Up>', 'insert')
+config.bind('<Ctrl-n>', 'fake-key <Down>', 'insert')
+config.bind('<Mod1-d>', 'fake-key <Ctrl-Delete>', 'insert')
+config.bind('<Ctrl-d>', 'fake-key <Delete>', 'insert')
+config.bind('<Ctrl-w>', 'fake-key <Ctrl-Backspace>', 'insert')
+config.bind('<Ctrl-u>', 'fake-key <Shift-Home><Delete>', 'insert')
+config.bind('<Ctrl-k>', 'fake-key <Shift-End><Delete>', 'insert')
+config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', 'insert')
+
 # Bindings for passthrough mode
 config.bind('<Ctrl-V>', 'leave-mode', mode='passthrough')
 
@@ -1677,3 +1694,17 @@ config.bind('<Ctrl-Y>', 'prompt-accept yes', mode='prompt')
 
 # Bindings for register mode
 config.bind('<Escape>', 'leave-mode', mode='register')
+
+# Functions
+from qutebrowser.api import interceptor
+
+    # Youtube adblock
+def filter_yt(info: interceptor.Request):
+    """Block the given request if necessary."""
+    url = info.request_url
+    if (url.host() == 'www.youtube.com' and
+        url.path() == '/get_video_info' and
+            '&adformat=' in url.query()):
+        info.block()
+
+interceptor.register(filter_yt)
