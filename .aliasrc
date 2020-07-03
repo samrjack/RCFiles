@@ -36,3 +36,5 @@ alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 alias gl="gl1"
 alias lg="gl"
 
+alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
+
