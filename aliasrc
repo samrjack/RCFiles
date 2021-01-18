@@ -25,6 +25,8 @@ alias tmux='tmux -2'
 alias tmuxrc="vim ~/.tmux.conf"
 alias vimrc="vim ~/.vimrc"
 
+alias temacs="emacs --no-window-system"
+
 # An alias to read from stdin without requiring the output to be saved
 alias v='vim -c "setlocal buftype=nofile bufhidden=hide noswapfile" -'
 

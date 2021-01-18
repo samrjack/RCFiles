@@ -72,6 +72,16 @@
     (use-package ivy
         :ensure t)
 
+    ;; Emacs Window Manager
+    (use-package exwm
+        :ensure t)
+    (use-package exwm-edit
+        :ensure t)
+    (use-package exwm-firefox-core
+        :ensure t)
+    (use-package exwm-firefox-evil
+        :ensure t)
+
     ;; osx application stuff
     (use-package xclip
         :ensure t)

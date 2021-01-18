@@ -16,6 +16,7 @@
 ! (fn key with no keycode)
 ! key 105 - Control_R
 
+! Reassign alt to be super and super to be alt
 clear mod1
 clear mod4
 keycode 133 = Alt_L
@@ -23,4 +24,8 @@ keycode 64  = Super_L
 keycode 108 = Super_R
 add mod1 = Alt_L
 add mod4 = Super_L Super_R
+
+! Disable PgUp and PgDn because they are super annoying
+keycode 112 = NoSymbol
+keycode 117 = NoSymbol
 
