@@ -1,0 +1,6 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+    1) (gvim ~/.config/i3/config && restart)
+esac
+echo 
