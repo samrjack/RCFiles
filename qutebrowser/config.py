@@ -378,13 +378,13 @@ c.colors.tabs.selected.odd.fg = 'white'
 # Background color for webpages if unset (or empty to use the theme's
 # color).
 # Type: QtColor
-c.colors.webpage.bg = 'white'
+c.colors.webpage.bg = 'black'
 
 # Force prefers-color-scheme: dark colors for websites.
 # Type: Bool
 # On QtWebEngine, this setting requires Qt 5.14 or newer.
 # On QtWebKit, this setting is unavailable.
-c.colors.webpage.prefers_color_scheme_dark = True
+#c.colors.webpage.prefers_color_scheme_dark = True
 
 # Number of commands to save in the command history. 0: no history / -1:
 # unlimited
@@ -1517,7 +1517,8 @@ config.bind('Ss', 'open qute://settings')
 config.bind('<Ctrl-s>', 'stop')
 config.bind('th', 'back -t')
 config.bind('tl', 'forward -t')
-config.bind('T', 'tab-focus')
+config.bind('T', 'set-cmd-text -s :open -t')
+#config.bind('T', 'tab-focus')
 config.bind('<Ctrl-T>', 'open -t')
 config.bind('<Ctrl-Shift-T>', 'undo')
 config.bind('u', 'scroll-page 0 -0.5')
