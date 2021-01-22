@@ -190,6 +190,10 @@
     bindsym $mod+Shift+q kill
 
 # Focus window
+
+    # Prevent focus window from changing if mouse gets moved
+    focus_follows_mouse no
+
     # change focus
     bindsym $mod+h focus left
     bindsym $mod+j focus down
