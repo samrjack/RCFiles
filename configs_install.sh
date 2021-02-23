@@ -36,7 +36,11 @@ allDirs=$(find $configDir -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -
 for directory in $allDirs; do 
     dirRelativePath=${directory#"$configDir"/}
     homePath="$HOME"/"$dirRelativePath"
-    if [ ! -d  $homePath ]; then
+    if [ -L $homePath ]; then
+        echo "directory is a link, removing and replacing with a hard directory. $homePath"
+        rm -f $homePath
+        mkdir $homePath
+    elif [ ! -d  $homePath ]; then
         #echo "Making directory $homePath"
         mkdir $homePath
     fi
