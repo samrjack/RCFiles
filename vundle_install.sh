@@ -1,5 +1,5 @@
 #! /bin/bash
-# Installs git repos as necessary for standard setup.
+# Installs vundle for managing vim packages
 
 ### Vundle install ###
 
