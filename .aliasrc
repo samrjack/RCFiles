@@ -1,8 +1,8 @@
 # Aliases
-alias ls='ls -GbF'
-alias ll='ls -Galh'
-alias la='ls -GhA'
-alias l='ls -GCFlh'
+alias ls='ls --color=auto --group-directories-first -bF'
+alias ll='ls -alh'
+alias la='ls -hA'
+alias l='ls -CFlh'
 
 alias clc='clear'
 
