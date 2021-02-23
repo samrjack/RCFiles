@@ -31,7 +31,7 @@ configDir=$( cd -P -- "$(dirname -- "$invocationPath")" && pwd -P) || exit
 
 
 #### Setup directory structure ####
-allDirs=$(find $configDir -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d -print)
+allDirs=$(find $configDir -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d)
 
 for directory in $allDirs; do 
     dirRelativePath=${directory#"$configDir"/}
@@ -47,11 +47,11 @@ for directory in $allDirs; do
 done
 
 #### setup up files ####
-allFiles=$(find "$configDir" -not -path '*/\.git/*' -not -path '*/\.svn/*' -not -type d -print)
+allFiles=$(find "$configDir" -not -path '*/\.git/*' -not -path '*/\.svn/*' -not -type d)
 
 # A list of files that should not be installed on the system and should instead 
 # stay in this folder. Usually are helper files such as install scripts.
-unwantedFiles=$( find "$configDir" -maxdepth 1 -name "*.md" -o -name "*.sh" -print )
+unwantedFiles=$(find "$configDir" -maxdepth 1 -name "*.md" -o -name "*.sh")
 
 for file in $allFiles; do 
     # If the file is unwanted, then skip it.
