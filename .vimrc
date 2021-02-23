@@ -66,6 +66,9 @@ if IsVundleInstalled()
         " Python IDE style completion
         " Plugin 'python-mode/python-mode'
 
+        " Python semantic highlighting
+        Plugin 'numirias/semshi'
+
     """"" Navigation """""
         " Nerd tree directory navigator
         Plugin 'scrooloose/nerdtree'
@@ -159,6 +162,9 @@ if IsVundleInstalled()
 
         " Access Databases
         Plugin 'tpope/vim-dadbod'
+
+        " Access cheat sheets
+        Plugin 'dbeniamine/cheat.sh-vim'
 
     """"""""""""""""""" Plugins end """""""""""""""""""
 
@@ -378,6 +384,12 @@ endif
     silent !mkdir ~/.swap > /dev/null 2>&1
     set backupdir=~/.swap//,.,/tmp//
     set directory=~/.swap//,.,/tmp//
+
+    augroup indicate_insert
+        autocmd!
+        autocmd InsertEnter * set cul
+        autocmd InsertLeave * set nocul
+    augroup END
 
 """"" File Specific changes """""
     " Makes command 'TurnOnScratchBuffer' force the current buffer to become a

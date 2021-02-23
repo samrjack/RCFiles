@@ -17,3 +17,7 @@
 	tool = vimdiff2
 [merge]
 	tool = vimdiff2
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
