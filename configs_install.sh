@@ -37,7 +37,7 @@ for directory in $allDirs; do
     dirRelativePath=${directory#"$configDir"/}
     homePath="$HOME"/"$dirRelativePath"
     if [ ! -d  $homePath ]; then
-        echo "Making directory $homePath"
+        #echo "Making directory $homePath"
         mkdir $homePath
     fi
 done
@@ -60,7 +60,8 @@ for file in $allFiles; do
     homePath="$HOME"/"$fileRelativePath"
     if [ -L "$homePath" ]; then
         if [ "$(readlink -- "$homePath")" -ef "$file" ]; then
-            echo "Config link already exists for $file"
+            #echo "Config link already exists for $file"
+            tmp="temp string to allow branch to exist"
         elif [ ! -e "$homePath" ]; then
             echo "Found broken link. Replacing with $file"
             rm -f "$homePath"
@@ -72,7 +73,7 @@ for file in $allFiles; do
             # - other options from below
         fi
     elif [ ! -e "$homePath" ]; then
-        echo "making link to $file at $homePath"
+        #echo "making link to $file at $homePath"
         ln -s "$file" "$homePath"
     elif [ -f "$homePath" ]; then
         echo "The file already exists $homePath"
