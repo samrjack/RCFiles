@@ -67,7 +67,7 @@ if IsVundleInstalled()
         " Plugin 'python-mode/python-mode'
 
         " Python semantic highlighting
-        Plugin 'numirias/semshi'
+        "Plugin 'numirias/semshi' " Commented out due to causing errors when saving hidden files.
 
     """"" Navigation """""
         " Nerd tree directory navigator
@@ -121,6 +121,9 @@ if IsVundleInstalled()
     """"" Editing """""
         " Undo tree plugin
         Plugin 'mbbill/undotree'
+
+        " Yanking
+        Plugin 'machakann/vim-highlightedyank'
 
         " Allow for surrounding notation
         Plugin 'tpope/vim-surround'
