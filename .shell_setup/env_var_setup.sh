@@ -8,4 +8,8 @@ export EDITOR='vim'
 # ssh
 export SSH_KEY_PATH="${HOME}/.ssh/rsa_id"
 
-MANPATH="/usr/local/man:$MANPATH"
+# path to man pages
+export MANPATH="/usr/local/man:$MANPATH"
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
