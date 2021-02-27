@@ -29,6 +29,8 @@ alias emacs="emacs -nw"
 
 alias pip="pip3"
 
+alias open="xdg-open"
+
 # An alias to read from stdin without requiring the output to be saved
 alias v='vim -c "setlocal buftype=nofile bufhidden=hide noswapfile" -'
 
