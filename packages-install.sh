@@ -8,4 +8,4 @@ wget
 qutebrowser
 sl
 vlc
-
+net-tools
