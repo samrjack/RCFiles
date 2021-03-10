@@ -26,6 +26,7 @@ alias tmuxrc="vim ~/.tmux.conf"
 alias vimrc="vim ~/.vimrc"
 
 alias emacs="emacs -nw"
+alias emacsclient="emacsclient -t"
 
 alias open="xdg-open"
 
