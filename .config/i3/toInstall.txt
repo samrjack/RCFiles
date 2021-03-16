@@ -19,3 +19,4 @@ ranger
 
 blueman
 pavucontrol
+powermanagement-interface
