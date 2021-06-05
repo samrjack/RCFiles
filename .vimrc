@@ -49,10 +49,8 @@ if IsVundleInstalled()
         Plugin 'vim-scripts/haskellFold'
 
         " JS React highlighting
-        " Plugin 'pangloss/vim-javascript'
-        " Plugin 'maxmellon/vim-jsx-pretty'
+        Plugin 'maxmellon/vim-jsx-pretty'
         Plugin 'pangloss/vim-javascript'
-        Plugin 'mxw/vim-jsx'
 
         " Larg syntax highlighting package
         Plugin 'sheerun/vim-polyglot'
@@ -301,10 +299,10 @@ endif
             colorscheme forest-night
         catch
             try
-                colorscheme gruvbox
+                colorscheme dracula
             catch
                 try
-                    colorscheme dracula
+                    colorscheme gruvbox
                 catch
                     try
                         colorscheme desert

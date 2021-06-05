@@ -27,9 +27,6 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -57,8 +54,6 @@
 ;; Must now write to register "+ to write to system clipboard.
 (setq save-interprogram-paste-before-kill t)
 (setq select-enable-clipboard nil)
-(setq x-select-enable-clipboard nil)
-
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -68,3 +63,24 @@ Position the cursor at it's beginning, according to the current mode."
   (forward-line -1)
   (indent-according-to-mode))
 
+
+;; (setq-default left-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
+
+(define-key evil-normal-state-map (kbd "C-n") '+treemacs/toggle)
+;; Checkout out https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/ for configuration example
+
+;; (map! :leader
+;;       (:prefix-map ("a" . "personal")
+;;        (:prefix-map ("a" . "test2")
+;;         (:prefix ("a" . "test")
+;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
+;;          :desc "Search journal entry" "s" #'org-journal-search))))
+
+;;; Org mode bindings
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+
+;;; config.el ends here
