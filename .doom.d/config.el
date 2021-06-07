@@ -83,4 +83,24 @@ Position the cursor at it's beginning, according to the current mode."
 (setq org-directory "~/org/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
+(setq org-pomodoro-length 25
+      org-pomodoro-short-break-length 5
+      org-pomodoro-long-break-length 15)
+
+(setq org-pomodoro-play-sounds t
+      org-pomodoro-start-sound-p f
+      org-pomodoro-ticking-sound-p f
+      org-pomodoro-killed-sound-p t
+      org-pomodoro-finished-sound-p t
+      org-pomodoro-short-break-sound-p t
+      org-pomodoro-long-break-sound-p t)
+
+;; need to find (or make) some better alert audio files.
+;; (setq ;org-pomodoro-start-sound ()
+;;       ;org-pomodoro-ticking-sound ()
+;;       org-pomodoro-killed-sound ()
+;;       org-pomodoro-finished-sound ()
+;;       org-pomodoro-short-break-sound ()
+;;       org-pomodoro-long-break-sound ())
+
 ;;; config.el ends here
