@@ -9,3 +9,4 @@ qutebrowser
 sl
 vlc
 net-tools
+texlive-full
