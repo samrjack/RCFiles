@@ -87,6 +87,46 @@ Position the cursor at it's beginning, according to the current mode."
 (setq org-agenda-files (list "~/org/work.org"
                              "~/org/todo.org"))
 
+(setq org-default-extension ".org")
+(defun org-open-org-file (file)
+  "Opens an org file in the default org folder.
+if no org extension is given then it will be automatically appended."
+  (interactive
+   (list (directory-file-name
+          (read-file-name "Choose org file:" org-directory))))
+
+  ; Check for if the file:
+  ; * Already exists (and is not a directory)
+  ; * Has an org extension
+  ; If neither of these cases is valid then automatically append an org extension
+  ; to the provided file name.
+  (let ((input-file-extension (file-name-extension file))
+        (valid-org-extension-regex-list
+         (mapcar 'car
+                 (seq-filter
+                  (lambda (mode-pairs) (eq 'org-mode (cdr mode-pairs)))
+                  auto-mode-alist))))
+    (unless
+        (or (and (file-exists-p file)
+                 (not (file-directory-p file)))
+            (and input-file-extension
+                 ; check the input
+                 (eval (cons 'or (mapcar (lambda (extension-regex)
+                           (string-match-p extension-regex input-file-extension))
+                         valid-org-extension-regex-list)))))
+      (setq file (concat file org-default-extension)))) ; Otherwise set file to have an org extension)
+
+    ; If, after the above checks, the file name still points to a directory, then
+    ; throw an error since it can't be opened at that point.
+    (if (file-directory-p file)
+        (error "The provided file is a directory %s" file)
+      (find-file file)
+      (org-mode)))
+
+(map! :leader
+      :desc "Find org file"
+      "f o" #'org-open-org-file)
+
 ;; Example of org capture templates
 ;; for example text, see https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
 ;; (after! org
