@@ -77,6 +77,9 @@ Position the cursor at it's beginning, according to the current mode."
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
 ;;          :desc "Search journal entry" "s" #'org-journal-search))))
 
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (after! flycheck
   (global-flycheck-mode -1))

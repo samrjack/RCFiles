@@ -48,6 +48,10 @@ if no org extension is given then it will be automatically appended."
       :desc "Find org file"
       "f o" #'org-open-org-file)
 
+(add-to-list 'org-capture-templates
+             '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]"))
+
+
 ;; Example of org capture templates
 ;; for example text, see https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
 ;; (after! org
@@ -108,9 +112,8 @@ if no org extension is given then it will be automatically appended."
 (after! org
   (setq org-pomodoro-length 25
         org-pomodoro-short-break-length 5
-        org-pomodoro-long-break-length 15))
+        org-pomodoro-long-break-length 15)
 
-(after! org
   (setq org-pomodoro-play-sounds t
         ;; org-pomodoro-start-sound-p f
         ;; org-pomodoro-ticking-sound-p f
