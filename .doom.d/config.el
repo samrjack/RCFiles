@@ -78,3 +78,5 @@ Position the cursor at it's beginning, according to the current mode."
 ;;          :desc "Search journal entry" "s" #'org-journal-search))))
 
 (load! "settings/org-settings.el")
+(load! "settings/evil-snipe-settings.el")
+
