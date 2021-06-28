@@ -67,9 +67,9 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
-(define-key evil-normal-state-map (kbd "C-n") '+treemacs/toggle)
-;; Checkout out https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/ for configuration example
+(define-key evil-normal-state-map (kbd "C-n") 'dired-sidebar-toggle-sidebar)
 
+;; Checkout out https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/ for configuration example
 ;; (map! :leader
 ;;       (:prefix-map ("a" . "personal")
 ;;        (:prefix-map ("a" . "test2")
@@ -78,7 +78,11 @@ Position the cursor at it's beginning, according to the current mode."
 ;;          :desc "Search journal entry" "s" #'org-journal-search))))
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(global-flycheck-mode -1)
+(after! flycheck
+  (global-flycheck-mode -1))
+
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
 
 (load! "settings/org-settings.el")
 (load! "settings/evil-snipe-settings.el")
