@@ -50,3 +50,5 @@
 ;(unpin! t)
 
 (package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
