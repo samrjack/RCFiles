@@ -67,18 +67,26 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
+
 (define-key evil-normal-state-map (kbd "C-n") 'dired-sidebar-toggle-sidebar)
 
-;; Checkout out https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/ for configuration example
-;; (map! :leader
-;;       (:prefix-map ("a" . "personal")
+(defun print-point-position ()
+  "Print the position of point to the message console."
+  (interactive)
+  (message (number-to-string (point))))
+
+(map! :leader
+      (:prefix-map ("a" . "Additional")
+        (:desc "Point's position" "p" #'print-point-position)))
 ;;        (:prefix-map ("a" . "test2")
 ;;         (:prefix ("a" . "test")
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
-;;          :desc "Search journal entry" "s" #'org-journal-search))))
-
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
+         ;; :desc "Search journal entry" "s" #'org-journal-search))))
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (after! flycheck
