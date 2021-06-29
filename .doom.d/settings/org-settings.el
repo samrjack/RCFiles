@@ -48,8 +48,9 @@ if no org extension is given then it will be automatically appended."
       :desc "Find org file"
       "f o" #'org-open-org-file)
 
-(add-to-list 'org-capture-templates
-             '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]"))
+(after! org
+  (add-to-list 'org-capture-templates
+                '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]")))
 
 
 ;; Example of org capture templates
