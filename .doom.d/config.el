@@ -97,4 +97,4 @@ Position the cursor at it's beginning, according to the current mode."
 
 (load! "settings/org-settings.el")
 (load! "settings/evil-snipe-settings.el")
-
+(load! "settings/evil-settings.el")
