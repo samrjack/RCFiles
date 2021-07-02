@@ -31,18 +31,18 @@ configDir=$( cd -P -- "$(dirname -- "$invocationPath")" && pwd -P) || exit
 
 
 #### Setup directory structure ####
-allDirs=$(find $configDir -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d)
+allDirs=$(find "$configDir" -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d)
 
 for directory in $allDirs; do 
     dirRelativePath=${directory#"$configDir"/}
     homePath="$HOME"/"$dirRelativePath"
-    if [ -L $homePath ]; then
+    if [ -L "$homePath" ]; then
         echo "directory is a link, removing and replacing with a hard directory. $homePath"
-        rm -f $homePath
-        mkdir $homePath
-    elif [ ! -d  $homePath ]; then
+        rm -f "$homePath"
+        mkdir "$homePath"
+    elif [ ! -d  "$homePath" ]; then
         #echo "Making directory $homePath"
-        mkdir $homePath
+        mkdir "$homePath"
     fi
 done
 
@@ -65,7 +65,9 @@ for file in $allFiles; do
     if [ -L "$homePath" ]; then
         if [ "$(readlink -- "$homePath")" -ef "$file" ]; then
             #echo "Config link already exists for $file"
-            tmp="temp string to allow branch to exist"
+            # : is a no-op command that is present just to allow this branch
+            # to exist for possible later use.
+            :
         elif [ ! -e "$homePath" ]; then
             echo "Found broken link. Replacing with $file"
             rm -f "$homePath"

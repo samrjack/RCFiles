@@ -4,8 +4,8 @@
 ### Vundle install ###
 
 vundleDirectory="$HOME/.vim/bundle";
-if [ ! -d $vundleDirectory ]; then
-    mkdir -vp $vundleDirectory;
+if [ ! -d "$vundleDirectory" ]; then
+    mkdir -vp "$vundleDirectory";
 fi
 
 vundleName="Vundle.vim";
