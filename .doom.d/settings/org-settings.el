@@ -21,7 +21,7 @@ if no org extension is given then it will be automatically appended."
   ; * Has an org extension
   ; If neither of these cases is valid then automatically append an org extension
   ; to the provided file name.
-  (let ((input-file-extension (file-name-extension file))
+  (let ((input-file-extension (concat "." (file-name-extension file)))
         (valid-org-extension-regex-list
          (mapcar 'car
                  (seq-filter
