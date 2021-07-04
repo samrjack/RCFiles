@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; File for setting values related to evil-snipe mode
 
 ; There can be problems between snipe mode and magit mode.
