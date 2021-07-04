@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Configuration settings for Emacs evil mode
 
 ; Turn off case-insensitive search. Can still make
