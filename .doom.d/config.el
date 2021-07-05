@@ -52,8 +52,12 @@
 
 ;; Prevents system clipboard from being accidentially overwritten.
 ;; Must now write to register "+ to write to system clipboard.
-(setq save-interprogram-paste-before-kill t)
-(setq select-enable-clipboard nil)
+
+;; Some paste related settings.
+;; TODO I want to find a way to copy and paste to clipboard without
+;; having to go through "+ directly.
+(setq save-interprogram-paste-before-kill t
+      select-enable-clipboard nil)
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -62,6 +66,26 @@ Position the cursor at it's beginning, according to the current mode."
   (newline-and-indent)
   (forward-line -1)
   (indent-according-to-mode))
+
+;; Resize all windows when a new one comes in so they have
+;; equal space.
+(setq-default window-combination-resize t
+;; changes the cursor to be the size of a gliph in the buffer.
+              x-stretch-cursor t)
+
+;; Let the undo buffer use up to 100Mb
+(setq undo-limit 100000000
+;; Make undo revert smaller sections of text instead of all text
+;; added while in insert mode.
+      evil-want-fine-undo t
+;; leave some space at the bottom while scrolling down so the
+;; cursor isn't hugging the bottom edge.
+      scroll-margin 2)
+
+
+;; Makes it so movement keys stop at camlecase sub words.
+(global-subword-mode 1)
+
 
 
 ;; (setq-default left-margin-width 1)
@@ -95,6 +119,15 @@ Position the cursor at it's beginning, according to the current mode."
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
+(setq custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file) (load custom-file))
+
+(setq which-key-idle-delay 0.5)
+;; enables nested snippets
+(setq yas-triggers-in-field t)
+
+(load! "settings/package-settings.el")
+(load! "settings/mode-line-settings.el")
 (load! "settings/org-settings.el")
 (load! "settings/org-template-settings.el")
 (load! "settings/evil-snipe-settings.el")
