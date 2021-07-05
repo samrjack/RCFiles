@@ -96,5 +96,6 @@ Position the cursor at it's beginning, according to the current mode."
   (setq projectile-track-known-projects-automatically nil))
 
 (load! "settings/org-settings.el")
+(load! "settings/org-template-settings.el")
 (load! "settings/evil-snipe-settings.el")
 (load! "settings/evil-settings.el")
