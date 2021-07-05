@@ -50,6 +50,12 @@ if no org extension is given then it will be automatically appended."
       "f o" #'org-open-org-file)
 
 
+;; Use keybinding g b to "go back" to previous location when a link is followed.
+;; Use keybinding g m to "go mark" the current location so it can be returned to later.
+(after! org
+  (map! :map org-mode-map
+        :n "g m" #'org-mark-ring-push
+        :n "g b" #'org-mark-ring-goto))
 
 ;; Pomodoro
 (after! org
