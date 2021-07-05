@@ -53,3 +53,31 @@
 (package! dired+)
 (package! dired-subtree)
 (package! dracula-theme)
+(package! org-reverse-datetree)
+(package! xkcd)
+(package! selectric-mode)
+(package! theme-magic)
+(package! spray)
+(package! elcord)
+(package! keycast)
+(package! gif-screencast)
+(package! ess-view)
+(package! info-colors)
+(package! systemd)
+(package! graphviz-dot-mode)
+
+;; e-reader
+(package! calibredb)
+(package! nov)
+;; org packages
+(package! org-super-agenda)
+(package! org-fragtog)
+(package! org-pretty-tags)
+;; (package! ox-gfm) ; Causing problems with pandoc at the moment.
+(package! org-ref)
+(package! org-chef)
+
+
+;; Used to view VERY large files faster
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
+  :disable t) ; disabled on startup to not impact load time.
