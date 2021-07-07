@@ -114,8 +114,6 @@ Position the cursor at it's beginning, according to the current mode."
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! 'doom-first-buffer-hook 'global-flycheck-mode)
-;; (after! flycheck
-;;   (global-flycheck-mode -1))
 
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
