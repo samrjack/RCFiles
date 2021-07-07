@@ -113,8 +113,9 @@ Position the cursor at it's beginning, according to the current mode."
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(after! flycheck
-  (global-flycheck-mode -1))
+(remove-hook! 'doom-first-buffer-hook 'global-flycheck-mode)
+;; (after! flycheck
+;;   (global-flycheck-mode -1))
 
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
@@ -130,5 +131,5 @@ Position the cursor at it's beginning, according to the current mode."
 (load! "settings/mode-line-settings.el")
 (load! "settings/org-settings.el")
 (load! "settings/org-template-settings.el")
-(load! "settings/evil-snipe-settings.el")
 (load! "settings/evil-settings.el")
+(load! "settings/evil-snipe-settings.el")
