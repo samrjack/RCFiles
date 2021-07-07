@@ -16,5 +16,3 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 (map! :leader
       :desc "Evil snipe mode"
       "t S" #'toggle-and-activate-evil-snipe-mode)
-; (map! :map general-override-mode-map :nv "s" #'evil-substitute)
-;; (after! evil-snipe (evil-snipe-mode -1))
