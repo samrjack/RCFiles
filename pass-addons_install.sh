@@ -17,7 +17,22 @@ curl https://maximbaz.com/pgp_keys.asc | gpg --import || \
 git clone https://github.com/browserpass/browserpass-native
 cd browserpass-native
 make all
-sudo make configure
+make configure
+sudo chown ${USER}:${USER} .config/chromium
 sudo make install
 cd ..
 rm -rf browserpass-native
+cd /usr/lib/browserpass/
+make make hosts-chromium-user
+make hosts-firefox-user
+make hosts-chrome-user
+make hosts-brave-user
+make hosts-iridium-user
+make hosts-vivaldi-user
+make hosts-slimjet-user
+make policies-chromium-user
+make policies-chrome-user
+make policies-brave-user
+make policies-iridium-user	
+make policies-slimjet-user
+make policies-vivaldi-user
