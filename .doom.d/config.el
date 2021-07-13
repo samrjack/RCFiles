@@ -88,12 +88,6 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
-(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
-(setq evil-snipe-scope 'whole-visible
-      evil-snipe-repeat-scope 'whole-visible)
-
 (define-key evil-normal-state-map (kbd "C-n") 'dired-sidebar-toggle-sidebar)
 
 (defun print-point-position ()
@@ -108,6 +102,14 @@ Position the cursor at it's beginning, according to the current mode."
 ;;         (:prefix ("a" . "test")
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
+;;
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'toggle-and-activate-evil-snipe-mode)
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! (doom-first-buffer) #'global-flycheck-mode)
