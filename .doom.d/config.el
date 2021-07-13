@@ -82,11 +82,8 @@ Position the cursor at it's beginning, according to the current mode."
 ;; cursor isn't hugging the bottom edge.
       scroll-margin 2)
 
-
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
-
-
 
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
@@ -113,7 +110,7 @@ Position the cursor at it's beginning, according to the current mode."
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(remove-hook! 'doom-first-buffer-hook 'global-flycheck-mode)
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
 
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))

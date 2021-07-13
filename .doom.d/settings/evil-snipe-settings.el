@@ -2,9 +2,11 @@
 ;; File for setting values related to evil-snipe mode
 
 ; There can be problems between snipe mode and magit mode.
+(remove-hook! (doom-first-input) 'evil-snipe-mode)
 (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
 
-(remove-hook! 'doom-first-input-hook 'evil-snipe-mode)
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
 
 (defun toggle-and-activate-evil-snipe-mode ()
   "Toggles evil-snipe-mode on and off then activates the
