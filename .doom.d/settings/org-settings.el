@@ -54,8 +54,12 @@ if no org extension is given then it will be automatically appended."
 ;; Use keybinding g m to "go mark" the current location so it can be returned to later.
 (after! org
   (map! :map org-mode-map
-        :n "g m" #'org-mark-ring-push
-        :n "g b" #'org-mark-ring-goto))
+        :n  "g m" #'org-mark-ring-push
+        :n  "g b" #'org-mark-ring-goto
+        :nv "g j" #'evil-next-visual-line
+        :nv "g k" #'evil-previous-visual-line
+        :nv "g J" #'org-forward-element
+        :nv "g K" #'org-backward-element))
 
 ;; Pomodoro
 (after! org
