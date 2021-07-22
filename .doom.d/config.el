@@ -109,7 +109,7 @@ Position the cursor at it's beginning, according to the current mode."
 (add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
 (map! :leader
       :desc "Write good mode"
-      "t W" #'toggle-and-activate-evil-snipe-mode)
+      "t W" #'writegood-mode)
 
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! (doom-first-buffer) #'global-flycheck-mode)
