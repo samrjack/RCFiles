@@ -60,6 +60,7 @@
 (package! spray)
 (package! elcord)
 (package! keycast)
+(package! command-log-mode)
 (package! gif-screencast)
 (package! ess-view)
 (package! info-colors)
