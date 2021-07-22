@@ -34,8 +34,8 @@
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
 
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; (use-package! vlf-setup
+;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
 ;; (use-package! ox-gfm
 ;;   :after org)
@@ -47,7 +47,7 @@
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
-(use-package! nov
+(use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config
   (map! :map nov-mode-map

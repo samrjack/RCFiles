@@ -80,5 +80,4 @@
 
 
 ;; Used to view VERY large files faster
-(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
-  :disable t) ; disabled on startup to not impact load time.
+(package! vlf :disable t) ; disabled on startup to not impact load time.
