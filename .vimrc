@@ -67,6 +67,10 @@ if IsVundleInstalled()
         " Python semantic highlighting
         "Plugin 'numirias/semshi' " Commented out due to causing errors when saving hidden files.
 
+        " Clojure packages
+        Plugin 'guns/vim-clojure-static'
+        Plugin 'tpope/vim-fireplace'
+
     """"" Navigation """""
         " Nerd tree directory navigator
         Plugin 'scrooloose/nerdtree'
