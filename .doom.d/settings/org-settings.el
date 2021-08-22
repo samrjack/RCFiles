@@ -5,9 +5,15 @@
 (setq org-directory "~/org/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
+(setq org-roam-directory "~/roam")
+(setq org-roam-v2-ack t)
+
 ;; Agenda
 (setq org-agenda-files (list "~/org/work.org"
                              "~/org/todo.org"))
+
+
+(setq org-bable-clojure-backend 'cider)
 
 (setq org-default-extension ".org")
 (defun org-open-org-file (file)

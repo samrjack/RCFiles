@@ -49,35 +49,52 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+;; directory management
 (package! dired-sidebar)
 (package! dired+)
 (package! dired-subtree)
+
+;; Themes
 (package! dracula-theme)
-(package! org-reverse-datetree)
-(package! xkcd)
-(package! selectric-mode)
 (package! theme-magic)
+
+;; Org mode related stuff
+(package! org-reverse-datetree)
+;(package! ox-gfm) ; Causing problems with pandoc at the moment.
+(package! org-ref)
+(package! org-chef)
+(package! org-super-agenda)
+(package! org-fragtog)
+(package! org-pretty-tags)
+
+;; Fun stuff
+(package! xkcd)
+
+;; Clojure related packages
+(package! clojure-mode)
+(package! clojure-mode-extra-font-locking)
+(package! clj-refactor)
+(package! cider)
+
+;; Presentation/showing emacs
+(package! command-log-mode)
+(package! gif-screencast)
+
+;; e-reader
+(package! calibredb)
+(package! nov)
+
+;; Uncatigorized
+(package! selectric-mode)
 (package! spray)
 (package! elcord)
 (package! keycast)
-(package! command-log-mode)
-(package! gif-screencast)
 (package! ess-view)
 (package! info-colors)
 (package! systemd)
 (package! graphviz-dot-mode)
 
-;; e-reader
-(package! calibredb)
-(package! nov)
-;; org packages
-(package! org-super-agenda)
-(package! org-fragtog)
-(package! org-pretty-tags)
-;; (package! ox-gfm) ; Causing problems with pandoc at the moment.
-(package! org-ref)
-(package! org-chef)
-
+;; (package! subed)
 
 ;; Used to view VERY large files faster
 (package! vlf :disable t) ; disabled on startup to not impact load time.

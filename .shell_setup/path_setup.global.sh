@@ -24,3 +24,19 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Rust build system
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Source a GUIX environment if present
+GUIX_PROFILE="$HOME/.guix-profile"
+GUIX_PROFILE_SCRIPT="$GUIX_PROFILE/etc/profile"
+if [ -e "$GUIX_PROFILE_SCRIPT" ]; then
+   . "$GUIX_PROFILE_SCRIPT"
+
+   # If guix is updated, it needs to source its new location too. However,
+   # if it's not updated, then we should overwrite the above variables.
+   NEW_GUIX_PROFILE="$HOME/.config/guix/current"
+   NEW_GUIX_PROFILE_SCRIPT="$NEW_GUIX_PROFILE/etc/profile"
+   if [ -e "$NEW_GUIX_PROFILE_SCRIPT" ]; then
+       GUIX_PROFILE="$NEW_GUIX_PROFILE"
+       . "$NEW_GUIX_PROFILE_SCRIPT"
+   fi
+fi
