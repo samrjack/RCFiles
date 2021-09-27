@@ -43,3 +43,14 @@ alias lg="gl"
 
 alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
+function magit () {
+    git_root=$(git rev-parse --show-toplevel)
+    magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
+    if [ $? -eq 0 ]; then
+        if ! emacsclient -e 0 >&/dev/null; then
+            emacs -nw --eval=${magitExecute}
+        else
+            emacsclient -nw -e ${magitExecute}
+        fi
+    fi
+}
