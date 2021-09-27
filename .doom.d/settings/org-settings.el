@@ -9,9 +9,9 @@
 (setq org-roam-v2-ack t)
 
 ;; Agenda
-(setq org-agenda-files (list "~/org/work.org"
-                             "~/org/todo.org"))
-
+;; (setq org-agenda-files (list "~/org/work.org"
+;;                              "~/org/todo.org"))
+(setq org-archive-location "archive/%s_archive::")
 
 (setq org-bable-clojure-backend 'cider)
 
