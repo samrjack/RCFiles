@@ -96,8 +96,10 @@
 
 ;; (package! subed)
 
+(package! guix)
 ;; Used to view VERY large files faster
 (package! vlf :disable t) ; disabled on startup to not impact load time.
+
 
 ;; Temp fixes for gitconfig-mode bug https://github.com/hlissner/doom-emacs/issues/5667
 (package! gitconfig-mode
