@@ -54,3 +54,11 @@ function magit () {
         fi
     fi
 }
+
+function hibernate () {
+    if [[ $(which systemctl) ]]; then
+        systemctl suspend;
+    else
+        echo "sorry, don't know how yet.";
+    fi
+}
