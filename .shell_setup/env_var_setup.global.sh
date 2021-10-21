@@ -1,6 +1,7 @@
 
 # Setting language parameter so it's consistent
 export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
