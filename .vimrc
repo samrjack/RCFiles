@@ -71,6 +71,9 @@ if IsVundleInstalled()
         Plugin 'guns/vim-clojure-static'
         Plugin 'tpope/vim-fireplace'
 
+        " Ruby packages
+        Plugin 'tpope/vim-rails'
+
     """"" Navigation """""
         " Nerd tree directory navigator
         Plugin 'scrooloose/nerdtree'
