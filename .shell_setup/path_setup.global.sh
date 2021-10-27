@@ -1,7 +1,8 @@
 # Setting up the path variable for all shell environments.
 
-# Files
+# program files
 export PATH="/usr/local/bin/:$PATH"
+export PATH="/sbin/:$PATH"
 
 # Doom emacs
 export PATH="${HOME}/.emacs.d/bin:$PATH"
