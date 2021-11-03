@@ -28,6 +28,8 @@ alias vimrc="vim ~/.vimrc"
 alias emacs="emacs -nw"
 alias emacsclient="emacsclient -t"
 
+alias untar="tar -xvf"
+
 alias open="xdg-open"
 
 alias xrs='set -o noglob; eval `resize`; unset noglob'
