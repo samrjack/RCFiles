@@ -85,6 +85,9 @@ Position the cursor at it's beginning, according to the current mode."
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
 
+;; Make searches case sensitive
+(setq case-fold-search nil)
+
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
@@ -123,6 +126,11 @@ Position the cursor at it's beginning, according to the current mode."
 (setq which-key-idle-delay 0.5)
 ;; enables nested snippets
 (setq yas-triggers-in-field t)
+
+(setq web-mode-script-padding standard-indent)
+(setq web-mode-style-padding standard-indent)
+(setq web-mode-block-padding standard-indent)
+(setq web-mode-part-padding standard-indent)
 
 (load! "settings/package-settings.el")
 (load! "settings/mode-line-settings.el")
