@@ -34,6 +34,8 @@ alias open="xdg-open"
 
 alias xrs='set -o noglob; eval `resize`; unset noglob'
 
+alias server="echo 'http://localhost:8000/'; python3 -m http.server"
+
 # An alias to read from stdin without requiring the output to be saved
 alias v='vim -c "setlocal buftype=nofile bufhidden=hide noswapfile" -'
 
