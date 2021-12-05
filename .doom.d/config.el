@@ -91,7 +91,10 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "g /" #'which-key-show-top-level
+      :n "g C-/" #'which-key-show-full-major-mode
+      :n "g M-/" #'which-key-show-minor-mode-keymap
+      :n "C-n" #'dired-sidebar-toggle-sidebar)
 
 (defun print-point-position ()
   "Print the position of point to the message console."

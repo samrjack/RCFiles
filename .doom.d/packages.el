@@ -85,6 +85,7 @@
 (package! nov)
 
 ;; Uncatigorized
+(package! discover-my-major)
 (package! scad-mode)
 (package! selectric-mode)
 (package! spray)
