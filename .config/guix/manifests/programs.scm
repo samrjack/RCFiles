@@ -61,6 +61,7 @@
     "audacity"
     "gparted"
     "steam"
+    "vlc"
 
     ;;; Office programs
     "libreoffice"
@@ -79,6 +80,8 @@
     "sed"
     "password-store"
     "ranger"
+    "tmux"
+    "sl"
 
     ;; Web tools
     "wget"
