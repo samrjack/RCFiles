@@ -85,6 +85,7 @@
 (package! nov)
 
 ;; Uncatigorized
+(package! scad-mode)
 (package! selectric-mode)
 (package! spray)
 (package! elcord)

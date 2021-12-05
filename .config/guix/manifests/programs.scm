@@ -52,6 +52,7 @@
     "texlive"
     "texmaker"
     "octave"
+    "openscad"
 
     ;;; GUI programs
     "blender"
