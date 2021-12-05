@@ -91,7 +91,7 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
-(define-key evil-normal-state-map (kbd "C-n") 'dired-sidebar-toggle-sidebar)
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 
 (defun print-point-position ()
   "Print the position of point to the message console."
