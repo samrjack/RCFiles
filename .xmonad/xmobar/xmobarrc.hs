@@ -1,4 +1,4 @@
-Config { font = "xft:Ubuntu Mono:pixelsize=12:antialias=true:hinting=true"
+Config { font = "xft:Ubuntu mono:pixelsize=14:antialias=true:hinting=true"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
@@ -12,7 +12,7 @@ Config { font = "xft:Ubuntu Mono:pixelsize=12:antialias=true:hinting=true"
        , pickBroadest = False
        , persistent = False
        , hideOnStart = False
-       , iconRoot = "."
+       , iconRoot = "~/.xmonad/xpm/"
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
@@ -20,6 +20,7 @@ Config { font = "xft:Ubuntu Mono:pixelsize=12:antialias=true:hinting=true"
                                           "--normal","green",
                                           "--high","red",
                                           "--low","lightblue"] 36000
+                    , Run Date "%a %Y %m %d %H:%M:%S" "date" 10
                     , Run Network "eth0" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
                     , Run Network "eth1" ["-L","0","-H","32",
@@ -29,10 +30,10 @@ Config { font = "xft:Ubuntu Mono:pixelsize=12:antialias=true:hinting=true"
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
+       , template = " <icon=haskell_20.xpm><fc=#666666> |</fc> %cpu% | %memory% * %swap% | %eth0% - %eth1% }\
                     \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
        }

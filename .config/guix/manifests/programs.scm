@@ -8,6 +8,7 @@
     "dwm"
 
     ;;; window manager dependencies
+    "ghc-xmonad-contrib"
     "xmobar"
     "i3lock"
     "i3lock-fancy"
@@ -24,7 +25,9 @@
     "arandr"
     "rofi"
     "dmenu"
+    "xterm"
     "pulseaudio"
+    "xdotool"
 
     ;;; Shells
     "zsh"

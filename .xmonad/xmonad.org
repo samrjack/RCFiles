@@ -1,0 +1,28 @@
+#+TITLE: Xmonad Config Explanation
+#+AUTHOR: Samuel Jackson
+
+* Keybindings
+For the purposes of using a system, it is important to have a constant set of key bindings that fit your most regular use cases. Therefore, it is helpful to first consider a list of actions you would want to consider for your system and only then pick the key bindings for each action.
+
+** Activities
+*** System activities
+- Log out / close WM
+- Reload xmonad config
+- Kill a program
+- Adjust brightness
+- Mute
+- Screenshot
+*** Window management
+- Change current monitor's workspace
+- Move program to a different workspace
+- Manage window sorters
+- Rotate windows
+- Change active window
+- Fullscreen "zoom-in" toggle
+- Toggle floating window
+- Resize window
+***  Quick action programs
+- Open file manager
+- Open a program searcher
+- Open a web browser
+- Open emacs
