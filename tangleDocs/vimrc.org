@@ -4,15 +4,22 @@
 #+STARTUP: showall hidestars indent
 #+PROPERTY: header-args :results silent :tangle "../configs/.vimrc"
 
+Welcome to my Vim rc literate programming file. In here, I will be building up my vimrc file step by step.
 #+BEGIN_SRC vimrc
-" This file has been tangled
+" This file has been generated using org tangle. To modify, please see the org file.
 set nocompatible      " VI improve allowed
+#+END_SRC
+* Vundle and package setup
+** What is Vundle
+** Setting up Vundle
+#+BEGIN_SRC vimrc
 filetype off
-
 function! IsVundleInstalled()
     let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
     return filereadable(vundle_readme)
 endfunction
+#+END_SRC
+#+BEGIN_SRC vimrc
 " Install vundle if needed
     let vundlePreviouslyInstalled=1
     if !IsVundleInstalled() && executable('git')
@@ -23,6 +30,8 @@ endfunction
         let vundlePreviouslyInstalled=0
     endif
 
+#+END_SRC
+#+BEGIN_SRC vimrc
     if IsVundleInstalled()
         set rtp+=~/.vim/bundle/Vundle.vim/
         call vundle#rc()
@@ -37,6 +46,9 @@ endfunction
     endif
 " END - Setting up Vundle
 
+#+END_SRC
+** Installing packages
+#+BEGIN_SRC vimrc
 " set the runtime path to include Vundle and initialize
 if IsVundleInstalled()
     set rtp+=~/.vim/bundle/Vundle.vim
@@ -46,66 +58,119 @@ if IsVundleInstalled()
     Plugin 'VundleVim/Vundle.vim'
 
     """"""""""""""""""" All plugins here """""""""""""""""""
+#+END_SRC
+*** Extension handlers
+#+BEGIN_SRC vimrc
     """"" Syntax """""
+#+END_SRC
+**** Org mode
+#+BEGIN_SRC vimrc
         " Org mode
         Plugin 'jceb/vim-orgmode'
 
+#+END_SRC
+**** Perl Mason
+#+BEGIN_SRC vimrc
         " Syntax highlighting for perl-mason
         Plugin 'aming/vim-mason'
 
+#+END_SRC
+**** Haskell
+#+BEGIN_SRC vimrc
         " Haskell folding capability
         Plugin 'vim-scripts/haskellFold'
 
+#+END_SRC
+**** Javascript
+#+BEGIN_SRC vimrc
         " JS React highlighting
         Plugin 'maxmellon/vim-jsx-pretty'
         Plugin 'pangloss/vim-javascript'
 
-        " Larg syntax highlighting package
-        Plugin 'sheerun/vim-polyglot'
-
+#+END_SRC
+**** Tmux
+Modifies =.tmux.conf=.
+#+BEGIN_SRC vimrc
         " Tmux environment
         Plugin 'tmux-plugins/vim-tmux'
 
+#+END_SRC
+**** Ansi
+#+BEGIN_SRC vimrc
         " Allow Ansi color escape characters to be shown
         Plugin 'powerman/vim-plugin-AnsiEsc'
 
+#+END_SRC
+**** Python
+#+BEGIN_SRC vimrc
         " Python IDE style completion
         " Plugin 'python-mode/python-mode'
 
         " Python semantic highlighting
         "Plugin 'numirias/semshi' " Commented out due to causing errors when saving hidden files.
 
+#+END_SRC
+**** Clojure
+#+BEGIN_SRC vimrc
         " Clojure packages
         Plugin 'guns/vim-clojure-static'
         Plugin 'tpope/vim-fireplace'
 
+#+END_SRC
+**** Ruby
+#+BEGIN_SRC vimrc
         " Ruby packages
         Plugin 'tpope/vim-rails'
 
+#+END_SRC
+**** Other
+#+BEGIN_SRC vimrc
+        " Large syntax highlighting package
+        Plugin 'sheerun/vim-polyglot'
+
+#+END_SRC
+*** Navigation
+#+BEGIN_SRC vimrc
     """"" Navigation """""
         " Nerd tree directory navigator
         Plugin 'scrooloose/nerdtree'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Fuzzy File Finder
         Plugin 'kien/ctrlp.vim'
 
+#+END_SRC
+*** Viewing
+#+BEGIN_SRC vimrc
     """"" Viewing """""
         " Differenc color parentheses
         Plugin 'kien/rainbow_parentheses.vim'
         Plugin 'luochen1990/rainbow'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Indentation guide
         Plugin 'nathanaelkane/vim-indent-guides'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Colorful status bar
         Plugin 'itchyny/lightline.vim'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Hex Color viewing
         Plugin 'gu-fan/colorv.vim'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Terminal escape color viewing
         Plugin 'chrisbra/Colorizer'
 
+#+END_SRC
+*** Themes
+#+BEGIN_SRC vimrc
         """ Themes
             " Dracula theme
             Plugin 'dracula/vim'
@@ -131,32 +196,54 @@ if IsVundleInstalled()
             " Lightline themes
             Plugin 'sainnhe/lightline_foobar.vim'
 
+#+END_SRC
+*** Editing
+#+BEGIN_SRC vimrc
     """"" Editing """""
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Undo tree plugin
         Plugin 'mbbill/undotree'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Yanking
         Plugin 'machakann/vim-highlightedyank'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Allow for surrounding notation
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-repeat'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Allow for easy commenting
         Plugin 'tomtom/tcomment_vim'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Commenting plugin
         Plugin 'scrooloose/nerdcommenter'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Incrementer works with dates too
         Plugin 'tpope/vim-speeddating'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Working with CSVs
         Plugin 'chrisbra/csv.vim'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
         " Multiple cursors
         " Plugin 'terryma/vim-multiple-cursors'
 
+#+END_SRC
+*** Git
+#+BEGIN_SRC vimrc
     """"" GIT """""
         " NERDTree git plugin
         Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -169,6 +256,9 @@ if IsVundleInstalled()
         " Git Messenge
         Plugin 'rhysd/git-messenger.vim'
 
+#+END_SRC
+*** Other
+#+BEGIN_SRC vimrc
     """"" Other """""
         " Calandar
         Plugin 'mattn/calendar-vim'
@@ -182,15 +272,27 @@ if IsVundleInstalled()
         " Access cheat sheets
         Plugin 'dbeniamine/cheat.sh-vim'
 
+#+END_SRC
+#+BEGIN_SRC vimrc
     """"""""""""""""""" Plugins end """""""""""""""""""
-
+#+END_SRC
+** Wrap-up
+#+BEGIN_SRC vimrc
     call vundle#end()            " All plugins before here
 endif
 
 filetype plugin indent on    " turn filetypes back on
 filetype on
 
+#+END_SRC
+
+* Settings
+#+BEGIN_SRC vimrc
 """"""""""""""""""" Configure Plugin values and mappings """""""""""""""""""
+#+END_SRC
+
+*** Settings for Vundle managed packages
+#+BEGIN_SRC vimrc
 if IsVundleInstalled()
     """"" Navigation """""
         " Nerd tree options
@@ -300,6 +402,9 @@ if IsVundleInstalled()
         " let g:skipview_files = ['*\.vim']
 endif
 
+#+END_SRC
+*** Vundle agnostic settings
+#+BEGIN_SRC vimrc
 """"""""""""""""""" Environment Values """""""""""""""""""
 """"" Colors """""
     " enables true color for themes
@@ -309,6 +414,9 @@ endif
             set termguicolors
         endif
 
+#+END_SRC
+**** Setting color scheme
+#+BEGIN_SRC vimrc
     " Set colorscheme
         try
             colorscheme forest-night
@@ -328,14 +436,20 @@ endif
             endtry
         endtry
 
+#+END_SRC
+#+BEGIN_SRC vimrc
     syntax enable          " Enable syntax processing
 
+#+END_SRC
+#+BEGIN_SRC vimrc
     if exists('colorcolumn')
         set colorcolumn=120    " Highlights the nth column
         " Sets column color to grey
         highlight ColorColumn ctermbg=8
     endif
 
+#+END_SRC
+#+BEGIN_SRC vimrc
 """"" Indentation """""
     set smarttab           " Indents to the correct spot first time
     set shiftwidth=4       " Code defaults to 4 space indents
@@ -344,6 +458,9 @@ endif
     set autoindent         " Automatically indents when enter is pressed
     set expandtab          " Makes all tabs into spaces
 
+#+END_SRC
+*** Interface settings
+#+BEGIN_SRC vimrc
 """"" UI """""
     " set relativenumber     " Show line numbers relative to cursor
     set confirm            " Asks to save before quiting a file instead of preventing quit
@@ -356,11 +473,17 @@ endif
     set showmatch          " Highlight matching [{()}]
     set ruler
 
+#+END_SRC
+***** Search
+#+BEGIN_SRC vimrc
 """"" Searching """""
     set incsearch          " Search as characters are entered
     set hlsearch           " Highlight search matches
     set dictionary=/usr/share/dict/words "dictionary for searching
 
+#+END_SRC
+***** Indentation
+#+BEGIN_SRC vimrc
 """"" Folding """""
     set foldenable         " Enables code folding
     set foldnestmax=100    " Prevents too many folds
@@ -370,6 +493,8 @@ endif
     set foldlevelstart=20  " Start with all folds open
     set foldignore=""      " Doesn't ignore any characters when deciding fold level
 
+#+END_SRC
+#+BEGIN_SRC vimrc
 """"" Remaps """""
     nnoremap gV `[v`]
                            " Highlight last inserted text
@@ -384,6 +509,8 @@ endif
                            " Sources the current file. Used when testing new
                            " features.
 
+#+END_SRC
+#+BEGIN_SRC vimrc
 """"" Insert mode moveing """""
     inoremap <C-h> <Right>
     inoremap <C-j> <Down>
@@ -396,6 +523,9 @@ endif
     set redrawtime=10000
     set lazyredraw
 
+#+END_SRC
+*** Swapfiles
+#+BEGIN_SRC vimrc
 """"" Meta changes """""
     silent !mkdir ~/.swap > /dev/null 2>&1
     set backupdir=~/.swap//,.,/tmp//
@@ -407,13 +537,24 @@ endif
         autocmd InsertLeave * set nocul
     augroup END
 
+#+END_SRC
+
+*** File type specific settings
+#+BEGIN_SRC vimrc
 """"" File Specific changes """""
+
+#+END_SRC
+**** Scratch buffer
+#+BEGIN_SRC vimrc
     " Makes command 'TurnOnScratchBuffer' force the current buffer to become a
     " scratch buffer.
     command! -bar TurnOnScratchBuffer setlocal buftype=nofile bufhidden=hide noswapfile
     command! -bar TurnOffScratchBuffer setlocal buftype= bufhidden= swapfile
     command! -bar NewScratch new | TurnOnScratchBuffer
 
+#+END_SRC
+***** Making automatic scratch buffers
+#+BEGIN_SRC vimrc
     augroup remove_quite_prompt
         autocmd!
         autocmd StdinReadPre * TurnOnScratchBuffer
@@ -429,12 +570,18 @@ endif
             \ | endif
     augroup END
 
+#+END_SRC
+**** Folding
+#+BEGIN_SRC vimrc
     " augroup AutoSaveFolds
     "     autocmd!
     "     autocmd BufWinLeave * mkview
     "     autocmd BufWinEnter * silent loadview
     " augroup END
 
+#+END_SRC
+**** Some file specific settings
+#+BEGIN_SRC vimrc
     augroup filetype_syntax_changes
         autocmd!
         " Set default file type for files without so that they can have basic
@@ -450,3 +597,10 @@ endif
     augroup END
 
 #+END_SRC
+
+* Local Variables
+The below allows this file to tangle and produce the output RC file whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:

@@ -1,11 +1,12 @@
-" This file has been tangled
+" This file has been generated using org tangle. To modify, please see the org file.
 set nocompatible      " VI improve allowed
-filetype off
 
+filetype off
 function! IsVundleInstalled()
     let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
     return filereadable(vundle_readme)
 endfunction
+
 " Install vundle if needed
     let vundlePreviouslyInstalled=1
     if !IsVundleInstalled() && executable('git')
@@ -39,7 +40,9 @@ if IsVundleInstalled()
     Plugin 'VundleVim/Vundle.vim'
 
     """"""""""""""""""" All plugins here """""""""""""""""""
+
     """"" Syntax """""
+
         " Org mode
         Plugin 'jceb/vim-orgmode'
 
@@ -52,9 +55,6 @@ if IsVundleInstalled()
         " JS React highlighting
         Plugin 'maxmellon/vim-jsx-pretty'
         Plugin 'pangloss/vim-javascript'
-
-        " Larg syntax highlighting package
-        Plugin 'sheerun/vim-polyglot'
 
         " Tmux environment
         Plugin 'tmux-plugins/vim-tmux'
@@ -74,6 +74,9 @@ if IsVundleInstalled()
 
         " Ruby packages
         Plugin 'tpope/vim-rails'
+
+        " Large syntax highlighting package
+        Plugin 'sheerun/vim-polyglot'
 
     """"" Navigation """""
         " Nerd tree directory navigator
@@ -125,6 +128,7 @@ if IsVundleInstalled()
             Plugin 'sainnhe/lightline_foobar.vim'
 
     """"" Editing """""
+
         " Undo tree plugin
         Plugin 'mbbill/undotree'
 
@@ -184,6 +188,7 @@ filetype plugin indent on    " turn filetypes back on
 filetype on
 
 """"""""""""""""""" Configure Plugin values and mappings """""""""""""""""""
+
 if IsVundleInstalled()
     """"" Navigation """""
         " Nerd tree options
@@ -401,6 +406,7 @@ endif
     augroup END
 
 """"" File Specific changes """""
+
     " Makes command 'TurnOnScratchBuffer' force the current buffer to become a
     " scratch buffer.
     command! -bar TurnOnScratchBuffer setlocal buftype=nofile bufhidden=hide noswapfile
