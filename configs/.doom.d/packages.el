@@ -109,10 +109,3 @@
 
 ;; Used to view VERY large files faster
 (package! vlf :disable t) ; disabled on startup to not impact load time.
-;; Temp fixes for gitconfig-mode bug https://github.com/hlissner/doom-emacs/issues/5667
-(package! gitconfig-mode
-      :recipe (:host github :repo "magit/git-modes"
-             :files ("gitconfig-mode.el")))
-(package! gitignore-mode
-      :recipe (:host github :repo "magit/git-modes"
-             :files ("gitignore-mode.el")))
