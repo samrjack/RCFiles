@@ -1,4 +1,4 @@
-[submodule "i3Scripts"]
+[submodule "i3scripts"]
 	path = configs/.config/i3/scripts
 	url = https://github.com/vivien/i3blocks-contrib
 [submodule ".config/i3/scripts"]
