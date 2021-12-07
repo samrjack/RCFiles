@@ -68,6 +68,10 @@
 (setq save-interprogram-paste-before-kill t
       select-enable-clipboard nil)
 
+;; leave some space at the bottom while scrolling down so the
+;; cursor isn't hugging the bottom edge.
+(setq scroll-margin 2)
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -77,9 +81,13 @@ Position the cursor at it's beginning, according to the current mode."
   (forward-line -1)
   (indent-according-to-mode))
 
-;; leave some space at the bottom while scrolling down so the
-;; cursor isn't hugging the bottom edge.
-(setq scroll-margin 2)
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
+
+;; enables nested snippets
+(setq yas-triggers-in-field t)
 
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
@@ -92,30 +100,37 @@ Position the cursor at it's beginning, according to the current mode."
       :n "g M-/" #'which-key-show-minor-mode-keymap)
 (setq which-key-idle-delay 0.5)
 
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'writegood-mode)
 
-(defun print-point-position ()
-  "Print the position of point to the message console."
+;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+
+;; Make undo revert smaller sections of text instead of all text
+;; added while in insert mode.
+(setq evil-want-fine-undo t)
+
+; Remove default snipe mode
+(remove-hook! (doom-first-input) 'evil-snipe-mode)
+; There can be problems between snipe mode and magit mode.
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
+
+(defun toggle-and-activate-evil-snipe-mode ()
+  "Toggles evil-snipe-mode on and off then activates the
+mode map since otherwise it requires forcing the normal mode state to be activated."
   (interactive)
-  (message (number-to-string (point))))
+  (evil-snipe-local-mode)
+  (evil-force-normal-state))
 
 (map! :leader
-      (:prefix-map ("a" . "Additional")
-        (:desc "Point's position" "p" #'print-point-position)))
-;;        (:prefix-map ("a" . "test2")
-;;         (:prefix ("a" . "test")
-;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
-         ;; :desc "Search journal entry" "s" #'org-journal-search))))
-;;
-
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
-
-(after! projectile
-  (setq projectile-track-known-projects-automatically nil))
-
-;; enables nested snippets
-(setq yas-triggers-in-field t)
+      :desc "Evil snipe mode"
+      "t S" #'toggle-and-activate-evil-snipe-mode)
 
 (use-package! keycast
   :commands keycast-mode
@@ -151,51 +166,24 @@ Position the cursor at it's beginning, according to the current mode."
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
 
-(use-package! nov ; Novel reading
-  :mode ("\\.epub\\'" . nov-mode)
-  :config
-  (map! :map nov-mode-map
-        :n "RET" #'nov-scroll-up)
-  (defun doom-modeline-segment--nov-info ()
-    (concat
-     " " (propertize
-          (cdr (assoc 'creator nov-metadata))
-          'face
-          'doom-modeline-project-parent-dir)
-     " " (cdr (assoc 'title nov-metadata))
-     " " (propertize
-          (format "%d/%d" (1+ nov-documents-index) (length nov-documents))
-          'face
-          'doom-modeline-info)))
-  (advice-add 'nov-render-title :override #'ignore)
-  (defun +nov-mode-setup ()
-    (require 'visual-fill-column nil t)
-    (setq-local visual-fill-column-center-text t
-                visual-fill-column-width 80
-                nov-text-width 80)
-    (visual-fill-column-mode 1)
-    (hl-line-mode -1)
-    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
 
-    (setq-local mode-line-format
-                `((:eval (doom-modeline-segment--workspace-name))
-                  (:eval (doom-modeline-segment--window-number))
-                  (:eval (doom-modeline-segment--nov-info))
-                  ,(propertize " "
-                               'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
-                               'display `((space :align-to
-                                                 (-
-                                                  (+ right right-fringe right-margin)
-                                                  ,(* (let ((width (doom-modeline --font-width)))
-                                                        (or (and (= width 1) 1)
-                                                            (/ width (frame-char-width) 1.0)))
-                                                      (string-width
-                                                       (format-mode-line
-                                                        (cons ""
-                                                              '(:eval (doom-modeline-segment--major-mode))))))))))
-                  (:eval (doom-modeline-segment--major-mode)))))
+(defun print-point-position ()
+  "Print the position of point to the message console."
+  (interactive)
+  (message (number-to-string (point))))
 
-  (add-hook 'nov-mode-hook #'+nov-mode-setup))
+(map! :leader
+      (:prefix-map ("a" . "Additional")
+        (:desc "Point's position" "p" #'print-point-position)))
+;;        (:prefix-map ("a" . "test2")
+;;         (:prefix ("a" . "test")
+;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
+         ;; :desc "Search journal entry" "s" #'org-journal-search))))
+;;
+
+(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
 
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
@@ -218,17 +206,6 @@ so only show the modeline when this is not the case"
                 t f)))
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 
-(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
-
-(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
-(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
-(map! :leader
-      :desc "Write good mode"
-      "t W" #'writegood-mode)
-
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
-
 (setq web-mode-script-padding standard-indent)
 (setq web-mode-style-padding standard-indent)
 (setq web-mode-block-padding standard-indent)
@@ -236,6 +213,11 @@ so only show the modeline when this is not the case"
 
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
+
+; Set default file for newly captured notes
+(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
+
+(setq org-bable-clojure-backend 'cider)
 
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
 ;; Use keybinding g m to "go mark" the current location so it can be returned to later.
@@ -247,11 +229,6 @@ so only show the modeline when this is not the case"
     :nv "g k" #'evil-previous-visual-line
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
-
-(setq org-roam-directory "~/roam")
-(setq org-roam-v2-ack t)
-
-(setq org-bable-clojure-backend 'cider)
 
 (setq-local org-default-extension ".org")
 (defun org-open-org-file (file)
@@ -293,12 +270,11 @@ if no org extension is given then it will be automatically appended."
       :desc "Find org file"
       "f o" #'org-open-org-file)
 
+(setq org-roam-directory "~/roam")
+(setq org-roam-v2-ack t)
+
 (after! org
 
-; Set default file for newly captured notes
-(setq org-default-notes-file (concat org-directory "/inbox.org"))
-
-;; Pomodoro
 (setq org-pomodoro-length 25
     org-pomodoro-short-break-length 5
     org-pomodoro-long-break-length 15)
@@ -310,14 +286,6 @@ if no org extension is given then it will be automatically appended."
     org-pomodoro-finished-sound-p t
     org-pomodoro-short-break-sound-p t
     org-pomodoro-long-break-sound-p t)
-
-;; need to find (or make) some better alert audio files.
-;; (setq ;org-pomodoro-start-sound ()
-;;       ;org-pomodoro-ticking-sound ()
-;;       org-pomodoro-killed-sound ()
-;;       org-pomodoro-finished-sound ()
-;;       org-pomodoro-short-break-sound ()
-;;       org-pomodoro-long-break-sound ())
 
 )
 
@@ -367,93 +335,61 @@ if no org extension is given then it will be automatically appended."
 
 (after! org
   (add-to-list 'org-capture-templates
-                '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]"))
-  (add-to-list 'org-capture-templates
                 '("w" "Worry Capture" entry (file "worries.org") (function worry-template) :prepend t :immediate-finish t)))
 
-;;
-;; Example of org capture templates
-;; for example text, see https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
-;; (after! org
-;;   (setq org-capture-templates '(
-;;     ("t" "Todo" entry () "" :prepend t)
-;;     ("k" "Kudos" entry () "" :prepend t)
-;;     ("f" "Followup" entry () "" :prepend t)
-;;     ("p" "Personal" entry () "" :prepend t)
-;;     ("P" "Project" entry () "" :prepend t)
-;;     ("j" "Journal" entry () "" :prepend t)
-;;   )))
-
-
-
-;; '(
-;;   ("t" "Personal todo" entry (file+headline +org-capture-todo-file "Inbox") "* [ ] %?\n%i\n%a" :prepend t)
-;;           ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
-;;           ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file)
-;;            "* %U %?\n%i\n%a" :prepend t)
-
-;;           ;; Will use {project-root}/{todo,notes,changelog}.org, unless a
-;;           ;; {todo,notes,changelog}.org file is found in a parent directory.
-;;           ;; Uses the basename from `+org-capture-todo-file',
-;;           ;; `+org-capture-changelog-file' and `+org-capture-notes-file'.
-;;           ("p" "Templates for projects")
-;;           ("pt" "Project-local todo" entry  ; {project-root}/todo.org
-;;            (file+headline +org-capture-project-todo-file "Inbox")
-;;            "* TODO %?\n%i\n%a" :prepend t)
-;;           ("pn" "Project-local notes" entry  ; {project-root}/notes.org
-;;            (file+headline +org-capture-project-notes-file "Inbox")
-;;            "* %U %?\n%i\n%a" :prepend t)
-;;           ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
-;;            (file+headline +org-capture-project-changelog-file "Unreleased")
-;;            "* %U %?\n%i\n%a" :prepend t)
-
-;;           ;; Will use {org-directory}/{+org-capture-projects-file} and store
-;;           ;; these under {ProjectName}/{Tasks,Notes,Changelog} headings. They
-;;           ;; support `:parents' to specify what headings to put them under, e.g.
-;;           ;; :parents ("Projects")
-;;           ("o" "Centralized templates for projects")
-;;           ("ot" "Project todo" entry
-;;            (function +org-capture-central-project-todo-file)
-;;            "* TODO %?\n %i\n %a"
-;;            :heading "Tasks"
-;;            :prepend nil)
-;;           ("on" "Project notes" entry
-;;            (function +org-capture-central-project-notes-file)
-;;            "* %U %?\n %i\n %a"
-;;            :heading "Notes"
-;;            :prepend t)
-;;           ("oc" "Project changelog" entry
-;;            (function +org-capture-central-project-changelog-file)
-;;            "* %U %?\n %i\n %a"
-;;            :heading "Changelog"
-;;            :prepend t)))
+(after! org
+  (add-to-list 'org-capture-templates
+                '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]")))
 
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
-;; Make undo revert smaller sections of text instead of all text
-;; added while in insert mode.
-(setq evil-want-fine-undo t)
-
-; Remove default snipe mode
-(remove-hook! (doom-first-input) 'evil-snipe-mode)
-; There can be problems between snipe mode and magit mode.
-(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-
-(setq evil-snipe-scope 'whole-visible
-      evil-snipe-repeat-scope 'whole-visible)
-
-(defun toggle-and-activate-evil-snipe-mode ()
-  "Toggles evil-snipe-mode on and off then activates the
-mode map since otherwise it requires forcing the normal mode state to be activated."
-  (interactive)
-  (evil-snipe-local-mode)
-  (evil-force-normal-state))
-
-(map! :leader
-      :desc "Evil snipe mode"
-      "t S" #'toggle-and-activate-evil-snipe-mode)
-
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 (add-hook 'info-selection-hook 'info-colors-fontify-node)
+
+(use-package! nov ; Novel reading
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (map! :map nov-mode-map
+        :n "RET" #'nov-scroll-up)
+  (defun doom-modeline-segment--nov-info ()
+    (concat
+     " " (propertize
+          (cdr (assoc 'creator nov-metadata))
+          'face
+          'doom-modeline-project-parent-dir)
+     " " (cdr (assoc 'title nov-metadata))
+     " " (propertize
+          (format "%d/%d" (1+ nov-documents-index) (length nov-documents))
+          'face
+          'doom-modeline-info)))
+  (advice-add 'nov-render-title :override #'ignore)
+  (defun +nov-mode-setup ()
+    (require 'visual-fill-column nil t)
+    (setq-local visual-fill-column-center-text t
+                visual-fill-column-width 80
+                nov-text-width 80)
+    (visual-fill-column-mode 1)
+    (hl-line-mode -1)
+    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
+
+    (setq-local mode-line-format
+                `((:eval (doom-modeline-segment--workspace-name))
+                  (:eval (doom-modeline-segment--window-number))
+                  (:eval (doom-modeline-segment--nov-info))
+                  ,(propertize " "
+                               'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
+                               'display `((space :align-to
+                                                 (-
+                                                  (+ right right-fringe right-margin)
+                                                  ,(* (let ((width (doom-modeline --font-width)))
+                                                        (or (and (= width 1) 1)
+                                                            (/ width (frame-char-width) 1.0)))
+                                                      (string-width
+                                                       (format-mode-line
+                                                        (cons ""
+                                                              '(:eval (doom-modeline-segment--major-mode))))))))))
+                  (:eval (doom-modeline-segment--major-mode)))))
+
+  (add-hook 'nov-mode-hook #'+nov-mode-setup))

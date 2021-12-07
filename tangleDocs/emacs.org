@@ -8,7 +8,9 @@
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
-
+#+END_SRC
+** Documentation
+#+BEGIN_SRC elisp :tangle no
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
@@ -183,7 +185,9 @@ Makes emacs sound like a typewriter.
 * Initialization
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 ;;; init.el -*- lexical-binding: t; -*-
-
+#+END_SRC
+** Documentation
+#+BEGIN_SRC elisp :tangle no
 ;; This file controls what Doom modules are enabled and what order they load
 ;; in. Remember to run 'doom sync' after modifying it!
 
@@ -197,7 +201,9 @@ Makes emacs sound like a typewriter.
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
-
+#+END_SRC
+** Start
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 (doom!
 ;;; Modules to load
 #+END_SRC
@@ -529,6 +535,13 @@ Makes emacs sound like a typewriter.
       select-enable-clipboard nil)
 #+END_SRC
 
+*** Scrolling
+#+BEGIN_SRC elisp
+;; leave some space at the bottom while scrolling down so the
+;; cursor isn't hugging the bottom edge.
+(setq scroll-margin 2)
+#+END_SRC
+
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
 #+BEGIN_SRC elisp
@@ -542,27 +555,40 @@ Position the cursor at it's beginning, according to the current mode."
   (indent-according-to-mode))
 #+END_SRC
 
-** Scrolling
+** Managing files
+*** Sidebar file explorer
 #+BEGIN_SRC elisp
-;; leave some space at the bottom while scrolling down so the
-;; cursor isn't hugging the bottom edge.
-(setq scroll-margin 2)
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 #+END_SRC
 
-** Sub-word movement
+*** Projectile
+#+BEGIN_SRC elisp
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
+#+END_SRC
+
+*** Snippets
+#+BEGIN_SRC elisp
+;; enables nested snippets
+(setq yas-triggers-in-field t)
+#+END_SRC
+
+** General utility settings
+These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
+*** Sub-word movement
 #+BEGIN_SRC elisp
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
 #+END_SRC
 
-** Case insensitive search
+*** Case insensitive search
 =case-fold-search= is a variable that turns case sensitivity on and off. It is set per buffer. Since I like case sensitivity, I'm setting the default value so that new buffers use case sensitive searches.
 #+BEGIN_SRC elisp
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
 #+END_SRC
 
-** Which key settings
+*** Which key settings
 #+BEGIN_SRC elisp
 (map! :n "g /" #'which-key-show-top-level
       :n "g C-/" #'which-key-show-full-major-mode
@@ -570,48 +596,68 @@ Position the cursor at it's beginning, according to the current mode."
 (setq which-key-idle-delay 0.5)
 #+END_SRC
 
-** Sidebar file explorer
+*** Write good mode
 #+BEGIN_SRC elisp
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'writegood-mode)
 #+END_SRC
 
-** Experimental personal functions
+*** Flycheck mode
 #+BEGIN_SRC elisp
-(defun print-point-position ()
-  "Print the position of point to the message console."
+;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+#+END_SRC
+
+*** Evil mode
+**** Evil settings
+#+BEGIN_SRC elisp
+;; Make undo revert smaller sections of text instead of all text
+;; added while in insert mode.
+(setq evil-want-fine-undo t)
+#+END_SRC
+**** Evil snipe mode
+***** Snipe mode off by default
+I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
+#+BEGIN_SRC elisp
+; Remove default snipe mode
+(remove-hook! (doom-first-input) 'evil-snipe-mode)
+; There can be problems between snipe mode and magit mode.
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+#+END_SRC
+
+***** Settings
+Some settings for when snipe mode is on.
+#+BEGIN_SRC elisp
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
+#+END_SRC
+
+***** New keybinding
+This allows you to toggle evil snipe mode on and off (though it's still off by default)
+#+BEGIN_SRC elisp
+(defun toggle-and-activate-evil-snipe-mode ()
+  "Toggles evil-snipe-mode on and off then activates the
+mode map since otherwise it requires forcing the normal mode state to be activated."
   (interactive)
-  (message (number-to-string (point))))
+  (evil-snipe-local-mode)
+  (evil-force-normal-state))
 
 (map! :leader
-      (:prefix-map ("a" . "Additional")
-        (:desc "Point's position" "p" #'print-point-position)))
-;;        (:prefix-map ("a" . "test2")
-;;         (:prefix ("a" . "test")
-;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
-         ;; :desc "Search journal entry" "s" #'org-journal-search))))
-;;
+      :desc "Evil snipe mode"
+      "t S" #'toggle-and-activate-evil-snipe-mode)
+#+END_SRC
+*** VLF (Very Large Files)
+VLF if a package for lazy loading enormous files that would normally take forever to load. However, I've ran into issues with using it and therefore I'm just leaving it off for the time being.
+#+BEGIN_SRC elisp :tangle no
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 #+END_SRC
 
-** Dictionary
-#+BEGIN_SRC elisp
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
-#+END_SRC
-
-** Projectile
-#+BEGIN_SRC elisp
-(after! projectile
-  (setq projectile-track-known-projects-automatically nil))
-#+END_SRC
-
-** Snippets
-#+BEGIN_SRC elisp
-;; enables nested snippets
-(setq yas-triggers-in-field t)
-#+END_SRC
-
-** Presentations
-*** Keycast
+*** Presentations
+**** Keycast
 #+BEGIN_SRC elisp
 (use-package! keycast
   :commands keycast-mode
@@ -630,7 +676,7 @@ Position the cursor at it's beginning, according to the current mode."
     ('keycast-key :inherit custom-modified :height 1.1 :weight bold)))
 #+END_SRC
 
-*** Gif Screenshot
+**** Gif Screenshot
 #+BEGIN_SRC elisp
 (use-package! gif-screencast
   :commands gif-screencast-mode
@@ -651,56 +697,37 @@ Position the cursor at it's beginning, according to the current mode."
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
 #+END_SRC
 
-** Nov
+*** Dictionary
 #+BEGIN_SRC elisp
-(use-package! nov ; Novel reading
-  :mode ("\\.epub\\'" . nov-mode)
-  :config
-  (map! :map nov-mode-map
-        :n "RET" #'nov-scroll-up)
-  (defun doom-modeline-segment--nov-info ()
-    (concat
-     " " (propertize
-          (cdr (assoc 'creator nov-metadata))
-          'face
-          'doom-modeline-project-parent-dir)
-     " " (cdr (assoc 'title nov-metadata))
-     " " (propertize
-          (format "%d/%d" (1+ nov-documents-index) (length nov-documents))
-          'face
-          'doom-modeline-info)))
-  (advice-add 'nov-render-title :override #'ignore)
-  (defun +nov-mode-setup ()
-    (require 'visual-fill-column nil t)
-    (setq-local visual-fill-column-center-text t
-                visual-fill-column-width 80
-                nov-text-width 80)
-    (visual-fill-column-mode 1)
-    (hl-line-mode -1)
-    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+#+END_SRC
 
-    (setq-local mode-line-format
-                `((:eval (doom-modeline-segment--workspace-name))
-                  (:eval (doom-modeline-segment--window-number))
-                  (:eval (doom-modeline-segment--nov-info))
-                  ,(propertize " "
-                               'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
-                               'display `((space :align-to
-                                                 (-
-                                                  (+ right right-fringe right-margin)
-                                                  ,(* (let ((width (doom-modeline --font-width)))
-                                                        (or (and (= width 1) 1)
-                                                            (/ width (frame-char-width) 1.0)))
-                                                      (string-width
-                                                       (format-mode-line
-                                                        (cons ""
-                                                              '(:eval (doom-modeline-segment--major-mode))))))))))
-                  (:eval (doom-modeline-segment--major-mode)))))
+** Experimental personal functions
+#+BEGIN_SRC elisp
+(defun print-point-position ()
+  "Print the position of point to the message console."
+  (interactive)
+  (message (number-to-string (point))))
 
-  (add-hook 'nov-mode-hook #'+nov-mode-setup))
+(map! :leader
+      (:prefix-map ("a" . "Additional")
+        (:desc "Point's position" "p" #'print-point-position)))
+;;        (:prefix-map ("a" . "test2")
+;;         (:prefix ("a" . "test")
+;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
+         ;; :desc "Search journal entry" "s" #'org-journal-search))))
+;;
 #+END_SRC
 
 ** Mode/package settings
+*** Elisp-shell
+#+BEGIN_SRC elisp
+(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
+#+END_SRC
+**** Elisp shell aliases
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/.eshell-aliases
+#+END_SRC
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
 #+BEGIN_SRC elisp
@@ -726,29 +753,6 @@ so only show the modeline when this is not the case"
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 #+END_SRC
 
-*** Elisp-shell
-#+BEGIN_SRC elisp
-(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
-#+END_SRC
-**** Elisp shell aliases
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/.eshell-aliases
-#+END_SRC
-
-*** Write good mode
-#+BEGIN_SRC elisp
-(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
-(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
-(map! :leader
-      :desc "Write good mode"
-      "t W" #'writegood-mode)
-#+END_SRC
-
-*** Flycheck mode
-#+BEGIN_SRC elisp
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
-#+END_SRC
-
 *** Web mode
 #+BEGIN_SRC elisp
 (setq web-mode-script-padding standard-indent)
@@ -758,15 +762,23 @@ so only show the modeline when this is not the case"
 #+END_SRC
 
 *** Org mode
-**** Org settings
+**** Standard Org settings
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
 #+BEGIN_SRC elisp
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
+
+; Set default file for newly captured notes
+(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
 #+END_SRC
 
+***** Bable
+Several languages require LSPs or other backend code to be configured for bable to use them so they are configured here.
+****** Clojure
+#+BEGIN_SRC elisp
+(setq org-bable-clojure-backend 'cider)
+#+END_SRC
 ***** Org mode keybindings
-Although these are technically "after org loads", they are easier to set using the built in key mapping functionality so I'm placing them here instead.
 #+BEGIN_SRC elisp
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
 ;; Use keybinding g m to "go mark" the current location so it can be returned to later.
@@ -779,27 +791,6 @@ Although these are technically "after org loads", they are easier to set using t
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
 #+END_SRC
-***** Org roam
-#+BEGIN_SRC elisp
-(setq org-roam-directory "~/roam")
-(setq org-roam-v2-ack t)
-#+END_SRC
-
-***** Org Agenda
-****** Limiting files
-To set specific files as being "agenda" files, you can use =org-agenda-files= however I've found I like putting schedule markers in various files around my org setup.
-#+BEGIN_SRC elisp :tangle no
-(setq org-agenda-files (list "~/org/work.org"
-                             "~/org/todo.org"))
-#+END_SRC
-
-***** Bable
-Several languages require LSPs or other backend code to be configured for bable to use them so they are configured here.
-****** Clojure
-#+BEGIN_SRC elisp
-(setq org-bable-clojure-backend 'cider)
-#+END_SRC
-
 ***** Shortcut to open org files
 This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
 #+BEGIN_SRC elisp
@@ -844,26 +835,34 @@ if no org extension is given then it will be automatically appended."
       "f o" #'org-open-org-file)
 #+END_SRC
 
-**** After org load
-***** Start of "after! org"
-These configurations must all be made after org is loaded so the must be placed int the =after!= macro.
+**** Org roam
+#+BEGIN_SRC elisp
+(setq org-roam-directory "~/roam")
+(setq org-roam-v2-ack t)
+#+END_SRC
+
+**** Org Agenda
+***** Limiting files
+To set specific files as being "agenda" files, you can use =org-agenda-files= however I've found I like putting schedule markers in various files around my org setup.
+#+BEGIN_SRC elisp :tangle no
+(setq org-agenda-files (list "~/org/work.org"
+                             "~/org/todo.org"))
+#+END_SRC
+
+**** Pomodoro
+***** Begin "after! org"
+All these settings have to be made after org loads so they're wrapped in an =(after! org ...)= macro.
 #+BEGIN_SRC elisp
 (after! org
 #+END_SRC
-
-***** Dynamic settings
+***** Work length
 #+BEGIN_SRC elisp
-; Set default file for newly captured notes
-(setq org-default-notes-file (concat org-directory "/inbox.org"))
-#+END_SRC
-
-***** Pomodoro
-#+BEGIN_SRC elisp
-;; Pomodoro
 (setq org-pomodoro-length 25
     org-pomodoro-short-break-length 5
     org-pomodoro-long-break-length 15)
-
+#+END_SRC
+***** Sounds to play
+#+BEGIN_SRC elisp
 (setq org-pomodoro-play-sounds t
     ;; org-pomodoro-start-sound-p f
     ;; org-pomodoro-ticking-sound-p f
@@ -871,21 +870,24 @@ These configurations must all be made after org is loaded so the must be placed 
     org-pomodoro-finished-sound-p t
     org-pomodoro-short-break-sound-p t
     org-pomodoro-long-break-sound-p t)
+#+END_SRC
 
-;; need to find (or make) some better alert audio files.
-;; (setq ;org-pomodoro-start-sound ()
-;;       ;org-pomodoro-ticking-sound ()
-;;       org-pomodoro-killed-sound ()
-;;       org-pomodoro-finished-sound ()
-;;       org-pomodoro-short-break-sound ()
-;;       org-pomodoro-long-break-sound ())
+***** Sounds to use
+If I decide to find sound files I like more than the defaults, then I can put them here.
+#+BEGIN_SRC elisp :tangle no
+(setq ;org-pomodoro-start-sound ()
+      ;org-pomodoro-ticking-sound ()
+      org-pomodoro-killed-sound ()
+      org-pomodoro-finished-sound ()
+      org-pomodoro-short-break-sound ()
+      org-pomodoro-long-break-sound ())
 #+END_SRC
 ***** End of "after! org"
 #+BEGIN_SRC elisp
 )
 #+END_SRC
-
-**** TODO Org template
+**** Org template
+***** Anxiety/Worry template
 #+BEGIN_SRC elisp
 (defun get-current-timestamp ()
   "returns a string timestamp in the format [yyyy-mm-dd day hh:mm]"
@@ -933,66 +935,69 @@ These configurations must all be made after org is loaded so the must be placed 
 
 (after! org
   (add-to-list 'org-capture-templates
-                '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]"))
-  (add-to-list 'org-capture-templates
                 '("w" "Worry Capture" entry (file "worries.org") (function worry-template) :prepend t :immediate-finish t)))
+#+END_SRC
 
-;;
-;; Example of org capture templates
-;; for example text, see https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
-;; (after! org
-;;   (setq org-capture-templates '(
-;;     ("t" "Todo" entry () "" :prepend t)
-;;     ("k" "Kudos" entry () "" :prepend t)
-;;     ("f" "Followup" entry () "" :prepend t)
-;;     ("p" "Personal" entry () "" :prepend t)
-;;     ("P" "Project" entry () "" :prepend t)
-;;     ("j" "Journal" entry () "" :prepend t)
-;;   )))
+***** Test checklist template
+#+BEGIN_SRC elisp
+(after! org
+  (add-to-list 'org-capture-templates
+                '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]")))
+#+END_SRC
+***** Example template code
+Example of org capture templates and how everything is setup.
+pulled from https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
+#+BEGIN_SRC elisp :tangle no
+(after! org
+  (setq org-capture-templates '(
+    ("t" "Todo" entry () "" :prepend t)
+    ("k" "Kudos" entry () "" :prepend t)
+    ("f" "Followup" entry () "" :prepend t)
+    ("p" "Personal" entry () "" :prepend t)
+    ("P" "Project" entry () "" :prepend t)
+    ("j" "Journal" entry () "" :prepend t)
+  )))
+'(
+  ("t" "Personal todo" entry (file+headline +org-capture-todo-file "Inbox") "* [ ] %?\n%i\n%a" :prepend t)
+          ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
+          ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file)
+           "* %U %?\n%i\n%a" :prepend t)
 
+          ;; Will use {project-root}/{todo,notes,changelog}.org, unless a
+          ;; {todo,notes,changelog}.org file is found in a parent directory.
+          ;; Uses the basename from `+org-capture-todo-file',
+          ;; `+org-capture-changelog-file' and `+org-capture-notes-file'.
+          ("p" "Templates for projects")
+          ("pt" "Project-local todo" entry  ; {project-root}/todo.org
+           (file+headline +org-capture-project-todo-file "Inbox")
+           "* TODO %?\n%i\n%a" :prepend t)
+          ("pn" "Project-local notes" entry  ; {project-root}/notes.org
+           (file+headline +org-capture-project-notes-file "Inbox")
+           "* %U %?\n%i\n%a" :prepend t)
+          ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
+           (file+headline +org-capture-project-changelog-file "Unreleased")
+           "* %U %?\n%i\n%a" :prepend t)
 
-
-;; '(
-;;   ("t" "Personal todo" entry (file+headline +org-capture-todo-file "Inbox") "* [ ] %?\n%i\n%a" :prepend t)
-;;           ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
-;;           ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file)
-;;            "* %U %?\n%i\n%a" :prepend t)
-
-;;           ;; Will use {project-root}/{todo,notes,changelog}.org, unless a
-;;           ;; {todo,notes,changelog}.org file is found in a parent directory.
-;;           ;; Uses the basename from `+org-capture-todo-file',
-;;           ;; `+org-capture-changelog-file' and `+org-capture-notes-file'.
-;;           ("p" "Templates for projects")
-;;           ("pt" "Project-local todo" entry  ; {project-root}/todo.org
-;;            (file+headline +org-capture-project-todo-file "Inbox")
-;;            "* TODO %?\n%i\n%a" :prepend t)
-;;           ("pn" "Project-local notes" entry  ; {project-root}/notes.org
-;;            (file+headline +org-capture-project-notes-file "Inbox")
-;;            "* %U %?\n%i\n%a" :prepend t)
-;;           ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
-;;            (file+headline +org-capture-project-changelog-file "Unreleased")
-;;            "* %U %?\n%i\n%a" :prepend t)
-
-;;           ;; Will use {org-directory}/{+org-capture-projects-file} and store
-;;           ;; these under {ProjectName}/{Tasks,Notes,Changelog} headings. They
-;;           ;; support `:parents' to specify what headings to put them under, e.g.
-;;           ;; :parents ("Projects")
-;;           ("o" "Centralized templates for projects")
-;;           ("ot" "Project todo" entry
-;;            (function +org-capture-central-project-todo-file)
-;;            "* TODO %?\n %i\n %a"
-;;            :heading "Tasks"
-;;            :prepend nil)
-;;           ("on" "Project notes" entry
-;;            (function +org-capture-central-project-notes-file)
-;;            "* %U %?\n %i\n %a"
-;;            :heading "Notes"
-;;            :prepend t)
-;;           ("oc" "Project changelog" entry
-;;            (function +org-capture-central-project-changelog-file)
-;;            "* %U %?\n %i\n %a"
-;;            :heading "Changelog"
-;;            :prepend t)))
+          ;; Will use {org-directory}/{+org-capture-projects-file} and store
+          ;; these under {ProjectName}/{Tasks,Notes,Changelog} headings. They
+          ;; support `:parents' to specify what headings to put them under, e.g.
+          ;; :parents ("Projects")
+          ("o" "Centralized templates for projects")
+          ("ot" "Project todo" entry
+           (function +org-capture-central-project-todo-file)
+           "* TODO %?\n %i\n %a"
+           :heading "Tasks"
+           :prepend nil)
+          ("on" "Project notes" entry
+           (function +org-capture-central-project-notes-file)
+           "* %U %?\n %i\n %a"
+           :heading "Notes"
+           :prepend t)
+          ("oc" "Project changelog" entry
+           (function +org-capture-central-project-changelog-file)
+           "* %U %?\n %i\n %a"
+           :heading "Changelog"
+           :prepend t)))
 #+END_SRC
 **** Org chef
 Org chef is a package for saving cooking recipes from sites like [[allrecipes.com][allrecipies]] in org mode for future reference and use.
@@ -1001,57 +1006,60 @@ Org chef is a package for saving cooking recipes from sites like [[allrecipes.co
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 #+END_SRC
 
-*** Evil mode
-**** Evil settings
-#+BEGIN_SRC elisp
-;; Make undo revert smaller sections of text instead of all text
-;; added while in insert mode.
-(setq evil-want-fine-undo t)
-#+END_SRC
-**** Evil snipe mode
-***** Snipe mode off by default
-I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
-#+BEGIN_SRC elisp
-; Remove default snipe mode
-(remove-hook! (doom-first-input) 'evil-snipe-mode)
-; There can be problems between snipe mode and magit mode.
-(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-#+END_SRC
-
-***** Settings
-Some settings for when snipe mode is on.
-#+BEGIN_SRC elisp
-(setq evil-snipe-scope 'whole-visible
-      evil-snipe-repeat-scope 'whole-visible)
-#+END_SRC
-
-***** New keybinding
-This allows you to toggle evil snipe mode on and off (though it's still off by default)
-#+BEGIN_SRC elisp
-(defun toggle-and-activate-evil-snipe-mode ()
-  "Toggles evil-snipe-mode on and off then activates the
-mode map since otherwise it requires forcing the normal mode state to be activated."
-  (interactive)
-  (evil-snipe-local-mode)
-  (evil-force-normal-state))
-
-(map! :leader
-      :desc "Evil snipe mode"
-      "t S" #'toggle-and-activate-evil-snipe-mode)
-#+END_SRC
-
-*** VLF (Very Large Files)
-VLF if a package for lazy loading enormous files that would normally take forever to load. However, I've ran into issues with using it and therefore I'm just leaving it off for the time being.
-#+BEGIN_SRC elisp :tangle no
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
-#+END_SRC
-
 *** Info colors
 #+BEGIN_SRC elisp
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 (add-hook 'info-selection-hook 'info-colors-fontify-node)
+#+END_SRC
+
+*** E-book reader
+#+BEGIN_SRC elisp
+(use-package! nov ; Novel reading
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (map! :map nov-mode-map
+        :n "RET" #'nov-scroll-up)
+  (defun doom-modeline-segment--nov-info ()
+    (concat
+     " " (propertize
+          (cdr (assoc 'creator nov-metadata))
+          'face
+          'doom-modeline-project-parent-dir)
+     " " (cdr (assoc 'title nov-metadata))
+     " " (propertize
+          (format "%d/%d" (1+ nov-documents-index) (length nov-documents))
+          'face
+          'doom-modeline-info)))
+  (advice-add 'nov-render-title :override #'ignore)
+  (defun +nov-mode-setup ()
+    (require 'visual-fill-column nil t)
+    (setq-local visual-fill-column-center-text t
+                visual-fill-column-width 80
+                nov-text-width 80)
+    (visual-fill-column-mode 1)
+    (hl-line-mode -1)
+    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
+
+    (setq-local mode-line-format
+                `((:eval (doom-modeline-segment--workspace-name))
+                  (:eval (doom-modeline-segment--window-number))
+                  (:eval (doom-modeline-segment--nov-info))
+                  ,(propertize " "
+                               'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
+                               'display `((space :align-to
+                                                 (-
+                                                  (+ right right-fringe right-margin)
+                                                  ,(* (let ((width (doom-modeline --font-width)))
+                                                        (or (and (= width 1) 1)
+                                                            (/ width (frame-char-width) 1.0)))
+                                                      (string-width
+                                                       (format-mode-line
+                                                        (cons ""
+                                                              '(:eval (doom-modeline-segment--major-mode))))))))))
+                  (:eval (doom-modeline-segment--major-mode)))))
+
+  (add-hook 'nov-mode-hook #'+nov-mode-setup))
 #+END_SRC
 
 * Auto Tangle
