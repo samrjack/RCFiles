@@ -12,6 +12,7 @@ set nocompatible      " VI improve allowed
 * Vundle and package setup
 ** What is Vundle
 ** Setting up Vundle
+*** Checking if Vundle is installed
 #+BEGIN_SRC vimrc
 filetype off
 function! IsVundleInstalled()
@@ -19,6 +20,8 @@ function! IsVundleInstalled()
     return filereadable(vundle_readme)
 endfunction
 #+END_SRC
+
+*** Installing Vundle
 #+BEGIN_SRC vimrc
 " Install vundle if needed
     let vundlePreviouslyInstalled=1
@@ -31,6 +34,8 @@ endfunction
     endif
 
 #+END_SRC
+
+*** Add Vundle to necessary settings to allow it to work
 #+BEGIN_SRC vimrc
     if IsVundleInstalled()
         set rtp+=~/.vim/bundle/Vundle.vim/
