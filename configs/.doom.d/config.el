@@ -1,7 +1,21 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
+;; Here are some additional functions/macros that could help you configure Doom:
+;;
+;; - `load!' for loading external *.el files relative to this one
+;; - `use-package!' for configuring packages
+;; - `after!' for running code after a package has loaded
+;; - `add-load-path!' for adding directories to the `load-path', relative to
+;;   this file. Emacs searches the `load-path' when you load packages with
+;;   `require' or `use-package'.
+;; - `map!' for binding new keys
+;;
+;; To get information about any of these functions/macros, move the cursor over
+;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
+;; This will open documentation for it, including demos of how they are used.
+;;
+;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
+;; they are implemented.
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -21,6 +35,9 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
+(setq custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file) (load custom-file))
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -30,22 +47,17 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+;; Let the undo buffer use up to 100Mb
+(setq undo-limit 100000000)
+
+;; Resize all windows when a new one comes in so they have
+;; equal space.
+(setq-default window-combination-resize t
+;; changes the cursor to be the size of a gliph in the buffer.
+              x-stretch-cursor t)
+
+;; (setq-default left-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
 
 ;; Prevents system clipboard from being accidentially overwritten.
 ;; Must now write to register "+ to write to system clipboard.
@@ -64,22 +76,6 @@ Position the cursor at it's beginning, according to the current mode."
   (newline-and-indent)
   (forward-line -1)
   (indent-according-to-mode))
-
-;; Resize all windows when a new one comes in so they have
-;; equal space.
-(setq-default window-combination-resize t
-;; changes the cursor to be the size of a gliph in the buffer.
-              x-stretch-cursor t)
-
-;; (setq-default left-margin-width 1)
-;; (set-window-buffer nil (current-buffer))
-
-;; Let the undo buffer use up to 100Mb
-(setq undo-limit 100000000)
-
-;; Make undo revert smaller sections of text instead of all text
-;; added while in insert mode.
-(setq evil-want-fine-undo t)
 
 ;; leave some space at the bottom while scrolling down so the
 ;; cursor isn't hugging the bottom edge.
@@ -115,28 +111,11 @@ Position the cursor at it's beginning, according to the current mode."
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 
-(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
-(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
-(map! :leader
-      :desc "Write good mode"
-      "t W" #'writegood-mode)
-
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
-
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
-(setq custom-file (expand-file-name ".custom.el" doom-private-dir))
-(when (file-exists-p custom-file) (load custom-file))
-
 ;; enables nested snippets
 (setq yas-triggers-in-field t)
-
-(setq web-mode-script-padding standard-indent)
-(setq web-mode-style-padding standard-indent)
-(setq web-mode-block-padding standard-indent)
-(setq web-mode-part-padding standard-indent)
 
 (use-package! keycast
   :commands keycast-mode
@@ -171,19 +150,6 @@ Position the cursor at it's beginning, according to the current mode."
                                "/tmp/doom-color-theme")))
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
-
-;; (use-package! vlf-setup
-;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
-
-;; (use-package! ox-gfm
-;;   :after org)
-
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-(add-hook 'info-selection-hook 'info-colors-fontify-node)
-
-(use-package! org-chef
-  :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
@@ -234,40 +200,60 @@ Position the cursor at it's beginning, according to the current mode."
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
 (display-time-mode 1)
+                                        ; if a battery source is detected, then show the batter level
 (unless (string-match-p "^Power N/A" (battery)) (display-battery-mode 1))
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,
 so only show the modeline when this is not the case"
   (setq-local doom-modeline-buffer-encoding
-              (unless (and (memq
-                            (plist-get (coding-system-plist buffer-file-coding-system) :category)
-                            '(coding-category-utf-8))
-                           (not
-                            (memq
-                             (coding-system-eol-type buffer-file-coding-system)
-                             '(1 2)))) t)))
+              (if (and
+                       ; Checking for UTF-8
+                       (memq
+                        (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                        '(coding-category-utf-8))
+                       ; Checking for LF line ending
+                       (not
+                        (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t f)))
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 
-;;; Org mode bindings
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org")
+(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
 
-(after! org
-  (setq org-default-notes-file (concat org-directory "/inbox.org")))
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'writegood-mode)
+
+;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+
+(setq web-mode-script-padding standard-indent)
+(setq web-mode-style-padding standard-indent)
+(setq web-mode-block-padding standard-indent)
+(setq web-mode-part-padding standard-indent)
+
+(setq org-directory "~/org")
+(setq org-archive-location "archive/%s_archive::")
+
+;; Use keybinding g b to "go back" to previous location when a link is followed.
+;; Use keybinding g m to "go mark" the current location so it can be returned to later.
+(map! :after org
+    :map org-mode-map
+    :n  "g m" #'org-mark-ring-push
+    :n  "g b" #'org-mark-ring-goto
+    :nv "g j" #'evil-next-visual-line
+    :nv "g k" #'evil-previous-visual-line
+    :nv "g J" #'org-forward-element
+    :nv "g K" #'org-backward-element)
 
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
 
-;; Agenda
-;; (setq org-agenda-files (list "~/org/work.org"
-;;                              "~/org/todo.org"))
-(setq org-archive-location "archive/%s_archive::")
-
 (setq org-bable-clojure-backend 'cider)
 
-(setq org-default-extension ".org")
+(setq-local org-default-extension ".org")
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
@@ -307,31 +293,23 @@ if no org extension is given then it will be automatically appended."
       :desc "Find org file"
       "f o" #'org-open-org-file)
 
+(after! org
 
-;; Use keybinding g b to "go back" to previous location when a link is followed.
-;; Use keybinding g m to "go mark" the current location so it can be returned to later.
-(map! :after org
-    :map org-mode-map
-    :n  "g m" #'org-mark-ring-push
-    :n  "g b" #'org-mark-ring-goto
-    :nv "g j" #'evil-next-visual-line
-    :nv "g k" #'evil-previous-visual-line
-    :nv "g J" #'org-forward-element
-    :nv "g K" #'org-backward-element)
+; Set default file for newly captured notes
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
 
 ;; Pomodoro
-(after! org
-  (setq org-pomodoro-length 25
-        org-pomodoro-short-break-length 5
-        org-pomodoro-long-break-length 15)
+(setq org-pomodoro-length 25
+    org-pomodoro-short-break-length 5
+    org-pomodoro-long-break-length 15)
 
-  (setq org-pomodoro-play-sounds t
-        ;; org-pomodoro-start-sound-p f
-        ;; org-pomodoro-ticking-sound-p f
-        org-pomodoro-killed-sound-p t
-        org-pomodoro-finished-sound-p t
-        org-pomodoro-short-break-sound-p t
-        org-pomodoro-long-break-sound-p t))
+(setq org-pomodoro-play-sounds t
+    ;; org-pomodoro-start-sound-p f
+    ;; org-pomodoro-ticking-sound-p f
+    org-pomodoro-killed-sound-p t
+    org-pomodoro-finished-sound-p t
+    org-pomodoro-short-break-sound-p t
+    org-pomodoro-long-break-sound-p t)
 
 ;; need to find (or make) some better alert audio files.
 ;; (setq ;org-pomodoro-start-sound ()
@@ -341,7 +319,7 @@ if no org extension is given then it will be automatically appended."
 ;;       org-pomodoro-short-break-sound ()
 ;;       org-pomodoro-long-break-sound ())
 
-;;; config.el ends here
+)
 
 (defun get-current-timestamp ()
   "returns a string timestamp in the format [yyyy-mm-dd day hh:mm]"
@@ -450,16 +428,16 @@ if no org extension is given then it will be automatically appended."
 ;;            :heading "Changelog"
 ;;            :prepend t)))
 
-;; Configuration settings for Emacs evil mode
+(use-package! org-chef
+  :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
-; Turn off case-insensitive search. Can still make
-; search case-insensitive with "\c"
-; (setq case-fold-search nil)
+;; Make undo revert smaller sections of text instead of all text
+;; added while in insert mode.
+(setq evil-want-fine-undo t)
 
-;; File for setting values related to evil-snipe mode
-
-; There can be problems between snipe mode and magit mode.
+; Remove default snipe mode
 (remove-hook! (doom-first-input) 'evil-snipe-mode)
+; There can be problems between snipe mode and magit mode.
 (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
 
 (setq evil-snipe-scope 'whole-visible
@@ -476,4 +454,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'toggle-and-activate-evil-snipe-mode)
 
-(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+(add-hook 'info-selection-hook 'info-colors-fontify-node)
