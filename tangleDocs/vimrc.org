@@ -1,7 +1,7 @@
 #+TITLE: Vim config file
 #+AUTHOR: Samuel Jackson
 #+DESCRIPTION: This org doc is a test of tangle and how well it works to manage my vimrc
-#+STARTUP: showall hidestars indent
+#+STARTUP: overview hidestars indent
 #+PROPERTY: header-args :results silent :tangle "../configs/.vimrc"
 
 Welcome to my Vim rc literate programming file. In here, I will be building up my vimrc file step by step.

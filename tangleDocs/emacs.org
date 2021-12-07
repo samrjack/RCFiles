@@ -1,3 +1,194 @@
+#+TITLE: Emacs config file
+#+AUTHOR: Samuel Jackson
+#+DESCRIPTION: This file defines all my emacs configurations for my doom emacs setup.
+#+STARTUP: showall hidestars overview
+#+PROPERTY: header-args :results silent :tangle no
+
+* Packages
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+
+;; To install a package with Doom you must declare them here and run 'doom sync'
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
+
+
+;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+;(package! some-package)
+
+;; To install a package directly from a remote git repo, you must specify a
+;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
+;; https://github.com/raxod502/straight.el#the-recipe-format
+;(package! another-package
+;  :recipe (:host github :repo "username/repo"))
+
+;; If the package you are trying to install does not contain a PACKAGENAME.el
+;; file, or is located in a subdirectory of the repo, you'll need to specify
+;; `:files' in the `:recipe':
+;(package! this-package
+;  :recipe (:host github :repo "username/repo"
+;           :files ("some-file.el" "src/lisp/*.el")))
+
+;; If you'd like to disable a package included with Doom, you can do so here
+;; with the `:disable' property:
+;(package! builtin-package :disable t)
+
+;; You can override the recipe of a built in package without having to specify
+;; all the properties for `:recipe'. These will inherit the rest of its recipe
+;; from Doom or MELPA/ELPA/Emacsmirror:
+;(package! builtin-package :recipe (:nonrecursive t))
+;(package! builtin-package-2 :recipe (:repo "myfork/package"))
+
+;; Specify a `:branch' to install a package from a particular branch or tag.
+;; This is required for some packages whose default branch isn't 'master' (which
+;; our package manager can't deal with; see raxod502/straight.el#279)
+;(package! builtin-package :recipe (:branch "develop"))
+
+;; Use `:pin' to specify a particular commit to install.
+;(package! builtin-package :pin "1a2b3c4d5e")
+
+
+;; Doom's packages are pinned to a specific commit and updated from release to
+;; release. The `unpin!' macro allows you to unpin single packages...
+;(unpin! pinned-package)
+;; ...or multiple packages
+;(unpin! pinned-package another-pinned-package)
+;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
+;(unpin! t)
+
+#+END_SRC
+** Directory navigation
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; directory management
+(package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
+
+#+END_SRC
+** Themes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Themes
+(package! dracula-theme)
+(package! theme-magic)
+
+#+END_SRC
+** File type specific modes
+*** Org mode
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Org mode related stuff
+(package! org-reverse-datetree)
+;(package! ox-gfm) ; Causing problems with pandoc at the moment.
+(package! org-ref)
+(package! org-chef)
+(package! org-super-agenda)
+(package! org-fragtog)
+(package! org-pretty-tags)
+#+END_SRC
+
+*** Clojure
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Clojure related packages
+(package! clojure-mode)
+(package! clojure-mode-extra-font-locking)
+(package! clj-refactor)
+(package! cider)
+#+END_SRC
+
+*** Systemd
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! systemd)
+#+END_SRC
+
+*** Vimrc
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! vimrc-mode)
+#+END_SRC
+
+*** Open CAD
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! scad-mode)
+#+END_SRC
+
+*** R dataframes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! ess-view)
+#+END_SRC
+
+*** Graphviz
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! graphviz-dot-mode)
+#+END_SRC
+
+*** E-readers
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; e-reader
+(package! calibredb)
+(package! nov)
+#+END_SRC
+
+** Fun
+*** XKCD
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Fun stuff
+(package! xkcd)
+#+END_SRC
+
+*** Typewriter
+Makes emacs sound like a typewriter.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! selectric-mode)
+#+END_SRC
+
+** Presentation tools
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Presentation/showing emacs
+(package! command-log-mode)
+(package! gif-screencast)
+(package! keycast)
+#+END_SRC
+
+** Useful Tools
+*** Colored info
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! info-colors)
+#+END_SRC
+
+*** Discovery tools
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! discover-my-major)
+#+END_SRC
+
+*** Speed reading
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! spray)
+#+END_SRC
+
+*** Discord integration
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! elcord)
+#+END_SRC
+
+*** Guix
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! guix)
+#+END_SRC
+
+** Broken package fixes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Used to view VERY large files faster
+(package! vlf :disable t) ; disabled on startup to not impact load time.
+;; Temp fixes for gitconfig-mode bug https://github.com/hlissner/doom-emacs/issues/5667
+(package! gitconfig-mode
+      :recipe (:host github :repo "magit/git-modes"
+             :files ("gitconfig-mode.el")))
+(package! gitignore-mode
+      :recipe (:host github :repo "magit/git-modes"
+             :files ("gitignore-mode.el")))
+#+END_SRC
+
+* Initialization
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; This file controls what Doom modules are enabled and what order they load
@@ -16,18 +207,26 @@
 
 (doom!
 ;;; Modules to load
-
+#+END_SRC
+** Input
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :input
        chinese
        ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
 
+#+END_SRC
+** Completion
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :completion
        (company +childframe); the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
 
+#+END_SRC
+** UI
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :ui
        deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
@@ -53,6 +252,9 @@
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 
+#+END_SRC
+** Editor tools
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
@@ -67,6 +269,9 @@
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
 
+#+END_SRC
+** Emacs
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :emacs
        (dired            ; making dired pretty [functional]
         +icon)
@@ -75,17 +280,26 @@
        ; undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
+#+END_SRC
+** Terminals
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :term
        eshell            ; the elisp shell that works everywhere
        shell             ; simple shell REPL for Emacs
        term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
 
+#+END_SRC
+** Checkers
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :checkers
        syntax            ; tasing you for every semicolon you forget
        spell             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 
+#+END_SRC
+** Tools
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
@@ -108,10 +322,16 @@
        tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
 
+#+END_SRC
+** OS
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :os
        (:if IS-MAC macos)  ; improve compatibility with macOS
        tty               ; improve the terminal Emacs experience
 
+#+END_SRC
+** Programming Languages
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :lang
        ;;agda              ; types of types of types of types...
        cc                ; C/C++/Obj-C madness
@@ -188,19 +408,38 @@
        web               ; the tubes
        yaml              ; JSON, but readable
 
+#+END_SRC
+** Email
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :email
        (mu4e +gmail)
        ;;notmuch
        (wanderlust +gmail)
 
+#+END_SRC
+** App
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :app
        calendar
        irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
        twitter           ; twitter client https://twitter.com/vnought
 
+#+END_SRC
+** Config
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :config
        ;;literate
        (default +bindings +smartparens)
-
+#+END_SRC
+** End section
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 )
+#+END_SRC
+
+* Auto Tangle
+The below allows this file to tangle and produce the output configuration files whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:

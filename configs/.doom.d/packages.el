@@ -67,47 +67,52 @@
 (package! org-fragtog)
 (package! org-pretty-tags)
 
-;; Fun stuff
-(package! xkcd)
-
 ;; Clojure related packages
 (package! clojure-mode)
 (package! clojure-mode-extra-font-locking)
 (package! clj-refactor)
 (package! cider)
 
-;; Presentation/showing emacs
-(package! command-log-mode)
-(package! gif-screencast)
+(package! systemd)
+
+(package! vimrc-mode)
+
+(package! scad-mode)
+
+(package! ess-view)
+
+(package! graphviz-dot-mode)
 
 ;; e-reader
 (package! calibredb)
 (package! nov)
 
-;; Uncatigorized
-(package! discover-my-major)
-(package! scad-mode)
-(package! selectric-mode)
-(package! spray)
-(package! elcord)
-(package! keycast)
-(package! ess-view)
-(package! info-colors)
-(package! systemd)
-(package! graphviz-dot-mode)
-(package! vimrc-mode)
+;; Fun stuff
+(package! xkcd)
 
-;; (package! subed)
+(package! selectric-mode)
+
+;; Presentation/showing emacs
+(package! command-log-mode)
+(package! gif-screencast)
+(package! keycast)
+
+(package! info-colors)
+
+(package! discover-my-major)
+
+(package! spray)
+
+(package! elcord)
 
 (package! guix)
+
 ;; Used to view VERY large files faster
 (package! vlf :disable t) ; disabled on startup to not impact load time.
-
-
 ;; Temp fixes for gitconfig-mode bug https://github.com/hlissner/doom-emacs/issues/5667
 (package! gitconfig-mode
-	  :recipe (:host github :repo "magit/git-modes"
-			 :files ("gitconfig-mode.el")))
+      :recipe (:host github :repo "magit/git-modes"
+             :files ("gitconfig-mode.el")))
 (package! gitignore-mode
-	  :recipe (:host github :repo "magit/git-modes"
-			 :files ("gitignore-mode.el")))
+      :recipe (:host github :repo "magit/git-modes"
+             :files ("gitignore-mode.el")))
