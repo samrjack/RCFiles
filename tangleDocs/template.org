@@ -1,0 +1,16 @@
+#+TITLE: Config File
+#+AUTHOR: Samuel Jackson
+#+DESCRIPTION: 
+#+STARTUP: overview hidestars indent
+#+PROPERTY: header-args :results silent :tangle ""
+
+#+BEGIN_SRC 
+" This file has been generated using org tangle. To modify, please see the org file.
+#+END_SRC
+
+* Local Variables
+The below allows this file to tangle and produce the output RC file whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:
