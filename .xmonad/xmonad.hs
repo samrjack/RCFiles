@@ -1,5 +1,4 @@
 -- IMPORTS
-
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -10,9 +9,9 @@ import XMonad.Layout.Grid
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import qualified XMonad.Actions.Search as S 
+import XMonad.Actions.WithAll (sinkAll, killAll) 
 import XMonad.Actions.WindowGo (runOrRaise)
-import XMonad.Actions.WithAll (sinkAll, killAll)
-import qualified XMonad.Actions.Search as S
 
     -- Data
 import Data.Char (isSpace, toUpper)
@@ -75,7 +74,7 @@ import XMonad.Util.SpawnOnce
       -- SolarizedDark
       -- SolarizedLight
       -- TomorrowNight
--- import Colors.DoomOne
+import Colors.Dracula
 
 
 -- mod1Mask - "left alt" - default
@@ -111,6 +110,9 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 -- workspace names
 myWorkspaces :: [String]
 myWorkspaces = map show [1..9]
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..]
+clickable ws = "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
 
 -- Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor  = "#dddddd"
@@ -301,33 +303,33 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 ------------------------------------------------------------------------
-myLogHook = workspaceHistoryHook -- <+> dynamicLogWithPP xmobarPP
+myLogHook =  return ()
+
+myXMobarLogHook = \xmobarProc -> dynamicLogWithPP $ xmobarPP
               -- -- XMOBAR SETTINGS
-              -- { ppOutput = \x -> hPutStrLn xmproc0 x   -- xmobar on monitor 1
-              --                 >> hPutStrLn xmproc1 x   -- xmobar on monitor 2
-              --                 >> hPutStrLn xmproc2 x   -- xmobar on monitor 3
-              --   -- Current workspace
-              -- , ppCurrent = xmobarColor color06 "" . wrap
-              --               ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>"
-              --   -- Visible but not current workspace
-              -- , ppVisible = xmobarColor color06 "" . clickable
-              --   -- Hidden workspace
-              -- , ppHidden = xmobarColor color05 "" . wrap
-              --              ("<box type=Top width=2 mt=2 color=" ++ color05 ++ ">") "</box>" . clickable
-              --   -- Hidden workspaces (no windows)
-              -- , ppHiddenNoWindows = xmobarColor color05 ""  . clickable
-              --   -- Title of active window
-              -- , ppTitle = xmobarColor color16 "" . shorten 60
-              --   -- Separator character
-              -- -- , ppSep =  "<fc=" ++ color09 ++ "> <fn=1>|</fn> </fc>"
+              { ppOutput = \x -> hPutStrLn xmobarProc x   -- xmobar on monitor 
+                -- Current workspace
+              , ppCurrent = xmobarColor color06 "" . wrap
+                            ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>"
+                -- Visible but not current workspace
+              , ppVisible = xmobarColor color06 "" . clickable
+                -- Hidden workspace
+              , ppHidden = xmobarColor color05 "" . wrap
+                           ("<box type=Top width=2 mt=2 color=" ++ color05 ++ ">") "</box>" . clickable
+                -- Hidden workspaces (no windows)
+              , ppHiddenNoWindows = xmobarColor color05 ""  . clickable
+                -- Title of active window
+              , ppTitle = xmobarColor color16 "" . shorten 60
+                -- Separator character
+              , ppSep =  "<fc=" ++ color09 ++ "> | </fc>"
               -- , ppSep =  " | "
-              --   -- Urgent workspace
-              -- , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
-              --   -- Adding # of windows on current workspace to the bar
-              -- , ppExtras  = [windowCount]
-              --   -- order of things in xmobar
-              -- , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-              -- }
+                -- Urgent workspace
+              , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
+                -- Adding # of windows on current workspace to the bar
+              , ppExtras  = [windowCount]
+                -- order of things in xmobar
+              , ppOrder  = \(ws:l:t:ex) -> [ws,l]
+              }
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -347,7 +349,15 @@ myStartupHook = do
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
-defaults = def {
+
+------------------------------------------------------------------------
+-- Now run xmonad with all the defaults we set up.
+
+-- Run xmonad with the settings you specify. No need to modify this.
+--
+main = do 
+        xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar/xmobarrc.hs"
+        xmonad $ docks def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -366,19 +376,9 @@ defaults = def {
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        logHook            = myLogHook <+> myXMobarLogHook xmproc,
         startupHook        = myStartupHook
     }
-
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
-
--- Run xmonad with the settings you specify. No need to modify this.
---
-main = do 
-        xmproc <- spawnPipe "xmobar -x 0 ~/.xmonad/xmobar/xmobarrc.hs"
-        xmonad $ docks defaults
-
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
 help = unlines ["The default modifier key is 'alt'. Default keybindings:",

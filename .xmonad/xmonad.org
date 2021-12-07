@@ -26,3 +26,15 @@ For the purposes of using a system, it is important to have a constant set of ke
 - Open a program searcher
 - Open a web browser
 - Open emacs
+- Open a scratchpad (floating emacs window)
+* Bottom bar:
+** Left
+- Work spaces
+** Right
+- Hard drive space
+- local IP
+- Global IP
+- battery
+- sound
+- date/time
+- wifi
