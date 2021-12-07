@@ -95,6 +95,7 @@
 (package! info-colors)
 (package! systemd)
 (package! graphviz-dot-mode)
+(package! vimrc-mode)
 
 ;; (package! subed)
 
