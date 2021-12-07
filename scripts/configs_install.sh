@@ -14,21 +14,17 @@
 # Make "*" also match hidden files
 shopt -s dotglob
 
-#### Functions ####
-contains() {
-    return 0
-}
-
 # Get the path to the config directory for use later
+
 invocationPath=$0
+configRelativePath="../configs"
 if [ ! -e "$invocationPath" ]; then
 	case $invocationPath in
 		(*/*) (echo "Issue in case 1"; exit 1);;
 		(*) invocationPath=$(command -v -- "$invocationPath") || (echo "Issue in case 2"; exit);;
 	esac
 fi
-configDir=$( cd -P -- "$(dirname -- "$invocationPath")" && pwd -P) || exit
-
+configDir=$( cd -P -- "$(dirname -- "$invocationPath")" && cd $configRelativePath && pwd -P) || exit
 
 #### Setup directory structure ####
 allDirs=$(find "$configDir" -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d)
