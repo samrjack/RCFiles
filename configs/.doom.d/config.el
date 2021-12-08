@@ -95,8 +95,9 @@ Position the cursor at it's beginning, according to the current mode."
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
 
-(map! :n "g /" #'which-key-show-top-level
+(map! :n "g /"   #'which-key-show-top-level
       :n "g C-/" #'which-key-show-full-major-mode
+      :n "g ?"   #'which-key-show-full-major-mode
       :n "g M-/" #'which-key-show-minor-mode-keymap)
 (setq which-key-idle-delay 0.5)
 
@@ -203,7 +204,7 @@ so only show the modeline when this is not the case"
                        ; Checking for LF line ending
                        (not
                         (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
-                t f)))
+                t nil)))
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 
 (setq web-mode-script-padding standard-indent)

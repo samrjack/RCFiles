@@ -3,7 +3,6 @@
 #+DESCRIPTION: This file defines all my emacs configurations for my doom emacs setup.
 #+STARTUP: showall hidestars overview
 #+PROPERTY: header-args :results silent :tangle "../configs/.doom.d/config.el"
-
 * Packages
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 ;; -*- no-byte-compile: t; -*-
@@ -174,6 +173,38 @@ Makes emacs sound like a typewriter.
 *** Guix
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (package! guix)
+#+END_SRC
+
+** Games
+*** steam
+A package for accessing and organizing your steam library from within emacs
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! steam)
+#+END_SRC
+
+*** 2048-game
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! 2048-game)
+#+END_SRC
+
+*** mines
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! mines)
+#+END_SRC
+
+*** minesweeper
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! minesweeper)
+#+END_SRC
+
+*** sudoku
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! sudoku)
+#+END_SRC
+
+*** threes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! threes)
 #+END_SRC
 
 ** Broken package fixes
@@ -590,8 +621,9 @@ These aren't file or use case specific changes but instead things that can apply
 
 *** Which key settings
 #+BEGIN_SRC elisp
-(map! :n "g /" #'which-key-show-top-level
+(map! :n "g /"   #'which-key-show-top-level
       :n "g C-/" #'which-key-show-full-major-mode
+      :n "g ?"   #'which-key-show-full-major-mode
       :n "g M-/" #'which-key-show-minor-mode-keymap)
 (setq which-key-idle-delay 0.5)
 #+END_SRC
@@ -749,7 +781,7 @@ so only show the modeline when this is not the case"
                        ; Checking for LF line ending
                        (not
                         (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
-                t f)))
+                t nil)))
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 #+END_SRC
 

@@ -59,5 +59,17 @@
 
 (package! guix)
 
+(package! steam)
+
+(package! 2048-game)
+
+(package! mines)
+
+(package! minesweeper)
+
+(package! sudoku)
+
+(package! threes)
+
 ;; Used to view VERY large files faster
 (package! vlf :disable t) ; disabled on startup to not impact load time.
