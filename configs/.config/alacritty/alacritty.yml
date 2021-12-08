@@ -4,6 +4,8 @@ env:
 
   TERM: xterm-256color
 
+WINIT_X11_SCALE_FACTOR: "1"
+
 scrolling:
 
   history: 30000
@@ -52,6 +54,6 @@ font:
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
-  size: 6.0 # Corresponds to about 2 mm tall text. see en.wikipedia.org/wiki/Traditional_point-size_names
+  size: 12.0
 
 background_opacity: 0.7
