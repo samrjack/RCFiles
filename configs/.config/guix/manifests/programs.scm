@@ -68,6 +68,7 @@
 
     ;;; Office programs
     "libreoffice"
+    "graphviz"
 
     ;;; Web browsers
     "qutebrowser"
