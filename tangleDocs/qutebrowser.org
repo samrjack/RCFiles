@@ -1,28 +1,71 @@
+#+TITLE: Config File
+#+AUTHOR: Samuel Jackson
+#+DESCRIPTION: 
+#+STARTUP: overview hidestars indent
+#+PROPERTY: header-args :results silent :tangle "../configs/.config/qutebrowser/config.py"
+
+Config file for qutebrowser.
+To find documentation on all settings, please see:
+https://qutebrowser.org/doc/help/
+
+* Initialization
+#+BEGIN_SRC python
 # This file has been generated using org tangle. To modify, please see the org file.
-
+#+END_SRC
+* Autoconfig
+This is here so setting changes done via the GUI are still loaded. To have GUI setting changes not loaded, pass the parameter False.
+#+BEGIN_SRC python
 config.load_autoconfig()
+#+END_SRC
 
+* Session saving
+#+BEGIN_SRC python
 c.auto_save.session = True
+#+END_SRC
 
+* Scrolling
+#+BEGIN_SRC python
 c.scrolling.smooth = True
+#+END_SRC
 
+* Content
+#+BEGIN_SRC python
 c.content.pdfjs = True
 c.content.plugins = True
 c.content.cache.size = 2147483647
+#+END_SRC
 
+* Spellcheck
+#+BEGIN_SRC python
 c.spellcheck.languages = ["en-US"]
+#+END_SRC
 
+* Color theme
+#+BEGIN_SRC python
 #c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.preferred_color_scheme = "dark"
+#+END_SRC
 
+* Hinting
+#+BEGIN_SRC python
 c.hints.chars = "abcdefghijklmnopqrstuvwxyz"
+#+END_SRC
 
+* History
+#+BEGIN_SRC python
 c.completion.cmd_history_max_items = 10000
 c.completion.use_best_match = True
+#+END_SRC
 
+* Downloads
+#+BEGIN_SRC python
 c.downloads.location.suggestion = "both"
 c.confirm_quit = ["downloads"]
+#+END_SRC
 
+* Keybindings
+** Normal mode
+#+BEGIN_SRC python
 # Bindings for normal mode
 config.bind("'", 'mode-enter jump_mark')
 config.bind('=', 'zoom')
@@ -205,7 +248,10 @@ config.bind('<back>', 'back')
 config.bind('<forward>', 'forward')
 config.bind('<Ctrl-PgDown>', 'tab-next')
 config.bind('<Ctrl-PgUp>', 'tab-prev')
+#+END_SRC
 
+** Caret mode (visual mode)
+#+BEGIN_SRC python
 # Bindings for caret mode
 config.bind('$', 'move-to-end-of-line', mode='caret')
 config.bind('{', 'move-to-end-of-prev-block', mode='caret')
@@ -234,7 +280,10 @@ config.bind('<Ctrl-Space>', 'drop-selection', mode='caret')
 config.bind('<Escape>', 'mode-leave', mode='caret')
 config.bind('<Return>', 'yank selection', mode='caret')
 config.bind('<Space>', 'toggle-selection', mode='caret')
+#+END_SRC
 
+** Command mode
+#+BEGIN_SRC python
 # Bindings for command mode
 config.bind('<Ctrl-?>', 'rl-delete-char', mode='command')
 config.bind('<Ctrl-A>', 'rl-beginning-of-line', mode='command')
@@ -265,14 +314,20 @@ config.bind('<Shift-Tab>', 'completion-item-focus prev', mode='command')
 config.bind('<Tab>', 'completion-item-focus next', mode='command')
 config.bind('<Up>', 'completion-item-focus --history prev', mode='command')
 config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='command')
+#+END_SRC
 
+** Hint mode
+#+BEGIN_SRC python
 # Bindings for hint mode
 config.bind('<Ctrl-B>', 'hint all tab-bg', mode='hint')
 config.bind('<Ctrl-F>', 'hint links', mode='hint')
 config.bind('<Ctrl-R>', 'hint --rapid links tab-bg', mode='hint')
 config.bind('<Escape>', 'mode-leave', mode='hint')
 config.bind('<Return>', 'follow-hint', mode='hint')
+#+END_SRC
 
+** Insert mode
+#+BEGIN_SRC python
 # Bindings for insert mode
 config.bind('<Ctrl-X><Ctrl-E>', 'open-editor', mode='insert')
 config.bind('<Escape>', 'mode-leave', mode='insert')
@@ -294,10 +349,16 @@ config.bind('<Ctrl-w>', 'fake-key <Ctrl-Backspace>', 'insert')
 config.bind('<Ctrl-u>', 'fake-key <Shift-Home><Delete>', 'insert')
 config.bind('<Ctrl-k>', 'fake-key <Shift-End><Delete>', 'insert')
 config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', 'insert')
+#+END_SRC
 
+** Passthrough mode
+#+BEGIN_SRC python
 # Bindings for passthrough mode
 config.bind('<Ctrl-V>', 'mode-leave', mode='passthrough')
+#+END_SRC
 
+** Prompt mode
+#+BEGIN_SRC python
 # Bindings for prompt mode
 config.bind('<Alt-B>', 'rl-backward-word', mode='prompt')
 config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='prompt')
@@ -324,7 +385,11 @@ config.bind('<Ctrl-Y>', 'prompt-accept yes', mode='prompt')
 
 # Bindings for register mode
 config.bind('<Escape>', 'mode-leave', mode='register')
+#+END_SRC
 
+* Ad block
+This little function was originally pulled from [[https://gitlab.com/jgkamat/dotfiles/blob/master/qutebrowser/.config/qutebrowser/pyconfig/adblock-yt.py][here]] but will probably be replaced some day with a better plugin. For now, I can't complain and don't want to dive further into qutebrowser plugins.
+#+BEGIN_SRC python
 from qutebrowser.api import interceptor
 
     # Youtube adblock
@@ -337,3 +402,11 @@ def filter_yt(info: interceptor.Request):
         info.block()
 
 interceptor.register(filter_yt)
+#+END_SRC
+
+* Local Variables
+The below allows this file to tangle and produce the output RC file whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:
