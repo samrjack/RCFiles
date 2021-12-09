@@ -14,6 +14,8 @@ c.input.insert_mode.plugins = True
 
 c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
 
+c.content.javascript.can_access_clipboard = True
+
 c.auto_save.session = True
 c.session.default_name = "default"
 
@@ -201,8 +203,11 @@ config.bind('yp', 'yank pretty-url')
 config.bind('yP', 'yank pretty-url -s')
 config.bind('yt', 'yank title')
 config.bind('yT', 'yank title -s')
-config.bind('yy', 'yank')
+config.bind('yy', 'yank pretty-url')
 config.bind('yY', 'yank -s')
+
+config.bind('<Ctrl-c>', 'yank selection')
+config.bind('<Alt-c>', 'yank selection')
 
 config.bind('=', 'zoom') # resets zoom level to 100%
 config.bind('+', 'zoom-in')
@@ -279,7 +284,6 @@ config.bind('Sq', 'open qute://bookmarks')
 config.bind('Ss', 'open qute://settings')
 config.bind('<Ctrl-m>', 'messages -t')
 
-config.bind('<Ctrl-c>', 'stop')
 config.bind('<Ctrl-s>', 'stop')
 config.bind('.', 'repeat-command')
 config.bind('<F11>', 'fullscreen')

@@ -46,6 +46,12 @@ Use emacs when editing input from qutebrowser since most text editing can be don
 c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
 #+END_SRC
 
+* Javascript
+** Accessing the clipboard
+#+BEGIN_SRC python
+c.content.javascript.can_access_clipboard = True
+#+END_SRC
+
 * Session saving
 #+BEGIN_SRC python
 c.auto_save.session = True
@@ -332,7 +338,8 @@ config.bind('<Return>', 'selection-follow')
 config.bind('<Ctrl-Return>', 'selection-follow -t')
 #+END_SRC
 
-*** Yanking url
+*** Yanking (copying)
+**** Url
 #+BEGIN_SRC python
 config.bind('yd', 'yank domain')
 config.bind('yD', 'yank domain -s')
@@ -341,8 +348,15 @@ config.bind('yp', 'yank pretty-url')
 config.bind('yP', 'yank pretty-url -s')
 config.bind('yt', 'yank title')
 config.bind('yT', 'yank title -s')
-config.bind('yy', 'yank')
+config.bind('yy', 'yank pretty-url')
 config.bind('yY', 'yank -s')
+#+END_SRC
+
+**** Text
+Since qutebrowser doesn't automatically copy and paste to the clipboard using normal OS shortcuts, I've added both linux and macOS shortcuts here for handling text copying.
+#+BEGIN_SRC python
+config.bind('<Ctrl-c>', 'yank selection')
+config.bind('<Alt-c>', 'yank selection')
 #+END_SRC
 
 *** Zooming
@@ -459,7 +473,6 @@ config.bind('<Ctrl-m>', 'messages -t')
 
 *** Other functionality
 #+BEGIN_SRC python
-config.bind('<Ctrl-c>', 'stop')
 config.bind('<Ctrl-s>', 'stop')
 config.bind('.', 'repeat-command')
 config.bind('<F11>', 'fullscreen')
