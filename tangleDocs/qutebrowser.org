@@ -12,7 +12,7 @@ https://qutebrowser.org/doc/help/
 #+BEGIN_SRC python
 # This file has been generated using org tangle. To modify, please see the org file.
 #+END_SRC
-* Autoconfig
+* Auto-config
 This is here so setting changes done via the GUI are still loaded. To have GUI setting changes not loaded, pass the parameter False.
 #+BEGIN_SRC python
 config.load_autoconfig()
@@ -28,6 +28,14 @@ c.auto_save.session = True
 c.scrolling.smooth = True
 #+END_SRC
 
+* Tabs
+** Width
+When tabs are on the left or right, I don't want them taking up too much of the screen. The width below is how much of the width of the screen that the tabs take up.
+#+BEGIN_SRC python
+c.tabs.width = "10%"
+#+END_SRC
+
+** 
 * Content
 #+BEGIN_SRC python
 c.content.pdfjs = True
@@ -65,28 +73,185 @@ c.confirm_quit = ["downloads"]
 
 * Keybindings
 ** Normal mode
+*** Unbind old keys
 #+BEGIN_SRC python
-# Bindings for normal mode
-config.bind("'", 'mode-enter jump_mark')
-config.bind('=', 'zoom')
-config.bind('+', 'zoom-in')
-config.bind('-', 'zoom-out')
-config.bind('.', 'repeat-command')
+config.unbind('b')
+#+END_SRC
+
+*** Exiting
+#+BEGIN_SRC python
+config.bind('<Ctrl-q>', 'quit')
+config.bind('ZQ', 'quit')
+config.bind('ZZ', 'quit --save')
+#+END_SRC
+
+*** Page scrolling
+#+BEGIN_SRC python
+# Standard scrolling
+config.bind('h', 'scroll left')
+config.bind('j', 'scroll down')
+config.bind('k', 'scroll up')
+config.bind('l', 'scroll right')
+
+# Scrolling up
+config.bind('u', 'scroll-page 0 -0.5')
+config.bind('U', 'scroll-page 0 -1')
+config.bind('<Ctrl-u>', 'scroll-page 0 -0.5')
+
+#Emacs
+config.bind('<Ctrl-b>', 'scroll-page 0 -1')
+
+# Scrolling down
+config.bind('d', 'scroll-page 0 0.5')
+config.bind('D', 'scroll-page 0 1')
+config.bind('<Ctrl-d>', 'scroll-page 0 0.5')
+
+# Scrolling top/bottom
+config.bind('gg', 'scroll-to-perc 0')
+config.bind('G', 'scroll-to-perc')
+#+END_SRC
+
+*** Search
+#+BEGIN_SRC python
 config.bind('/', 'set-cmd-text /')
 config.bind('?', 'set-cmd-text ?')
-config.bind(':', 'set-cmd-text :')
-config.bind('@', 'run-macro')
+config.bind('n', 'search-next')
+config.bind('N', 'search-prev')
+#+END_SRC
+
+*** Open url
+#+BEGIN_SRC python
+config.bind('o', 'set-cmd-text -s :open')
+config.bind('O', 'set-cmd-text -s :open -t')
+config.bind('<Ctrl-o>', 'set-cmd-text -s :open -r {url:pretty}')
+config.bind('<Alt-o>', 'set-cmd-text -s :open -t -r {url:pretty}')
+config.bind('<Ctrl-t>', 'open -t')
+config.bind('T', 'set-cmd-text -s :open -t')
+config.bind('pp', 'open -- {clipboard}')
+config.bind('pP', 'open -- {primary}')
+config.bind('Pp', 'open -t -- {clipboard}')
+config.bind('PP', 'open -t -- {primary}')
+config.bind('<Ctrl-Shift-n>', 'open -p')
+#+END_SRC
+
+*** Tabs
+**** Navigation
+First we have some bindings that come directly from vim.
+#+BEGIN_SRC python
+config.bind('^', 'tab-focus 1')
+config.bind('$', 'tab-focus -1')
+config.bind('<Ctrl-^>', 'tab-focus last')
+#+END_SRC
+
+Next we have some bindings that that make logical sense in the context of a web browser, even if they aren't pulled directly from their text editing inspiration.
+#+BEGIN_SRC python
+config.bind('J', 'tab-next')
+config.bind('K', 'tab-prev')
+#+END_SRC
+
+And then finally some consistency bindings.
+#+BEGIN_SRC python
+config.bind('<Ctrl-Tab>', 'tab-focus last')
+config.bind('<Ctrl-PgDown>', 'tab-next')
+config.bind('<Ctrl-PgUp>', 'tab-prev')
+#+END_SRC
+
+**** Shortcuts
+#+BEGIN_SRC python
+config.bind('<Alt-1>', 'tab-focus 1')
+config.bind('<Alt-2>', 'tab-focus 2')
+config.bind('<Alt-3>', 'tab-focus 3')
+config.bind('<Alt-4>', 'tab-focus 4')
+config.bind('<Alt-5>', 'tab-focus 5')
+config.bind('<Alt-6>', 'tab-focus 6')
+config.bind('<Alt-7>', 'tab-focus 7')
+config.bind('<Alt-8>', 'tab-focus 8')
+config.bind('<Alt-9>', 'tab-focus 9')
+config.bind('<Alt-0>', 'tab-focus -1')
+#+END_SRC
+
+**** Management
+Here are some bindings for managing what tabs are open and where they exist in the tab bar.
+#+BEGIN_SRC python
+config.bind('<', 'tab-move -')
+config.bind('>', 'tab-move +')
+config.bind('x', 'tab-close')
+config.bind('X', 'undo')
+config.bind('<Alt-p>', 'tab-pin')
+#+END_SRC
+
+Some other redundant bindings for convenience, these are less used but are still present for logical consistency.
+#+BEGIN_SRC python
+config.bind('<Ctrl-Shift-t>', 'undo')
+#+END_SRC
+*** History navigation
+#+BEGIN_SRC python
+# Open previous page
+config.bind('H', 'back')
+# Go to next page
+config.bind('L', 'forward')
+
+# Open next page in a new background tab
+config.bind('<Ctrl-l>', 'forward --tab --bg')
+# Open prevous page in a new background tab
+config.bind('<Ctrl-h>', 'back --tab --bg')
+#+END_SRC
+
+Then here are some bindings that are more more for consistencies sake. It's nice to have options after all.
+#+BEGIN_SRC python
+config.bind('th', 'back -t')
+config.bind('tl', 'forward -t')
+config.bind('<back>', 'back')
+config.bind('<forward>', 'forward')
+#+END_SRC
+
+*** Link navigation
+#+BEGIN_SRC python
+config.bind('f', 'hint all current')
+config.bind('F', 'hint all tab-fg')
+config.bind('<Ctrl-f>', 'hint all tab-bg')
+#+END_SRC
+
+*** Navigate
+#+BEGIN_SRC python
 config.bind('{{', 'navigate prev -t')
 config.bind('}}', 'navigate next -t')
 config.bind('[[', 'navigate prev')
 config.bind(']]', 'navigate next')
-config.bind('`', 'mode-enter set_mark')
-config.bind('<', 'tab-move -')
-config.bind('>', 'tab-move +')
-config.bind('^', 'tab-focus 1')
-config.bind('$', 'tab-focus -1')
-config.bind('<Ctrl-^>', 'tab-focus last')
+config.bind('<Ctrl-a>', 'navigate increment')
+config.bind('<Ctrl-x>', 'navigate decrement')
+#+END_SRC
 
+Since quick navigation is useful, I've exposed the full api through ~,~. When ~Ctrl-,~ is used or the second letter is capitalized then the navigation is opened in a new tab. When the ~<Alt-,>~ is used, then the navigation is opened in a background tab for later viewing.
+#+BEGIN_SRC python
+config.bind(',u', 'navigate up')
+config.bind(',s', 'navigate strip')
+config.bind(',p', 'navigate prev')
+config.bind(',n', 'navigate next')
+config.bind(',i', 'navigate increment')
+config.bind(',d', 'navigate decrement')
+config.bind(',U', 'navigate --tab up')
+config.bind(',S', 'navigate --tab strip')
+config.bind(',P', 'navigate --tab prev')
+config.bind(',N', 'navigate --tab next')
+config.bind(',I', 'navigate --tab increment')
+config.bind(',D', 'navigate --tab decrement')
+config.bind('<Ctrl-,>u', 'navigate --tab up')
+config.bind('<Ctrl-,>s', 'navigate --tab strip')
+config.bind('<Ctrl-,>p', 'navigate --tab prev')
+config.bind('<Ctrl-,>n', 'navigate --tab next')
+config.bind('<Ctrl-,>i', 'navigate --tab increment')
+config.bind('<Ctrl-,>d', 'navigate --tab decrement')
+config.bind('<Alt-,>u', 'navigate --bg up')
+config.bind('<Alt-,>s', 'navigate --bg strip')
+config.bind('<Alt-,>p', 'navigate --bg prev')
+config.bind('<Alt-,>n', 'navigate --bg next')
+config.bind('<Alt-,>i', 'navigate --bg increment')
+config.bind('<Alt-,>d', 'navigate --bg decrement')
+#+END_SRC
+
+*** hinting
+#+BEGIN_SRC python
 config.bind(';b', 'hint all tab-bg')
 config.bind(';d', 'hint all download')
 config.bind(';D', 'hint all delete')
@@ -101,28 +266,107 @@ config.bind(';R', 'hint --rapid links window')
 config.bind(';t', 'hint inputs')
 config.bind(';y', 'hint links yank')
 config.bind(';Y', 'hint links yank-primary')
+config.bind('<Alt-d>', 'hint all delete')
+#+END_SRC
 
+*** Follow selection
+Following selections is an action that can be useful when when you select a text link such as by hovering over it with hints or finding it with searches.
+#+BEGIN_SRC python
+config.bind('<Return>', 'selection-follow')
+config.bind('<Ctrl-Return>', 'selection-follow -t')
+#+END_SRC
 
-config.bind('ad', 'download-cancel')
-config.bind('<Ctrl-A>', 'navigate increment')
-config.unbind('b')
+*** Yanking url
+#+BEGIN_SRC python
+config.bind('yd', 'yank domain')
+config.bind('yD', 'yank domain -s')
+config.bind('yf', 'hint all yank')
+config.bind('yp', 'yank pretty-url')
+config.bind('yP', 'yank pretty-url -s')
+config.bind('yt', 'yank title')
+config.bind('yT', 'yank title -s')
+config.bind('yy', 'yank')
+config.bind('yY', 'yank -s')
+#+END_SRC
+
+*** Zooming
+#+BEGIN_SRC python
+config.bind('=', 'zoom') # resets zoom level to 100%
+config.bind('+', 'zoom-in')
+config.bind('-', 'zoom-out')
+#+END_SRC
+
+*** Quickmarks/Bookmarks
+#+BEGIN_SRC python
 config.bind('bd', 'set-cmd-text -s :quickmark-del ')
 config.bind('bl', 'set-cmd-text -s :quickmark-load')
 config.bind('bs', 'set-cmd-text -s :quickmark-add {url:pretty} ')
 config.bind('B', 'set-cmd-text -s :quickmark-load -t')
-config.bind('<Ctrl-B>', 'scroll-page 0 -1')
-config.bind('<Alt-B>', 'fullscreen')
+config.bind('m', 'quickmark-save')
+config.bind('M', 'bookmark-add')
+#+END_SRC
+
+*** Clearing things away
+#+BEGIN_SRC python
 config.bind('cd', 'download-clear')
 config.bind('cm', 'clear-messages')
 config.bind('co', 'tab-only')
-config.bind('d', 'scroll-page 0 0.5')
-config.bind('D', 'scroll-page 0 1')
-config.bind('<Ctrl-D>', 'scroll-page 0 0.5')
-config.bind('<Alt-D>', 'hint all delete')
-config.bind('f', 'hint all current')
-config.bind('F', 'hint all tab-fg')
-config.bind('<Ctrl-F>', 'hint all tab-bg')
+config.bind('ct', 'tab-only')
+#+END_SRC
 
+*** Change modes
+#+BEGIN_SRC python
+config.bind('i', 'mode-enter insert')
+config.bind('I', 'mode-enter passthrough')
+config.bind('v', 'mode-enter caret')
+config.bind('<Ctrl-v>', 'mode-enter passthrough')
+config.bind('`', 'mode-enter set_mark')
+config.bind("'", 'mode-enter jump_mark')
+config.bind(':', 'set-cmd-text :')
+#+END_SRC
+
+*** Sessions
+#+BEGIN_SRC python
+config.bind('sd', 'set-cmd-text -s :session-delete ')
+config.bind('sl', 'set-cmd-text -s :session-load ')
+config.bind('sr', 'set-cmd-text -s :session-load ')
+config.bind('ss', 'set-cmd-text -s :session-save -o ')
+config.bind('sS', 'set-cmd-text -s :session-save -p ')
+#+END_SRC
+
+*** Windows
+#+BEGIN_SRC python
+config.bind('wB', 'set-cmd-text -s :bookmark-load -w')
+config.bind('wO', 'set-cmd-text :open -w {url:pretty}')
+config.bind('wP', 'open -w -- {primary}')
+config.bind('wb', 'set-cmd-text -s :quickmark-load -w')
+config.bind('wf', 'hint all window')
+config.bind('wh', 'back -w')
+config.bind('wi', 'inspector')
+config.bind('wl', 'forward -w')
+config.bind('wo', 'set-cmd-text -s :open -w')
+config.bind('wp', 'open -w -- {clipboard}')
+config.bind('<Ctrl-n>', 'open -w')
+#+END_SRC
+
+*** Reload
+#+BEGIN_SRC python
+config.bind('r', 'reload')
+config.bind('R', 'reload -f')
+config.bind('<F5>', 'reload')
+config.bind('<Ctrl-F5>', 'reload -f')
+config.bind('<Ctrl-r>', 'config-source')
+#+END_SRC
+
+*** Macros
+#+BEGIN_SRC python
+config.bind('q', 'record-macro')
+config.bind('@', 'run-macro')
+#+END_SRC
+
+*** g- and its options
+g is an interesting key. it is an easy key to use for any shortcuts you may want to use once in a while but don't need to use often or remember. Therefore I'm just throwing all the stuff here so I can see what g options I have when I need to.
+#+BEGIN_SRC python
 config.bind('g$', 'tab-focus -1')
 config.bind('g0', 'tab-focus 1')
 config.bind('gB', 'set-cmd-text -s :bookmark-load -t')
@@ -134,125 +378,35 @@ config.bind('ga', 'open -t')
 config.bind('gb', 'set-cmd-text -s :bookmark-load')
 config.bind('gd', 'download')
 config.bind('gf', 'view-source')
-config.bind('gg', 'scroll-to-perc 0')
 config.bind('gl', 'tab-move -')
 config.bind('gm', 'tab-move')
 config.bind('go', 'set-cmd-text :open {url:pretty}')
 config.bind('gr', 'tab-move +')
 config.bind('gt', 'set-cmd-text -s :buffer')
 config.bind('gu', 'navigate up')
+#+END_SRC
 
-config.bind('G', 'scroll-to-perc')
-config.bind('h', 'scroll left')
-config.bind('H', 'back')
-config.bind('<Ctrl-h>', 'back --tab --bg')
-config.bind('i', 'mode-enter insert')
-config.bind('I', 'mode-enter insert')
-config.bind('j', 'scroll down')
-config.bind('J', 'tab-prev')
-config.bind('k', 'scroll up')
-config.bind('K', 'tab-next')
-config.bind('l', 'scroll right')
-config.bind('L', 'forward')
-config.bind('<Ctrl-l>', 'forward --tab --bg')
-config.bind('m', 'quickmark-save')
-config.bind('M', 'bookmark-add')
-config.bind('<Ctrl-M>', 'messages -t')
-config.bind('n', 'search-next')
-config.bind('N', 'search-prev')
-config.bind('<Ctrl-N>', 'open -w')
-config.bind('<Ctrl-Shift-N>', 'open -p')
-config.bind('o', 'set-cmd-text -s :open')
-config.bind('O', 'set-cmd-text -s :open -t')
-config.bind('<Ctrl-O>', 'set-cmd-text -s :open {url:pretty}')
-config.bind('<Alt-O>', 'set-cmd-text -s :open -t {url:pretty}')
-config.bind('pP', 'open -- {primary}')
-config.bind('pp', 'open -- {clipboard}')
-config.bind('Pp', 'open -t -- {clipboard}')
-config.bind('PP', 'open -t -- {primary}')
-config.bind('<Ctrl-p>', 'tab-pin')
-config.bind('<Ctrl-Alt-p>', 'print')
-config.bind('q', 'record-macro')
-config.bind('<Ctrl-Q>', 'quit')
-config.bind('r', 'reload')
-config.bind('R', 'reload -f')
-config.bind('<Ctrl-R>', 'config-source')
-config.bind('sd', 'set-cmd-text -s :session-delete ')
-config.bind('sl', 'set-cmd-text -s :session-load ')
-config.bind('sr', 'set-cmd-text -s :session-load ')
-#config.bind('ss', 'set-cmd-text -s :set')
-config.bind('ss', 'set-cmd-text -s :session-save ')
+*** Settings
+#+BEGIN_SRC python
 config.bind('Sb', 'open qute://bookmarks#bookmarks')
 config.bind('Sh', 'open qute://history')
 config.bind('Sq', 'open qute://bookmarks')
 config.bind('Ss', 'open qute://settings')
-config.bind('<Ctrl-s>', 'stop')
-config.bind('th', 'back -t')
-config.bind('tl', 'forward -t')
-config.bind('T', 'set-cmd-text -s :open -t')
-#config.bind('T', 'tab-focus')
-config.bind('<Ctrl-T>', 'open -t')
-config.bind('<Ctrl-Shift-T>', 'undo')
-config.bind('u', 'scroll-page 0 -0.5')
-config.bind('U', 'scroll-page 0 -1')
-config.bind('<Ctrl-U>', 'scroll-page 0 -0.5')
-config.bind('v', 'mode-enter caret')
-config.bind('<Ctrl-V>', 'mode-enter passthrough')
-config.bind('wB', 'set-cmd-text -s :bookmark-load -w')
-config.bind('wO', 'set-cmd-text :open -w {url:pretty}')
-config.bind('wP', 'open -w -- {primary}')
-config.bind('wb', 'set-cmd-text -s :quickmark-load -w')
-config.bind('wf', 'hint all window')
-config.bind('wh', 'back -w')
-config.bind('wi', 'inspector')
-config.bind('wl', 'forward -w')
-config.bind('wo', 'set-cmd-text -s :open -w')
-config.bind('wp', 'open -w -- {clipboard}')
-config.bind('<Ctrl-W>', 'tab-close')
-config.bind('<Ctrl-Shift-W>', 'close')
-#config.bind('xO', 'set-cmd-text :open -b -r {url:pretty}')
-#config.bind('xo', 'set-cmd-text -s :open -b')
-config.bind('x', 'tab-close')
-config.bind('X', 'undo')
-config.bind('<Ctrl-X>', 'navigate decrement')
-config.bind('yd', 'yank domain')
-config.bind('yD', 'yank domain -s')
-config.bind('yf', 'hint all yank')
-config.bind('yp', 'yank pretty-url')
-config.bind('yP', 'yank pretty-url -s')
-config.bind('yt', 'yank title')
-config.bind('yT', 'yank title -s')
-config.bind('yy', 'yank')
-config.bind('yY', 'yank -s')
-config.bind('ZQ', 'quit')
-config.bind('ZZ', 'quit --save')
-
-config.bind('<Alt-1>', 'tab-focus 1')
-config.bind('<Alt-2>', 'tab-focus 2')
-config.bind('<Alt-3>', 'tab-focus 3')
-config.bind('<Alt-4>', 'tab-focus 4')
-config.bind('<Alt-5>', 'tab-focus 5')
-config.bind('<Alt-6>', 'tab-focus 6')
-config.bind('<Alt-7>', 'tab-focus 7')
-config.bind('<Alt-8>', 'tab-focus 8')
-config.bind('<Alt-9>', 'tab-focus 9')
-config.bind('<Alt-0>', 'tab-focus -1')
-
-config.bind('<Ctrl-Return>', 'follow-selected -t')
-config.bind('<Ctrl-Tab>', 'tab-focus last')
-config.bind('<F11>', 'fullscreen')
-config.bind('<F5>', 'reload')
-config.bind('<Ctrl-F5>', 'reload -f')
-config.bind('<Return>', 'follow-selected')
-config.bind('<back>', 'back')
-config.bind('<forward>', 'forward')
-config.bind('<Ctrl-PgDown>', 'tab-next')
-config.bind('<Ctrl-PgUp>', 'tab-prev')
+config.bind('<Ctrl-m>', 'messages -t')
 #+END_SRC
 
-** Caret mode (visual mode)
+*** Other functionality
 #+BEGIN_SRC python
-# Bindings for caret mode
+config.bind('<Ctrl-c>', 'stop')
+config.bind('<Ctrl-s>', 'stop')
+config.bind('.', 'repeat-command')
+config.bind('<F11>', 'fullscreen')
+config.bind('<Alt-b>', 'fullscreen')
+config.bind('<Ctrl-p>', 'print')
+#+END_SRC
+
+** Caret mode
+#+BEGIN_SRC python
 config.bind('$', 'move-to-end-of-line', mode='caret')
 config.bind('{', 'move-to-end-of-prev-block', mode='caret')
 config.bind('}', 'move-to-end-of-next-block', mode='caret')
@@ -283,106 +437,126 @@ config.bind('<Space>', 'toggle-selection', mode='caret')
 #+END_SRC
 
 ** Command mode
+*** Basic readline emulation
+The readline package standardizes a set of keyboard shortcuts for moving around text. Those shortcuts are enabled in terminal emulators and on Macs. I quite like using them when working with normal or short pieces of text when full vim modes is too much. The basic commands are shown below.
+**** Moving around
 #+BEGIN_SRC python
-# Bindings for command mode
+config.bind('<Ctrl-b>', 'rl-backward-char', mode='command')
+config.bind('<Alt-b>', 'rl-backward-word', mode='command')
+config.bind('<Ctrl-f>', 'rl-forward-char', mode='command')
+config.bind('<Alt-f>', 'rl-forward-word', mode='command')
+config.bind('<Ctrl-a>', 'rl-beginning-of-line', mode='command')
+config.bind('<Ctrl-e>', 'rl-end-of-line', mode='command')
+#+END_SRC
+
+**** Deleting and pasting text
+#+BEGIN_SRC python
+# Deleting
+config.bind('<Ctrl-d>', 'rl-delete-char', mode='command')
+config.bind('<Alt-d>', 'rl-kill-word', mode='command')
+config.bind('<Backspace>', 'rl-backward-delete-char', mode='command')
+config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='command')
+config.bind('<Ctrl-h>', 'rl-backward-delete-char', mode='command')
+config.bind('<Ctrl-w>', 'rl-backward-kill-word', mode='command')
+config.bind('<Ctrl-k>', 'rl-kill-line', mode='command')
+config.bind('<Ctrl-u>', 'rl-unix-line-discard', mode='command')
+
+# yanking
+config.bind('<Ctrl-y>', 'rl-yank', mode='command')
+config.bind('<Ctrl-h>', 'rl-backward-delete-char', mode='command')
 config.bind('<Ctrl-?>', 'rl-delete-char', mode='command')
-config.bind('<Ctrl-A>', 'rl-beginning-of-line', mode='command')
-config.bind('<Ctrl-B>', 'rl-backward-char', mode='command')
-config.bind('<Alt-B>', 'rl-backward-word', mode='command')
-config.bind('<Ctrl-C>', 'completion-item-yank', mode='command')
-config.bind('<Ctrl-D>', 'completion-item-del', mode='command')
-config.bind('<Alt-D>', 'rl-kill-word', mode='command')
-config.bind('<Ctrl-E>', 'rl-end-of-line', mode='command')
-config.bind('<Ctrl-F>', 'rl-forward-char', mode='command')
-config.bind('<Alt-F>', 'rl-forward-word', mode='command')
-config.bind('<Ctrl-H>', 'rl-backward-delete-char', mode='command')
-config.bind('<Ctrl-K>', 'rl-kill-line', mode='command')
-config.bind('<Ctrl-N>', 'command-history-next', mode='command')
-config.bind('<Ctrl-P>', 'command-history-prev', mode='command')
-config.bind('<Ctrl-Return>', 'command-accept --rapid', mode='command')
-config.bind('<Ctrl-Shift-C>', 'completion-item-yank --sel', mode='command')
-config.bind('<Ctrl-Shift-Tab>', 'completion-item-focus prev-category', mode='command')
-config.bind('<Ctrl-Tab>', 'completion-item-focus next-category', mode='command')
-config.bind('<Ctrl-U>', 'rl-unix-line-discard', mode='command')
-config.bind('<Ctrl-W>', 'rl-unix-word-rubout', mode='command')
-config.bind('<Ctrl-Y>', 'rl-yank', mode='command')
+config.bind('<Ctrl-w>', 'rl-unix-word-rubout', mode='command')
+#+END_SRC
+
+**** History
+#+BEGIN_SRC python
+config.bind('<Ctrl-n>', 'command-history-next', mode='command')
+config.bind('<Ctrl-p>', 'command-history-prev', mode='command')
+config.bind('<Up>', 'completion-item-focus --history prev', mode='command')
 config.bind('<Down>', 'completion-item-focus --history next', mode='command')
-config.bind('<Escape>', 'mode-leave', mode='command')
-config.bind('<Return>', 'command-accept', mode='command')
+#+END_SRC
+
+*** Non-standard bindings
+These bindings make some sense in the context of a web browser but are certainly not standardized.
+#+BEGIN_SRC python
 config.bind('<Shift-Delete>', 'completion-item-del', mode='command')
+config.bind('<Ctrl-Shift-c>', 'completion-item-yank --sel', mode='command')
+config.bind('<Ctrl-Shift-tab>', 'completion-item-focus prev-category', mode='command')
+config.bind('<Ctrl-tab>', 'completion-item-focus next-category', mode='command')
 config.bind('<Shift-Tab>', 'completion-item-focus prev', mode='command')
 config.bind('<Tab>', 'completion-item-focus next', mode='command')
-config.bind('<Up>', 'completion-item-focus --history prev', mode='command')
-config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='command')
+config.bind('<Return>', 'command-accept', mode='command')
+config.bind('<Ctrl-Return>', 'command-accept --rapid', mode='command')
+config.bind('<Escape>', 'mode-leave', mode='command')
 #+END_SRC
 
 ** Hint mode
 #+BEGIN_SRC python
-# Bindings for hint mode
-config.bind('<Ctrl-B>', 'hint all tab-bg', mode='hint')
-config.bind('<Ctrl-F>', 'hint links', mode='hint')
-config.bind('<Ctrl-R>', 'hint --rapid links tab-bg', mode='hint')
+config.bind('<Ctrl-b>', 'hint all tab-bg', mode='hint')
+config.bind('<Ctrl-f>', 'hint links', mode='hint')
+config.bind('<Ctrl-r>', 'hint --rapid links tab-bg', mode='hint')
 config.bind('<Escape>', 'mode-leave', mode='hint')
 config.bind('<Return>', 'follow-hint', mode='hint')
 #+END_SRC
 
 ** Insert mode
+When on a page that requires text to be typed (even places like google's home page) then insert mode needs to be used. Usually when clicking on a text box, insert mode is automatically started however sometimes it doesn't work as planned and needs to be entered manually. Normally in text mode, very few commands are intercepted by the web browser so I'm adding a few below for convenience.
 #+BEGIN_SRC python
-# Bindings for insert mode
-config.bind('<Ctrl-X><Ctrl-E>', 'open-editor', mode='insert')
 config.bind('<Escape>', 'mode-leave', mode='insert')
 config.bind('<Shift-Ins>', 'insert-text {primary}', mode='insert')
-
+config.bind('<Ctrl-r>', 'insert-text {primary}', mode='insert')
+#+END_SRC
+*** Recreating readline
+#+BEGIN_SRC python
 # Recreated readline bindings for insert mode
-config.bind('<Ctrl-h>', 'fake-key <Backspace>', 'insert')
-config.bind('<Ctrl-a>', 'fake-key <Home>', 'insert')
-config.bind('<Ctrl-e>', 'fake-key <End>', 'insert')
-config.bind('<Ctrl-b>', 'fake-key <Left>', 'insert')
-config.bind('<Mod1-b>', 'fake-key <Ctrl-Left>', 'insert')
-config.bind('<Ctrl-f>', 'fake-key <Right>', 'insert')
-config.bind('<Mod1-f>', 'fake-key <Ctrl-Right>', 'insert')
-config.bind('<Ctrl-p>', 'fake-key <Up>', 'insert')
-config.bind('<Ctrl-n>', 'fake-key <Down>', 'insert')
-config.bind('<Mod1-d>', 'fake-key <Ctrl-Delete>', 'insert')
-config.bind('<Ctrl-d>', 'fake-key <Delete>', 'insert')
-config.bind('<Ctrl-w>', 'fake-key <Ctrl-Backspace>', 'insert')
-config.bind('<Ctrl-u>', 'fake-key <Shift-Home><Delete>', 'insert')
-config.bind('<Ctrl-k>', 'fake-key <Shift-End><Delete>', 'insert')
-config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', 'insert')
+config.bind('<Ctrl-h>', 'fake-key <Backspace>', mode='insert')
+config.bind('<Ctrl-a>', 'fake-key <Home>', mode='insert')
+config.bind('<Ctrl-e>', 'fake-key <End>', mode='insert')
+config.bind('<Ctrl-b>', 'fake-key <Left>', mode='insert')
+config.bind('<Alt-b>', 'fake-key <Ctrl-Left>', mode='insert')
+config.bind('<Ctrl-f>', 'fake-key <Right>', mode='insert')
+config.bind('<Alt-f>', 'fake-key <Ctrl-Right>', mode='insert')
+config.bind('<Ctrl-p>', 'fake-key <Up>', mode='insert')
+config.bind('<Ctrl-n>', 'fake-key <Down>', mode='insert')
+config.bind('<Alt-d>', 'fake-key <Ctrl-Delete>', mode='insert')
+config.bind('<Ctrl-d>', 'fake-key <Delete>', mode='insert')
+config.bind('<Ctrl-w>', 'fake-key <Ctrl-Backspace>', mode='insert')
+config.bind('<Ctrl-u>', 'fake-key <Shift-Home><Delete>', mode='insert')
+config.bind('<Ctrl-k>', 'fake-key <Shift-End><Delete>', mode='insert')
+config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', mode='insert')
 #+END_SRC
 
 ** Passthrough mode
-#+BEGIN_SRC python
-# Bindings for passthrough mode
-config.bind('<Ctrl-V>', 'mode-leave', mode='passthrough')
-#+END_SRC
+Passthrough mode is a special mode that is designed to allow you to interact with the page without qutebrowser intercepting or interpreting any of your actions for itself. This is useful on sites that need to see Ctrl signals or simply are not qute friendly.
 
 ** Prompt mode
 #+BEGIN_SRC python
-# Bindings for prompt mode
-config.bind('<Alt-B>', 'rl-backward-word', mode='prompt')
+config.bind('<Alt-b>', 'rl-backward-word', mode='prompt')
 config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='prompt')
-config.bind('<Alt-D>', 'rl-kill-word', mode='prompt')
-config.bind('<Alt-F>', 'rl-forward-word', mode='prompt')
+config.bind('<Alt-d>', 'rl-kill-word', mode='prompt')
+config.bind('<Alt-f>', 'rl-forward-word', mode='prompt')
 config.bind('<Ctrl-?>', 'rl-delete-char', mode='prompt')
-config.bind('<Ctrl-A>', 'rl-beginning-of-line', mode='prompt')
-config.bind('<Ctrl-B>', 'rl-backward-char', mode='prompt')
-config.bind('<Ctrl-E>', 'rl-end-of-line', mode='prompt')
-config.bind('<Ctrl-F>', 'rl-forward-char', mode='prompt')
-config.bind('<Ctrl-H>', 'rl-backward-delete-char', mode='prompt')
-config.bind('<Ctrl-K>', 'rl-kill-line', mode='prompt')
-config.bind('<Ctrl-U>', 'rl-unix-line-discard', mode='prompt')
-config.bind('<Ctrl-W>', 'rl-unix-word-rubout', mode='prompt')
-config.bind('<Ctrl-X>', 'prompt-open-download', mode='prompt')
+config.bind('<Ctrl-a>', 'rl-beginning-of-line', mode='prompt')
+config.bind('<Ctrl-b>', 'rl-backward-char', mode='prompt')
+config.bind('<Ctrl-e>', 'rl-end-of-line', mode='prompt')
+config.bind('<Ctrl-f>', 'rl-forward-char', mode='prompt')
+config.bind('<Ctrl-h>', 'rl-backward-delete-char', mode='prompt')
+config.bind('<Ctrl-k>', 'rl-kill-line', mode='prompt')
+config.bind('<Ctrl-u>', 'rl-unix-line-discard', mode='prompt')
+config.bind('<Ctrl-w>', 'rl-unix-word-rubout', mode='prompt')
+config.bind('<Ctrl-x>', 'prompt-open-download', mode='prompt')
 config.bind('<Down>', 'prompt-item-focus next', mode='prompt')
 config.bind('<Escape>', 'mode-leave', mode='prompt')
 config.bind('<Return>', 'prompt-accept', mode='prompt')
 config.bind('<Shift-Tab>', 'prompt-item-focus prev', mode='prompt')
 config.bind('<Tab>', 'prompt-item-focus next', mode='prompt')
 config.bind('<Up>', 'prompt-item-focus prev', mode='prompt')
-config.bind('<Ctrl-N>', 'prompt-accept no', mode='prompt')
-config.bind('<Ctrl-Y>', 'prompt-accept yes', mode='prompt')
+config.bind('<Ctrl-n>', 'prompt-accept no', mode='prompt')
+config.bind('<Ctrl-y>', 'prompt-accept yes', mode='prompt')
+#+END_SRC
 
+** Register mode
+#+BEGIN_SRC python
 # Bindings for register mode
 config.bind('<Escape>', 'mode-leave', mode='register')
 #+END_SRC

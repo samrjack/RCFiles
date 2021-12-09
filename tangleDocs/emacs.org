@@ -826,7 +826,7 @@ Several languages require LSPs or other backend code to be configured for bable 
 ***** Shortcut to open org files
 This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
 #+BEGIN_SRC elisp
-(setq-local org-default-extension ".org")
+(setq org-default-extension ".org")
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."

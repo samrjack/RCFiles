@@ -231,7 +231,7 @@ so only show the modeline when this is not the case"
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
 
-(setq-local org-default-extension ".org")
+(setq org-default-extension ".org")
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
