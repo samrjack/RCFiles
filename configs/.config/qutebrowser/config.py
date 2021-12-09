@@ -14,8 +14,6 @@ c.input.insert_mode.plugins = True
 
 c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
 
-c.content.javascript.can_access_clipboard = True
-
 c.auto_save.session = True
 c.session.default_name = "default"
 
@@ -33,9 +31,14 @@ c.tabs.show = "multiple"
 
 c.tabs.select_on_remove = "last-used"
 
-c.content.pdfjs = True
 c.content.plugins = True
 c.content.cache.size = 2147483647
+
+c.content.pdfjs = True
+
+c.content.fullscreen.window = True
+
+c.content.javascript.can_access_clipboard = True
 
 c.spellcheck.languages = ["en-US"]
 

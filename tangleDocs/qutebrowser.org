@@ -46,12 +46,6 @@ Use emacs when editing input from qutebrowser since most text editing can be don
 c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
 #+END_SRC
 
-* Javascript
-** Accessing the clipboard
-#+BEGIN_SRC python
-c.content.javascript.can_access_clipboard = True
-#+END_SRC
-
 * Session saving
 #+BEGIN_SRC python
 c.auto_save.session = True
@@ -100,9 +94,28 @@ c.tabs.select_on_remove = "last-used"
 
 * Content
 #+BEGIN_SRC python
-c.content.pdfjs = True
 c.content.plugins = True
 c.content.cache.size = 2147483647
+#+END_SRC
+
+** PDFs
+This allows pdfs to be controlled the same way other web content is which is super convenient for scrolling and searching!
+#+BEGIN_SRC python
+c.content.pdfjs = True
+#+END_SRC
+
+
+** Fullscreen mode
+When content attempts to be fullscreen, it will just fill the browser window so I can make it as big or small as I want using my window manager. This also makes content more consumable by removing distractions while its open.
+#+BEGIN_SRC python
+c.content.fullscreen.window = True
+#+END_SRC
+
+
+** Javascript
+*** Accessing the clipboard
+#+BEGIN_SRC python
+c.content.javascript.can_access_clipboard = True
 #+END_SRC
 
 * Spellcheck
