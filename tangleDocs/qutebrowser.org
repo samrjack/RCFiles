@@ -12,20 +12,55 @@ https://qutebrowser.org/doc/help/
 #+BEGIN_SRC python
 # This file has been generated using org tangle. To modify, please see the org file.
 #+END_SRC
+
+These headings below allow for use with python IDEs.
+#+BEGIN_SRC python
+# pylint: disable=C0111
+from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
+from qutebrowser.config.config import ConfigContainer  # noqa: F401
+config: ConfigAPI = config  # noqa: F821 pylint: disable=E0602,C0103
+c: ConfigContainer = c  # noqa: F821 pylint: disable=E0602,C0103
+#+END_SRC
 * Auto-config
 This is here so setting changes done via the GUI are still loaded. To have GUI setting changes not loaded, pass the parameter False.
 #+BEGIN_SRC python
 config.load_autoconfig()
 #+END_SRC
 
+* Input
+** Insert mode when auto focusing on new page
+When loading a new page that focuses you immediately into a text field, then enter insert mode.
+#+BEGIN_SRC python
+c.input.insert_mode.auto_load = True
+#+END_SRC
+
+** Insert mode in plugins
+When clicking into a plugin, go into insert mode since usually they can't be operated from keyboard commands anyways.
+#+BEGIN_SRC python
+c.input.insert_mode.plugins = True
+#+END_SRC
+
+* Editor
+Use emacs when editing input from qutebrowser since most text editing can be done pretty easily in the browser itself. Anything that needs more complex input can probably use emacs's power.
+#+BEGIN_SRC python
+c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
+#+END_SRC
+
 * Session saving
 #+BEGIN_SRC python
 c.auto_save.session = True
+c.session.default_name = "default"
 #+END_SRC
 
 * Scrolling
 #+BEGIN_SRC python
 c.scrolling.smooth = True
+#+END_SRC
+
+* Search
+Don't ignore case while searching a page.
+#+BEGIN_SRC python
+c.search.ignore_case = "never"
 #+END_SRC
 
 * Tabs
@@ -35,7 +70,28 @@ When tabs are on the left or right, I don't want them taking up too much of the 
 c.tabs.width = "10%"
 #+END_SRC
 
-** 
+** Position
+Start position for the tab bar. It can easily be moved while using qutebrowser by setting them to something else.
+#+BEGIN_SRC python
+c.tabs.position = "top"
+#+END_SRC
+** Last close
+When the last tab is closed, I want the start page to be shown so that I know I can safely close qutebrowser. I would just have qutebrowser itself close, however it is too slow to reopen to make it worth while.
+#+BEGIN_SRC python
+c.tabs.last_close = "default-page"
+#+END_SRC
+** Show
+Only show the tab bar when there is more than one tab.
+#+BEGIN_SRC python
+c.tabs.show = "multiple"
+#+END_SRC
+
+** On remove
+When a tab is removed, then show the last used tab. Although this can be annoying sometimes, it's often helpful.
+#+BEGIN_SRC python
+c.tabs.select_on_remove = "last-used"
+#+END_SRC
+
 * Content
 #+BEGIN_SRC python
 c.content.pdfjs = True
@@ -365,6 +421,7 @@ config.bind('@', 'run-macro')
 #+END_SRC
 
 *** g- and its options
+
 g is an interesting key. it is an easy key to use for any shortcuts you may want to use once in a while but don't need to use often or remember. Therefore I'm just throwing all the stuff here so I can see what g options I have when I need to.
 #+BEGIN_SRC python
 config.bind('g$', 'tab-focus -1')
@@ -385,6 +442,11 @@ config.bind('gr', 'tab-move +')
 config.bind('gt', 'set-cmd-text -s :buffer')
 config.bind('gu', 'navigate up')
 #+END_SRC
+
+**** Ideas about what can be done with g
+g as many possible uses but currently just has random things in it. Here are a list of some ideas to add in the future:
+- Rotate tab position
+- increase tab size
 
 *** Settings
 #+BEGIN_SRC python
@@ -523,7 +585,7 @@ config.bind('<Ctrl-d>', 'fake-key <Delete>', mode='insert')
 config.bind('<Ctrl-w>', 'fake-key <Ctrl-Backspace>', mode='insert')
 config.bind('<Ctrl-u>', 'fake-key <Shift-Home><Delete>', mode='insert')
 config.bind('<Ctrl-k>', 'fake-key <Shift-End><Delete>', mode='insert')
-config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', mode='insert')
+config.bind('<Ctrl-x><Ctrl-e>', 'edit-text', mode='insert')
 #+END_SRC
 
 ** Passthrough mode
@@ -568,7 +630,7 @@ from qutebrowser.api import interceptor
 
     # Youtube adblock
 def filter_yt(info: interceptor.Request):
-    """Block the given request if necessary."""
+    """"""
     url = info.request_url
     if (url.host() == 'www.youtube.com' and
         url.path() == '/get_video_info' and

@@ -1,12 +1,35 @@
 # This file has been generated using org tangle. To modify, please see the org file.
 
+# pylint: disable=C0111
+from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
+from qutebrowser.config.config import ConfigContainer  # noqa: F401
+config: ConfigAPI = config  # noqa: F821 pylint: disable=E0602,C0103
+c: ConfigContainer = c  # noqa: F821 pylint: disable=E0602,C0103
+
 config.load_autoconfig()
 
+c.input.insert_mode.auto_load = True
+
+c.input.insert_mode.plugins = True
+
+c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
+
 c.auto_save.session = True
+c.session.default_name = "default"
 
 c.scrolling.smooth = True
 
+c.search.ignore_case = "never"
+
 c.tabs.width = "10%"
+
+c.tabs.position = "top"
+
+c.tabs.last_close = "default-page"
+
+c.tabs.show = "multiple"
+
+c.tabs.select_on_remove = "last-used"
 
 c.content.pdfjs = True
 c.content.plugins = True
@@ -354,7 +377,7 @@ config.bind('<Ctrl-d>', 'fake-key <Delete>', mode='insert')
 config.bind('<Ctrl-w>', 'fake-key <Ctrl-Backspace>', mode='insert')
 config.bind('<Ctrl-u>', 'fake-key <Shift-Home><Delete>', mode='insert')
 config.bind('<Ctrl-k>', 'fake-key <Shift-End><Delete>', mode='insert')
-config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', mode='insert')
+config.bind('<Ctrl-x><Ctrl-e>', 'edit-text', mode='insert')
 
 config.bind('<Alt-b>', 'rl-backward-word', mode='prompt')
 config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='prompt')
@@ -386,7 +409,7 @@ from qutebrowser.api import interceptor
 
     # Youtube adblock
 def filter_yt(info: interceptor.Request):
-    """Block the given request if necessary."""
+    """"""
     url = info.request_url
     if (url.host() == 'www.youtube.com' and
         url.path() == '/get_video_info' and
