@@ -44,6 +44,8 @@ alias gl1=" git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias gl="gl1"
 alias lg="gl"
+alias git-root='cd $(git rev-parse --show-toplevel)'
+alias gr="git-root"
 
 alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
