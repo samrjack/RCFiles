@@ -603,6 +603,15 @@ endif
 
 #+END_SRC
 
+* NeoVim
+Neovim is a branch of vim that has a lot of added features. However, for now I don't use neovim for anything so I'm just having it copy my vim settings.
+#+BEGIN_SRC vimrc :tangle "../configs/.config/nvim/init.vim"
+" This file has been generated using org tangle. To modify, please see the org file.
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath=&runtimepath
+source ~/.vimrc
+#+END_SRC
+
 * Local Variables
 The below allows this file to tangle and produce the output RC file whenever the document is saved.
 
