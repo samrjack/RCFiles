@@ -206,8 +206,6 @@ so only show the modeline when this is not the case"
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
 
-(add-hook 'org-mode-hook #'(lambda () (chinese-text-support t)))
-
 (setq org-bable-clojure-backend 'cider)
 
 ;; Use keybinding g b to "go back" to previous location when a link is followed.

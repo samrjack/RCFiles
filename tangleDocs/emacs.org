@@ -793,10 +793,10 @@ If you use `org' and don't want your org files in the default location below, ch
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
 #+END_SRC
-
+***** Font support
 In org mode I like to be able to write in different fonts and languages (such as chinese) so I'm turning on variable pitch font support. Without it, lots of text starts to overlap.
-#+BEGIN_SRC elisp
-(add-hook 'org-mode-hook #'(lambda () (chinese-text-support t)))
+#+BEGIN_SRC elisp :tangle no
+(add-hook 'org-mode-hook #'(lambda () (chinese-text-support)))
 #+END_SRC
 
 ***** Bable
