@@ -22,6 +22,11 @@
 (setq user-full-name "Samuel Jackson"
       user-mail-address "dsiq3g@gmail.com")
 
+(defun chinese-text-support ()
+  "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
+  (interactive)
+  (variable-pitch-mode))
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -170,20 +175,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 
-(defun print-point-position ()
-  "Print the position of point to the message console."
-  (interactive)
-  (message (number-to-string (point))))
-
-(map! :leader
-      (:prefix-map ("a" . "Additional")
-        (:desc "Point's position" "p" #'print-point-position)))
-;;        (:prefix-map ("a" . "test2")
-;;         (:prefix ("a" . "test")
-;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
-         ;; :desc "Search journal entry" "s" #'org-journal-search))))
-;;
-
 (setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
 
 ;; Add useful data to the mode line.
@@ -215,8 +206,7 @@ so only show the modeline when this is not the case"
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
 
-; Set default file for newly captured notes
-(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
+(add-hook 'org-mode-hook #'(lambda () (chinese-text-support t)))
 
 (setq org-bable-clojure-backend 'cider)
 
@@ -289,6 +279,9 @@ if no org extension is given then it will be automatically appended."
     org-pomodoro-long-break-sound-p t)
 
 )
+
+; Set default file for newly captured notes
+(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
 
 (defun get-current-timestamp ()
   "returns a string timestamp in the format [yyyy-mm-dd day hh:mm]"
@@ -394,3 +387,17 @@ if no org extension is given then it will be automatically appended."
                   (:eval (doom-modeline-segment--major-mode)))))
 
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
+
+(defun print-point-position ()
+  "Print the position of point to the message console."
+  (interactive)
+  (message (number-to-string (point))))
+
+(map! :leader
+      (:prefix-map ("a" . "Additional")
+        (:desc "Point's position" "p" #'print-point-position)))
+;;        (:prefix-map ("a" . "test2")
+;;         (:prefix ("a" . "test")
+;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
+         ;; :desc "Search journal entry" "s" #'org-journal-search))))
+;;

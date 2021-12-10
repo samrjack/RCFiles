@@ -242,7 +242,7 @@ A package for accessing and organizing your steam library from within emacs
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :input
        chinese
-       ;;japanese
+       japanese
        ;;layout            ; auie,ctsrnm is the superior home row
 
 #+END_SRC
@@ -499,6 +499,16 @@ A package for accessing and organizing your steam library from within emacs
       user-mail-address "dsiq3g@gmail.com")
 #+END_SRC
 
+** Fonts and language
+*** Chinese support
+In order for Chinese text to be displayed correctly, some modes needs to be turned on to allow for the unique characteristics of the symbolic language.
+#+BEGIN_SRC elisp
+(defun chinese-text-support ()
+  "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
+  (interactive)
+  (variable-pitch-mode))
+#+END_SRC
+
 ** Basic Emacs settings
 *** Fonts
 #+BEGIN_SRC elisp
@@ -604,7 +614,7 @@ Position the cursor at it's beginning, according to the current mode."
 (setq yas-triggers-in-field t)
 #+END_SRC
 
-** General utility settings
+** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
 *** Sub-word movement
 #+BEGIN_SRC elisp
@@ -735,23 +745,6 @@ VLF if a package for lazy loading enormous files that would normally take foreve
 (setq ispell-dictionary "en")
 #+END_SRC
 
-** Experimental personal functions
-#+BEGIN_SRC elisp
-(defun print-point-position ()
-  "Print the position of point to the message console."
-  (interactive)
-  (message (number-to-string (point))))
-
-(map! :leader
-      (:prefix-map ("a" . "Additional")
-        (:desc "Point's position" "p" #'print-point-position)))
-;;        (:prefix-map ("a" . "test2")
-;;         (:prefix ("a" . "test")
-;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
-         ;; :desc "Search journal entry" "s" #'org-journal-search))))
-;;
-#+END_SRC
-
 ** Mode/package settings
 *** Elisp-shell
 #+BEGIN_SRC elisp
@@ -799,9 +792,11 @@ If you use `org' and don't want your org files in the default location below, ch
 #+BEGIN_SRC elisp
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
+#+END_SRC
 
-; Set default file for newly captured notes
-(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
+In org mode I like to be able to write in different fonts and languages (such as chinese) so I'm turning on variable pitch font support. Without it, lots of text starts to overlap.
+#+BEGIN_SRC elisp
+(add-hook 'org-mode-hook #'(lambda () (chinese-text-support t)))
 #+END_SRC
 
 ***** Bable
@@ -867,7 +862,7 @@ if no org extension is given then it will be automatically appended."
       "f o" #'org-open-org-file)
 #+END_SRC
 
-**** Org roam
+**** Org Roam
 #+BEGIN_SRC elisp
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
@@ -918,8 +913,15 @@ If I decide to find sound files I like more than the defaults, then I can put th
 #+BEGIN_SRC elisp
 )
 #+END_SRC
-**** Org template
-***** Anxiety/Worry template
+**** Org Capture
+***** Settings
+#+BEGIN_SRC elisp
+; Set default file for newly captured notes
+(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
+#+END_SRC
+
+***** Org template
+****** Anxiety/Worry template
 #+BEGIN_SRC elisp
 (defun get-current-timestamp ()
   "returns a string timestamp in the format [yyyy-mm-dd day hh:mm]"
@@ -970,13 +972,13 @@ If I decide to find sound files I like more than the defaults, then I can put th
                 '("w" "Worry Capture" entry (file "worries.org") (function worry-template) :prepend t :immediate-finish t)))
 #+END_SRC
 
-***** Test checklist template
+****** Test checklist template
 #+BEGIN_SRC elisp
 (after! org
   (add-to-list 'org-capture-templates
                 '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]")))
 #+END_SRC
-***** Example template code
+****** Example template code
 Example of org capture templates and how everything is setup.
 pulled from https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
 #+BEGIN_SRC elisp :tangle no
@@ -1031,7 +1033,7 @@ pulled from https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org
            :heading "Changelog"
            :prepend t)))
 #+END_SRC
-**** Org chef
+**** Org Chef
 Org chef is a package for saving cooking recipes from sites like [[allrecipes.com][allrecipies]] in org mode for future reference and use.
 #+BEGIN_SRC elisp
 (use-package! org-chef
@@ -1092,6 +1094,23 @@ Org chef is a package for saving cooking recipes from sites like [[allrecipes.co
                   (:eval (doom-modeline-segment--major-mode)))))
 
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
+#+END_SRC
+
+** Experimental personal functions
+#+BEGIN_SRC elisp
+(defun print-point-position ()
+  "Print the position of point to the message console."
+  (interactive)
+  (message (number-to-string (point))))
+
+(map! :leader
+      (:prefix-map ("a" . "Additional")
+        (:desc "Point's position" "p" #'print-point-position)))
+;;        (:prefix-map ("a" . "test2")
+;;         (:prefix ("a" . "test")
+;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
+         ;; :desc "Search journal entry" "s" #'org-journal-search))))
+;;
 #+END_SRC
 
 * Auto Tangle
