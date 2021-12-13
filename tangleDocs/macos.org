@@ -111,6 +111,11 @@ brew install --cask firefox
 brew install --cask qutebrowser
 #+END_SRC
 
+** Intellij
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask intellij-idea-ce
+#+END_SRC
+
 * CLI tools
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install tmux

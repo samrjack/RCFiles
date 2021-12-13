@@ -11,6 +11,8 @@ brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --w
 
 brew install --cask google-chrome
 
+brew install --cask intellij-idea-ce
+
 brew install tmux
 brew install wget
 brew install sl
