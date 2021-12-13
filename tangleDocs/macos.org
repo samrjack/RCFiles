@@ -1,0 +1,177 @@
+#+TITLE: Config File
+#+AUTHOR: Samuel Jackson
+#+DESCRIPTION: 
+#+STARTUP: overview hidestars indent
+#+PROPERTY: header-args :results silent :tangle ""
+
+* Full system install script
+When I need to install on a whole system, I want to have a single script I can run to install basically everything and not need to worry about which scripts to run first or in what order.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#!/bin/bash
+# This file has been generated using org tangle. To modify, please see the org file.
+#+END_SRC
+
+TODO prompt to ask about installing doom and fonts. Those are both really long running processes that may not be immediately wanted.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+END_SRC
+
+First we install all the packages. Partly because this is the most instensive part and partly because this ensures that any following scripts have their dependencies installed.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+./programs_install.sh
+#+END_SRC
+
+Next we install all the config files. This way they're present when things are installed. If this came later, then some of the config files may be created ahead of time which causes problems with symbolically linking to my own configs.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+../configs_install.sh
+#+END_SRC
+
+Next we need make sure macos specific aliases are present.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+./make_aliases.sh
+#+END_SRC
+
+Next comes oh-my-zsh since a clean terminal is so important.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+../oh-my-zsh_install.sh
+#+END_SRC
+
+Next comes my NPM settings.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+../npm_install.sh
+#+END_SRC
+
+Following that comes the pass plugins so I can use my password manager.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+../pass-addons_install.sh
+#+END_SRC
+
+And finally we fix correct any MacOS specific issues.
+#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+./configure_settings.sh
+#+END_SRC
+
+* Aliases
+Since macos uses some aliases and environment values that are different from my standard sort of linux environments, this script sets up the local shell setup files so the system runs smoothly.
+#+BEGIN_SRC sh :tangle ../scripts/macos/make_aliases.sh
+#!/bin/bash
+
+echo "alias ls='ls -G -bF'"                                    >> ~/.shell_setup/aliases.local.sh
+echo ""                                                        >> ~/.shell_setup/aliases.local.sh
+echo "if type brew &>/dev/null; then"                          >> ~/.shell_setup/aliases.local.sh
+echo "    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH" >> ~/.shell_setup/aliases.local.sh
+echo ""                                                        >> ~/.shell_setup/aliases.local.sh
+echo "    autoload -Uz compinit"                               >> ~/.shell_setup/aliases.local.sh
+echo "    compinit"                                            >> ~/.shell_setup/aliases.local.sh
+echo "fi"                                                      >> ~/.shell_setup/aliases.local.sh
+#+END_SRC
+
+* Applications
+** Terminals
+*** Iterm
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install iterm2
+#+END_SRC
+
+*** Alacritty
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install alacritty
+#+END_SRC
+
+** Zoom
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install zoom
+#+END_SRC
+
+** VLC
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install vlc
+#+END_SRC
+
+** Emacs
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew tap d12frosted/emacs-plus
+brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
+#+END_SRC
+
+Once emacs is installed, it should be added to the applications section.
+#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+#+END_SRC
+
+** Web Browsers
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install google-chrome
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+brew install firefox
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+brew install qutebrowser
+#+END_SRC
+
+* CLI tools
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install tmux
+brew install wget
+brew install sl
+brew install ranger
+brew install pass
+brew install cmatrix
+brew install pandoc
+brew install asciidoc
+brew install htop
+brew install tldr
+brew install jq
+brew install tty-clock
+#+END_SRC
+** Shells
+*** Bash
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install bash
+brew install bash-completion
+#+END_SRC
+*** Zsh
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install zsh
+brew install zsh-autosuggestions
+brew install zsh-navigation-tools
+brew install zsh-lovers
+brew install zsh-syntax-highlighting
+brew install zsh-completions
+brew install zsh-you-should-use
+#+END_SRC
+
+* Utils
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install pandoc
+brew install asciidoc
+brew install texlive
+brew install 1clipboard
+brew install background-music
+#+END_SRC
+
+* The template
+Below are some of the commands I used when installing everything initially. This section is for reference for now and later can be entirely removed.
+#+BEGIN_SRC sh :tangle no
+# This file has been generated using org tangle. To modify, please see the org file.
+#!/bin/bash
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install tmux alacritty wget sl ranger pass google-chrome firefox qutebrowser cmatrix pandoc asciidoc texlive zoom htop tldr jq tty-clock bash-completion zsh zsh-autosuggestions zsh-navigation-tools zsh-lovers zsh-syntax-highlighting zsh-completions zsh-you-should-use vlc iterm2 1clipboard background-music emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
+
+ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+
+sudo xattr -rd com.apple.quarantine /Applications/qutebrowser.app
+ln -s ~/.config/qutebrowser/config.py ~/.qutebrowser/config.py
+
+sudo chmod -R 755 /usr/local/share
+#+END_SRC
+
+* Local Variables
+The below allows this file to tangle and produce the output RC file whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:
