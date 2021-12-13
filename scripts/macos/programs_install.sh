@@ -1,15 +1,15 @@
-brew install iterm2
+brew install --cask iterm2
 
-brew install alacritty
+brew install --cask alacritty
 
-brew install zoom
+brew install --cask zoom
 
-brew install vlc
+brew install --cask vlc
 
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
 
-brew install google-chrome
+brew install --cask google-chrome
 
 brew install tmux
 brew install wget
@@ -35,8 +35,8 @@ brew install zsh-syntax-highlighting
 brew install zsh-completions
 brew install zsh-you-should-use
 
-brew install pandoc
-brew install asciidoc
+# brew install pandoc
+# brew install asciidoc
 brew install texlive
-brew install 1clipboard
-brew install background-music
+brew install --cask 1clipboard
+brew install --cask background-music

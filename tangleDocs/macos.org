@@ -69,22 +69,22 @@ echo "fi"                                                      >> ~/.shell_setup
 ** Terminals
 *** Iterm
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install iterm2
+brew install --cask iterm2
 #+END_SRC
 
 *** Alacritty
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install alacritty
+brew install --cask alacritty
 #+END_SRC
 
 ** Zoom
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install zoom
+brew install --cask zoom
 #+END_SRC
 
 ** VLC
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install vlc
+brew install --cask vlc
 #+END_SRC
 
 ** Emacs
@@ -100,15 +100,15 @@ ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
 
 ** Web Browsers
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install google-chrome
+brew install --cask google-chrome
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
-brew install firefox
+brew install --cask firefox
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
-brew install qutebrowser
+brew install --cask qutebrowser
 #+END_SRC
 
 * CLI tools
@@ -145,11 +145,11 @@ brew install zsh-you-should-use
 
 * Utils
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install pandoc
-brew install asciidoc
+# brew install pandoc
+# brew install asciidoc
 brew install texlive
-brew install 1clipboard
-brew install background-music
+brew install --cask 1clipboard
+brew install --cask background-music
 #+END_SRC
 
 * The template
