@@ -47,8 +47,6 @@ brew install zsh-syntax-highlighting
 brew install zsh-completions
 brew install zsh-you-should-use
 
-# brew install pandoc
-# brew install asciidoc
 brew install texlive
 brew install --cask 1clipboard
 brew install --cask background-music
