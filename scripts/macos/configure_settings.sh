@@ -1,5 +1,8 @@
+#!/bin/bash
+
 ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
 
-brew install --cask firefox
+sudo xattr -rd com.apple.quarantine /Applications/qutebrowser.app
+ln -s ~/.config/qutebrowser/config.py ~/.qutebrowser/config.py
 
-brew install --cask qutebrowser
+sudo chmod -R 755 /usr/local/share

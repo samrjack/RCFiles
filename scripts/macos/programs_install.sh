@@ -1,3 +1,9 @@
+#!/bin/bash
+#TODO check if brew is already installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew tap buo/cask-upgrade
+brew install mas
+
 brew install --cask iterm2
 
 brew install --cask alacritty
@@ -10,6 +16,10 @@ brew tap d12frosted/emacs-plus
 brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
 
 brew install --cask google-chrome
+
+brew install --cask firefox
+
+brew install --cask qutebrowser
 
 brew install --cask intellij-idea-ce
 
@@ -42,3 +52,5 @@ brew install zsh-you-should-use
 brew install texlive
 brew install --cask 1clipboard
 brew install --cask background-music
+brew install --cask alfred
+brew install --cask go2shell
