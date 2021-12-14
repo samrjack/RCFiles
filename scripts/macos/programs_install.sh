@@ -15,15 +15,27 @@ brew install --cask vlc
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
 
+brew install sublime-text
+
+brew install brackets
+
+brew install atom
+
+brew install visual-studio-code
+
+brew install --cask intellij-idea-ce
+
 brew install --cask google-chrome
 
 brew install --cask firefox
 
+brew install --cask brave-browser
+
 brew install --cask qutebrowser
 
-brew install --cask intellij-idea-ce
-
 brew install --cask slack
+
+brew install --cask gimp
 
 brew install tmux
 
@@ -71,3 +83,9 @@ brew install --cask background-music
 brew install --cask alfred
 
 brew install --cask go2shell
+
+mas install 937984704 # Amphetamine
+
+mas install 497799835 # Xcode
+
+brew install go

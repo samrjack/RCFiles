@@ -64,7 +64,8 @@ This can play anything. The interface is ugly, but if it's a video file then VLC
 brew install --cask vlc
 #+END_SRC
 
-** Emacs
+** Text editors
+*** Emacs
 Emacs is a lisp programming environment that's better known for it's text editing capabilities.
 #+BEGIN_SRC sh :tangle no
 brew install --cask emacs
@@ -81,6 +82,36 @@ Once emacs is installed, it should be added to the applications section.
 ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
 #+END_SRC
 
+*** Sublime-text
+A popular text editor. I don't use it much but I can try it later.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install sublime-text
+#+END_SRC
+
+*** Brackets
+A popular text editor. I don't use it much but I can try it later.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install brackets
+#+END_SRC
+
+*** Atom
+A popular text editor. I don't use it much but I can try it later.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install atom
+#+END_SRC
+
+*** Visual studio code
+A popular text editor. I don't use it much but I can try it later.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install visual-studio-code
+#+END_SRC
+
+*** Intellij
+Intellij is the industry standard IDE for java and similar languages.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask intellij-idea-ce
+#+END_SRC
+
 ** Web Browsers
 *** Chrome
 Chrome is my usual standard choice for a web browser.
@@ -94,6 +125,11 @@ I've always found firefox to be slower than chrome but it is more open source so
 brew install --cask firefox
 #+END_SRC
 
+*** Brave
+Brave browser is a privacy focused browser with good adblocking.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask brave-browser
+#+END_SRC
 *** Qutebrowser
 Qutebrowser is a wonderful little web browser that incorporates vim style keybindings and modal tab management. It's missing plugins and a better adblocker but I still love it! There ARE plugins that privide similar functionality in chrome/firefox that I want to explore some more, but they've never been as fully functioning and as clean to use as my dear qutebrowser.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
@@ -106,16 +142,16 @@ sudo xattr -rd com.apple.quarantine /Applications/qutebrowser.app
 ln -s ~/.config/qutebrowser/config.py ~/.qutebrowser/config.py
 #+END_SRC
 
-** Intellij
-Intellij is the industry standard IDE for java and similar languages.
-#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install --cask intellij-idea-ce
-#+END_SRC
-
 ** Slack
 Slack is a very popular tool for business messaging and communication.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install --cask slack
+#+END_SRC
+
+** Gimp
+Best opensource image editor!
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask gimp
 #+END_SRC
 
 * CLI tools
@@ -229,6 +265,23 @@ brew install --cask alfred
 Allows you to open up a terminal in a particular folder from Finder.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install --cask go2shell
+#+END_SRC
+
+Amphetamine is a program that keeps the computer awake without interaction from the user. Super convenient when installing programs or just watching something.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+mas install 937984704 # Amphetamine
+#+END_SRC
+
+Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+mas install 497799835 # Xcode
+#+END_SRC
+
+** Programming languages
+*** Go
+A clean simple little language. See the [[https://go.dev][golang]] website.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install go
 #+END_SRC
 
 * Full system install script
