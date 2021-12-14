@@ -112,6 +112,12 @@ Intellij is the industry standard IDE for java and similar languages.
 brew install --cask intellij-idea-ce
 #+END_SRC
 
+*** Goland
+An intellij-like IDE (also made by jetbrains) for working with go.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask goland
+#+END_SRC
+
 ** Web Browsers
 *** Chrome
 Chrome is my usual standard choice for a web browser.
