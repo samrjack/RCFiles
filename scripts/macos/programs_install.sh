@@ -23,18 +23,33 @@ brew install --cask qutebrowser
 
 brew install --cask intellij-idea-ce
 
+brew install --cask slack
+
 brew install tmux
+
 brew install wget
+
 brew install sl
+
 brew install ranger
+
 brew install pass
+
 brew install cmatrix
+
 brew install pandoc
+
 brew install asciidoc
+
 brew install htop
+
 brew install tldr
+
 brew install jq
+
 brew install tty-clock
+
+brew install ffmpeg
 
 brew install bash
 brew install bash-completion
@@ -48,7 +63,11 @@ brew install zsh-completions
 brew install zsh-you-should-use
 
 brew install texlive
+
 brew install --cask 1clipboard
+
 brew install --cask background-music
+
 brew install --cask alfred
+
 brew install --cask go2shell
