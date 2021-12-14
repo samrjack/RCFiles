@@ -248,39 +248,47 @@ sudo chmod -R 755 /usr/local/share
 #+END_SRC
 
 * Utils
-The whole latex environment. It's a big package but there should be enough space on most machines that it won't matter.
+** Lastpass
+Lastpass is a tool for password managment.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install texlive
+brew install --cask lastpass
+brew install lastpass-cli
 #+END_SRC
 
+** 1clipboard
 1clipboard manages your clipboard history and access what you've coppied before.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install --cask 1clipboard
 #+END_SRC
 
+** Background-music
 Background music is a nice program for managing the audio streams on your computer.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install --cask background-music
 #+END_SRC
 
-Alphred is a more customizable spotlight.
-#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install --cask alfred
-#+END_SRC
-
-Allows you to open up a terminal in a particular folder from Finder.
-#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install --cask go2shell
-#+END_SRC
-
+** Amphetamine
 Amphetamine is a program that keeps the computer awake without interaction from the user. Super convenient when installing programs or just watching something.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 mas install 937984704 # Amphetamine
 #+END_SRC
 
-Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
+** Dropbox
+Dropbox is a file syncing service. I use it to manage my database of org files.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-mas install 497799835 # Xcode
+brew install --cask dropbox
+#+END_SRC
+
+** Alphred
+Alphred is a more customizable spotlight.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask alfred
+#+END_SRC
+
+** Go2shell
+Allows you to open up a terminal in a particular folder from Finder.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask go2shell
 #+END_SRC
 
 ** Programming languages
@@ -288,6 +296,23 @@ mas install 497799835 # Xcode
 A clean simple little language. See the [[https://go.dev][golang]] website.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install go
+#+END_SRC
+
+And the linter that goes along with it.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install golangci-lint
+#+END_SRC
+
+*** Xcode
+Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+mas install 497799835 # Xcode
+#+END_SRC
+
+*** LaTeX
+The whole latex environment. It's a big package but there should be enough space on most machines that it won't matter.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install texlive
 #+END_SRC
 
 * Full system install script

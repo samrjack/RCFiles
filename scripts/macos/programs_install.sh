@@ -76,18 +76,25 @@ brew install zsh-syntax-highlighting
 brew install zsh-completions
 brew install zsh-you-should-use
 
-brew install texlive
+brew install --cask lastpass
+brew install lastpass-cli
 
 brew install --cask 1clipboard
 
 brew install --cask background-music
 
+mas install 937984704 # Amphetamine
+
+brew install --cask dropbox
+
 brew install --cask alfred
 
 brew install --cask go2shell
 
-mas install 937984704 # Amphetamine
+brew install go
+
+brew install golangci-lint
 
 mas install 497799835 # Xcode
 
-brew install go
+brew install texlive
