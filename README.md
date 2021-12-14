@@ -26,6 +26,11 @@ Here's a list of current scripts and their uses. May not be entirely up to date 
 - `npm_install.sh`: Sets up NPM settings.
 - `pass-addons_install.sh`: Installs web browser addons for using the pass password manager.
 - `SDKman_install.sh`: Installs the SDKman program which helps install sdks such as Java, Kotlin, etc.
+- `macos`: A set of scripts specifically for installing my setup and standard programs on a mac computer.
+  - `full_system_install.sh`: Should install everying. For use on a brand new system.
+  - `programs_install.sh`: A list of install commands for the programs I regularly install on a new machine.
+  - `configure_settings.sh`: A set of system manipulations needed on MacOS to get things to work.
+  - `make_aliases.sh`: Creates a starter local aliases file to remove some settings from my standard linux alias file.
 
 ## Org files, tangle, and literate programming configuration
 Literate programming is an interesting idea that allows you to use normal text documents to create configuration files. By doing this, you are able to write about decisions that were made or useful documentation without it filling up the entire final config file. Why not use comments? Because often the formatting and pleasantness of text document helps to identify the important information and the stuff that's just there in case it may be useful later. It also makes things like folding sections or parts of sections far easier as well as making the ordering of sections are parts of sections more clear. Often in comments it can be hard to tell where in a nested section you're at since comments don't easily show structure, but org files sure do!
