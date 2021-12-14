@@ -248,6 +248,13 @@ sudo chmod -R 755 /usr/local/share
 #+END_SRC
 
 * Utils
+** Docker
+Docker is a tool for creating VMs to run software. Needed at many software companies.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install docker
+brew install docker-compose
+#+END_SRC
+
 ** Lastpass
 Lastpass is a tool for password managment.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
