@@ -13,6 +13,12 @@ go install golang.org/x/tools/cmd/goimports@latest
 # Type-Safe Renaming of Go identifiers
 go install golang.org/x/tools/cmd/gorename@latest
 
+# LSP language server
+go install golang.org/x/tools/gopls@latest
+
+# Go linter
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0
+
 # Asks questions about your Gocode
 go install golang.org/x/tools/cmd/guru@latest
 
