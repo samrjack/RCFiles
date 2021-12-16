@@ -27,3 +27,6 @@ go install github.com/cweill/gotests/gotests@latest
 
 # Add `json` or `bson` to structs easily
 go install github.com/fatih/gomodifytags@latest
+
+# Find symbol information in Go source
+go install github.com/rogpeppe/godef@latest
