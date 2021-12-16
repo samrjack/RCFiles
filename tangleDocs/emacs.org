@@ -1096,6 +1096,8 @@ Org chef is a package for saving cooking recipes from sites like [[allrecipes.co
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
 #+END_SRC
 
+*** Go mode
+Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
 ** Experimental personal functions
 #+BEGIN_SRC elisp
 (defun print-point-position ()

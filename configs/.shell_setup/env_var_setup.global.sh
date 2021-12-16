@@ -15,7 +15,7 @@ export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
 
 # Golang
 export GOPATH="$(go env GOPATH)"
-export path="${PATH}:${GOPATH}/bin"
+export PATH="${PATH}:${GOPATH}/bin"
 
 guixSSL="$HOME/.guix-profile/etc/ssl/certs${SSL_CERT_DIR:+:}$SSL_CERT_DIR"
 guixGitSSL="$HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt${GIT_SSL_CAINFO:+:}$GIT_SSL_CAINFO"
