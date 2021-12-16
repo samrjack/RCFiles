@@ -39,6 +39,8 @@ brew install --cask slack
 
 brew install --cask gimp
 
+brew install awscli
+
 brew install tmux
 
 brew install wget

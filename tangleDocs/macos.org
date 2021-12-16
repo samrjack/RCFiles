@@ -161,6 +161,12 @@ brew install --cask gimp
 #+END_SRC
 
 * CLI tools
+** awscli
+A CLI tool for accessing and using AWS resources.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install awscli
+#+END_SRC
+
 ** tmux
 Tmux is a terminal multiplexer and session daemon. It works really well for having your own set of desktops in the terminal itself.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
