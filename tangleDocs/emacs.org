@@ -289,7 +289,7 @@ A package for accessing and organizing your steam library from within emacs
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       ;;(format +onsave)  ; automated prettiness
+       (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
@@ -1098,6 +1098,7 @@ Org chef is a package for saving cooking recipes from sites like [[allrecipes.co
 
 *** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
+
 ** Experimental personal functions
 #+BEGIN_SRC elisp
 (defun print-point-position ()
