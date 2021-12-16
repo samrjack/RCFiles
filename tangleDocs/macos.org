@@ -325,6 +325,11 @@ A clean simple little language. See the [[https://go.dev][golang]] website.
 brew install go
 #+END_SRC
 
+Go's language server for editors like emacs or vs-code.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install gopls
+#+END_SRC
+
 And the linter that goes along with it.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install golangci-lint

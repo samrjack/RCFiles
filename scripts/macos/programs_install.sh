@@ -98,6 +98,8 @@ brew install --cask go2shell
 
 brew install go
 
+brew install gopls
+
 brew install golangci-lint
 
 mas install 497799835 # Xcode
