@@ -262,6 +262,9 @@ if no org extension is given then it will be automatically appended."
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
 
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
 (after! org
 
 (setq org-pomodoro-length 25

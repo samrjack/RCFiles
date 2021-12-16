@@ -3,6 +3,7 @@
 #+DESCRIPTION: This file defines all my emacs configurations for my doom emacs setup.
 #+STARTUP: showall hidestars overview
 #+PROPERTY: header-args :results silent :tangle "../configs/.doom.d/config.el"
+
 * Packages
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 ;; -*- no-byte-compile: t; -*-
@@ -868,6 +869,11 @@ if no org extension is given then it will be automatically appended."
 (setq org-roam-v2-ack t)
 #+END_SRC
 
+**** Timers and clock
+#+BEGIN_SRC elisp
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+#+END_SRC
 **** Org Agenda
 ***** Limiting files
 To set specific files as being "agenda" files, you can use =org-agenda-files= however I've found I like putting schedule markers in various files around my org setup.
