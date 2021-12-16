@@ -161,70 +161,84 @@ brew install --cask gimp
 #+END_SRC
 
 * CLI tools
+** tmux
 Tmux is a terminal multiplexer and session daemon. It works really well for having your own set of desktops in the terminal itself.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install tmux
 #+END_SRC
 
+** wget
 Wget is a web downloader similar to curl. It gets used instead of curl in a couple of places so it's good to have installed.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install wget
 #+END_SRC
 
+** sl
 Sl is the steam locomotive progrom. Who doesn't like trains?
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install sl
 #+END_SRC
 
+** ranger
 Ranger is a terminal file manager. Nice to use when you need to manipulate files.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install ranger
 #+END_SRC
 
+** pass
 Pass is an opensource package manager.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install pass
 #+END_SRC
 
+** cmatrix
 Cmatrix allows you to enter the (c)Matrix!
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install cmatrix
 #+END_SRC
 
+** pandoc
 Pandoc is a converter that transpiles several different kinds of docs such as markdown into latex or Org into latex or wikix into latex... I mostly use it for turning org files into pdfs or wiki pages.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install pandoc
 #+END_SRC
 
-Converts asaciidoc files into DocBook or HTML.
+** asciidoc
+Converts asciidoc files into DocBook or HTML.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install asciidoc
 #+END_SRC
 
+** htop
 Htop is a terminal based process viewer and manager.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install htop
 #+END_SRC
 
+** tldr
 Tldr is a program that provides example usage for several common cli tools out there.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install tldr
 #+END_SRC
 
+** jq
 Jq is a cli tool for JSON reading and manipulation.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install jq
 #+END_SRC
 
+** tty-clock
 Tty-clock is a... clock, in the... tty.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install tty-clock
 #+END_SRC
 
+** ffmpeg
 Ffmpeg is a super powerful cli video and photo modifier.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install ffmpeg
 #+END_SRC
+
 ** Shells
 *** Bash
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
