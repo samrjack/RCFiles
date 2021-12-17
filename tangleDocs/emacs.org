@@ -566,15 +566,40 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
 ;; (set-window-buffer nil (current-buffer))
 #+END_SRC
 *** Clipboard
+Prevents system clipboard from being accidentially overwritten. Must now write to register "+ to write to system clipboard.
 #+BEGIN_SRC elisp
-;; Prevents system clipboard from being accidentially overwritten.
-;; Must now write to register "+ to write to system clipboard.
-
 ;; Some paste related settings.
-;; TODO I want to find a way to copy and paste to clipboard without
-;; having to go through "+ directly.
 (setq save-interprogram-paste-before-kill t
       select-enable-clipboard nil)
+#+END_SRC
+
+In order to provide copy and paste functionality directly from the keyboard, I need to capture the inputs and make functions that force the register that corresponds with the clipboard to be used (the + register).
+
+First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. Inorder to get the ascii number of a character, we simply need to put a '?' before it.
+#+BEGIN_SRC elisp
+(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
+  "Saves the characters in motion into they system clipboard through the '+' register"
+  :move-point nil
+  :repeat nil
+  (interactive "<R><x><y>")
+  (evil-yank beg end type ?+ handler))
+#+END_SRC
+
+And here is the paste function.
+#+BEGIN_SRC elisp
+(evil-define-command evil-paste-from-clipboard
+  (count &optional _ handler)
+  "Pastes the latest yanked text behind point.
+The return value is the yanked text."
+  :suppress-operator t
+  (interactive "*P<x>")
+  (evil-paste-before count ?+ handler))
+#+END_SRC
+
+Finally we need to create universal keybindings to these functions so they can be called from anywhere.
+#+BEGIN_SRC elisp
+(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
+      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
 #+END_SRC
 
 *** Scrolling

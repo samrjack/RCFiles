@@ -64,14 +64,27 @@
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 
-;; Prevents system clipboard from being accidentially overwritten.
-;; Must now write to register "+ to write to system clipboard.
-
 ;; Some paste related settings.
-;; TODO I want to find a way to copy and paste to clipboard without
-;; having to go through "+ directly.
 (setq save-interprogram-paste-before-kill t
       select-enable-clipboard nil)
+
+(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
+  "Saves the characters in motion into they system clipboard through the '+' register"
+  :move-point nil
+  :repeat nil
+  (interactive "<R><x><y>")
+  (evil-yank beg end type ?+ handler))
+
+(evil-define-command evil-paste-from-clipboard
+  (count &optional _ handler)
+  "Pastes the latest yanked text behind point.
+The return value is the yanked text."
+  :suppress-operator t
+  (interactive "*P<x>")
+  (evil-paste-before count ?+ handler))
+
+(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
+      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
 
 ;; leave some space at the bottom while scrolling down so the
 ;; cursor isn't hugging the bottom edge.
