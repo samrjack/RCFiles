@@ -25,8 +25,12 @@ alias tmux='tmux -2'
 alias tmuxrc="vim ~/.tmux.conf"
 alias vimrc="vim ~/.vimrc"
 
-alias emacs="emacs -nw"
-alias emacsclient="emacsclient -t"
+alias tmacs="emacs -nw"
+alias temacs="tmacs"
+alias emacsc="emacsclient -c -n"
+alias ec="emacsc"
+alias temacsc="emacsc -t"
+alias tec="ec -t"
 
 alias untar="tar -xvf"
 
@@ -54,9 +58,9 @@ function magit () {
     magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
     if [ $? -eq 0 ]; then
         if ! emacsclient -e 0 >&/dev/null; then
-            emacs -nw --eval=${magitExecute}
+            emacs -n --eval=${magitExecute}
         else
-            emacsclient -nw -e ${magitExecute}
+            emacsclient -c -n -e ${magitExecute}
         fi
     fi
 }
