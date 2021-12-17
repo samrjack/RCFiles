@@ -584,6 +584,17 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
 (setq scroll-margin 2)
 #+END_SRC
 
+*** Scratch buffer
+The scratch buffer is always present as an area to experiement or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundemental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elislp code so I can set things on a whim while working in other non-elisp buffers.
+#+BEGIN_SRC elisp
+(setq initial-major-mode 'emacs-lisp-mode)
+
+(setq initial-scratch-message "\
+# Welcome to the scratch buffer.
+
+")
+#+END_SRC
+
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
 #+BEGIN_SRC elisp

@@ -77,6 +77,13 @@
 ;; cursor isn't hugging the bottom edge.
 (setq scroll-margin 2)
 
+(setq initial-major-mode 'emacs-lisp-mode)
+
+(setq initial-scratch-message "\
+# Welcome to the scratch buffer.
+
+")
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
