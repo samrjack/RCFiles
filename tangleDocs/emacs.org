@@ -729,8 +729,15 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       "t S" #'toggle-and-activate-evil-snipe-mode)
 #+END_SRC
 *** VLF (Very Large Files)
-VLF if a package for lazy loading enormous files that would normally take forever to load. However, I've ran into issues with using it and therefore I'm just leaving it off for the time being.
-#+BEGIN_SRC elisp :tangle no
+VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
+  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
+#+END_SRC
+
+Then setup the package later.
+#+BEGIN_SRC elisp
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 #+END_SRC
