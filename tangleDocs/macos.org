@@ -347,6 +347,13 @@ The whole latex environment. It's a big package but there should be enough space
 brew install texlive
 #+END_SRC
 
+** VPN
+** TunnelBlick
+Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask tunnelblick
+#+END_SRC
+
 * Full system install script
 When I need to install on a whole system, I want to have a single script I can run to install basically everything and not need to worry about which scripts to run first or in what order.
 #+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh

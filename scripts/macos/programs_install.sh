@@ -105,3 +105,5 @@ brew install golangci-lint
 mas install 497799835 # Xcode
 
 brew install texlive
+
+brew install --cask tunnelblick
