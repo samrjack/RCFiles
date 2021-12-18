@@ -267,12 +267,29 @@ There's a weird issue that causes zsh to show a warning when starting up. This f
 sudo chmod -R 755 /usr/local/share
 #+END_SRC
 
+** Cmake
+Used for vterm in emacs.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install cmake
+#+END_SRC
+
+*** Ripgrep
+A fast grep tool for finding files. Used in emacs.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install ripgrep
+#+END_SRC
+
 * Utils
+** Postgresql
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install postgresql
+brew install golang-migrate
+#+END_SRC
+
 ** Docker
 Docker is a tool for creating VMs to run software. Needed at many software companies.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install docker
-brew install docker-compose
+brew install --cask docker
 #+END_SRC
 
 ** Lastpass

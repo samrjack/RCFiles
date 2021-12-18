@@ -78,8 +78,14 @@ brew install zsh-syntax-highlighting
 brew install zsh-completions
 brew install zsh-you-should-use
 
-brew install docker
-brew install docker-compose
+brew install cmake
+
+brew install ripgrep
+
+brew install postgresql
+brew install golang-migrate
+
+brew install --cask docker
 
 brew install --cask lastpass
 brew install lastpass-cli
