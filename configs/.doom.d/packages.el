@@ -5,6 +5,33 @@
 (package! dracula-theme)
 (package! theme-magic)
 
+;; directory management
+(package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
+
+(package! discover-my-major)
+
+;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
+  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
+
+(package! info-colors)
+
+(package! ess-view)
+
+(package! elcord)
+
+(package! spray)
+
+(package! keycast)
+
+(package! gif-screencast)
+
+(package! command-log-mode)
+
+(package! guix)
+
 ;; Org mode related stuff
 (package! org-reverse-datetree)
 ;(package! ox-gfm) ; Causing problems with pandoc at the moment.
@@ -20,39 +47,22 @@
 (package! clj-refactor)
 (package! cider)
 
-(package! systemd)
-
-(package! vimrc-mode)
-
-(package! scad-mode)
-
-(package! ess-view)
-
-(package! graphviz-dot-mode)
-
 ;; e-reader
 (package! calibredb)
 (package! nov)
+
+(package! scad-mode)
+
+(package! vimrc-mode)
+
+(package! graphviz-dot-mode)
+
+(package! systemd)
 
 ;; Fun stuff
 (package! xkcd)
 
 (package! selectric-mode)
-
-;; Presentation/showing emacs
-(package! command-log-mode)
-(package! gif-screencast)
-(package! keycast)
-
-(package! info-colors)
-
-(package! discover-my-major)
-
-(package! spray)
-
-(package! elcord)
-
-(package! guix)
 
 (package! steam)
 
@@ -65,15 +75,3 @@
 (package! sudoku)
 
 (package! threes)
-
-;; Used to view VERY large files faster
-(package! vlf :disable t) ; disabled on startup to not impact load time.
-
-;; directory management
-(package! dired-sidebar)
-(package! dired+)
-(package! dired-subtree)
-
-;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
-(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
-  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)

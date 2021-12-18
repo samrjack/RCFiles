@@ -1,21 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -43,9 +28,6 @@
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -179,6 +161,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 ;; (use-package! vlf-setup
 ;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+
 (use-package! keycast
   :commands keycast-mode
   :config
@@ -212,9 +197,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
                                "/tmp/doom-color-theme")))
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
-
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
 
 (setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
 
