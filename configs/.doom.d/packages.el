@@ -74,3 +74,7 @@
 (package! sudoku)
 
 (package! threes)
+
+(package! pacmacs)
+
+(package! fireplace)

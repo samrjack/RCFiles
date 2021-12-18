@@ -1170,6 +1170,16 @@ A package for accessing and organizing your steam library from within emacs
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (package! threes)
 #+END_SRC
+**** Pacmacs
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! pacmacs)
+#+END_SRC
+
+*** Fireplace
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! fireplace)
+#+END_SRC
+
 ** Experimental personal functions
 #+BEGIN_SRC elisp
 (defun print-point-position ()
