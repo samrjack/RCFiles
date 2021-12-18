@@ -606,7 +606,7 @@ The scratch buffer is always present as an area to experiement or take a quick n
 (setq initial-major-mode 'emacs-lisp-mode)
 
 (setq initial-scratch-message "\
-# Welcome to the scratch buffer.
+;; Welcome to the scratch buffer.
 
 ")
 #+END_SRC

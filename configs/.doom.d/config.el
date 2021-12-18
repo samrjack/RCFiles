@@ -93,7 +93,7 @@ The return value is the yanked text."
 (setq initial-major-mode 'emacs-lisp-mode)
 
 (setq initial-scratch-message "\
-# Welcome to the scratch buffer.
+;; Welcome to the scratch buffer.
 
 ")
 
