@@ -97,6 +97,24 @@ The return value is the yanked text."
 
 ")
 
+(setq tab-bar-show 1)
+(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
+(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
+(map! :n "M->" #'tab-next
+      :n "M-<" #'tab-previous)
+
+(defun dired-turn-off-file-info ()
+  "Turns off the file info in dired mode"
+  (interactive)
+  (dired-hide-details-mode t))
+(add-hook! 'dired-mode-hook #'dired-turn-off-file-info)
+
+(map! :map dired-mode-map
+      :leader
+      :desc "toggle dired file info"
+      :n "t d" #'dired-hide-details-mode)
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
