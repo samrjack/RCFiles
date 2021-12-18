@@ -271,7 +271,7 @@ if IsVundleInstalled()
             if &l:filetype ==# 'fugitiveblame'
                 close
             else
-                Gblame
+                Git blame
             endif
         endfunction
 
