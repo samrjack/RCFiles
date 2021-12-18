@@ -158,8 +158,8 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'toggle-and-activate-evil-snipe-mode)
 
-;; (use-package! vlf-setup
-;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
