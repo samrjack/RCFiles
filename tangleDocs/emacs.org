@@ -768,8 +768,8 @@ VLF if a package for lazy loading enormous files that would normally take foreve
 
 Then setup the package later.
 #+BEGIN_SRC elisp
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; (use-package! vlf-setup
+;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 #+END_SRC
 
 *** Presentations
