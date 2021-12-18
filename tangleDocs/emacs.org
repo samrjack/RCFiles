@@ -4,216 +4,6 @@
 #+STARTUP: showall hidestars overview
 #+PROPERTY: header-args :results silent :tangle "../configs/.doom.d/config.el"
 
-* Packages
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; -*- no-byte-compile: t; -*-
-;;; $DOOMDIR/packages.el
-#+END_SRC
-** Documentation
-#+BEGIN_SRC elisp :tangle no
-;; To install a package with Doom you must declare them here and run 'doom sync'
-;; on the command line, then restart Emacs for the changes to take effect -- or
-;; use 'M-x doom/reload'.
-
-
-;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
-;(package! some-package)
-
-;; To install a package directly from a remote git repo, you must specify a
-;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
-;; https://github.com/raxod502/straight.el#the-recipe-format
-;(package! another-package
-;  :recipe (:host github :repo "username/repo"))
-
-;; If the package you are trying to install does not contain a PACKAGENAME.el
-;; file, or is located in a subdirectory of the repo, you'll need to specify
-;; `:files' in the `:recipe':
-;(package! this-package
-;  :recipe (:host github :repo "username/repo"
-;           :files ("some-file.el" "src/lisp/*.el")))
-
-;; If you'd like to disable a package included with Doom, you can do so here
-;; with the `:disable' property:
-;(package! builtin-package :disable t)
-
-;; You can override the recipe of a built in package without having to specify
-;; all the properties for `:recipe'. These will inherit the rest of its recipe
-;; from Doom or MELPA/ELPA/Emacsmirror:
-;(package! builtin-package :recipe (:nonrecursive t))
-;(package! builtin-package-2 :recipe (:repo "myfork/package"))
-
-;; Specify a `:branch' to install a package from a particular branch or tag.
-;; This is required for some packages whose default branch isn't 'master' (which
-;; our package manager can't deal with; see raxod502/straight.el#279)
-;(package! builtin-package :recipe (:branch "develop"))
-
-;; Use `:pin' to specify a particular commit to install.
-;(package! builtin-package :pin "1a2b3c4d5e")
-
-
-;; Doom's packages are pinned to a specific commit and updated from release to
-;; release. The `unpin!' macro allows you to unpin single packages...
-;(unpin! pinned-package)
-;; ...or multiple packages
-;(unpin! pinned-package another-pinned-package)
-;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
-;(unpin! t)
-
-#+END_SRC
-** Directory navigation
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; directory management
-(package! dired-sidebar)
-(package! dired+)
-(package! dired-subtree)
-
-#+END_SRC
-** Themes
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Themes
-(package! dracula-theme)
-(package! theme-magic)
-
-#+END_SRC
-** File type specific modes
-*** Org mode
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Org mode related stuff
-(package! org-reverse-datetree)
-;(package! ox-gfm) ; Causing problems with pandoc at the moment.
-(package! org-ref)
-(package! org-chef)
-(package! org-super-agenda)
-(package! org-fragtog)
-(package! org-pretty-tags)
-#+END_SRC
-
-*** Clojure
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Clojure related packages
-(package! clojure-mode)
-(package! clojure-mode-extra-font-locking)
-(package! clj-refactor)
-(package! cider)
-#+END_SRC
-
-*** Systemd
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! systemd)
-#+END_SRC
-
-*** Vimrc
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! vimrc-mode)
-#+END_SRC
-
-*** Open CAD
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! scad-mode)
-#+END_SRC
-
-*** R dataframes
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! ess-view)
-#+END_SRC
-
-*** Graphviz
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! graphviz-dot-mode)
-#+END_SRC
-
-*** E-readers
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; e-reader
-(package! calibredb)
-(package! nov)
-#+END_SRC
-
-** Fun
-*** XKCD
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Fun stuff
-(package! xkcd)
-#+END_SRC
-
-*** Typewriter
-Makes emacs sound like a typewriter.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! selectric-mode)
-#+END_SRC
-
-** Presentation tools
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Presentation/showing emacs
-(package! command-log-mode)
-(package! gif-screencast)
-(package! keycast)
-#+END_SRC
-
-** Useful Tools
-*** Colored info
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! info-colors)
-#+END_SRC
-
-*** Discovery tools
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! discover-my-major)
-#+END_SRC
-
-*** Speed reading
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! spray)
-#+END_SRC
-
-*** Discord integration
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! elcord)
-#+END_SRC
-
-*** Guix
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! guix)
-#+END_SRC
-
-** Games
-*** steam
-A package for accessing and organizing your steam library from within emacs
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! steam)
-#+END_SRC
-
-*** 2048-game
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! 2048-game)
-#+END_SRC
-
-*** mines
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! mines)
-#+END_SRC
-
-*** minesweeper
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! minesweeper)
-#+END_SRC
-
-*** sudoku
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! sudoku)
-#+END_SRC
-
-*** threes
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-(package! threes)
-#+END_SRC
-
-** Broken package fixes
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Used to view VERY large files faster
-(package! vlf :disable t) ; disabled on startup to not impact load time.
-#+END_SRC
-
 * Initialization
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 ;;; init.el -*- lexical-binding: t; -*-
@@ -468,6 +258,207 @@ A package for accessing and organizing your steam library from within emacs
 )
 #+END_SRC
 
+* Packages
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+#+END_SRC
+** Documentation
+#+BEGIN_SRC elisp :tangle no
+;; To install a package with Doom you must declare them here and run 'doom sync'
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
+
+
+;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+;(package! some-package)
+
+;; To install a package directly from a remote git repo, you must specify a
+;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
+;; https://github.com/raxod502/straight.el#the-recipe-format
+;(package! another-package
+;  :recipe (:host github :repo "username/repo"))
+
+;; If the package you are trying to install does not contain a PACKAGENAME.el
+;; file, or is located in a subdirectory of the repo, you'll need to specify
+;; `:files' in the `:recipe':
+;(package! this-package
+;  :recipe (:host github :repo "username/repo"
+;           :files ("some-file.el" "src/lisp/*.el")))
+
+;; If you'd like to disable a package included with Doom, you can do so here
+;; with the `:disable' property:
+;(package! builtin-package :disable t)
+
+;; You can override the recipe of a built in package without having to specify
+;; all the properties for `:recipe'. These will inherit the rest of its recipe
+;; from Doom or MELPA/ELPA/Emacsmirror:
+;(package! builtin-package :recipe (:nonrecursive t))
+;(package! builtin-package-2 :recipe (:repo "myfork/package"))
+
+;; Specify a `:branch' to install a package from a particular branch or tag.
+;; This is required for some packages whose default branch isn't 'master' (which
+;; our package manager can't deal with; see raxod502/straight.el#279)
+;(package! builtin-package :recipe (:branch "develop"))
+
+;; Use `:pin' to specify a particular commit to install.
+;(package! builtin-package :pin "1a2b3c4d5e")
+
+
+;; Doom's packages are pinned to a specific commit and updated from release to
+;; release. The `unpin!' macro allows you to unpin single packages...
+;(unpin! pinned-package)
+;; ...or multiple packages
+;(unpin! pinned-package another-pinned-package)
+;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
+;(unpin! t)
+
+#+END_SRC
+** Themes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Themes
+(package! dracula-theme)
+(package! theme-magic)
+
+#+END_SRC
+** File type specific modes
+*** Org mode
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Org mode related stuff
+(package! org-reverse-datetree)
+;(package! ox-gfm) ; Causing problems with pandoc at the moment.
+(package! org-ref)
+(package! org-chef)
+(package! org-super-agenda)
+(package! org-fragtog)
+(package! org-pretty-tags)
+#+END_SRC
+
+*** Clojure
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Clojure related packages
+(package! clojure-mode)
+(package! clojure-mode-extra-font-locking)
+(package! clj-refactor)
+(package! cider)
+#+END_SRC
+
+*** Systemd
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! systemd)
+#+END_SRC
+
+*** Vimrc
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! vimrc-mode)
+#+END_SRC
+
+*** Open CAD
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! scad-mode)
+#+END_SRC
+
+*** R dataframes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! ess-view)
+#+END_SRC
+
+*** Graphviz
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! graphviz-dot-mode)
+#+END_SRC
+
+*** E-readers
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; e-reader
+(package! calibredb)
+(package! nov)
+#+END_SRC
+
+** Fun
+*** XKCD
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Fun stuff
+(package! xkcd)
+#+END_SRC
+
+*** Typewriter
+Makes emacs sound like a typewriter.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! selectric-mode)
+#+END_SRC
+
+** Presentation tools
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Presentation/showing emacs
+(package! command-log-mode)
+(package! gif-screencast)
+(package! keycast)
+#+END_SRC
+
+** Useful Tools
+*** Colored info
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! info-colors)
+#+END_SRC
+
+*** Discovery tools
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! discover-my-major)
+#+END_SRC
+
+*** Speed reading
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! spray)
+#+END_SRC
+
+*** Discord integration
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! elcord)
+#+END_SRC
+
+*** Guix
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! guix)
+#+END_SRC
+
+** Games
+*** steam
+A package for accessing and organizing your steam library from within emacs
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! steam)
+#+END_SRC
+
+*** 2048-game
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! 2048-game)
+#+END_SRC
+
+*** mines
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! mines)
+#+END_SRC
+
+*** minesweeper
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! minesweeper)
+#+END_SRC
+
+*** sudoku
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! sudoku)
+#+END_SRC
+
+*** threes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! threes)
+#+END_SRC
+
+** Broken package fixes
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+;; Used to view VERY large files faster
+(package! vlf :disable t) ; disabled on startup to not impact load time.
+#+END_SRC
 * Configuration
 #+BEGIN_SRC elisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-

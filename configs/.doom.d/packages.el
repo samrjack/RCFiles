@@ -1,11 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; directory management
-(package! dired-sidebar)
-(package! dired+)
-(package! dired-subtree)
-
 ;; Themes
 (package! dracula-theme)
 (package! theme-magic)
@@ -73,6 +68,11 @@
 
 ;; Used to view VERY large files faster
 (package! vlf :disable t) ; disabled on startup to not impact load time.
+
+;; directory management
+(package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
 
 ;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
 (package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
