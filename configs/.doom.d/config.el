@@ -161,6 +161,10 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+(add-hook 'info-selection-hook 'info-colors-fontify-node)
+
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 
@@ -361,10 +365,6 @@ if no org extension is given then it will be automatically appended."
 
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
-
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-(add-hook 'info-selection-hook 'info-colors-fontify-node)
 
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)

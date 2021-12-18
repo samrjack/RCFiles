@@ -638,6 +638,12 @@ Then setup the package later.
 (package! info-colors)
 #+END_SRC
 
+#+BEGIN_SRC elisp
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+(add-hook 'info-selection-hook 'info-colors-fontify-node)
+#+END_SRC
+
 *** R data frames
 This allows emacs to handle R style dataframes. This makes some data handling easier in various files.
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
@@ -1037,13 +1043,6 @@ Org chef is a package for saving cooking recipes from sites like [[allrecipes.co
 #+BEGIN_SRC elisp
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
-#+END_SRC
-
-*** Info colors
-#+BEGIN_SRC elisp
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-(add-hook 'info-selection-hook 'info-colors-fontify-node)
 #+END_SRC
 
 *** Systemd
