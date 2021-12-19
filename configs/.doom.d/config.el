@@ -425,3 +425,5 @@ if no org extension is given then it will be automatically appended."
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 ;;
+
+(remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
