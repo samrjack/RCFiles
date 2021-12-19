@@ -106,7 +106,12 @@ Position the cursor at it's beginning, according to the current mode."
   (forward-line -1)
   (indent-according-to-mode))
 
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "C-n" #'+treemacs/toggle)
+(map! :n "M-n" #'dired-sidebar-toggle-sidebar)
+
+(map! :map 'treemacs-mode-map
+      :ng "M-n" #'+treemacs/toggle
+      :ng "C-n" #'+treemacs/toggle)
 
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))

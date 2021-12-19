@@ -10,6 +10,8 @@
 (package! dired+)
 (package! dired-subtree)
 
+(package! dired-sidebar)
+
 (package! discover-my-major)
 
 ;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]

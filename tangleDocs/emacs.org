@@ -69,15 +69,19 @@
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides     ; highlighted indent columns
-       ligatures         ; ligatures and symbols to make your code pretty again
+       (ligatures        ; ligatures and symbols to make your code pretty again
+        +extra
+        +hasklig)
        minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
-       (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       ;;tabs              ; a tab bar for Emacs
-       treemacs          ; a project drawer, like neotree but cooler
+       (popup            ; tame sudden yet inevitable temporary windows
+        +defaults)
+       ;; tabs              ; a tab bar for Emacs
+       (treemacs         ; a project drawer, like neotree but cooler
+        +lsp)
        unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -523,8 +527,28 @@ Position the cursor at it's beginning, according to the current mode."
 
 ** Managing files
 *** Sidebar file explorer
-#+BEGIN_SRC elisp
+
+Use treemacs for now since it looks so nice
+#+BEGIN_SRC elisp :tangle no
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "M-n" #'+treemacs/toggle)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(map! :n "C-n" #'+treemacs/toggle)
+(map! :n "M-n" #'dired-sidebar-toggle-sidebar)
+#+END_SRC
+
+Make it so that treemacs can use my keyboard shortcuts.
+#+BEGIN_SRC elisp
+(map! :map 'treemacs-mode-map
+      :ng "M-n" #'+treemacs/toggle
+      :ng "C-n" #'+treemacs/toggle)
+#+END_SRC
+
+Import a simpler sidebar package for when it's needed.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! dired-sidebar)
 #+END_SRC
 
 *** Projectile
