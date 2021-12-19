@@ -161,6 +161,8 @@
     # start a terminal
     bindsym $mod+Return exec alacritty
 
+    # start emacs
+    bindsym $mod+t exec emacs
     # start a filebrowser
     bindsym $mod+Shift+f exec nautilus
 
