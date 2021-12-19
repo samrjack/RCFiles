@@ -47,6 +47,8 @@ brew install wget
 
 brew install sl
 
+brew install fd
+
 brew install ranger
 
 brew install pass

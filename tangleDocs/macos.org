@@ -185,6 +185,12 @@ Sl is the steam locomotive progrom. Who doesn't like trains?
 brew install sl
 #+END_SRC
 
+** fd
+Fd is a find-like utility.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install fd
+#+END_SRC
+
 ** ranger
 Ranger is a terminal file manager. Nice to use when you need to manipulate files.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
