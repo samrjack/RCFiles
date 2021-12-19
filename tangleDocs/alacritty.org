@@ -1066,7 +1066,6 @@ These below are unused.
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 #+END_SRC
 
-
 * Debug
 #+BEGIN_SRC yaml :tangle no
 debug:
