@@ -207,8 +207,22 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
 (display-time-mode 1)
-                                        ; if a battery source is detected, then show the batter level
-(unless (string-match-p "^Power N/A" (battery)) (display-battery-mode 1))
+
+(use-package! battery :config
+
+    (defun battery-p ()
+        "returns t if a battery is present for the system and nil if one is not."
+        (and battery-status-function
+             battery-echo-area-format
+             (string-match-p "^Power N/A"
+                             (battery-format
+                                     battery-echo-area-format
+                                     (funcall battery-status-function)))
+             t))
+
+    (unless (battery-p) (display-battery-mode 1))
+
+)
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,

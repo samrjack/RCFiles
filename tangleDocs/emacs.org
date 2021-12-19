@@ -736,13 +736,46 @@ This allows emacs to handle R style dataframes. This makes some data handling ea
 #+END_SRC
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
+**** Date and time
 #+BEGIN_SRC elisp
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
 (display-time-mode 1)
-                                        ; if a battery source is detected, then show the batter level
-(unless (string-match-p "^Power N/A" (battery)) (display-battery-mode 1))
+#+END_SRC
 
+**** Battery
+For the battery, I don't want it to appear in the the mode line if there is no battery present.
+
+Since the following functions require the battery package, I need to wrap it in ~use-package~ to make sure all the definitions are loaded.
+#+BEGIN_SRC elisp
+(use-package! battery :config
+#+END_SRC
+
+Sadly, there are no default functions for finding if a battery is present so I'll start by writing my own based off of the ~battery~ function in [[https://github.com/emacs-mirror/emacs/blob/3af9e84ff59811734dcbb5d55e04e1fdb7051e77/lisp/battery.el#L219][battery.el]].
+#+BEGIN_SRC elisp
+    (defun battery-p ()
+        "returns t if a battery is present for the system and nil if one is not."
+        (and battery-status-function
+             battery-echo-area-format
+             (string-match-p "^Power N/A"
+                             (battery-format
+                                     battery-echo-area-format
+                                     (funcall battery-status-function)))
+             t))
+#+END_SRC
+
+If a battery source is detected, then show the batter level in the mode bar.
+#+BEGIN_SRC elisp
+    (unless (battery-p) (display-battery-mode 1))
+#+END_SRC
+
+Finally, close the battery package wrapper.
+#+BEGIN_SRC elisp
+)
+#+END_SRC
+
+**** Encoding format
+#+BEGIN_SRC elsip
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,
 so only show the modeline when this is not the case"
