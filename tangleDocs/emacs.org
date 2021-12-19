@@ -45,7 +45,7 @@
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :input
        chinese
-       japanese
+       ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
 
 #+END_SRC
