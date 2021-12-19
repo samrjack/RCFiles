@@ -14,7 +14,7 @@
  will be replaced.
 
  All imports must either be absolute paths starting with ~/~, or paths relative
- to the user's home directory starting with ~~/~.
+ to the user's home directory starting with ~\~/~.
 
 #+BEGIN_SRC yaml
 # This file has been generated using org tangle. To modify, please see the org file.
@@ -720,6 +720,7 @@ mouse_bindings:
 #+END_SRC
 
 * Key bindings
+** Documentation
 Key bindings
 
 Key bindings are specified as a list of objects. For example, this is the default paste binding:
@@ -913,8 +914,8 @@ And optionally:
    - Alt
    - Vi
 
-   A ~~~ operator can be used before a mode to apply the binding whenever
-   the mode is *not* active, e.g. ~~Alt~.
+   A ~\~~ operator can be used before a mode to apply the binding whenever
+   the mode is *not* active, e.g. ~\~Alt~.
 
 Bindings are always filled by default, but will be replaced when a new
 binding with the same triggers is defined. To unset a default binding, it can
@@ -923,17 +924,26 @@ a no-op if you do not wish to receive input characters for that binding.
 
 If the same trigger is assigned to multiple actions, all of them are executed
 in the order they were defined in.
-#+BEGIN_SRC yaml :tangle no
-key_bindings:
-  #- { key: Paste,                                       action: Paste          }
-  #- { key: Copy,                                        action: Copy           }
-  #- { key: L,         mods: Control,                    action: ClearLogNotice }
-  #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
-  #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
-  #- { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
-  #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
-  #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
+** Modes
+#+BEGIN_SRC yaml
+key_bindings:
+#+END_SRC
+
+*** General
+#+BEGIN_SRC yaml
+  - { key: Paste,                                       action: Paste          }
+  - { key: Copy,                                        action: Copy           }
+  - { key: L,         mods: Control,                    action: ClearLogNotice }
+  - { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
+  - { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
+  - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
+  - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
+  - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
+#+END_SRC
+
+*** Vi mode
+#+BEGIN_SRC yaml :tangle no
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
   #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
@@ -982,7 +992,10 @@ key_bindings:
   #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
   #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
   #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
+#+END_SRC
 
+*** Search mode
+#+BEGIN_SRC yaml :tangle no
   # Search Mode
   #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
   #- { key: Escape,                mode: Search,     action: SearchCancel          }
@@ -995,10 +1008,16 @@ key_bindings:
   #- { key: Down,                  mode: Search,     action: SearchHistoryNext     }
   #- { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
   #- { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
+#+END_SRC
 
-  # (Windows, Linux, and BSD only)
-  #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
-  #- { key: C,              mods: Control|Shift,                   action: Copy             }
+*** Linux, BSD, and Windows
+#+BEGIN_SRC yaml
+  - { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
+  - { key: C,              mods: Control|Shift, mode: ~Vi,        action: Copy             }
+#+END_SRC
+
+These below are unused.
+#+BEGIN_SRC yaml :tangle no
   #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
   #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
   #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
@@ -1009,32 +1028,44 @@ key_bindings:
   #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
+#+END_SRC
 
+*** Windows
+#+BEGIN_SRC yaml :tangle no
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
+#+END_SRC
 
-  # (macOS only)
+*** MacOS
+These keybindings are pulled from MacOS but it turns out that in alacritty, Command also maps to Super so I'm just leaving these on everywhere.
+#+BEGIN_SRC yaml
+  # (macOS inspired)
+  - { key: Key0,           mods: Command,                    action: ResetFontSize         }
+  - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
+  - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
+  - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
+  - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
+  - { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
+  - { key: V,              mods: Command,                    action: Paste                 }
+  - { key: C,              mods: Command,                    action: Copy                  }
+  - { key: H,              mods: Command,                    action: Hide                  }
+  - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
+#+END_SRC
+
+These below are unused.
+#+BEGIN_SRC yaml :tangle no
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
-  #- { key: Key0,           mods: Command,                    action: ResetFontSize         }
-  #- { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
-  #- { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
-  #- { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
-  #- { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
-  #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
-  #- { key: V,              mods: Command,                    action: Paste                 }
-  #- { key: C,              mods: Command,                    action: Copy                  }
   #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
-  #- { key: H,              mods: Command,                    action: Hide                  }
   #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
   #- { key: M,              mods: Command,                    action: Minimize              }
   #- { key: Q,              mods: Command,                    action: Quit                  }
   #- { key: W,              mods: Command,                    action: Quit                  }
   #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
-  #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 #+END_SRC
+
 
 * Debug
 #+BEGIN_SRC yaml :tangle no
