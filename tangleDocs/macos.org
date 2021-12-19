@@ -341,6 +341,13 @@ Allows you to open up a terminal in a particular folder from Finder.
 brew install --cask go2shell
 #+END_SRC
 
+** VPN
+** TunnelBlick
+Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask tunnelblick
+#+END_SRC
+
 ** Programming languages
 *** Go
 A clean simple little language. See the [[https://go.dev][golang]] website.
@@ -358,6 +365,30 @@ And the linter that goes along with it.
 brew install golangci-lint
 #+END_SRC
 
+*** Python
+In Emacs, python uses a language formatter called black:
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install black
+#+END_SRC
+*** Haskell
+Install haskell compiler and its language server. Haskell is useful for scripting some things.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install ghc
+brew install haskell-language-server
+#+END_SRC
+
+*** Racket
+Racket is a popular lisp language.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask racket
+#+END_SRC
+
+*** Html
+Great set of HTML tools.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install tidy-html5
+#+END_SRC
+
 *** Xcode
 Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
@@ -369,14 +400,6 @@ The whole latex environment. It's a big package but there should be enough space
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install texlive
 #+END_SRC
-
-** VPN
-** TunnelBlick
-Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].
-#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
-brew install --cask tunnelblick
-#+END_SRC
-
 * Full system install script
 When I need to install on a whole system, I want to have a single script I can run to install basically everything and not need to worry about which scripts to run first or in what order.
 #+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh

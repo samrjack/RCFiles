@@ -104,14 +104,23 @@ brew install --cask alfred
 
 brew install --cask go2shell
 
+brew install --cask tunnelblick
+
 brew install go
 
 brew install gopls
 
 brew install golangci-lint
 
+brew install black
+
+brew install ghc
+brew install haskell-language-server
+
+brew install --cask racket
+
+brew install tidy-html5
+
 mas install 497799835 # Xcode
 
 brew install texlive
-
-brew install --cask tunnelblick
