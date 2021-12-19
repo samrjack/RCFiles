@@ -78,3 +78,5 @@
 (package! pacmacs)
 
 (package! fireplace)
+
+(unpin! dired-git-info)

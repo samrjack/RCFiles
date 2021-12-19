@@ -1237,6 +1237,11 @@ This issue is with some hook that is causing all my actions to fail its getting 
 #+BEGIN_SRC elisp
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 #+END_SRC
+
+This package's git github repo recently changed and so the pinning information is wrong. I'm unpinning it for now so that things build correctly. Eventually this will get fixed and can be removed. This isn't a big risk since this package is not under active development so the no breaking changes should come any time soon.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(unpin! dired-git-info)
+#+END_SRC
 * Auto Tangle
 The below allows this file to tangle and produce the output configuration files whenever the document is saved.
 
