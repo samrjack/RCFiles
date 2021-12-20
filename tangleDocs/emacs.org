@@ -364,7 +364,7 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
 
 ** Basic Emacs settings
 *** Fonts
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp :tangle no
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -422,7 +422,7 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 ;; (set-window-buffer nil (current-buffer))
 #+END_SRC
 *** Clipboard
-Prevents system clipboard from being accidentially overwritten. Must now write to register "+ to write to system clipboard.
+Prevents system clipboard from being accidentally overwritten. Must now write to register "+ to write to system clipboard.
 #+BEGIN_SRC elisp
 ;; Some paste related settings.
 (setq save-interprogram-paste-before-kill t
