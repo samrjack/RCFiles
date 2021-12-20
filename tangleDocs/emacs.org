@@ -1,7 +1,7 @@
 #+TITLE: Emacs config file
 #+AUTHOR: Samuel Jackson
 #+DESCRIPTION: This file defines all my emacs configurations for my doom emacs setup.
-#+STARTUP: showall hidestars overview
+#+STARTUP: overview num hidestars indent
 #+PROPERTY: header-args :results silent :tangle "../configs/.doom.d/config.el"
 
 * File setup

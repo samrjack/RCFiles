@@ -1,7 +1,7 @@
 #+TITLE: Config File
 #+AUTHOR: Samuel Jackson
 #+DESCRIPTION: 
-#+STARTUP: overview hidestars indent
+#+STARTUP: overview hidestars indent num
 #+PROPERTY: header-args :results silent :tangle ""
 
 #+BEGIN_SRC 

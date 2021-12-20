@@ -2,6 +2,8 @@
 #+AUTHOR: Samuel Jackson
 #+DESCRIPTION: 
 #+STARTUP: overview hidestars indent
+#+DESCRIPTION: This file creates scripts for setting up a new Mac machine.
+#+STARTUP: overview num hidestars indent
 #+PROPERTY: header-args :results silent :tangle ""
 
 * Scripts setup
