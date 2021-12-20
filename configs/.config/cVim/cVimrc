@@ -1,0 +1,44 @@
+set hud
+set smoothscroll
+set incsearch
+set cncpcompletion
+let defaultengine = "google"
+let locale = "us"
+
+map j scrollDown
+map k scrollDown
+map h scrollLeft
+map l scrollRight
+
+map d scrollPageDown
+map u scrollPageUp
+map D scrollFullPageDown
+map U scrollFullPageUp
+
+map gg scrollToTop
+map G scrollToBottom
+map 0 scrollToLeft
+map $ scrollToRight
+
+map o :open<Space>
+map O :open!<Space>
+map <C-o> :open @%
+map <A-o> :open! @%
+
+map ^ firstTab
+
+map < moveTabLeft
+map > moveTabRight
+map x closeTab
+map X lastClosedTab
+map <A-p> pinTab
+
+map H goBack
+map L goForward
+
+" map <C-h>
+" map <C-l>
+
+map ss :mksession<Space>
+map sd :delsession<Space>
+map sr :session<Space>

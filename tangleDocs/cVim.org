@@ -1,0 +1,114 @@
+#+TITLE: cVim Config File
+#+AUTHOR: Samuel Jackson
+#+DESCRIPTION: Config for using the cVim plug in.
+#+STARTUP: overview hidestars indent num
+#+PROPERTY: header-args :results silent :tangle "../configs/.config/cVim/cVimrc"
+
+#+BEGIN_SRC 
+" This file has been generated using org tangle. To modify, please see the org file.
+#+END_SRC
+
+* Settings
+#+BEGIN_SRC vimrc
+set hud
+set smoothscroll
+set incsearch
+set cncpcompletion
+let defaultengine = "google"
+let locale = "us"
+#+END_SRC
+
+* Keybindings
+** Page scrolling
+Basic movement
+#+BEGIN_SRC vimrc
+map j scrollDown
+map k scrollDown
+map h scrollLeft
+map l scrollRight
+#+END_SRC
+
+Moving faster.
+#+BEGIN_SRC vimrc
+map d scrollPageDown
+map u scrollPageUp
+map D scrollFullPageDown
+map U scrollFullPageUp
+#+END_SRC
+
+Moveing to the edges.
+#+BEGIN_SRC vimrc
+map gg scrollToTop
+map G scrollToBottom
+map 0 scrollToLeft
+map $ scrollToRight
+#+END_SRC
+
+** Searches
+** Open url
+#+BEGIN_SRC vimcrc
+map o :open<Space>
+map O :open!<Space>
+map <C-o> :open @%
+map <A-o> :open! @%
+#+END_SRC
+** Tabs
+*** Navigation
+#+BEGIN_SRC vimrc
+map ^ firstTab
+#+END_SRC
+*** Shortcuts
+*** Management
+#+BEGIN_SRC vimrc
+map < moveTabLeft
+map > moveTabRight
+map x closeTab
+map X lastClosedTab
+map <A-p> pinTab
+#+END_SRC
+
+** History navigation
+Going backwards and forwards in history
+#+BEGIN_SRC vimrc
+map H goBack
+map L goForward
+#+END_SRC
+
+Put Open older tab in the background
+#+BEGIN_SRC vimrc
+" map <C-h>
+" map <C-l>
+#+END_SRC
+** Link navigation
+** Navigation
+** Hinting
+** Follow selection
+** Yanking (copying)
+** Zooming
+** Quickmarks/Bookmarks
+** CLearing things away
+** Change modes
+** Sessions
+Session settings.
+#+BEGIN_SRC vimrc
+map ss :mksession<Space>
+map sd :delsession<Space>
+map sr :session<Space>
+#+END_SRC
+** Windows
+** Reload
+** Macros
+** g- and its options
+** Settiongs
+** Other functionality
+
+* Commands
+** Documentation
+#+BEGIN_SRC vimrc
+:command doc open! https://github.com/1995eaton/chromium-vim
+* Local Variables
+The below allows this file to tangle and produce the output RC file whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:
