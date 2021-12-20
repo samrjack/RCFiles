@@ -1,7 +1,5 @@
-#+TITLE: Config File
+#+TITLE: MacOS Setup Config File
 #+AUTHOR: Samuel Jackson
-#+DESCRIPTION: 
-#+STARTUP: overview hidestars indent
 #+DESCRIPTION: This file creates scripts for setting up a new Mac machine.
 #+STARTUP: overview num hidestars indent
 #+PROPERTY: header-args :results silent :tangle ""
@@ -181,6 +179,12 @@ Wget is a web downloader similar to curl. It gets used instead of curl in a coup
 brew install wget
 #+END_SRC
 
+** HttPie
+An alternative to curl and wget.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install httpie
+#+END_SRC
+
 ** sl
 Sl is the steam locomotive progrom. Who doesn't like trains?
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
@@ -342,7 +346,11 @@ Allows you to open up a terminal in a particular folder from Finder.
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install --cask go2shell
 #+END_SRC
-
+** Spectacle
+A tool for window snap managment.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask spectacle
+#+END_SRC
 ** VPN
 ** TunnelBlick
 Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].

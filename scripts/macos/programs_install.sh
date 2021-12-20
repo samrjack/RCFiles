@@ -45,6 +45,8 @@ brew install tmux
 
 brew install wget
 
+brew install httpie
+
 brew install sl
 
 brew install fd
@@ -103,6 +105,8 @@ brew install --cask dropbox
 brew install --cask alfred
 
 brew install --cask go2shell
+
+brew install --cask spectacle
 
 brew install --cask tunnelblick
 
