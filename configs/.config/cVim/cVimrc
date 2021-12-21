@@ -6,7 +6,7 @@ let defaultengine = "google"
 let locale = "us"
 
 map j scrollDown
-map k scrollDown
+map k scrollUp
 map h scrollLeft
 map l scrollRight
 

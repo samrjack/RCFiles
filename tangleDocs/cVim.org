@@ -23,7 +23,7 @@ let locale = "us"
 Basic movement
 #+BEGIN_SRC vimrc
 map j scrollDown
-map k scrollDown
+map k scrollUp
 map h scrollLeft
 map l scrollRight
 #+END_SRC
@@ -86,8 +86,7 @@ Put Open older tab in the background
 ** Yanking (copying)
 ** Zooming
 ** Quickmarks/Bookmarks
-** CLearing things away
-** Change modes
+** Clearing things away
 ** Sessions
 Session settings.
 #+BEGIN_SRC vimrc
