@@ -42,3 +42,7 @@ map L goForward
 map ss :mksession<Space>
 map sd :delsession<Space>
 map sr :session<Space>
+
+map wa :tabattach<Space>
+map wd :tabdetach<CR>
+map wo :new<Space>
