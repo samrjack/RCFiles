@@ -86,6 +86,8 @@ brew install cmake
 
 brew install ripgrep
 
+brew install ag
+
 brew install postgresql
 brew install golang-migrate
 

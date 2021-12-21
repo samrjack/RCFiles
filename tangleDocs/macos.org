@@ -291,6 +291,12 @@ A fast grep tool for finding files. Used in emacs.
 brew install ripgrep
 #+END_SRC
 
+*** Silver searcher
+Another fast grep tool for finding files. Also used in emacs.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install ag
+#+END_SRC
+
 * Utils
 ** Postgresql
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
