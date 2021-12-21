@@ -317,57 +317,17 @@ if no org extension is given then it will be automatically appended."
 ; Set default file for newly captured notes
 (after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
 
-(defun get-current-timestamp ()
-  "returns a string timestamp in the format [yyyy-mm-dd day hh:mm]"
-  (let ((time (current-time))
-         (fmt (cdr org-time-stamp-formats)))
-    (setq fmt (concat "[" (substring fmt 1 -1) "]"))
-    (format-time-string fmt time)))
+(defun load-directory (dir)
+  "Loads all .el files from a provided directory. If the directory doesn't exist, the function loads nothing."
+  (interactive)
+  (if (not (f-directory-p dir))
+      (message "No directory named %s, no scripts loaded." dir)
+    (let* ((load-it (lambda (f)
+                      (load-file (concat (file-name-as-directory dir) f)))
+                    ))
+      (mapc load-it (directory-files dir nil "\\.el$")))))
 
-(defun worry-template ()
-  "Produces a template that is meant to"
-  (let ((topic (read-string "My goal is to understand why I'm worried about: ")))
-    (concat
-     "* " topic "\n"
-     "** Intake\nDate/time: " (get-current-timestamp) "\n"
-     "My goal is to understand why I'm worried about " topic ".\n"
-     "** Investigation\n"
-     "*** Triggers\n"
-     "Pick the triggers below that apply to this issue.\n"
-     "- [ ] Trying to make everyone happy\n"
-     "- [ ] Perfectionism\n"
-     "- [ ] I'm-not-doing-my-job panic attack\n"
-     "- [ ] Imposter syndrome\n"
-     "- [ ] Compare and despair\n"
-     "- [ ] Other (add to master list if needed)\n\n"
-     "This worry involves:\n"
-     "- [ ] someone else's perception of me.\n"
-     "- [ ] my perception of myself.\n\n"
-     "Real world events I'm reacting to, and duration (secs/mins/hrs/etc.):\n\n"
-     "Am I doing something that feels too difficult?\n\n"
-     "*** Five whys\n"
-     "- Q1) Why am I worried about ...\n"
-     "- Q2) Why ...\n"
-     "- Q3) Why ...\n"
-     "- Q4) Why ...\n"
-     "- Q5) Why ...\n\n"
-     "** Resolution\n"
-     "1. Do I /want/ to take action? If so, what is my goal? _____\n"
-     "2. Do I /have/ to take action? If so, what is my goal? _____\n"
-     "3. What happens if I do nothing? _____\n"
-     "4. What is the worst thing I can imagine happening? _____\n"
-     "5. What do I think is the most likely to happen? _____\n"
-     "6. Is there an opportunity to Think Big here? What would it look like if this issue were resolved far better than I ever imagined? _____\n"
-     "7. The next concrete step I will take is _____\n"
-     "8. Is there a step I can add to a personal checklist to reduce the chance this worry happens again? _____\n")))
-
-(after! org
-  (add-to-list 'org-capture-templates
-                '("w" "Worry Capture" entry (file "worries.org") (function worry-template) :prepend t :immediate-finish t)))
-
-(after! org
-  (add-to-list 'org-capture-templates
-                '("l" "Test Capture" checkitem (file+olp+datetree org-default-notes-file) "[ ]")))
+(load-directory (concat (file-name-as-directory org-directory) "capture-templates"))
 
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
