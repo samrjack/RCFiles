@@ -358,10 +358,29 @@ A tool for window snap managment.
 brew install --cask spectacle
 #+END_SRC
 ** VPN
-** TunnelBlick
+*** TunnelBlick
 Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install --cask tunnelblick
+#+END_SRC
+
+*** AWS VPN
+AWS VPN client allows you to connect to the AWS vpn which is
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install --cask --cask aws-vpn-client
+
+#+END_SRC
+
+** GNU plot
+GNU plot is a tool for creating graphs and other visuals. Used by emacs
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install gnuplot
+#+END_SRC
+
+** Aspell
+A good spellchecking backend. Used by emacs.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install aspell
 #+END_SRC
 
 ** Programming languages
@@ -416,10 +435,22 @@ The whole latex environment. It's a big package but there should be enough space
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install texlive
 #+END_SRC
-*** Javascript/Typescript
+*** Markdown
+Grip is nice markdown viewer so you can see what you've written before publishing.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+brew install grip
+#+END_SRC
+
+*** Web
 Npm is the main package manager for anything and everything javascript. Better have it installed!
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install npm
+#+END_SRC
+
+Once npm is installed, it can be used to install packages useful for web development.
+#+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
+npm -g install js-beautify
+npm -g install stylelint
 #+END_SRC
 
 * Full system install script

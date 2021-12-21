@@ -112,6 +112,12 @@ brew install --cask spectacle
 
 brew install --cask tunnelblick
 
+brew install --cask --cask aws-vpn-client
+
+brew install gnuplot
+
+brew install aspell
+
 brew install go
 
 brew install gopls
@@ -131,4 +137,9 @@ mas install 497799835 # Xcode
 
 brew install texlive
 
+brew install grip
+
 brew install npm
+
+npm -g install js-beautify
+npm -g install stylelint
