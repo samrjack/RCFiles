@@ -15,6 +15,7 @@
 	wdiff = diff --color-words
     fix = "!f() { vim -p `git diff --name-only --diff-filter=U`; }; f"
     root = "rev-parse --show-toplevel"
+    nlog = "log --numstat"
 [diff]
 	tool = vimdiff2
 [merge]
