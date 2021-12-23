@@ -223,9 +223,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
                                      (funcall battery-status-function)))
              t))
 
-    (unless (battery-p) (display-battery-mode 1))
+    (unless (battery-p) (display-battery-mode 1)))
 
-)
+
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,
