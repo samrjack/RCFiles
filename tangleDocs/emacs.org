@@ -9,6 +9,7 @@
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 ;;; init.el -*- lexical-binding: t; -*-
 #+END_SRC
+
 ** Packages
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 ;; -*- no-byte-compile: t; -*-
@@ -19,6 +20,7 @@
 #+BEGIN_SRC elisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 #+END_SRC
+
 * Initialization
 ** Documentation
 #+BEGIN_SRC elisp :tangle no
@@ -36,19 +38,21 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 #+END_SRC
+
 ** Start
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 (doom!
 ;;; Modules to load
 #+END_SRC
+
 ** Input
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :input
        chinese
        ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
-
 #+END_SRC
+
 ** Completion
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :completion
@@ -56,8 +60,8 @@
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
-
 #+END_SRC
+
 ** UI
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :ui
@@ -89,6 +93,7 @@
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 #+END_SRC
+
 ** Editor tools
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :editor
@@ -105,6 +110,7 @@
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
 #+END_SRC
+
 ** Emacs
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :emacs
@@ -115,6 +121,7 @@
        undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 #+END_SRC
+
 ** Terminals
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :term
@@ -123,6 +130,7 @@
        term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
 #+END_SRC
+
 ** Checkers
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :checkers
@@ -130,6 +138,7 @@
        spell             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 #+END_SRC
+
 ** Tools
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :tools
@@ -154,6 +163,7 @@
        tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
 #+END_SRC
+
 ** OS
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :os
@@ -161,6 +171,7 @@
        tty               ; improve the terminal Emacs experience
 
 #+END_SRC
+
 ** Programming Languages
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :lang
@@ -238,16 +249,16 @@
        ;;terra             ; Earth and Moon in alignment for performance.
        web               ; the tubes
        yaml              ; JSON, but readable
-
 #+END_SRC
+
 ** Email
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :email
        (mu4e +gmail)
        ;;notmuch
        (wanderlust +gmail)
-
 #+END_SRC
+
 ** App
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :app
@@ -255,14 +266,15 @@
        irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
        twitter           ; twitter client https://twitter.com/vnought
-
 #+END_SRC
+
 ** Config
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
        :config
        ;;literate
        (default +bindings +smartparens)
 #+END_SRC
+
 ** End section
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
 )
@@ -272,6 +284,7 @@
 #+BEGIN_SRC elisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 #+END_SRC
+
 ** Documentation
 *** Macro documentation
 #+BEGIN_SRC elisp :tangle no
@@ -298,7 +311,6 @@
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
-
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
@@ -334,7 +346,6 @@
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
-
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
 ;(unpin! pinned-package)
@@ -344,6 +355,7 @@
 ;(unpin! t)
 
 #+END_SRC
+
 ** Personal Identification
 #+BEGIN_SRC elisp
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -421,6 +433,7 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
 #+END_SRC
+
 *** Clipboard
 Prevents system clipboard from being accidentally overwritten. Must now write to register "+ to write to system clipboard.
 #+BEGIN_SRC elisp
@@ -486,6 +499,7 @@ TODO Add commentary
 (map! :n "M->" #'tab-next
       :n "M-<" #'tab-previous)
 #+END_SRC
+
 *** Directory navigation
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 ;; directory management
@@ -506,6 +520,7 @@ TODO Add commentary
       :desc "toggle dired file info"
       :n "t d" #'dired-hide-details-mode)
 #+END_SRC
+
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
 #+BEGIN_SRC elisp
@@ -559,6 +574,7 @@ Import a simpler sidebar package for when it's needed.
 
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
+
 *** Sub-word movement
 #+BEGIN_SRC elisp
 ;; Makes it so movement keys stop at camlecase sub words.
@@ -607,6 +623,7 @@ These aren't file or use case specific changes but instead things that can apply
 ;; added while in insert mode.
 (setq evil-want-fine-undo t)
 #+END_SRC
+
 **** Evil snipe mode
 ***** Snipe mode off by default
 I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
@@ -638,6 +655,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'toggle-and-activate-evil-snipe-mode)
 #+END_SRC
+
 *** VLF (Very Large Files)
 VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
@@ -693,6 +711,7 @@ This module adds git commit information in line with code when turned on whcih c
                    :height 140
                    :italic t))))
 #+END_SRC
+
 ** Independent or external programs
 *** Discord integration
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
@@ -768,11 +787,14 @@ This module adds git commit information in line with code when turned on whcih c
 #+BEGIN_SRC elisp
 (setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
 #+END_SRC
+
 **** Elisp shell aliases
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/.eshell-aliases
 #+END_SRC
+
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
+
 **** Date and time
 #+BEGIN_SRC elisp
 ;; Add useful data to the mode line.
@@ -849,12 +871,14 @@ so only show the modeline when this is not the case"
 (package! org-fragtog)
 (package! org-pretty-tags)
 #+END_SRC
+
 **** Standard Org settings
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
 #+BEGIN_SRC elisp
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
 #+END_SRC
+
 ***** Font support
 In org mode I like to be able to write in different fonts and languages (such as chinese) so I'm turning on variable pitch font support. Without it, lots of text starts to overlap.
 #+BEGIN_SRC elisp :tangle no
@@ -863,6 +887,7 @@ In org mode I like to be able to write in different fonts and languages (such as
 
 ***** Bable
 Several languages require LSPs or other backend code to be configured for bable to use them so they are configured here.
+
 ****** Clojure
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 ;; Clojure related packages
@@ -875,6 +900,7 @@ Several languages require LSPs or other backend code to be configured for bable 
 #+BEGIN_SRC elisp
 (setq org-bable-clojure-backend 'cider)
 #+END_SRC
+
 ***** Org mode keybindings
 #+BEGIN_SRC elisp
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
@@ -888,6 +914,7 @@ Several languages require LSPs or other backend code to be configured for bable 
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
 #+END_SRC
+
 ***** Shortcut to open org files
 This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
 #+BEGIN_SRC elisp
@@ -943,6 +970,7 @@ if no org extension is given then it will be automatically appended."
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 #+END_SRC
+
 **** Org Agenda
 ***** Limiting files
 To set specific files as being "agenda" files, you can use =org-agenda-files= however I've found I like putting schedule markers in various files around my org setup.
@@ -957,12 +985,14 @@ All these settings have to be made after org loads so they're wrapped in an =(af
 #+BEGIN_SRC elisp
 (after! org
 #+END_SRC
+
 ***** Work length
 #+BEGIN_SRC elisp
 (setq org-pomodoro-length 25
     org-pomodoro-short-break-length 5
     org-pomodoro-long-break-length 15)
 #+END_SRC
+
 ***** Sounds to play
 #+BEGIN_SRC elisp
 (setq org-pomodoro-play-sounds t
@@ -984,10 +1014,12 @@ If I decide to find sound files I like more than the defaults, then I can put th
       org-pomodoro-short-break-sound ()
       org-pomodoro-long-break-sound ())
 #+END_SRC
+
 ***** End of "after! org"
 #+BEGIN_SRC elisp
 )
 #+END_SRC
+
 **** Org Capture
 ***** Settings
 #+BEGIN_SRC elisp
@@ -1069,6 +1101,7 @@ This block isn't tangled and isn't at all guarenteed to work even if it was so u
            :heading "Changelog"
            :prepend t))
 #+END_SRC
+
 **** Org Chef
 Org chef is a package for saving cooking recipes from sites like [[allrecipes.com][allrecipies]] in org mode for future reference and use.
 #+BEGIN_SRC elisp
@@ -1201,6 +1234,7 @@ A package for accessing and organizing your steam library from within emacs
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (package! threes)
 #+END_SRC
+
 **** Pacmacs
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (package! pacmacs)
@@ -1240,6 +1274,7 @@ This package's git github repo recently changed and so the pinning information i
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (unpin! dired-git-info)
 #+END_SRC
+
 * Auto Tangle
 The below allows this file to tangle and produce the output configuration files whenever the document is saved.
 
