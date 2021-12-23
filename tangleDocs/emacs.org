@@ -674,6 +674,25 @@ This allows emacs to handle R style dataframes. This makes some data handling ea
 (setq ispell-dictionary "en")
 #+END_SRC
 
+*** Git
+**** Blamer
+This module adds git commit information in line with code when turned on whcih can be nice when working through a code base.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! blamer)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(use-package blamer
+  :defer 20
+  :custom
+  (blamer-idle-time 0)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 140
+                   :italic t))))
+#+END_SRC
 ** Independent or external programs
 *** Discord integration
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el

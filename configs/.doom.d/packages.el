@@ -21,6 +21,8 @@
 
 (package! ess-view)
 
+(package! blamer)
+
 (package! elcord)
 
 (package! spray)

@@ -160,6 +160,17 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 
+(use-package blamer
+  :defer 20
+  :custom
+  (blamer-idle-time 0)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 140
+                   :italic t))))
+
 (use-package! keycast
   :commands keycast-mode
   :config
