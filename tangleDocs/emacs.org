@@ -691,6 +691,16 @@ This allows emacs to handle R style dataframes. This makes some data handling ea
 (setq ispell-dictionary "en")
 #+END_SRC
 
+*** Code folding
+Origami mode
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! origami)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(global-origami-mode)
+#+END_SRC
+
 *** Git
 **** Blamer
 This module adds git commit information in line with code when turned on whcih can be nice when working through a code base.
@@ -1261,7 +1271,7 @@ A package for accessing and organizing your steam library from within emacs
 ;;
 #+END_SRC
 
-** Fixes
+* Fixes
 Here are some config fixes for issues I'm running into.
 
 This issue is with some hook that is causing all my actions to fail its getting really annoying. I couldn't even use magit. Well now you're gone little guy, hope you're happy.

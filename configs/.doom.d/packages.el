@@ -21,6 +21,8 @@
 
 (package! ess-view)
 
+(package! origami)
+
 (package! blamer)
 
 (package! elcord)

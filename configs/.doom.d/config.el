@@ -160,6 +160,8 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 
+(global-origami-mode)
+
 (use-package blamer
   :defer 20
   :custom
