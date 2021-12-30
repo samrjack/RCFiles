@@ -10,8 +10,18 @@ Many scripts require some setup to make sure the dependencies are met. If a seci
 Here we need to install brew and add some other package manager related packages to make sure everything installs smoothly.
 #+BEGIN_SRC sh
 #!/bin/bash
-#TODO check if brew is already installed
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#+END_SRC
+
+Here we need to install brew to make sure everything installs smoothly. If brew is already installed we don't reinstall it since that is a pain.
+#+BEGIN_SRC sh
+if ! command -v brew &> /dev/null
+then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+#+END_SRC
+
+Then we add ~mas~ which is the =Mac App Store= program which is used to install app store apps from the command line.
+#+BEGIN_SRC sh
 brew tap buo/cask-upgrade
 brew install mas
 #+END_SRC

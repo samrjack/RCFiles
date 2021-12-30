@@ -1,6 +1,10 @@
 #!/bin/bash
-#TODO check if brew is already installed
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if ! command -v brew &> /dev/null
+then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 brew tap buo/cask-upgrade
 brew install mas
 
