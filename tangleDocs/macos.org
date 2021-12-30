@@ -2,7 +2,7 @@
 #+AUTHOR: Samuel Jackson
 #+DESCRIPTION: This file creates scripts for setting up a new Mac machine.
 #+STARTUP: overview num hidestars indent
-#+PROPERTY: header-args :results silent :tangle ""
+#+PROPERTY: header-args :results silent :tangle "../scripts/macos/programs_install.sh" :tangle-mode (identity #o755)
 
 * Scripts setup
 Many scripts require some setup to make sure the dependencies are met. If a seciton makes its own file that shouldn't be written to by other sections, then those are not initilized here.
@@ -297,7 +297,7 @@ Another fast grep tool for finding files. Also used in emacs.
 brew install ag
 #+END_SRC
 
-* Utils
+* Utilities
 ** Postgresql
 #+BEGIN_SRC sh :tangle ../scripts/macos/programs_install.sh
 brew install postgresql
