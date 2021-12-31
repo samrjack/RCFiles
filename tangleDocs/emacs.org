@@ -503,7 +503,7 @@ Add the menu button to the tab bar so it can be accessed once in a while without
 #+BEGIN_SRC elisp
 (defun tab-bar-format-menu-bar-lambda ()
   "Produce the Menu button for the tab bar that shows the menu bar."
-  '((menu-bar menu-item (propertize " λ" 'face 'tab-bar-tab)
+  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
      tab-bar-menu-bar :help "Menu Bar")))
 (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
 #+END_SRC
@@ -513,6 +513,7 @@ Add global keybinding labeling so tabs are easier to find
 (which-key-add-key-based-replacements "C-x t" "tabs")
 #+END_SRC
 
+Make tab functions accessible from the doom-leader menu as well.
 #+BEGIN_SRC elisp
 (map! :leader :desc "Tabs" "T" tab-prefix-map)
 #+END_SRC

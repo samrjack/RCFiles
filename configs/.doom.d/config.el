@@ -75,7 +75,7 @@ The return value is the yanked text."
 
 (defun tab-bar-format-menu-bar-lambda ()
   "Produce the Menu button for the tab bar that shows the menu bar."
-  '((menu-bar menu-item (propertize " λ" 'face 'tab-bar-tab)
+  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
      tab-bar-menu-bar :help "Menu Bar")))
 (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
 
