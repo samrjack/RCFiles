@@ -66,12 +66,22 @@ The return value is the yanked text."
 
 ")
 
-(setq tab-bar-show 1)
+(setq tab-bar-show)
 (setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
 (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
 (set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
 (map! :n "M->" #'tab-next
       :n "M-<" #'tab-previous)
+
+(defun tab-bar-format-menu-bar-lambda ()
+  "Produce the Menu button for the tab bar that shows the menu bar."
+  '((menu-bar menu-item (propertize " λ" 'face 'tab-bar-tab-active)
+     tab-bar-menu-bar :help "Menu Bar")))
+(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
+
+(which-key-add-key-based-replacements "C-x t" "tabs")
+
+(map! :leader :desc "Tabs" "T" tab-prefix-map)
 
 (defun dired-turn-off-file-info ()
   "Turns off the file info in dired mode"
@@ -225,9 +235,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
                                      (funcall battery-status-function)))
              t))
 
-    (unless (battery-p) (display-battery-mode 1)))
+    (unless (battery-p) (display-battery-mode 1))
 
-
+)
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,

@@ -101,10 +101,10 @@
        fold              ; (nigh) universal code folding
        (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
-       lispy             ; vim for lisp, for people who don't like vim
+       ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
-       parinfer          ; turn lisp into python, sort of
+       ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
@@ -491,12 +491,30 @@ The scratch buffer is always present as an area to experiement or take a quick n
 *** Tab bar mode
 TODO Add commentary
 #+BEGIN_SRC elisp
-(setq tab-bar-show 1)
+(setq tab-bar-show)
 (setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
 (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
 (set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
 (map! :n "M->" #'tab-next
       :n "M-<" #'tab-previous)
+#+END_SRC
+
+Add the menu button to the tab bar so it can be accessed once in a while without taking up space.
+#+BEGIN_SRC elisp
+(defun tab-bar-format-menu-bar-lambda ()
+  "Produce the Menu button for the tab bar that shows the menu bar."
+  '((menu-bar menu-item (propertize " λ" 'face 'tab-bar-tab-active)
+     tab-bar-menu-bar :help "Menu Bar")))
+(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
+#+END_SRC
+
+Add global keybinding labeling so tabs are easier to find
+#+BEGIN_SRC elisp
+(which-key-add-key-based-replacements "C-x t" "tabs")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(map! :leader :desc "Tabs" "T" tab-prefix-map)
 #+END_SRC
 
 *** Directory navigation
