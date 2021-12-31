@@ -443,7 +443,7 @@ Prevents system clipboard from being accidentally overwritten. Must now write to
 
 In order to provide copy and paste functionality directly from the keyboard, I need to capture the inputs and make functions that force the register that corresponds with the clipboard to be used (the + register).
 
-First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. Inorder to get the ascii number of a character, we simply need to put a '?' before it.
+First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. In order to get the ascii number of a character, we simply need to put a '?' before it.
 #+BEGIN_SRC elisp
 (evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
   "Saves the characters in motion into they system clipboard through the '+' register"
@@ -478,7 +478,7 @@ Finally we need to create universal keybindings to these functions so they can b
 #+END_SRC
 
 *** Scratch buffer
-The scratch buffer is always present as an area to experiement or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundemental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elislp code so I can set things on a whim while working in other non-elisp buffers.
+The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
 #+BEGIN_SRC elisp
 (setq initial-major-mode 'emacs-lisp-mode)
 
@@ -698,7 +698,7 @@ Then setup the package later.
 #+END_SRC
 
 *** R data frames
-This allows emacs to handle R style dataframes. This makes some data handling easier in various files.
+This allows emacs to handle R style data frames. This makes some data handling easier in various files.
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (package! ess-view)
 #+END_SRC
@@ -721,7 +721,7 @@ Origami mode
 
 *** Git
 **** Blamer
-This module adds git commit information in line with code when turned on whcih can be nice when working through a code base.
+This module adds git commit information in line with code when turned on which can be nice when working through a code base.
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
 (package! blamer)
 #+END_SRC
@@ -861,7 +861,7 @@ Finally, close the battery package wrapper.
 #+END_SRC
 
 **** Encoding format
-#+BEGIN_SRC elsip
+#+BEGIN_SRC elisp
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,
 so only show the modeline when this is not the case"
@@ -912,8 +912,8 @@ In org mode I like to be able to write in different fonts and languages (such as
 (add-hook 'org-mode-hook #'chinese-text-support)
 #+END_SRC
 
-***** Bable
-Several languages require LSPs or other backend code to be configured for bable to use them so they are configured here.
+***** Babel
+Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
 
 ****** Clojure
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
@@ -1055,7 +1055,7 @@ If I decide to find sound files I like more than the defaults, then I can put th
 #+END_SRC
 
 ***** Org template
-All of my org templates are in a seprate folder in my org files repo. This is so that templates are both private from public eyes and also travel with their partnered org files. I'll probably make a seporate git repo for them just so they're recorded but that's a lower priority.
+All of my org templates are in a separate folder in my org files repo. This is so that templates are both private from public eyes and also travel with their partnered org files. I'll probably make a separate git repo for them just so they're recorded but that's a lower priority.
 
 Load templates from org directory.
 #+BEGIN_SRC elisp
@@ -1075,7 +1075,7 @@ Load templates from org directory.
 ****** Example template code
 Example of org capture templates and how everything is setup.
 pulled from https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el.
-This block isn't tangled and isn't at all guarenteed to work even if it was so use it only as an example.
+This block isn't tangled and isn't at all guaranteed to work even if it was so use it only as an example.
 #+BEGIN_SRC elisp :tangle no
 (after! org
   (setq org-capture-templates '(
