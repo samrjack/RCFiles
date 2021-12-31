@@ -307,6 +307,12 @@ Another fast grep tool for finding files. Also used in emacs.
 brew install ag
 #+END_SRC
 
+** Ledger
+Ledger is a CLI program for double-entry accounting. Neat!
+#+BEGIN_SRC sh
+brew install ledger
+#+END_SRC
+
 * Utilities
 ** Postgresql
 #+BEGIN_SRC sh

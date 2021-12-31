@@ -92,6 +92,8 @@ brew install ripgrep
 
 brew install ag
 
+brew install ledger
+
 brew install postgresql
 brew install golang-migrate
 
