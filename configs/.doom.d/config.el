@@ -275,7 +275,7 @@ so only show the modeline when this is not the case"
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
 
-(setq org-default-extension ".org")
+(unless org-default-extension (setq org-default-extension ".org"))
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
@@ -300,20 +300,43 @@ if no org extension is given then it will be automatically appended."
             (and input-file-extension
                  ; check the input
                  (eval (cons 'or (mapcar (lambda (extension-regex)
-                           (string-match-p extension-regex input-file-extension))
-                         valid-org-extension-regex-list)))))
+                                           (string-match-p extension-regex input-file-extension))
+                                         valid-org-extension-regex-list)))))
       (setq file (concat file org-default-extension)))) ; Otherwise set file to have an org extension)
 
-    ; If, after the above checks, the file name still points to a directory, then
-    ; throw an error since it can't be opened at that point.
-    (if (file-directory-p file)
-        (error "The provided file is a directory %s" file)
-      (find-file file)
-      (org-mode)))
+  ; If, after the above checks, the file name still points to a directory, then
+  ; throw an error since it can't be opened at that point.
+  (if (file-directory-p file)
+      (error "The provided file is a directory %s" file)
+    (find-file file)
+    (org-mode)))
+
+(defun prompt-org-file (&optional dir default-name)
+  "Prompts the user for a file inside the specified directory. Uses defualt name when no entry is given if the name is provided."
+  (unless dir (setq dir org-directory))
+  (directory-file-name (read-file-name "Choose org file: " dir default-name)))
+
+(defun org-open-file ()
+  "Prompts and opens a file in the default org directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file org-directory "notes.org")))
+
+(defun org-open-work-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "notes")) "notes.org")))
+
+(defun org-open-work-task ()
+  "Prompts and opens a file in the org work tasks directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "tasks")) "schedule.org")))
 
 (map! :leader
-      :desc "Find org file"
-      "f o" #'org-open-org-file)
+      (:prefix ("f o" . "Org files")
+       :desc "Org file" "o" #'org-open-file
+       (:prefix ("w" . "Work")
+        :desc "Notes" "n" #'org-open-work-note
+        :desc "Tasks" "t" #'org-open-work-task)))
 
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)

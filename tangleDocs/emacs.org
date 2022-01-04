@@ -945,8 +945,10 @@ Several languages require LSPs or other back end code to be configured for babel
 
 ***** Shortcut to open org files
 This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
+
+This first function opens up the a file with all the complications that come with opening the file including setting a correct extension if needed.
 #+BEGIN_SRC elisp
-(setq org-default-extension ".org")
+(unless org-default-extension (setq org-default-extension ".org"))
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
@@ -969,22 +971,52 @@ if no org extension is given then it will be automatically appended."
         (or (and (file-exists-p file)
                  (not (file-directory-p file)))
             (and input-file-extension
-                 ; check the input
+                                        ; check the input
                  (eval (cons 'or (mapcar (lambda (extension-regex)
-                           (string-match-p extension-regex input-file-extension))
-                         valid-org-extension-regex-list)))))
+                                           (string-match-p extension-regex input-file-extension))
+                                         valid-org-extension-regex-list)))))
       (setq file (concat file org-default-extension)))) ; Otherwise set file to have an org extension)
 
-    ; If, after the above checks, the file name still points to a directory, then
-    ; throw an error since it can't be opened at that point.
-    (if (file-directory-p file)
-        (error "The provided file is a directory %s" file)
-      (find-file file)
-      (org-mode)))
+  ; If, after the above checks, the file name still points to a directory, then
+  ; throw an error since it can't be opened at that point.
+  (if (file-directory-p file)
+      (error "The provided file is a directory %s" file)
+    (find-file file)
+    (org-mode)))
+#+END_SRC
+
+This helper function contains the shared code for prompting for a file.
+=TODO= Create a function for building a system path.
+#+BEGIN_SRC elisp
+(defun prompt-org-file (&optional dir default-name)
+  "Prompts the user for a file inside the specified directory. Uses defualt name when no entry is given if the name is provided."
+  (unless dir (setq dir org-directory))
+  (directory-file-name (read-file-name "Choose org file: " dir default-name)))
+#+END_SRC
+
+Finally we can create functions to each of the directories that I access most often and map them to key cords.
+#+BEGIN_SRC elisp
+(defun org-open-file ()
+  "Prompts and opens a file in the default org directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file org-directory "notes.org")))
+
+(defun org-open-work-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "notes")) "notes.org")))
+
+(defun org-open-work-task ()
+  "Prompts and opens a file in the org work tasks directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "tasks")) "schedule.org")))
 
 (map! :leader
-      :desc "Find org file"
-      "f o" #'org-open-org-file)
+      (:prefix ("f o" . "Org files")
+       :desc "Org file" "o" #'org-open-file
+       (:prefix ("w" . "Work")
+        :desc "Notes" "n" #'org-open-work-note
+        :desc "Tasks" "t" #'org-open-work-task)))
 #+END_SRC
 
 **** Org Roam
