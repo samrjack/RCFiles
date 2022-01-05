@@ -552,6 +552,13 @@ Position the cursor at it's beginning, according to the current mode."
   (indent-according-to-mode))
 #+END_SRC
 
+*** Keybindings
+**** Tab as fold toggling
+When available, I really like to use tab as a quick way to toggle folds.
+#+BEGIN_SRC elisp
+(map! :n "TAB" #'+fold/toggle)
+#+END_SRC
+
 ** Managing files
 *** Sidebar file explorer
 

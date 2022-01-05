@@ -103,6 +103,8 @@ Position the cursor at it's beginning, according to the current mode."
   (forward-line -1)
   (indent-according-to-mode))
 
+(map! :n "TAB" #'+fold/toggle)
+
 (map! :n "C-n" #'+treemacs/toggle)
 (map! :n "M-n" #'dired-sidebar-toggle-sidebar)
 
