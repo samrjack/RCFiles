@@ -547,7 +547,6 @@ endif
 *** File type specific settings
 #+BEGIN_SRC vimrc
 """"" File Specific changes """""
-
 #+END_SRC
 **** Scratch buffer
 #+BEGIN_SRC vimrc
@@ -556,7 +555,6 @@ endif
     command! -bar TurnOnScratchBuffer setlocal buftype=nofile bufhidden=hide noswapfile
     command! -bar TurnOffScratchBuffer setlocal buftype= bufhidden= swapfile
     command! -bar NewScratch new | TurnOnScratchBuffer
-
 #+END_SRC
 ***** Making automatic scratch buffers
 #+BEGIN_SRC vimrc
@@ -593,14 +591,13 @@ endif
         " hilighting functionality.
         autocmd BufNewFile,BufRead * if &ft == '' | setlocal filetype=c | endif
 
-        "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
+        autocmd Filetype javascript setlocal sts=2 sw=2 ts=2 foldmethod=syntax
         autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
 
         " Note, perl automatically sets foldmethod in the syntax file
         autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
         autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
     augroup END
-
 #+END_SRC
 
 * NeoVim

@@ -440,7 +440,7 @@ endif
         " hilighting functionality.
         autocmd BufNewFile,BufRead * if &ft == '' | setlocal filetype=c | endif
 
-        "autocmd Filetype javascript.jsx setlocal sw=2 ts=2 foldmethod=syntax
+        autocmd Filetype javascript setlocal sts=2 sw=2 ts=2 foldmethod=syntax
         autocmd Filetype vim setlocal sw=4 ts=4 foldmethod=indent
 
         " Note, perl automatically sets foldmethod in the syntax file
