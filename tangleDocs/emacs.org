@@ -897,7 +897,6 @@ so only show the modeline when this is not the case"
 *** Org mode
 **** Org add-on packages
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
-;; Org mode related stuff
 (package! org-reverse-datetree)
 ;(package! ox-gfm) ; Causing problems with pandoc at the moment.
 (package! org-ref)
@@ -978,7 +977,7 @@ if no org extension is given then it will be automatically appended."
         (or (and (file-exists-p file)
                  (not (file-directory-p file)))
             (and input-file-extension
-                                        ; check the input
+                 ; check the input
                  (eval (cons 'or (mapcar (lambda (extension-regex)
                                            (string-match-p extension-regex input-file-extension))
                                          valid-org-extension-regex-list)))))

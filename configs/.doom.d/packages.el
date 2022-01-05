@@ -37,7 +37,6 @@
 
 (package! guix)
 
-;; Org mode related stuff
 (package! org-reverse-datetree)
 ;(package! ox-gfm) ; Causing problems with pandoc at the moment.
 (package! org-ref)
