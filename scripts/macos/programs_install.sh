@@ -94,6 +94,8 @@ brew install ag
 
 brew install ledger
 
+brew install cloc
+
 brew install postgresql
 brew install golang-migrate
 

@@ -313,6 +313,12 @@ Ledger is a CLI program for double-entry accounting. Neat!
 brew install ledger
 #+END_SRC
 
+** Cloc
+Cloc is a program that counts lines of code in files.
+#+begin_src sh
+brew install cloc
+#+end_src
+
 * Utilities
 ** Postgresql
 #+BEGIN_SRC sh
