@@ -125,8 +125,11 @@ c.spellcheck.languages = ["en-US"]
 
 * Color theme
 #+BEGIN_SRC python
-#c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.preferred_color_scheme = "dark"
+#+END_SRC
+
+#+BEGIN_SRC python
+c.colors.webpage.darkmode.enabled = True
 #+END_SRC
 
 * Hinting

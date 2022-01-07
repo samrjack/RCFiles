@@ -42,8 +42,9 @@ c.content.javascript.can_access_clipboard = True
 
 c.spellcheck.languages = ["en-US"]
 
-#c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.preferred_color_scheme = "dark"
+
+c.colors.webpage.darkmode.enabled = True
 
 c.hints.chars = "abcdefghijklmnopqrstuvwxyz"
 
