@@ -277,7 +277,7 @@ so only show the modeline when this is not the case"
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
 
-(unless org-default-extension (setq org-default-extension ".org"))
+(setq org-default-extension ".org")
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
@@ -328,6 +328,11 @@ if no org extension is given then it will be automatically appended."
   (interactive)
   (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "notes")) "notes.org")))
 
+(defun org-open-project-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "projects")) "project.org")))
+
 (defun org-open-work-task ()
   "Prompts and opens a file in the org work tasks directory."
   (interactive)
@@ -338,6 +343,7 @@ if no org extension is given then it will be automatically appended."
        :desc "Org file" "o" #'org-open-file
        (:prefix ("w" . "Work")
         :desc "Notes" "n" #'org-open-work-note
+        :desc "Projects" "p" #'org-open-project-note
         :desc "Tasks" "t" #'org-open-work-task)))
 
 (setq org-roam-directory "~/roam")

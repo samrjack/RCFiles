@@ -954,7 +954,7 @@ This shortcut opens the org directory and allows a user to select a file. If the
 
 This first function opens up the a file with all the complications that come with opening the file including setting a correct extension if needed.
 #+BEGIN_SRC elisp
-(unless org-default-extension (setq org-default-extension ".org"))
+(setq org-default-extension ".org")
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
@@ -1012,6 +1012,11 @@ Finally we can create functions to each of the directories that I access most of
   (interactive)
   (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "notes")) "notes.org")))
 
+(defun org-open-project-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "projects")) "project.org")))
+
 (defun org-open-work-task ()
   "Prompts and opens a file in the org work tasks directory."
   (interactive)
@@ -1022,6 +1027,7 @@ Finally we can create functions to each of the directories that I access most of
        :desc "Org file" "o" #'org-open-file
        (:prefix ("w" . "Work")
         :desc "Notes" "n" #'org-open-work-note
+        :desc "Projects" "p" #'org-open-project-note
         :desc "Tasks" "t" #'org-open-work-task)))
 #+END_SRC
 
