@@ -319,6 +319,30 @@ Cloc is a program that counts lines of code in files.
 brew install cloc
 #+end_src
 
+** Sops
+Tool for working with encrypted files and secrets.
+#+begin_src sh
+brew install sops
+#+end_src
+
+** k9 interface
+Cli tool for interfacing with kubernetes
+#+begin_src sh
+brew install k9s
+#+end_src
+
+** RabbitMQ
+A local viewer for the [[https://www.rabbitmq.com/][Rabbit MQ]] messaging system.
+#+begin_src sh
+brew install rabbitmq
+#+end_src
+
+** Pgcli
+A tool for accessing postgresSQL databases from command line. Has some pretty neat auto-completion and syntax highlighting!
+#+begin_src sh
+brew install pgcli
+#+end_src
+
 * Utilities
 ** Postgresql
 #+BEGIN_SRC sh

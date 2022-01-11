@@ -96,6 +96,14 @@ brew install ledger
 
 brew install cloc
 
+brew install sops
+
+brew install k9s
+
+brew install rabbitmq
+
+brew install pgcli
+
 brew install postgresql
 brew install golang-migrate
 
