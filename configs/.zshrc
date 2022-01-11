@@ -35,6 +35,8 @@ if [ -d "$ZSH" ]; then
 
     # Uncomment the following line to enable command auto-correction.
     ENABLE_CORRECTION="true"
+    # The following are corrections to the auto-correction feature to prevent it from being annoying
+    alias git='nocorrect git'
 
     # Uncomment the following line to display red dots whilst waiting for completion.
     COMPLETION_WAITING_DOTS="true"
