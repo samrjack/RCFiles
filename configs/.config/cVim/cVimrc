@@ -39,6 +39,11 @@ map L goForward
 " map <C-h>
 " map <C-l>
 
+map bc createBookmark
+map bo :bookmarks<Space>
+map bt :bookmarks!<Space>
+map bT :bookmarks&<Space>
+
 map ss :mksession<Space>
 map sd :delsession<Space>
 map sr :session<Space>

@@ -86,6 +86,14 @@ Put Open older tab in the background
 ** Yanking (copying)
 ** Zooming
 ** Quickmarks/Bookmarks
+Working with bookmarks
+#+begin_src vimrc
+map bc createBookmark
+map bo :bookmarks<Space>
+map bt :bookmarks!<Space>
+map bT :bookmarks&<Space>
+#+end_src
+
 ** Clearing things away
 ** Sessions
 Session settings.
