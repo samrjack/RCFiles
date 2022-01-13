@@ -43,6 +43,8 @@ brew install --cask slack
 
 brew install --cask gimp
 
+brew install minikube
+
 brew install awscli
 
 brew install tmux

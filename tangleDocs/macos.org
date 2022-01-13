@@ -170,6 +170,12 @@ Best opensource image editor!
 brew install --cask gimp
 #+END_SRC
 
+** Minikube
+Runs a kubernetes cluster locally.
+#+begin_src sh
+brew install minikube
+#+end_src
+
 * CLI tools
 ** awscli
 A CLI tool for accessing and using AWS resources.
