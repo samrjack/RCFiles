@@ -79,11 +79,6 @@ fi
 
 # User configuration
 
-# Source all shell generic files
-for file in ${HOME}/.shell_setup/*; do
-    source "$file"
-done;
-
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$(CONDA_REPORT_ERRORS=false '${HOME}/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
@@ -142,6 +137,11 @@ add-zsh-hook preexec prompt_preexec
 add-zsh-hook precmd prompt_precmd
 
 RPS1='%F{cyan}${prompt_elapsed_time}%F{none}'
+
+# Source all shell generic files
+for file in ${HOME}/.shell_setup/*; do
+    source "$file"
+done;
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
