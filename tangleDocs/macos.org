@@ -368,6 +368,24 @@ A tool for accessing postgresSQL databases from command line. Has some pretty ne
 brew install pgcli
 #+end_src
 
+** Nmap
+A useful network scanner.
+#+begin_src sh
+brew install nmap
+#+end_src
+
+** Hstr
+A history manager that provides suggestions of previous commands.
+#+begin_src sh
+brew install hstr
+#+end_src
+
+** Z
+A smart ~cd~.
+#+begin_src sh
+brew install z
+#+end_src
+
 * Utilities
 ** Postgresql
 #+BEGIN_SRC sh
@@ -405,6 +423,11 @@ Amphetamine is a program that keeps the computer awake without interaction from 
 #+BEGIN_SRC sh
 mas install 937984704 # Amphetamine
 #+END_SRC
+
+Also install caffeine as backup
+#+begin_src sh
+brew install caffeine
+#+end_src
 
 ** Dropbox
 Dropbox is a file syncing service. I use it to manage my database of org files.

@@ -108,6 +108,12 @@ brew install rabbitmq
 
 brew install pgcli
 
+brew install nmap
+
+brew install hstr
+
+brew install z
+
 brew install postgresql
 brew install golang-migrate
 
@@ -121,6 +127,8 @@ brew install --cask 1clipboard
 brew install --cask background-music
 
 mas install 937984704 # Amphetamine
+
+brew install caffeine
 
 brew install --cask dropbox
 
