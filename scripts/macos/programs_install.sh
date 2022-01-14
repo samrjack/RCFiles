@@ -45,6 +45,8 @@ brew install --cask gimp
 
 brew install minikube
 
+brew install coreutils
+
 brew install awscli
 
 brew install tmux
