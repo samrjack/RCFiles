@@ -57,6 +57,8 @@
 
 (package! scad-mode)
 
+(package! prettier-js)
+
 (package! vimrc-mode)
 
 (package! graphviz-dot-mode)

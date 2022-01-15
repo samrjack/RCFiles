@@ -1175,7 +1175,7 @@ This block isn't tangled and isn't at all guaranteed to work even if it was so u
 #+END_SRC
 
 **** Org Chef
-Org chef is a package for saving cooking recipes from sites like [[allrecipes.com][allrecipies]] in org mode for future reference and use.
+Org chef is a package for saving cooking recipes from sites like [[https://www.allrecipes.com][allrecipies]] in org mode for future reference and use.
 #+BEGIN_SRC elisp
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
@@ -1247,6 +1247,59 @@ Org chef is a package for saving cooking recipes from sites like [[allrecipes.co
 
 **** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
+
+**** Javascript
+When working with Javascript, I want to make sure that files fit the standard that I'm working with when I save them so I want to run eslint and/or prettier.
+
+***** Eslint
+Luckily eslint is can be used through LSP mode so for now the stuff below is unneeded.
+
+First I need to be able to run eslint from Emacs.
+#+begin_src elisp :tangle no
+(defun eslint-fix-file (&optional filename)
+  "Run eslint --fix on FILENAME"
+  (if (executable-find "eslint")
+      (progn
+        (unless filename (setq filename (buffer-file-name)))
+        (call-process-shell-command
+         (concat "eslint --fix " filename)
+         nil
+         "*Shell Command Output*"
+         t))))
+#+end_src
+
+Then I need to be able to reload my current file after eslint has run on it.
+#+begin_src elisp :tangle no
+(defun eslint-current-file ()
+  "Run eslint on the current file and load the result"
+  (interactive)
+  (if (executable-find "eslint")
+      (progn
+        (message "Running eslint on " (buffer-file-name))
+        (eslint-fix-file (buffer-file-name))
+        (revert-buffer t t))))
+#+end_src
+
+Finally I need to be able to insert that into the save hook when the javascript mode is loaded.
+#+begin_src elisp :tangle no
+(defun run-eslint-on-save ()
+  "Adds hook to run eslint on save"
+  (interactive)
+  (add-hook 'after-save-hook #'eslint-current-file))
+
+(add-hook 'js2-mode-hook #'run-eslint-on-save)
+#+end_src
+
+***** Prettier
+First I need to add prettier mode so that I don't need to write it myself.
+#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+(package! prettier-js)
+#+END_SRC
+
+Then I just add it to my javascript mode.
+#+begin_src elisp :tangle no
+(add-hook 'js2-mode-hook #'prettier-js-mode)
+#+end_src
 
 **** Vimrc
 #+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
