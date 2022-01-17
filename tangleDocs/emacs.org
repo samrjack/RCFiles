@@ -748,6 +748,11 @@ This module adds git commit information in line with code when turned on which c
                    :height 140
                    :italic t))))
 #+END_SRC
+**** Diff
+This is a nice package for visualizing git diffs in a more standard unix way than magit.
+#+begin_src elisp :tangle ../configs/.doom.d/packages.el
+(package! diff-ansi :recipe (:host gitlab :repo "ideasman42/emacs-diff-ansi"))
+#+end_src
 
 ** Independent or external programs
 *** Discord integration

@@ -25,6 +25,8 @@
 
 (package! blamer)
 
+(package! diff-ansi :recipe (:host gitlab :repo "ideasman42/emacs-diff-ansi"))
+
 (package! elcord)
 
 (package! spray)
