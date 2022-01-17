@@ -592,10 +592,6 @@ Import a simpler sidebar package for when it's needed.
 #+END_SRC
 
 *** Snippets
-#+BEGIN_SRC elisp
-;; enables nested snippets
-(setq yas-triggers-in-field t)
-#+END_SRC
 
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
@@ -680,6 +676,12 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'toggle-and-activate-evil-snipe-mode)
 #+END_SRC
+*** Snippets
+Yas snippets are a nice package for inserting snippets into code.
+
+#+begin_src emacs-lisp :tangle no
+(setq yas-triggers-in-field t)
+#+end_src
 
 *** VLF (Very Large Files)
 VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.

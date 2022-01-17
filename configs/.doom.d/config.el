@@ -115,9 +115,6 @@ Position the cursor at it's beginning, according to the current mode."
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
-;; enables nested snippets
-(setq yas-triggers-in-field t)
-
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
 
