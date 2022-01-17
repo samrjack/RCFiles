@@ -1,7 +1,7 @@
-#+TITLE: Config File
+#+TITLE: Qutebrowser Config File
 #+AUTHOR: Samuel Jackson
-#+DESCRIPTION: 
-#+STARTUP: overview hidestars indent
+#+DESCRIPTION: Configuration file for getting qutebrowser to work
+#+STARTUP: overview hidestars indent num
 #+PROPERTY: header-args :results silent :tangle "../configs/.config/qutebrowser/config.py"
 
 Config file for qutebrowser.
