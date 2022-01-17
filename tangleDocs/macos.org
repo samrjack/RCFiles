@@ -8,33 +8,33 @@
 Many scripts require some setup to make sure the dependencies are met. If a seciton makes its own file that shouldn't be written to by other sections, then those are not initilized here.
 ** programs_install.sh
 Here we need to install brew and add some other package manager related packages to make sure everything installs smoothly.
-#+BEGIN_SRC sh
+#+begin_src sh
 #!/bin/bash
-#+END_SRC
+#+end_src
 
 Here we need to install brew to make sure everything installs smoothly. If brew is already installed we don't reinstall it since that is a pain.
-#+BEGIN_SRC sh
+#+begin_src sh
 if ! command -v brew &> /dev/null
 then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-#+END_SRC
+#+end_src
 
 Then we add ~mas~ which is the =Mac App Store= program which is used to install app store apps from the command line.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew tap buo/cask-upgrade
 brew install mas
-#+END_SRC
+#+end_src
 
 ** configure_settings.sh
 Just need to declare the executing program
-#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+#+begin_src sh :tangle ../scripts/macos/configure_settings.sh
 #!/bin/bash
-#+END_SRC
+#+end_src
 
 * Aliases
 Since macos uses some aliases and environment values that are different from my standard sort of linux environments, this script sets up the local shell setup files so the system runs smoothly.
-#+BEGIN_SRC sh :tangle ../scripts/macos/make_aliases.sh
+#+begin_src sh :tangle ../scripts/macos/make_aliases.sh
 #!/bin/bash
 
 echo "# When coreutils is installed,"                          >> ~/.shell_setup/aliases.local.sh
@@ -51,137 +51,137 @@ echo ""                                                        >> ~/.shell_setup
 echo "    autoload -Uz compinit"                               >> ~/.shell_setup/aliases.local.sh
 echo "    compinit"                                            >> ~/.shell_setup/aliases.local.sh
 echo "fi"                                                      >> ~/.shell_setup/aliases.local.sh
-#+END_SRC
+#+end_src
 
 * Path
 Since macos uses some aliases and environment values that are different from my standard sort of linux environments, this script sets up the local shell setup files so the system runs smoothly.
-#+BEGIN_SRC sh :tangle ../scripts/macos/make_path.sh
+#+begin_src sh :tangle ../scripts/macos/make_path.sh
 #!/bin/bash
 
 echo 'export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.shell_setup/path_setup.local.sh
-#+END_SRC
+#+end_src
 
 * Applications
 ** Terminals
 *** Iterm
 Iterm is the best terminal on MacOS. This (for me) is primarily because mac has the stupid options button that replaces the alt key and this is one of the only terminals that interpret option key-cords correctly instead of creating some unicode gliph. I really hate this part of MacOS...
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask iterm2
-#+END_SRC
+#+end_src
 
 *** Alacritty
 The default terminal I use on all other systems.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask alacritty
-#+END_SRC
+#+end_src
 
 ** Zoom
 A popular video calling service.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask zoom
-#+END_SRC
+#+end_src
 
 ** VLC
 This can play anything. The interface is ugly, but if it's a video file then VLC will play it.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask vlc
-#+END_SRC
+#+end_src
 
 ** Text editors
 *** Emacs
 Emacs is a lisp programming environment that's better known for it's text editing capabilities.
-#+BEGIN_SRC sh :tangle no
+#+begin_src sh :tangle no
 brew install --cask emacs
-#+END_SRC
+#+end_src
 
 The standard emacs install that brew provies uses 27.2 but version 28 has a feature that compiles the elisp code to byte code which is too good to pass up!
-#+BEGIN_SRC sh
+#+begin_src sh
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
-#+END_SRC
+#+end_src
 
 Once emacs is installed, it should be added to the applications section.
-#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+#+begin_src sh :tangle ../scripts/macos/configure_settings.sh
 ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
-#+END_SRC
+#+end_src
 
 *** Sublime-text
 A popular text editor. I don't use it much but I can try it later.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install sublime-text
-#+END_SRC
+#+end_src
 
 *** Brackets
 A popular text editor. I don't use it much but I can try it later.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install brackets
-#+END_SRC
+#+end_src
 
 *** Atom
 A popular text editor. I don't use it much but I can try it later.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install atom
-#+END_SRC
+#+end_src
 
 *** Visual studio code
 A popular text editor. I don't use it much but I can try it later.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install visual-studio-code
-#+END_SRC
+#+end_src
 
 *** Intellij
 Intellij is the industry standard IDE for java and similar languages.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask intellij-idea-ce
-#+END_SRC
+#+end_src
 
 *** Goland
 An intellij-like IDE (also made by jetbrains) for working with go.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask goland
-#+END_SRC
+#+end_src
 
 ** Web Browsers
 *** Chrome
 Chrome is my usual standard choice for a web browser.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask google-chrome
-#+END_SRC
+#+end_src
 
 *** Firefox
 I've always found firefox to be slower than chrome but it is more open source so I like to use it once in a while.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask firefox
-#+END_SRC
+#+end_src
 
 *** Brave
 Brave browser is a privacy focused browser with good adblocking.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask brave-browser
-#+END_SRC
+#+end_src
 *** Qutebrowser
 Qutebrowser is a wonderful little web browser that incorporates vim style keybindings and modal tab management. It's missing plugins and a better adblocker but I still love it! There ARE plugins that privide similar functionality in chrome/firefox that I want to explore some more, but they've never been as fully functioning and as clean to use as my dear qutebrowser.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask qutebrowser
-#+END_SRC
+#+end_src
 
 Qutebrowser has some weird issue that makes it unable to run out of the cask so this command allows it to work. Don't entirely understand it but that's the way life goes sometimes. After allowing it to run, the config file is aliased to the ~.qutebrowser~ folder that macos uses instead of the ~.config/qutebrowser~ folder.
-#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+#+begin_src sh :tangle ../scripts/macos/configure_settings.sh
 sudo xattr -rd com.apple.quarantine /Applications/qutebrowser.app
 ln -s ~/.config/qutebrowser/config.py ~/.qutebrowser/config.py
-#+END_SRC
+#+end_src
 
 ** Slack
 Slack is a very popular tool for business messaging and communication.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask slack
-#+END_SRC
+#+end_src
 
 ** Gimp
 Best opensource image editor!
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask gimp
-#+END_SRC
+#+end_src
 
 ** Minikube
 Runs a kubernetes cluster locally.
@@ -198,108 +198,108 @@ brew install coreutils
 
 ** awscli
 A CLI tool for accessing and using AWS resources.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install awscli
-#+END_SRC
+#+end_src
 
 ** tmux
 Tmux is a terminal multiplexer and session daemon. It works really well for having your own set of desktops in the terminal itself.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install tmux
-#+END_SRC
+#+end_src
 
 ** wget
 Wget is a web downloader similar to curl. It gets used instead of curl in a couple of places so it's good to have installed.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install wget
-#+END_SRC
+#+end_src
 
 ** HttPie
 An alternative to curl and wget.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install httpie
-#+END_SRC
+#+end_src
 
 ** sl
 Sl is the steam locomotive progrom. Who doesn't like trains?
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install sl
-#+END_SRC
+#+end_src
 
 ** fd
 Fd is a find-like utility.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install fd
-#+END_SRC
+#+end_src
 
 ** ranger
 Ranger is a terminal file manager. Nice to use when you need to manipulate files.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install ranger
-#+END_SRC
+#+end_src
 
 ** pass
 Pass is an opensource package manager.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install pass
-#+END_SRC
+#+end_src
 
 ** cmatrix
 Cmatrix allows you to enter the (c)Matrix!
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install cmatrix
-#+END_SRC
+#+end_src
 
 ** pandoc
 Pandoc is a converter that transpiles several different kinds of docs such as markdown into latex or Org into latex or wikix into latex... I mostly use it for turning org files into pdfs or wiki pages.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install pandoc
-#+END_SRC
+#+end_src
 
 ** asciidoc
 Converts asciidoc files into DocBook or HTML.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install asciidoc
-#+END_SRC
+#+end_src
 
 ** htop
 Htop is a terminal based process viewer and manager.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install htop
-#+END_SRC
+#+end_src
 
 ** tldr
 Tldr is a program that provides example usage for several common cli tools out there.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install tldr
-#+END_SRC
+#+end_src
 
 ** jq
 Jq is a cli tool for JSON reading and manipulation.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install jq
-#+END_SRC
+#+end_src
 
 ** tty-clock
 Tty-clock is a... clock, in the... tty.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install tty-clock
-#+END_SRC
+#+end_src
 
 ** ffmpeg
 Ffmpeg is a super powerful cli video and photo modifier.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install ffmpeg
-#+END_SRC
+#+end_src
 
 ** Shells
 *** Bash
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install bash
 brew install bash-completion
-#+END_SRC
+#+end_src
 *** Zsh
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install zsh
 brew install zsh-autosuggestions
 brew install zsh-navigation-tools
@@ -307,36 +307,36 @@ brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install zsh-completions
 brew install zsh-you-should-use
-#+END_SRC
+#+end_src
 
 There's a weird issue that causes zsh to show a warning when starting up. This fixes it.
-#+BEGIN_SRC sh :tangle ../scripts/macos/configure_settings.sh
+#+begin_src sh :tangle ../scripts/macos/configure_settings.sh
 sudo chmod -R 755 /usr/local/share
-#+END_SRC
+#+end_src
 
 ** Cmake
 Used for vterm in emacs.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install cmake
-#+END_SRC
+#+end_src
 
 *** Ripgrep
 A fast grep tool for finding files. Used in emacs.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install ripgrep
-#+END_SRC
+#+end_src
 
 *** Silver searcher
 Another fast grep tool for finding files. Also used in emacs.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install ag
-#+END_SRC
+#+end_src
 
 ** Ledger
 Ledger is a CLI program for double-entry accounting. Neat!
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install ledger
-#+END_SRC
+#+end_src
 
 ** Cloc
 Cloc is a program that counts lines of code in files.
@@ -388,41 +388,41 @@ brew install z
 
 * Utilities
 ** Postgresql
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install postgresql
 brew install golang-migrate
-#+END_SRC
+#+end_src
 
 ** Docker
 Docker is a tool for creating VMs to run software. Needed at many software companies.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask docker
-#+END_SRC
+#+end_src
 
 ** Lastpass
 Lastpass is a tool for password managment.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask lastpass
 brew install lastpass-cli
-#+END_SRC
+#+end_src
 
 ** 1clipboard
 1clipboard manages your clipboard history and access what you've coppied before.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask 1clipboard
-#+END_SRC
+#+end_src
 
 ** Background-music
 Background music is a nice program for managing the audio streams on your computer.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask background-music
-#+END_SRC
+#+end_src
 
 ** Amphetamine
 Amphetamine is a program that keeps the computer awake without interaction from the user. Super convenient when installing programs or just watching something.
-#+BEGIN_SRC sh
+#+begin_src sh
 mas install 937984704 # Amphetamine
-#+END_SRC
+#+end_src
 
 Also install caffeine as backup
 #+begin_src sh
@@ -431,167 +431,167 @@ brew install caffeine
 
 ** Dropbox
 Dropbox is a file syncing service. I use it to manage my database of org files.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask dropbox
-#+END_SRC
+#+end_src
 
 ** Alphred
 Alphred is a more customizable spotlight.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask alfred
-#+END_SRC
+#+end_src
 
 ** Go2shell
 Allows you to open up a terminal in a particular folder from Finder.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask go2shell
-#+END_SRC
+#+end_src
 ** Spectacle
 A tool for window snap managment.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask spectacle
-#+END_SRC
+#+end_src
 ** VPN
 *** TunnelBlick
 Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask tunnelblick
-#+END_SRC
+#+end_src
 
 *** AWS VPN
 AWS VPN client allows you to connect to the AWS vpn which is
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask --cask aws-vpn-client
 
-#+END_SRC
+#+end_src
 
 ** GNU plot
 GNU plot is a tool for creating graphs and other visuals. Used by emacs
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install gnuplot
-#+END_SRC
+#+end_src
 
 ** Aspell
 A good spellchecking backend. Used by emacs.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install aspell
-#+END_SRC
+#+end_src
 
 ** Programming languages
 *** Go
 A clean simple little language. See the [[https://go.dev][golang]] website.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install go
-#+END_SRC
+#+end_src
 
 Go's language server for editors like emacs or vs-code.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install gopls
-#+END_SRC
+#+end_src
 
 And the linter that goes along with it.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install golangci-lint
-#+END_SRC
+#+end_src
 
 *** Python
 In Emacs, python uses a language formatter called black:
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install black
-#+END_SRC
+#+end_src
 *** Haskell
 Install haskell compiler and its language server. Haskell is useful for scripting some things.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install ghc
 brew install haskell-language-server
-#+END_SRC
+#+end_src
 
 *** Racket
 Racket is a popular lisp language.
-#+BEGIN_SRC sh
+#+begin_src sh
 brew install --cask racket
-#+END_SRC
+#+end_src
 
 *** Html
 Great set of HTML tools.
-#+BEGIN_SRC sh 
+#+begin_src sh
 brew install tidy-html5
-#+END_SRC
+#+end_src
 
 *** Xcode
 Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
-#+BEGIN_SRC sh 
+#+begin_src sh
 mas install 497799835 # Xcode
-#+END_SRC
+#+end_src
 
 *** LaTeX
 The whole latex environment. It's a big package but there should be enough space on most machines that it won't matter.
-#+BEGIN_SRC sh 
+#+begin_src sh
 brew install texlive
-#+END_SRC
+#+end_src
 *** Markdown
 Grip is nice markdown viewer so you can see what you've written before publishing.
-#+BEGIN_SRC sh 
+#+begin_src sh
 brew install grip
-#+END_SRC
+#+end_src
 
 *** Web
 Npm is the main package manager for anything and everything javascript. Better have it installed!
-#+BEGIN_SRC sh 
+#+begin_src sh
 brew install npm
-#+END_SRC
+#+end_src
 
 Once npm is installed, it can be used to install packages useful for web development.
-#+BEGIN_SRC sh 
+#+begin_src sh
 npm -g install js-beautify
 npm -g install stylelint
-#+END_SRC
+#+end_src
 
 * Full system install script
 When I need to install on a whole system, I want to have a single script I can run to install basically everything and not need to worry about which scripts to run first or in what order.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 #!/bin/bash
 # This file has been generated using org tangle. To modify, please see the org file.
-#+END_SRC
+#+end_src
 
 TODO prompt to ask about installing doom and fonts. Those are both really long running processes that may not be immediately wanted.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
-#+END_SRC
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
+#+end_src
 
 First we install all the packages. Partly because this is the most instensive part and partly because this ensures that any following scripts have their dependencies installed.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ./programs_install.sh
-#+END_SRC
+#+end_src
 
 Next we install all the config files. This way they're present when things are installed. If this came later, then some of the config files may be created ahead of time which causes problems with symbolically linking to my own configs.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ../configs_install.sh
-#+END_SRC
+#+end_src
 
 Next we need make sure macos specific aliases are present.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ./make_aliases.sh
-#+END_SRC
+#+end_src
 
 Next comes oh-my-zsh since a clean terminal is so important.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ../oh-my-zsh_install.sh
-#+END_SRC
+#+end_src
 
 Next comes my NPM settings.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ../npm_install.sh
-#+END_SRC
+#+end_src
 
 Following that comes the pass plugins so I can use my password manager.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ../pass-addons_install.sh
-#+END_SRC
+#+end_src
 
 And finally we fix correct any MacOS specific issues.
-#+BEGIN_SRC sh :tangle ../scripts/macos/full_system_install.sh
+#+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ./configure_settings.sh
-#+END_SRC
+#+end_src
 
 * Local Variables
 The below allows this file to tangle and produce the output RC file whenever the document is saved.

@@ -6,24 +6,24 @@
 
 * File setup
 ** Initialization
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
 ;;; init.el -*- lexical-binding: t; -*-
-#+END_SRC
+#+end_src
 
 ** Packages
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
-#+END_SRC
+#+end_src
 
 ** Configuration
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-#+END_SRC
+#+end_src
 
 * Initialization
 ** Documentation
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 ;; This file controls what Doom modules are enabled and what order they load
 ;; in. Remember to run 'doom sync' after modifying it!
 
@@ -37,33 +37,33 @@
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
-#+END_SRC
+#+end_src
 
 ** Start
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
 (doom!
 ;;; Modules to load
-#+END_SRC
+#+end_src
 
 ** Input
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :input
        chinese
        ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
-#+END_SRC
+#+end_src
 
 ** Completion
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :completion
        (company +childframe); the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
-#+END_SRC
+#+end_src
 
 ** UI
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :ui
        deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
@@ -91,10 +91,10 @@
        window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
-#+END_SRC
+#+end_src
 
 ** Editor tools
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
@@ -108,10 +108,10 @@
        rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
-#+END_SRC
+#+end_src
 
 ** Emacs
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :emacs
        (dired            ; making dired pretty [functional]
         +icon)
@@ -119,27 +119,27 @@
        ibuffer           ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
-#+END_SRC
+#+end_src
 
 ** Terminals
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :term
        eshell            ; the elisp shell that works everywhere
        shell             ; simple shell REPL for Emacs
        term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
-#+END_SRC
+#+end_src
 
 ** Checkers
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :checkers
        syntax            ; tasing you for every semicolon you forget
        spell             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
-#+END_SRC
+#+end_src
 
 ** Tools
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
@@ -161,17 +161,17 @@
        ;;terraform         ; infrastructure as code
        tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
-#+END_SRC
+#+end_src
 
 ** OS
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :os
        (:if IS-MAC macos)  ; improve compatibility with macOS
        tty               ; improve the terminal Emacs experience
-#+END_SRC
+#+end_src
 
 ** Programming Languages
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :lang
        ;;agda              ; types of types of types of types...
        (cc +lsp)         ; C/C++/Obj-C madness
@@ -248,45 +248,45 @@
        ;;terra             ; Earth and Moon in alignment for performance.
        web               ; the tubes
        (yaml +lsp)       ; JSON, but readable
-#+END_SRC
+#+end_src
 
 ** Email
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :email
        (mu4e +gmail)
        ;;notmuch
        (wanderlust +gmail)
-#+END_SRC
+#+end_src
 
 ** App
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :app
        calendar
        irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
        twitter           ; twitter client https://twitter.com/vnought
-#+END_SRC
+#+end_src
 
 ** Config
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :config
        ;;literate
        (default +bindings +smartparens)
-#+END_SRC
+#+end_src
 
 ** End section
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/init.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
 )
-#+END_SRC
+#+end_src
 
 * Configuration
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-#+END_SRC
+#+end_src
 
 ** Documentation
 *** Macro documentation
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -303,10 +303,10 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-#+END_SRC
+#+end_src
 
 *** Packages documentation
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
@@ -353,29 +353,29 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-#+END_SRC
+#+end_src
 
 ** Personal Identification
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Samuel Jackson"
       user-mail-address "dsiq3g@gmail.com")
-#+END_SRC
+#+end_src
 
 ** Fonts and language
 *** Chinese support
 In order for Chinese text to be displayed correctly, some modes needs to be turned on to allow for the unique characteristics of the symbolic language.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun chinese-text-support ()
   "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
   (interactive)
   (variable-pitch-mode))
-#+END_SRC
+#+end_src
 
 ** Basic Emacs settings
 *** Fonts
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -388,41 +388,41 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-#+END_SRC
+#+end_src
 
 *** Custom settings file
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
-#+END_SRC
+#+end_src
 
 *** Theming
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; Themes
 (package! dracula-theme)
 (package! theme-magic)
-#+END_SRC
+#+end_src
 
 There are two ways to load a theme. Both assume the theme is installed and available. You can either set `doom-theme' or manually load a theme with the `load-theme' function.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
-#+END_SRC
+#+end_src
 
 *** Line numbering
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-#+END_SRC
+#+end_src
 
 *** Undo
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Let the undo buffer use up to 100Mb
 (setq undo-limit 100000000)
-#+END_SRC
+#+end_src
 
 *** Windows
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Resize all windows when a new one comes in so they have
 ;; equal space.
 (setq-default window-combination-resize t
@@ -431,30 +431,30 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 
 ;; (setq-default left-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))
-#+END_SRC
+#+end_src
 
 *** Clipboard
 Prevents system clipboard from being accidentally overwritten. Must now write to register "+ to write to system clipboard.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Some paste related settings.
 (setq save-interprogram-paste-before-kill t
       select-enable-clipboard nil)
-#+END_SRC
+#+end_src
 
 In order to provide copy and paste functionality directly from the keyboard, I need to capture the inputs and make functions that force the register that corresponds with the clipboard to be used (the + register).
 
 First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. In order to get the ascii number of a character, we simply need to put a '?' before it.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
   "Saves the characters in motion into they system clipboard through the '+' register"
   :move-point nil
   :repeat nil
   (interactive "<R><x><y>")
   (evil-yank beg end type ?+ handler))
-#+END_SRC
+#+end_src
 
 And here is the paste function.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (evil-define-command evil-paste-from-clipboard
   (count &optional _ handler)
   "Pastes the latest yanked text behind point.
@@ -462,71 +462,71 @@ The return value is the yanked text."
   :suppress-operator t
   (interactive "*P<x>")
   (evil-paste-before count ?+ handler))
-#+END_SRC
+#+end_src
 
 Finally we need to create universal keybindings to these functions so they can be called from anywhere.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
       :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
-#+END_SRC
+#+end_src
 
 *** Scrolling
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; leave some space at the bottom while scrolling down so the
 ;; cursor isn't hugging the bottom edge.
 (setq scroll-margin 2)
-#+END_SRC
+#+end_src
 
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq initial-major-mode 'emacs-lisp-mode)
 
 (setq initial-scratch-message "\
 ;; Welcome to the scratch buffer.
 
 ")
-#+END_SRC
+#+end_src
 
 *** Tab bar mode
 TODO Add commentary
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq tab-bar-show t)
 (setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
 (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
 (set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
 (map! :n "M->" #'tab-next
       :n "M-<" #'tab-previous)
-#+END_SRC
+#+end_src
 
 Add the menu button to the tab bar so it can be accessed once in a while without taking up space.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun tab-bar-format-menu-bar-lambda ()
   "Produce the Menu button for the tab bar that shows the menu bar."
   '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
      tab-bar-menu-bar :help "Menu Bar")))
 (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
-#+END_SRC
+#+end_src
 
 Add global keybinding labeling so tabs are easier to find
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (which-key-add-key-based-replacements "C-x t" "tabs")
-#+END_SRC
+#+end_src
 
 Make tab functions accessible from the doom-leader menu as well.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (map! :leader :desc "Tabs" "T" tab-prefix-map)
-#+END_SRC
+#+end_src
 
 *** Directory navigation
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; directory management
 (package! dired-sidebar)
 (package! dired+)
 (package! dired-subtree)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun dired-turn-off-file-info ()
   "Turns off the file info in dired mode"
   (interactive)
@@ -537,11 +537,11 @@ Make tab functions accessible from the doom-leader menu as well.
       :leader
       :desc "toggle dired file info"
       :n "t d" #'dired-hide-details-mode)
-#+END_SRC
+#+end_src
 
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -550,121 +550,119 @@ Position the cursor at it's beginning, according to the current mode."
   (newline-and-indent)
   (forward-line -1)
   (indent-according-to-mode))
-#+END_SRC
+#+end_src
 
 *** Keybindings
 **** Tab as fold toggling
 When available, I really like to use tab as a quick way to toggle folds.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (map! :n "TAB" #'+fold/toggle)
-#+END_SRC
+#+end_src
 
 ** Managing files
 *** Sidebar file explorer
 
 Use treemacs for now since it looks so nice
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'+treemacs/toggle)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (map! :n "C-n" #'+treemacs/toggle)
 (map! :n "M-n" #'dired-sidebar-toggle-sidebar)
-#+END_SRC
+#+end_src
 
 Make it so that treemacs can use my keyboard shortcuts.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (map! :map 'treemacs-mode-map
       :ng "M-n" #'+treemacs/toggle
       :ng "C-n" #'+treemacs/toggle)
-#+END_SRC
+#+end_src
 
 Import a simpler sidebar package for when it's needed.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! dired-sidebar)
-#+END_SRC
+#+end_src
 
 *** Projectile
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
-#+END_SRC
-
-*** Snippets
+#+end_src
 
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
 
 *** Sub-word movement
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
-#+END_SRC
+#+end_src
 
 *** Case insensitive search
 =case-fold-search= is a variable that turns case sensitivity on and off. It is set per buffer. Since I like case sensitivity, I'm setting the default value so that new buffers use case sensitive searches.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
-#+END_SRC
+#+end_src
 
 *** Which key
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! discover-my-major)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (map! :n "g /"   #'which-key-show-top-level
       :n "g C-/" #'which-key-show-full-major-mode
       :n "g ?"   #'which-key-show-full-major-mode
       :n "g M-/" #'which-key-show-minor-mode-keymap)
 (setq which-key-idle-delay 0.5)
-#+END_SRC
+#+end_src
 
 *** Write good mode
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
 (add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
 (map! :leader
       :desc "Write good mode"
       "t W" #'writegood-mode)
-#+END_SRC
+#+end_src
 
 *** Flycheck mode
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! (doom-first-buffer) #'global-flycheck-mode)
-#+END_SRC
+#+end_src
 
 *** Evil mode
 **** Evil settings
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Make undo revert smaller sections of text instead of all text
 ;; added while in insert mode.
 (setq evil-want-fine-undo t)
-#+END_SRC
+#+end_src
 
 **** Evil snipe mode
 ***** Snipe mode off by default
 I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ; Remove default snipe mode
 (remove-hook! (doom-first-input) 'evil-snipe-mode)
 ; There can be problems between snipe mode and magit mode.
 (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-#+END_SRC
+#+end_src
 
 ***** Settings
 Some settings for when snipe mode is on.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq evil-snipe-scope 'whole-visible
       evil-snipe-repeat-scope 'whole-visible)
-#+END_SRC
+#+end_src
 
 ***** New keybinding
 This allows you to toggle evil snipe mode on and off (though it's still off by default)
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun toggle-and-activate-evil-snipe-mode ()
   "Toggles evil-snipe-mode on and off then activates the
 mode map since otherwise it requires forcing the normal mode state to be activated."
@@ -675,7 +673,8 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 (map! :leader
       :desc "Evil snipe mode"
       "t S" #'toggle-and-activate-evil-snipe-mode)
-#+END_SRC
+#+end_src
+
 *** Snippets
 Yas snippets are a nice package for inserting snippets into code.
 
@@ -685,58 +684,58 @@ Yas snippets are a nice package for inserting snippets into code.
 
 *** VLF (Very Large Files)
 VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
 (package! vlf :recipe (:host github :repo "m00natic/vlfi"))
-#+END_SRC
+#+end_src
 
 Then setup the package later.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
-#+END_SRC
+#+end_src
 
 *** Colored info
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! info-colors)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 (add-hook 'info-selection-hook 'info-colors-fontify-node)
-#+END_SRC
+#+end_src
 
 *** R data frames
 This allows emacs to handle R style data frames. This makes some data handling easier in various files.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! ess-view)
-#+END_SRC
+#+end_src
 
 *** Dictionary
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
-#+END_SRC
+#+end_src
 
 *** Code folding
 Origami mode
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! origami)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (global-origami-mode)
-#+END_SRC
+#+end_src
 
 *** Git
 **** Blamer
 This module adds git commit information in line with code when turned on which can be nice when working through a code base.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! blamer)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package blamer
   :defer 20
   :custom
@@ -747,7 +746,7 @@ This module adds git commit information in line with code when turned on which c
                    :background nil
                    :height 140
                    :italic t))))
-#+END_SRC
+#+end_src
 **** Diff
 This is a nice package for visualizing git diffs in a more standard unix way than magit.
 #+begin_src elisp :tangle ../configs/.doom.d/packages.el
@@ -756,22 +755,22 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
 
 ** Independent or external programs
 *** Discord integration
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! elcord)
-#+END_SRC
+#+end_src
 
 *** Speed reading
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! spray)
-#+END_SRC
+#+end_src
 
 *** Presentations
 **** Key cast
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! keycast)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! keycast
   :commands keycast-mode
   :config
@@ -787,14 +786,14 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
   (custom-set-faces!
     ('keycast-command :inherit doom-modeline-debug :height 0.9)
     ('keycast-key :inherit custom-modified :height 1.1 :weight bold)))
-#+END_SRC
+#+end_src
 
 **** Gif Screenshot
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! gif-screencast)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! gif-screencast
   :commands gif-screencast-mode
   :config
@@ -812,48 +811,48 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
                                "/tmp/doom-color-theme")))
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
-#+END_SRC
+#+end_src
 
 **** Command log mode
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! command-log-mode)
-#+END_SRC
+#+end_src
 
 ** Mode/package settings
 *** Guix
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! guix)
-#+END_SRC
+#+end_src
 
 *** Elisp-shell
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
-#+END_SRC
+#+end_src
 
 **** Elisp shell aliases
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/.eshell-aliases
-#+END_SRC
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/.eshell-aliases
+#+end_src
 
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
 
 **** Date and time
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
 (display-time-mode 1)
-#+END_SRC
+#+end_src
 
 **** Battery
 For the battery, I don't want it to appear in the the mode line if there is no battery present.
 
 Since the following functions require the battery package, I need to wrap it in ~use-package~ to make sure all the definitions are loaded.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! battery :config
-#+END_SRC
+#+end_src
 
 Sadly, there are no default functions for finding if a battery is present so I'll start by writing my own based off of the ~battery~ function in [[https://github.com/emacs-mirror/emacs/blob/3af9e84ff59811734dcbb5d55e04e1fdb7051e77/lisp/battery.el#L219][battery.el]].
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
     (defun battery-p ()
         "returns t if a battery is present for the system and nil if one is not."
         (and battery-status-function
@@ -863,20 +862,20 @@ Sadly, there are no default functions for finding if a battery is present so I'l
                                      battery-echo-area-format
                                      (funcall battery-status-function)))
              t))
-#+END_SRC
+#+end_src
 
 If a battery source is detected, then show the batter level in the mode bar.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
     (unless (battery-p) (display-battery-mode 1))
-#+END_SRC
+#+end_src
 
 Finally, close the battery package wrapper.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 )
-#+END_SRC
+#+end_src
 
 **** Encoding format
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,
 so only show the modeline when this is not the case"
@@ -891,19 +890,19 @@ so only show the modeline when this is not the case"
                         (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
                 t nil)))
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
-#+END_SRC
+#+end_src
 
 *** Web mode
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq web-mode-script-padding standard-indent)
 (setq web-mode-style-padding standard-indent)
 (setq web-mode-block-padding standard-indent)
 (setq web-mode-part-padding standard-indent)
-#+END_SRC
+#+end_src
 
 *** Org mode
 **** Org add-on packages
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! org-reverse-datetree)
 ;(package! ox-gfm) ; Causing problems with pandoc at the moment.
 (package! org-ref)
@@ -911,39 +910,39 @@ so only show the modeline when this is not the case"
 (package! org-super-agenda)
 (package! org-fragtog)
 (package! org-pretty-tags)
-#+END_SRC
+#+end_src
 
 **** Standard Org settings
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-directory "~/org")
 (setq org-archive-location "archive/%s_archive::")
-#+END_SRC
+#+end_src
 
 ***** Font support
 In org mode I like to be able to write in different fonts and languages (such as chinese) so I'm turning on variable pitch font support. Without it, lots of text starts to overlap.
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (add-hook 'org-mode-hook #'chinese-text-support)
-#+END_SRC
+#+end_src
 
 ***** Babel
 Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
 
 ****** Clojure
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; Clojure related packages
 (package! clojure-mode)
 (package! clojure-mode-extra-font-locking)
 (package! clj-refactor)
 (package! cider)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-bable-clojure-backend 'cider)
-#+END_SRC
+#+end_src
 
 ***** Org mode keybindings
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
 ;; Use keybinding g m to "go mark" the current location so it can be returned to later.
 (map! :after org
@@ -954,13 +953,13 @@ Several languages require LSPs or other back end code to be configured for babel
     :nv "g k" #'evil-previous-visual-line
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
-#+END_SRC
+#+end_src
 
 ***** Shortcut to open org files
 This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
 
 This first function opens up the a file with all the complications that come with opening the file including setting a correct extension if needed.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-default-extension ".org")
 (defun org-open-org-file (file)
   "Opens an org file in the default org folder.
@@ -996,19 +995,19 @@ if no org extension is given then it will be automatically appended."
       (error "The provided file is a directory %s" file)
     (find-file file)
     (org-mode)))
-#+END_SRC
+#+end_src
 
 This helper function contains the shared code for prompting for a file.
 =TODO= Create a function for building a system path.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun prompt-org-file (&optional dir default-name)
   "Prompts the user for a file inside the specified directory. Uses defualt name when no entry is given if the name is provided."
   (unless dir (setq dir org-directory))
   (directory-file-name (read-file-name "Choose org file: " dir default-name)))
-#+END_SRC
+#+end_src
 
 Finally we can create functions to each of the directories that I access most often and map them to key cords.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun org-open-file ()
   "Prompts and opens a file in the default org directory."
   (interactive)
@@ -1036,44 +1035,44 @@ Finally we can create functions to each of the directories that I access most of
         :desc "Notes" "n" #'org-open-work-note
         :desc "Projects" "p" #'org-open-project-note
         :desc "Tasks" "t" #'org-open-work-task)))
-#+END_SRC
+#+end_src
 
 **** Org Roam
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
-#+END_SRC
+#+end_src
 
 **** Timers and clock
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
-#+END_SRC
+#+end_src
 
 **** Org Agenda
 ***** Limiting files
 To set specific files as being "agenda" files, you can use =org-agenda-files= however I've found I like putting schedule markers in various files around my org setup.
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (setq org-agenda-files (list "~/org/work.org"
                              "~/org/todo.org"))
-#+END_SRC
+#+end_src
 
 **** Pomodoro
 ***** Begin "after! org"
 All these settings have to be made after org loads so they're wrapped in an =(after! org ...)= macro.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (after! org
-#+END_SRC
+#+end_src
 
 ***** Work length
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-pomodoro-length 25
     org-pomodoro-short-break-length 5
     org-pomodoro-long-break-length 15)
-#+END_SRC
+#+end_src
 
 ***** Sounds to play
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (setq org-pomodoro-play-sounds t
     ;; org-pomodoro-start-sound-p f
     ;; org-pomodoro-ticking-sound-p f
@@ -1081,36 +1080,36 @@ All these settings have to be made after org loads so they're wrapped in an =(af
     org-pomodoro-finished-sound-p t
     org-pomodoro-short-break-sound-p t
     org-pomodoro-long-break-sound-p t)
-#+END_SRC
+#+end_src
 
 ***** Sounds to use
 If I decide to find sound files I like more than the defaults, then I can put them here.
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (setq ;org-pomodoro-start-sound ()
       ;org-pomodoro-ticking-sound ()
       org-pomodoro-killed-sound ()
       org-pomodoro-finished-sound ()
       org-pomodoro-short-break-sound ()
       org-pomodoro-long-break-sound ())
-#+END_SRC
+#+end_src
 
 ***** End of "after! org"
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 )
-#+END_SRC
+#+end_src
 
 **** Org Capture
 ***** Settings
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 ; Set default file for newly captured notes
 (after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
-#+END_SRC
+#+end_src
 
 ***** Org template
 All of my org templates are in a separate folder in my org files repo. This is so that templates are both private from public eyes and also travel with their partnered org files. I'll probably make a separate git repo for them just so they're recorded but that's a lower priority.
 
 Load templates from org directory.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun load-directory (dir)
   "Loads all .el files from a provided directory. If the directory doesn't exist, the function loads nothing."
   (interactive)
@@ -1122,13 +1121,13 @@ Load templates from org directory.
       (mapc load-it (directory-files dir nil "\\.el$")))))
 
 (load-directory (concat (file-name-as-directory org-directory) "capture-templates"))
-#+END_SRC
+#+end_src
 
 ****** Example template code
 Example of org capture templates and how everything is setup.
 pulled from https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el.
 This block isn't tangled and isn't at all guaranteed to work even if it was so use it only as an example.
-#+BEGIN_SRC elisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (after! org
   (setq org-capture-templates '(
     ("t" "Todo" entry () "" :prepend t)
@@ -1179,26 +1178,26 @@ This block isn't tangled and isn't at all guaranteed to work even if it was so u
            "* %U %?\n %i\n %a"
            :heading "Changelog"
            :prepend t))
-#+END_SRC
+#+end_src
 
 **** Org Chef
 Org chef is a package for saving cooking recipes from sites like [[https://www.allrecipes.com][allrecipies]] in org mode for future reference and use.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
-#+END_SRC
+#+end_src
 
 *** Systemd
 *** E-book reader
 **** Packages
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; e-reader
 (package! calibredb)
 (package! nov)
-#+END_SRC
+#+end_src
 
 **** Settings
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config
@@ -1244,13 +1243,13 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
                   (:eval (doom-modeline-segment--major-mode)))))
 
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
-#+END_SRC
+#+end_src
 
 *** Programming Languages
 **** Open CAD
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! scad-mode)
-#+END_SRC
+#+end_src
 
 **** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
@@ -1299,9 +1298,9 @@ Finally I need to be able to insert that into the save hook when the javascript 
 
 ***** Prettier
 First I need to add prettier mode so that I don't need to write it myself.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! prettier-js)
-#+END_SRC
+#+end_src
 
 Then I just add it to my javascript mode.
 #+begin_src elisp :tangle no
@@ -1309,82 +1308,82 @@ Then I just add it to my javascript mode.
 #+end_src
 
 **** Vimrc
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! vimrc-mode)
-#+END_SRC
+#+end_src
 
 **** Graphviz
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! graphviz-dot-mode)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! systemd)
-#+END_SRC
+#+end_src
 
 ** Fun
 *** XKCD
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; Fun stuff
 (package! xkcd)
-#+END_SRC
+#+end_src
 
 *** Typewriter
 Makes emacs sound like a typewriter.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! selectric-mode)
-#+END_SRC
+#+end_src
 
 *** Games
 **** steam
 A package for accessing and organizing your steam library from within emacs
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! steam)
-#+END_SRC
+#+end_src
 
 **** 2048-game
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! 2048-game)
-#+END_SRC
+#+end_src
 
 **** mines
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! mines)
-#+END_SRC
+#+end_src
 
 **** minesweeper
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! minesweeper)
-#+END_SRC
+#+end_src
 
 **** sudoku
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! sudoku)
-#+END_SRC
+#+end_src
 
 **** threes
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! threes)
-#+END_SRC
+#+end_src
 
 **** Pacmacs
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! pacmacs)
-#+END_SRC
+#+end_src
 
 *** Fireplace
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! fireplace)
-#+END_SRC
+#+end_src
 
 *** Power mode!
 Power mode causes the screen to shake and dust to fly with each key that's typed. A cool effect for when you're hammering out a sarcastic reply.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))
-#+END_SRC
+#+end_src
 
 ** Experimental personal functions
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (defun print-point-position ()
   "Print the position of point to the message console."
   (interactive)
@@ -1398,20 +1397,20 @@ Power mode causes the screen to shake and dust to fly with each key that's typed
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 ;;
-#+END_SRC
+#+end_src
 
 * Fixes
 Here are some config fixes for issues I'm running into.
 
 This issue is with some hook that is causing all my actions to fail its getting really annoying. I couldn't even use magit. Well now you're gone little guy, hope you're happy.
-#+BEGIN_SRC elisp
+#+begin_src emacs-lisp
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
-#+END_SRC
+#+end_src
 
 This package's git github repo recently changed and so the pinning information is wrong. I'm unpinning it for now so that things build correctly. Eventually this will get fixed and can be removed. This isn't a big risk since this package is not under active development so the no breaking changes should come any time soon.
-#+BEGIN_SRC elisp :tangle ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (unpin! dired-git-info)
-#+END_SRC
+#+end_src
 
 * Auto Tangle
 The below allows this file to tangle and produce the output configuration files whenever the document is saved.

@@ -4,81 +4,81 @@
 #+STARTUP: overview hidestars indent num
 #+PROPERTY: header-args :results silent :tangle "../configs/.config/cVim/cVimrc"
 
-#+BEGIN_SRC 
+#+begin_src
 " This file has been generated using org tangle. To modify, please see the org file.
-#+END_SRC
+#+end_src
 
 * Settings
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 set hud
 set smoothscroll
 set incsearch
 set cncpcompletion
 let defaultengine = "google"
 let locale = "us"
-#+END_SRC
+#+end_src
 
 * Keybindings
 ** Page scrolling
 Basic movement
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map j scrollDown
 map k scrollUp
 map h scrollLeft
 map l scrollRight
-#+END_SRC
+#+end_src
 
 Moving faster.
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map d scrollPageDown
 map u scrollPageUp
 map D scrollFullPageDown
 map U scrollFullPageUp
-#+END_SRC
+#+end_src
 
 Moveing to the edges.
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map gg scrollToTop
 map G scrollToBottom
 map 0 scrollToLeft
 map $ scrollToRight
-#+END_SRC
+#+end_src
 
 ** Searches
 ** Open url
-#+BEGIN_SRC vimcrc
+#+begin_src vimcrc
 map o :open<Space>
 map O :open!<Space>
 map <C-o> :open @%
 map <A-o> :open! @%
-#+END_SRC
+#+end_src
 ** Tabs
 *** Navigation
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map ^ firstTab
-#+END_SRC
+#+end_src
 *** Shortcuts
 *** Management
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map < moveTabLeft
 map > moveTabRight
 map x closeTab
 map X lastClosedTab
 map <A-p> pinTab
-#+END_SRC
+#+end_src
 
 ** History navigation
 Going backwards and forwards in history
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map H goBack
 map L goForward
-#+END_SRC
+#+end_src
 
 Put Open older tab in the background
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 " map <C-h>
 " map <C-l>
-#+END_SRC
+#+end_src
 ** Link navigation
 ** Navigation
 ** Hinting
@@ -97,18 +97,18 @@ map bT :bookmarks&<Space>
 ** Clearing things away
 ** Sessions
 Session settings.
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map ss :mksession<Space>
 map sd :delsession<Space>
 map sr :session<Space>
-#+END_SRC
+#+end_src
 ** Windows
 Keybindings for handling which window tabs are a part of.
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 map wa :tabattach<Space>
 map wd :tabdetach<CR>
 map wo :new<Space>
-#+END_SRC
+#+end_src
 ** Reload
 ** Macros
 ** g- and its options
@@ -117,7 +117,7 @@ map wo :new<Space>
 
 * Commands
 ** Documentation
-#+BEGIN_SRC vimrc
+#+begin_src vimrc
 :command doc open! https://github.com/1995eaton/chromium-vim
 * Local Variables
 The below allows this file to tangle and produce the output RC file whenever the document is saved.

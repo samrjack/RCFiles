@@ -4,9 +4,9 @@
 #+STARTUP: overview hidestars indent num
 #+PROPERTY: header-args :results silent :tangle ""
 
-#+BEGIN_SRC 
-" This file has been generated using org tangle. To modify, please see the org file.
-#+END_SRC
+#+BEGIN_SRC :tangle no
+// This file has been generated using org tangle. To modify, please see the org file.
+#+end_src
 
 * Local Variables
 The below allows this file to tangle and produce the output RC file whenever the document is saved.

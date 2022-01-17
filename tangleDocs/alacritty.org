@@ -16,23 +16,23 @@
  All imports must either be absolute paths starting with ~/~, or paths relative
  to the user's home directory starting with ~\~/~.
 
-#+BEGIN_SRC yaml
+#+begin_src yaml
 # This file has been generated using org tangle. To modify, please see the org file.
-#+END_SRC
+#+end_src
 
 * Imports
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 import:
   - /path/to/alacritty.yml
-#+END_SRC
+#+end_src
 
 * Environment
 Any items in the ~env~ entry below will be added as
 environment variables. Some entries may override variables
 set by alacritty itself.
-#+BEGIN_SRC yaml
+#+begin_src yaml
 env:
-#+END_SRC
+#+end_src
 ** TERM
 TERM variable
 
@@ -40,56 +40,56 @@ This value is used to set the ~$TERM~ environment variable for
 each instance of Alacritty. If it is not present, alacritty will
 check the local terminfo database and use ~alacritty~ if it is
 available, otherwise ~xterm-256color~ is used.
-#+BEGIN_SRC yaml
+#+begin_src yaml
   TERM: xterm-256color
-#+END_SRC
+#+end_src
 
 ** Scale factor
 This value can be set in order to standardize the text size. For some reason, when using xmonad vs gnome, I get different scale factors so I'd rather set it to a constant value and not have to worry.
 Issue solution pulled from [[https://github.com/alacritty/alacritty/issues/3549][here]].
-#+BEGIN_SRC yaml
+#+begin_src yaml
 WINIT_X11_SCALE_FACTOR: "1"
-#+END_SRC
+#+end_src
 * Window
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 window:
-#+END_SRC
+#+end_src
 ** dimensions
 Window dimensions (changes require restart)
 
 Number of lines/columns (not pixels) in the terminal. The number of columns
 must be at least ~2~, while using a value of ~0~ for columns and lines will
 fall back to the window manager's recommended size.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   dimensions:
     columns: 0
     lines: 0
-#+END_SRC
+#+end_src
 ** position
 Window position (changes require restart)
 
 Specified in number of pixels.
 If the position is not set, the window manager will handle the placement.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   position:
     x: 0
     y: 0
-#+END_SRC
+#+end_src
 ** padding
 Window padding (changes require restart)
 
 Blank space added around the window in pixels. This padding is scaled
 by DPI and the specified value is always added at both opposing sides.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   padding:
     x: 0
     y: 0
-#+END_SRC
+#+end_src
 ** dynamic padding
 Spread additional padding evenly around the terminal content.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   dynamic_padding: false
-#+END_SRC
+#+end_src
 ** decorations
 Window decorations
 
@@ -100,9 +100,9 @@ Values for ~decorations~:
 Values for ~decorations~ (macOS only):
     - transparent: Title bar, transparent background and title bar buttons
     - buttonless: Title bar, transparent background and no title bar buttons
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   decorations: full
-#+END_SRC
+#+end_src
 ** startup mode
 Startup Mode (changes require restart)
 
@@ -113,66 +113,66 @@ Values for ~startup_mode~:
 
 Values for ~startup_mode~ (macOS only):
   - SimpleFullscreen
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   startup_mode: Windowed
-#+END_SRC
+#+end_src
 ** title
 Window title
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   title: Alacritty
-#+END_SRC
+#+end_src
 ** dynnamic_title
 Allow terminal applications to change Alacritty's window title.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   dynamic_title: true
-#+END_SRC
+#+end_src
 ** class
 Window class (Linux/BSD only):
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   class:
-#+END_SRC
+#+end_src
 *** instance
 Application instance name
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     instance: Alacritty
-#+END_SRC
+#+end_src
 *** general
 General application class
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     general: Alacritty
-#+END_SRC
+#+end_src
 ** gtk theme variant
 GTK theme variant (Linux/BSD only)
 
 Override the variant of the GTK theme. Commonly supported values are ~dark~
 and ~light~. Set this to ~None~ to use the default theme variant.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   gtk_theme_variant: None
-#+END_SRC
+#+end_src
 * Scrolling
-#+BEGIN_SRC yaml
+#+begin_src yaml
 scrolling:
-#+END_SRC
+#+end_src
 ** history
 Maximum number of lines in the scrollback buffer.
 Specifying '0' will disable scrolling.
-#+BEGIN_SRC yaml
+#+begin_src yaml
   history: 30000
-#+END_SRC
+#+end_src
 ** multiplier
 Scrolling distance multiplier.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   multiplier: 3
-#+END_SRC
+#+end_src
 
 * Fonts
 Font configuration
-#+BEGIN_SRC yaml
+#+begin_src yaml
 font:
-#+END_SRC
+#+end_src
 ** normal
 Normal (roman) font face
-#+BEGIN_SRC yaml
+#+begin_src yaml
   normal:
     # Font family
     #
@@ -184,10 +184,10 @@ Normal (roman) font face
 
     # The ~style~ can be specified to pick a specific face.
     style: Regular
-#+END_SRC
+#+end_src
 ** bold
 Bold font face
-#+BEGIN_SRC yaml
+#+begin_src yaml
   bold:
     # Font family
     #
@@ -197,10 +197,10 @@ Bold font face
 
     # The ~style~ can be specified to pick a specific face.
     style: Bold
-#+END_SRC
+#+end_src
 ** italic
 Italic font face
-#+BEGIN_SRC yaml
+#+begin_src yaml
   italic:
     # Font family
     #
@@ -210,10 +210,10 @@ Italic font face
 
     # The ~style~ can be specified to pick a specific face.
     style: Italic
-#+END_SRC
+#+end_src
 ** bold_italic
 Bold italic font face
-#+BEGIN_SRC yaml
+#+begin_src yaml
   bold_italic:
     # Font family
     #
@@ -223,57 +223,57 @@ Bold italic font face
 
     # The ~style~ can be specified to pick a specific face.
     style: Bold Italic
-#+END_SRC
+#+end_src
 ** size
 Text size is set using standard text point sizing instead of pixel size. This is done by detecting the pixel density on the screen. For properly setting text size, see the [[en.wikipedia.org/wiki/Traditional_point-size_names][wikipedia]] page.
-#+BEGIN_SRC yaml
+#+begin_src yaml
   size: 12.0
-#+END_SRC
+#+end_src
 ** offset
 Offset is the extra space around each character. ~offset.y~ can be thought
 of as modifying the line spacing, and ~offset.x~ as modifying the letter
 spacing.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   offset:
     x: 0
     y: 0
-#+END_SRC
+#+end_src
 ** glyph offset
 Glyph offset determines the locations of the glyphs within their cells with
 the default being at the bottom. Increasing ~x~ moves the glyph to the
 right, increasing ~y~ moves the glyph upward.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   glyph_offset:
     x: 0
     y: 0
-#+END_SRC
+#+end_src
 ** use thin strokes
 Thin stroke font rendering (macOS only)
 
 Thin strokes are suitable for retina displays, but for non-retina screens
 it is recommended to set ~use_thin_strokes~ to ~false~.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   use_thin_strokes: true
-#+END_SRC
+#+end_src
 
 * Draw bold text with bright colors
 If ~true~, bold text is drawn using the bright color variants.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 draw_bold_text_with_bright_colors: false
-#+END_SRC
+#+end_src
 
 * Colors
 Colors (Tomorrow Night)
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 colors:
-#+END_SRC
+#+end_src
 ** primary
 Default colors
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   primary:
     background: '#1d1f21'
     foreground: '#c5c8c6'
-#+END_SRC
+#+end_src
 *** Bright and dim foreground colors
 Bright and dim foreground colors
 
@@ -281,10 +281,10 @@ The dimmed foreground color is calculated automatically if it is not
 present. If the bright foreground color is not set, or
 ~draw_bold_text_with_bright_colors~ is ~false~, the normal foreground
 color will be used.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     dim_foreground: '#828482'
     bright_foreground: '#eaeaea'
-#+END_SRC
+#+end_src
 ** cursor
 Cursor colors
 
@@ -292,11 +292,11 @@ Colors which should be used to draw the terminal cursor.
 
 Allowed values are CellForeground/CellBackground, which reference the
 affected cell, or hexadecimal colors like #ff00ff.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   cursor:
     text: CellBackground
     cursor: CellForeground
-#+END_SRC
+#+end_src
 ** vi mode cursor
 Vi mode cursor colors
 
@@ -304,60 +304,60 @@ Colors for the cursor when the vi mode is active.
 
 Allowed values are CellForeground/CellBackground, which reference the
 affected cell, or hexadecimal colors like #ff00ff.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   vi_mode_cursor:
     text: CellBackground
     cursor: CellForeground
-#+END_SRC
+#+end_src
 ** Search
 Search colors
 
 Colors used for the search bar and match highlighting.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   search:
-#+END_SRC
+#+end_src
 *** matches
 Allowed values are CellForeground/CellBackground, which reference the
 affected cell, or hexadecimal colors like #ff00ff.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     matches:
       foreground: '#000000'
       background: '#ffffff'
     focused_match:
       foreground: '#ffffff'
       background: '#000000'
-#+END_SRC
+#+end_src
 *** bar
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     bar:
       background: '#c5c8c6'
       foreground: '#1d1f21'
-#+END_SRC
+#+end_src
 ** hints
 Keyboard regex hints
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   hints:
-#+END_SRC
+#+end_src
 *** start
 First character in the hint label
 
 Allowed values are CellForeground/CellBackground, which reference the
 affected cell, or hexadecimal colors like #ff00ff.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     start:
       foreground: '#1d1f21'
       background: '#e9ff5e'
-#+END_SRC
+#+end_src
 *** end
 All characters after the first one in the hint label
 
 Allowed values are CellForeground/CellBackground, which reference the
 affected cell, or hexadecimal colors like #ff00ff.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     end:
       foreground: '#e9ff5e'
       background: '#1d1f21'
-#+END_SRC
+#+end_src
 ** line indicator
 Line indicator
 
@@ -365,11 +365,11 @@ Color used for the indicator displaying the position in history during
 search and vi mode.
 
 By default, these will use the opposing primary color.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   line_indicator:
     foreground: None
     background: None
-#+END_SRC
+#+end_src
 ** selection
 Selection colors
 
@@ -377,15 +377,15 @@ Colors which should be used to draw the selection area.
 
 Allowed values are CellForeground/CellBackground, which reference the
 affected cell, or hexadecimal colors like #ff00ff.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   selection:
     text: CellBackground
     background: CellForeground
-#+END_SRC
+#+end_src
 
 ** normal
 Normal colors
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   normal:
     black:   '#1d1f21'
     red:     '#cc6666'
@@ -395,10 +395,10 @@ Normal colors
     magenta: '#b294bb'
     cyan:    '#8abeb7'
     white:   '#c5c8c6'
-#+END_SRC
+#+end_src
 ** bright
 Bright colors
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   bright:
     black:   '#666666'
     red:     '#d54e53'
@@ -408,13 +408,13 @@ Bright colors
     magenta: '#c397d8'
     cyan:    '#70c0b1'
     white:   '#eaeaea'
-#+END_SRC
+#+end_src
 ** dim
 Dim colors
 
 If the dim colors are not set, they will be calculated automatically based
 on the ~normal~ colors.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   dim:
     black:   '#131415'
     red:     '#864343'
@@ -424,7 +424,7 @@ on the ~normal~ colors.
     magenta: '#75617b'
     cyan:    '#5b7d78'
     white:   '#828482'
-#+END_SRC
+#+end_src
 ** indexed colors
  Indexed Colors
 
@@ -433,17 +433,17 @@ on the ~normal~ colors.
 
  Example:
    ~- { index: 16, color: '#ff00ff' }~
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   indexed_colors: []
-#+END_SRC
+#+end_src
 
 * Bell
 Bell
 
 The bell is rung every time the BEL control character is received.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 bell:
-#+END_SRC
+#+end_src
 ** animation
 Visual Bell Animation
 
@@ -460,20 +460,20 @@ Values for ~animation~:
   - EaseOutExpo
   - EaseOutCirc
   - Linear
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   animation: EaseOutExpo
-#+END_SRC
+#+end_src
 ** duration
 Duration of the visual bell flash in milliseconds. A ~duration~ of ~0~ will
 disable the visual bell animation.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   duration: 0
-#+END_SRC
+#+end_src
 ** color
 Visual bell animation color.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   color: '#ffffff'
-#+END_SRC
+#+end_src
 ** command
 Bell Command
 
@@ -485,44 +485,44 @@ Example:
   command:
     program: notify-send
     args: ["Hello, World!"]
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   command: None
-#+END_SRC
+#+end_src
 
 * Background opacity
 Background opacity
 
 Window opacity as a floating point number from ~0.0~ to ~1.0~.
 The value ~0.0~ is completely transparent and ~1.0~ is opaque.
-#+BEGIN_SRC yaml
+#+begin_src yaml
 background_opacity: 0.9
-#+END_SRC
+#+end_src
 
 * Selection
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 selection:
-#+END_SRC
+#+end_src
 ** semantic escape chars
 This string contains all characters that are used as separators for
 "semantic words" in Alacritty.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   semantic_escape_chars: ",│~|:\"' ()[]{}<>\t"
-#+END_SRC
+#+end_src
 ** save to clipboard
 When set to ~true`, selected text will be copied to the primary clipboard.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   save_to_clipboard: false
-#+END_SRC
+#+end_src
 
 * Cursor
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 cursor:
-#+END_SRC
+#+end_src
 ** style
 Cursor style
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   style:
-#+END_SRC
+#+end_src
 *** shape
 Cursor shape
 
@@ -530,9 +530,9 @@ Values for ~shape~:
   - ▇ Block
   - _ Underline
   - | Beam
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     shape: Block
-#+END_SRC
+#+end_src
 *** blinking
 Cursor blinking state
 
@@ -541,9 +541,9 @@ Values for ~blinking~:
   - Off: Disable blinking by default
   - On: Enable blinking by default
   - Always: Force the cursor to always blink
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
     blinking: Off
-#+END_SRC
+#+end_src
 ** vi mode style
 Vi mode cursor style
 
@@ -551,32 +551,32 @@ If the vi mode cursor style is ~None~ or not specified, it will fall back to
 the style of the active value of the normal cursor.
 
 See ~cursor.style~ for available options.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   vi_mode_style: None
-#+END_SRC
+#+end_src
 ** blink interval
 Cursor blinking interval in milliseconds.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   blink_interval: 750
-#+END_SRC
+#+end_src
 ** unfocused hollow
 If this is ~true~, the cursor will be rendered as a hollow box when the
 window is not focused.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   unfocused_hollow: true
-#+END_SRC
+#+end_src
 ** thickness
 Thickness of the cursor relative to the cell width as floating point number
 from ~0.0~ to ~1.0~.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   thickness: 0.15
-#+END_SRC
+#+end_src
 
 * Live config reload
 Live config reload (changes require restart)
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 live_config_reload: true
-#+END_SRC
+#+end_src
 
 * Shell
 Shell
@@ -589,67 +589,67 @@ Default:
   - (macOS) /bin/bash --login
   - (Linux/BSD) user login shell
   - (Windows) powershell
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 shell:
-#+END_SRC
+#+end_src
 ** program
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   program: /bin/bash
-#+END_SRC
+#+end_src
 ** args
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
  args:
    - --login
-#+END_SRC
+#+end_src
 
 * Working directory
 Startup directory
 
 Directory the shell is started in. If this is unset, or ~None~, the working
 directory of the parent process will be used.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 working_directory: None
-#+END_SRC
+#+end_src
 
 * Alt send escape
 Send ESC (\x1b) before characters when alt is pressed.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 alt_send_esc: true
-#+END_SRC
+#+end_src
 
 * Mouse
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 mouse:
-#+END_SRC
+#+end_src
 ** click settings
 Click settings
 
 The ~double_click~ and ~triple_click~ settings control the time
 alacritty should wait for accepting multiple clicks as one double
 or triple click.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
-#+END_SRC
+#+end_src
 ** hide when typing
 If this is ~true~, the cursor is temporarily hidden when typing.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   hide_when_typing: false
-#+END_SRC
+#+end_src
 
 * Hints
 Regex hints
 
 Terminal hints can be used to find text in the visible part of the terminal
 and pipe it to other applications.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 hints:
-#+END_SRC
+#+end_src
 ** alphabet
 Keys used for the hint labels.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   alphabet: "jfkdls;ahgurieowpq"
-#+END_SRC
+#+end_src
 ** enabled
 List with all available hints
 
@@ -675,7 +675,7 @@ Values for ~action~:
       Select the hint's text.
   - MoveViModeCursor
       Move the vi mode cursor to the beginning of the hint.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   enabled:
    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
              [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
@@ -687,9 +687,9 @@ Values for ~action~:
      binding:
        key: U
        mods: Control|Shift
-#+END_SRC
+#+end_src
 
-#+END_SRC
+#+end_src
 * Mouse bindings
 Mouse bindings
 
@@ -714,10 +714,10 @@ Each mouse binding will specify a:
 And optionally:
 
 - ~mods~ (see key bindings)
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
-#+END_SRC
+#+end_src
 
 * Key bindings
 ** Documentation
@@ -926,12 +926,12 @@ If the same trigger is assigned to multiple actions, all of them are executed
 in the order they were defined in.
 
 ** Modes
-#+BEGIN_SRC yaml
+#+begin_src yaml
 key_bindings:
-#+END_SRC
+#+end_src
 
 *** General
-#+BEGIN_SRC yaml
+#+begin_src yaml
   - { key: Paste,                                       action: Paste          }
   - { key: Copy,                                        action: Copy           }
   - { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -940,10 +940,10 @@ key_bindings:
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
   - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
   - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
-#+END_SRC
+#+end_src
 
 *** Vi mode
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
   #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
@@ -992,10 +992,10 @@ key_bindings:
   #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
   #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
   #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
-#+END_SRC
+#+end_src
 
 *** Search mode
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   # Search Mode
   #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
   #- { key: Escape,                mode: Search,     action: SearchCancel          }
@@ -1008,16 +1008,16 @@ key_bindings:
   #- { key: Down,                  mode: Search,     action: SearchHistoryNext     }
   #- { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
   #- { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
-#+END_SRC
+#+end_src
 
 *** Linux, BSD, and Windows
-#+BEGIN_SRC yaml
+#+begin_src yaml
   - { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
   - { key: C,              mods: Control|Shift, mode: ~Vi,        action: Copy             }
-#+END_SRC
+#+end_src
 
 These below are unused.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
   #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
   #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
@@ -1028,17 +1028,17 @@ These below are unused.
   #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
-#+END_SRC
+#+end_src
 
 *** Windows
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
-#+END_SRC
+#+end_src
 
 *** MacOS
 These keybindings are pulled from MacOS but it turns out that in alacritty, Command also maps to Super so I'm just leaving these on everywhere.
-#+BEGIN_SRC yaml
+#+begin_src yaml
   # (macOS inspired)
   - { key: Key0,           mods: Command,                    action: ResetFontSize         }
   - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
@@ -1050,10 +1050,10 @@ These keybindings are pulled from MacOS but it turns out that in alacritty, Comm
   - { key: C,              mods: Command,                    action: Copy                  }
   - { key: H,              mods: Command,                    action: Hide                  }
   - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
-#+END_SRC
+#+end_src
 
 These below are unused.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
   #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
@@ -1064,22 +1064,22 @@ These below are unused.
   #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
-#+END_SRC
+#+end_src
 
 * Debug
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
 debug:
-#+END_SRC
+#+end_src
 ** render timer
 Display the time it takes to redraw each frame.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   render_timer: false
-#+END_SRC
+#+end_src
 ** persistent logging
 Keep the log file after quitting Alacritty.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   persistent_logging: false
-#+END_SRC
+#+end_src
 ** log level
 Log level
 
@@ -1090,14 +1090,14 @@ Values for ~log_level~:
   - Info
   - Debug
   - Trace
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   log_level: Warn
-#+END_SRC
+#+end_src
 ** print events
 Print all received window events.
-#+BEGIN_SRC yaml :tangle no
+#+begin_src yaml :tangle no
   print_events: false
-#+END_SRC
+#+end_src
 
 * Local Variables
 The below allows this file to tangle and produce the output RC file whenever the document is saved.
