@@ -112,6 +112,8 @@ Position the cursor at it's beginning, according to the current mode."
       :ng "M-n" #'+treemacs/toggle
       :ng "C-n" #'+treemacs/toggle)
 
+(setq treemacs-collapse-dirs 5)
+
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
