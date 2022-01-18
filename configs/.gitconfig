@@ -19,6 +19,7 @@
     nlog = "log --numstat"
     authors = "shortlog -s"
     count = "rev-list --count"
+    clear = "reset --hard HEAD"
 [diff]
 	tool = vimdiff2
 [merge]
