@@ -1390,6 +1390,11 @@ A package for accessing and organizing your steam library from within emacs
 (package! pacmacs)
 #+end_src
 
+**** Wordel
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! wordel :recipe (:host github :repo "progfolio/wordel"))
+#+end_src
+
 *** Fireplace
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! fireplace)

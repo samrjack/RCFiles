@@ -91,6 +91,8 @@
 
 (package! pacmacs)
 
+(package! wordel :recipe (:host github :repo "progfolio/wordel"))
+
 (package! fireplace)
 
 (package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))
