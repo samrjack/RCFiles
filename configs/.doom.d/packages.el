@@ -37,6 +37,11 @@
 
 (package! command-log-mode)
 
+(package! kubernetes)
+(package! kubernetes-evil)
+
+(package! kubernetes-helm)
+
 (package! guix)
 
 (package! org-reverse-datetree)

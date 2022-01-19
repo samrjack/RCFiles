@@ -825,6 +825,18 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
 (package! command-log-mode)
 #+end_src
 
+*** Kubernetes
+Kubernetes is a container program that is useful for managing container networks.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! kubernetes)
+(package! kubernetes-evil)
+#+end_src
+
+And being able to work with helm is a must for kubernetes.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! kubernetes-helm)
+#+end_src
+
 ** Mode/package settings
 *** Guix
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
