@@ -202,6 +202,11 @@ A CLI tool for accessing and using AWS resources.
 brew install awscli
 #+end_src
 
+Along with this, usually when using the aws CLI you also need to authenticate and hence use this:
+#+begin_src sh
+brew install aws-iam-authenticator
+#+end_src
+
 ** tmux
 Tmux is a terminal multiplexer and session daemon. It works really well for having your own set of desktops in the terminal itself.
 #+begin_src sh
@@ -469,6 +474,24 @@ brew install --cask --cask aws-vpn-client
 GNU plot is a tool for creating graphs and other visuals. Used by emacs
 #+begin_src sh
 brew install gnuplot
+#+end_src
+
+** Kubernetes
+Kuberentes command line interface
+#+begin_src sh
+brew install kubernetes-cli
+#+end_src
+
+To use kubernetes, we also need to have helm installed. And add some of the more common helm plugins for good measure.
+#+begin_src sh
+brew install helm
+helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0
+helm plugin install https://github.com/rimusz/helm-tiller
+#+end_src
+
+Then this tool is used to create clusters on Amazon EKS. It could go up with the AWS CLI, but it's more related to kubernetes clusters.
+#+begin_src sh
+brew install eksctl
 #+end_src
 
 ** Aspell

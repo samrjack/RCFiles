@@ -49,6 +49,8 @@ brew install coreutils
 
 brew install awscli
 
+brew install aws-iam-authenticator
+
 brew install tmux
 
 brew install wget
@@ -143,6 +145,14 @@ brew install --cask tunnelblick
 brew install --cask --cask aws-vpn-client
 
 brew install gnuplot
+
+brew install kubernetes-cli
+
+brew install helm
+helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0
+helm plugin install https://github.com/rimusz/helm-tiller
+
+brew install eksctl
 
 brew install aspell
 
