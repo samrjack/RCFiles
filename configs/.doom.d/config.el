@@ -129,6 +129,12 @@ Position the cursor at it's beginning, according to the current mode."
       :n "g M-/" #'which-key-show-minor-mode-keymap)
 (setq which-key-idle-delay 0.5)
 
+(marginalia-mode)
+
+(map! :map help-map
+      "b b" 'embark-bindings
+      "b B" 'describe-bindings)
+
 (remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
 (add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
 (map! :leader

@@ -14,6 +14,10 @@
 
 (package! discover-my-major)
 
+(package! marginalia)
+
+(package! embark)
+
 ;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
 (package! vlf :recipe (:host github :repo "m00natic/vlfi"))
 

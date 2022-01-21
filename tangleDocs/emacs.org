@@ -614,7 +614,8 @@ These aren't file or use case specific changes but instead things that can apply
 (setq-default case-fold-search nil)
 #+end_src
 
-*** Which key
+*** Key discovery
+**** Which key
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! discover-my-major)
 #+end_src
@@ -625,6 +626,31 @@ These aren't file or use case specific changes but instead things that can apply
       :n "g ?"   #'which-key-show-full-major-mode
       :n "g M-/" #'which-key-show-minor-mode-keymap)
 (setq which-key-idle-delay 0.5)
+#+end_src
+
+**** Embark
+Embark is a package that allows you to search through key bindings and is a good supplement to which-key.
+
+In order to use embark, we first need to add a dependency: marginalia.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! marginalia)
+#+end_src
+
+Then it just needs to be turned on. Since marginalia is fairly light, this (hopefully) shouldn't impact startup times.
+#+begin_src emacs-lisp
+(marginalia-mode)
+#+end_src
+
+Then for the main package itself, embark.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! embark)
+#+end_src
+
+Once embark is installed, there are some key-bindings that should be set. The first of which is replacing the describe bindings function because that one isn't the most helpful. However, I want to keep it around since once in a while it may prove useful.
+#+begin_src emacs-lisp
+(map! :map help-map
+      "b b" 'embark-bindings
+      "b B" 'describe-bindings)
 #+end_src
 
 *** Write good mode
@@ -1391,6 +1417,7 @@ A package for accessing and organizing your steam library from within emacs
 #+end_src
 
 **** Wordel
+Wordel is a new little game that's a fun distraction.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! wordel :recipe (:host github :repo "progfolio/wordel"))
 #+end_src
