@@ -17,7 +17,7 @@
           )) " " )
 `}
 #+AUTHOR: `user-full-name`
-#+STARTUP: num overview
+#+STARTUP: overview num hidestars indent
 #+DESCRIPTION: $2
 
 $0
