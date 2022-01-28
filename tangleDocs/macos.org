@@ -572,6 +572,7 @@ brew install grip
 Npm is the main package manager for anything and everything javascript. Better have it installed!
 #+begin_src sh
 brew install npm
+brew install nvm
 #+end_src
 
 Once npm is installed, it can be used to install packages useful for web development.

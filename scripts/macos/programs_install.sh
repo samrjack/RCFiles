@@ -180,6 +180,7 @@ brew install texlive
 brew install grip
 
 brew install npm
+brew install nvm
 
 npm -g install js-beautify
 npm -g install stylelint
