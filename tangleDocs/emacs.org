@@ -567,18 +567,18 @@ Import a simpler sidebar package for when it's needed.
 (package! dired-sidebar)
 #+end_src
 
-Use treemacs for now since it looks so nice
+Dired is just so useful that I can't really justify using treemacs. Especially since treemacs has this annoying habit of not saving the location of my cursor so I have to start at the top every time...
 #+begin_src emacs-lisp :tangle no
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'+treemacs/toggle)
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (map! :n "C-n" #'+treemacs/toggle)
 (map! :n "M-n" #'dired-sidebar-toggle-sidebar)
 #+end_src
 
-Make it so that treemacs can use my keyboard shortcuts.
+Make it so that treemacs closes itself when selected no matter which button I press.
 #+begin_src emacs-lisp
 (map! :map 'treemacs-mode-map
       :ng "M-n" #'+treemacs/toggle
