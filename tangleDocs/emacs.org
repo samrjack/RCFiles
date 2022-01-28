@@ -1353,6 +1353,11 @@ Then I just add it to my javascript mode.
 (add-hook 'js2-mode-hook #'prettier-js-mode)
 #+end_src
 
+**** Gitlab CI
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! gitlab-ci-mode)
+#+end_src
+
 **** Vimrc
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! vimrc-mode)

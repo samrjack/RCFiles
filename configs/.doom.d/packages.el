@@ -70,6 +70,8 @@
 
 (package! prettier-js)
 
+(package! gitlab-ci-mode)
+
 (package! vimrc-mode)
 
 (package! graphviz-dot-mode)
