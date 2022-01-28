@@ -56,12 +56,16 @@ alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
 function magit () {
     git_root=$(git rev-parse --show-toplevel)
-    magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
+    # magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
+    magitExecute="(magit-status)"
+    echo "executing: ${magitExecute}"
     if [ $? -eq 0 ]; then
         if ! emacsclient -e 0 >&/dev/null; then
-            emacs -n --eval=${magitExecute}
+            echo "in new emacs instance"
+            emacs -nw -n --eval=${magitExecute}
         else
-            emacsclient -c -n -e ${magitExecute}
+            echo "in emacsclient"
+            emacsclient -nw -e ${magitExecute}
         fi
     fi
 }
