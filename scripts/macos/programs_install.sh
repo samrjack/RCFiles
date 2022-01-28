@@ -45,6 +45,8 @@ brew install --cask gimp
 
 brew install minikube
 
+brew install hyperkit
+
 brew install coreutils
 
 brew install awscli

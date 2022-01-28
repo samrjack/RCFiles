@@ -189,6 +189,16 @@ Runs a kubernetes cluster locally.
 brew install minikube
 #+end_src
 
+Then install the hyperkit drivers so minikube can use more memory.
+#+begin_src sh
+brew install hyperkit
+#+end_src
+
+To use hyperkit, start minikube as follows:
+#+begin_src sh :tangle no
+minikube start --driver='hyperkit' --memory='4g'
+#+end_src
+
 * CLI tools
 ** Coreutils
 The standard GNU utilities. Although these are provided with MacOS already, the ones included here should have the standard option flags which will make my life easier (for the most part...).
