@@ -105,9 +105,6 @@ Position the cursor at it's beginning, according to the current mode."
 
 (map! :n "TAB" #'+fold/toggle)
 
-(map! :n "C-n" #'+treemacs/toggle)
-(map! :n "M-n" #'dired-sidebar-toggle-sidebar)
-
 (map! :map 'treemacs-mode-map
       :ng "M-n" #'+treemacs/toggle
       :ng "C-n" #'+treemacs/toggle)
