@@ -510,6 +510,13 @@ A good spellchecking backend. Used by emacs.
 brew install aspell
 #+end_src
 
+** Android
+Needed to use adb and important tools for working with android devices.
+#+begin_src sh
+brew install android-sdk
+brew install android-platform-tools
+#+end_src
+
 ** Programming languages
 *** Go
 A clean simple little language. See the [[https://go.dev][golang]] website.
@@ -572,7 +579,11 @@ brew install grip
 Npm is the main package manager for anything and everything javascript. Better have it installed!
 #+begin_src sh
 brew install npm
-brew install nvm
+#+end_src
+
+Nvm for managing node versions.
+#+begin_src sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 #+end_src
 
 Once npm is installed, it can be used to install packages useful for web development.

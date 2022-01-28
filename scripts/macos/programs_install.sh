@@ -158,6 +158,9 @@ brew install eksctl
 
 brew install aspell
 
+brew install android-sdk
+brew install android-platform-tools
+
 brew install go
 
 brew install gopls
@@ -180,7 +183,8 @@ brew install texlive
 brew install grip
 
 brew install npm
-brew install nvm
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 npm -g install js-beautify
 npm -g install stylelint
