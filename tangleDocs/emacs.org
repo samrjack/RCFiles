@@ -711,6 +711,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 *** Snippets
 Yas snippets are a nice package for inserting snippets into code.
 
+Turning off the trigger in field for now since it was giving me undesired behavior. Maybe when I learn to use it better then it will come back into the config.
 #+begin_src emacs-lisp :tangle no
 (setq yas-triggers-in-field t)
 #+end_src
