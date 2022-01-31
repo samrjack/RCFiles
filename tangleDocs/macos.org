@@ -183,20 +183,10 @@ Best opensource image editor!
 brew install --cask gimp
 #+end_src
 
-** Minikube
-Runs a kubernetes cluster locally.
+** PgAdmin
+A good gui for accessing postgres tables.
 #+begin_src sh
-brew install minikube
-#+end_src
-
-Then install the hyperkit drivers so minikube can use more memory.
-#+begin_src sh
-brew install hyperkit
-#+end_src
-
-To use hyperkit, start minikube as follows:
-#+begin_src sh :tangle no
-minikube start --driver='hyperkit' --memory='4g'
+brew install --cask pgadmin4
 #+end_src
 
 * CLI tools
@@ -502,6 +492,22 @@ helm plugin install https://github.com/rimusz/helm-tiller
 Then this tool is used to create clusters on Amazon EKS. It could go up with the AWS CLI, but it's more related to kubernetes clusters.
 #+begin_src sh
 brew install eksctl
+#+end_src
+
+** Minikube
+Runs a kubernetes cluster locally.
+#+begin_src sh
+brew install minikube
+#+end_src
+
+Then install the hyperkit drivers so minikube can use more memory.
+#+begin_src sh
+brew install hyperkit
+#+end_src
+
+To use hyperkit, start minikube as follows:
+#+begin_src sh :tangle no
+minikube start --driver='hyperkit' --memory='4g'
 #+end_src
 
 ** Aspell

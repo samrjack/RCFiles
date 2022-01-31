@@ -43,9 +43,7 @@ brew install --cask slack
 
 brew install --cask gimp
 
-brew install minikube
-
-brew install hyperkit
+brew install --cask pgadmin4
 
 brew install coreutils
 
@@ -155,6 +153,10 @@ helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0
 helm plugin install https://github.com/rimusz/helm-tiller
 
 brew install eksctl
+
+brew install minikube
+
+brew install hyperkit
 
 brew install aspell
 
