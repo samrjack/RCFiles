@@ -54,6 +54,10 @@ alias gr="git-root"
 
 alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
+alias dockerc="docker-compose"
+alias dcu="docker-compose up"
+alias dcub="docker-compose up --build"
+
 function magit () {
     git_root=$(git rev-parse --show-toplevel)
     # magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
