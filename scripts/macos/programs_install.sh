@@ -163,6 +163,8 @@ brew install aspell
 brew install android-sdk
 brew install android-platform-tools
 
+brew install lsusb
+
 brew install go
 
 brew install gopls

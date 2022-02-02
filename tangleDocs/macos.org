@@ -183,7 +183,7 @@ Best opensource image editor!
 brew install --cask gimp
 #+end_src
 
-** PgAdmin
+** PGAdmin
 A good gui for accessing postgres tables.
 #+begin_src sh
 brew install --cask pgadmin4
@@ -521,6 +521,11 @@ Needed to use adb and important tools for working with android devices.
 #+begin_src sh
 brew install android-sdk
 brew install android-platform-tools
+#+end_src
+
+Here are other tools for working with android devices.
+#+begin_src sh
+brew install lsusb
 #+end_src
 
 ** Programming languages
