@@ -568,7 +568,7 @@ Import a simpler sidebar package for when it's needed.
 #+end_src
 
 Dired is just so useful that I can't really justify using treemacs. Especially since treemacs has this annoying habit of not saving the location of my cursor so I have to start at the top every time...
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'+treemacs/toggle)
 #+end_src
