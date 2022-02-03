@@ -325,20 +325,29 @@ if no org extension is given then it will be automatically appended."
   (interactive)
   (org-open-org-file (prompt-org-file org-directory "notes.org")))
 
+(defun open-work-org-file (directory default-file)
+  "A condensing function for opening an org directory for work purposes"
+  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory)) default-file)))
+
 (defun org-open-work-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
-  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "notes")) "notes.org")))
+  (open-work-org-file "notes" "notes.org"))
 
 (defun org-open-project-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
-  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "projects")) "project.org")))
+  (open-work-org-file "projects" "project.org"))
 
 (defun org-open-work-task ()
   "Prompts and opens a file in the org work tasks directory."
   (interactive)
-  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory "tasks")) "schedule.org")))
+  (open-work-org-file "tasks" "schedule.org"))
+
+(defun org-open-work-wiki ()
+  "Prompts and opens a file in the org work tasks directory."
+  (interactive)
+  (open-work-org-file "wiki" "toSort.org"))
 
 (map! :leader
       (:prefix ("f o" . "Org files")
@@ -346,7 +355,8 @@ if no org extension is given then it will be automatically appended."
        (:prefix ("w" . "Work")
         :desc "Notes" "n" #'org-open-work-note
         :desc "Projects" "p" #'org-open-project-note
-        :desc "Tasks" "t" #'org-open-work-task)))
+        :desc "Tasks" "t" #'org-open-work-task
+        :desc "Wiki" "w" #'org-open-work-wiki)))
 
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
