@@ -12,6 +12,10 @@
 
 (package! dired-sidebar)
 
+(package! dirtree)
+(package! ztree)
+(package! dir-treeview)
+
 (package! discover-my-major)
 
 (package! marginalia)
@@ -43,6 +47,8 @@
 
 (package! kubernetes)
 (package! kubernetes-evil)
+
+(package! k8s-mode)
 
 (package! kubernetes-helm)
 

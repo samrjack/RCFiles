@@ -598,6 +598,14 @@ The number represents the number of recursive layers it's allowed. Don't make it
   (setq projectile-track-known-projects-automatically nil))
 #+end_src
 
+*** Tree viewer
+This allows you to see all the recursive files in the current tree hierarchy (similar to the ~tree~ command).
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! dirtree)
+(package! ztree)
+(package! dir-treeview)
+#+end_src
+
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
 
@@ -857,6 +865,11 @@ Kubernetes is a container program that is useful for managing container networks
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! kubernetes)
 (package! kubernetes-evil)
+#+end_src
+
+This is for working with kubernetes config files.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! k8s-mode)
 #+end_src
 
 And being able to work with helm is a must for kubernetes.
