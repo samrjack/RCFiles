@@ -58,6 +58,10 @@ alias dockerc="docker-compose"
 alias dcu="docker-compose up"
 alias dcub="docker-compose up --build"
 
+alias add="awk '{ sum += \$1 } END { print sum }'"
+
+alias locst="localstack"
+
 function magit () {
     git_root=$(git rev-parse --show-toplevel)
     # magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
