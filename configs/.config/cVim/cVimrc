@@ -2,8 +2,13 @@ set hud
 set smoothscroll
 set incsearch
 set cncpcompletion
-let defaultengine = "google"
+set regexp
+set cncpcompletion " Uses C-n/C-p in completion selection
+set completeonopen
+let defaultengine = 'google'
 let locale = "us"
+
+let configpath = '~/.config/cVim/.cVimrc'
 
 map j scrollDown
 map k scrollUp

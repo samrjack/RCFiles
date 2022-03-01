@@ -14,8 +14,21 @@ set hud
 set smoothscroll
 set incsearch
 set cncpcompletion
-let defaultengine = "google"
+set regexp
+set cncpcompletion " Uses C-n/C-p in completion selection
+set completeonopen
+let defaultengine = 'google'
 let locale = "us"
+#+end_src
+** Config path
+Where to find the cvimrc file on the local machine.
+#+begin_src vimrc
+let configpath = '~/.config/cVim/.cVimrc'
+#+end_src
+
+Put this in the cvimrc settings along with the config path to just use your local config instead.
+#+begin_src vimrc :tangle no
+set localconfig
 #+end_src
 
 * Keybindings
@@ -81,6 +94,10 @@ Put Open older tab in the background
 #+end_src
 ** Link navigation
 ** Navigation
+*** Quick page access
+This will link pages to be quickly accessed via the ~a~ button.
+#+begin_src vimrc
+#+end_src
 ** Hinting
 ** Follow selection
 ** Yanking (copying)
