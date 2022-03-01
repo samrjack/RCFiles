@@ -385,6 +385,12 @@ A history manager that provides suggestions of previous commands.
 brew install hstr
 #+end_src
 
+** Speedtest cli
+When dealing with internet issues, it helps to be able to run a speed test from the command line.
+#+begin_src sh
+brew install speedtest_cli
+#+end_src
+
 ** Z
 A smart ~cd~.
 #+begin_src sh
@@ -494,6 +500,11 @@ Then this tool is used to create clusters on Amazon EKS. It could go up with the
 brew install eksctl
 #+end_src
 
+Skaffold is a program for running persistent updating local testing in kubernetes.
+#+begin_src sh
+brew install skaffold
+#+end_src
+
 ** Minikube
 Runs a kubernetes cluster locally.
 #+begin_src sh
@@ -507,7 +518,14 @@ brew install hyperkit
 
 To use hyperkit, start minikube as follows:
 #+begin_src sh :tangle no
-minikube start --driver='hyperkit' --memory='4g'
+minikube start --memory='4g' --cpus='2' --driver='hyperkit'
+#+end_src
+
+** Localstack
+Local stack is an AWS emulation program that allows you to run and test AWS integration code from your local computer. [[https://docs.localstack.cloud/overview/][Link to the docs]].
+#+begin_src sh
+pip3 install --user localstack
+pip3 install --user aws-local
 #+end_src
 
 ** Aspell

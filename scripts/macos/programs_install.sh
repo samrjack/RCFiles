@@ -114,6 +114,8 @@ brew install nmap
 
 brew install hstr
 
+brew install speedtest_cli
+
 brew install z
 
 brew install postgresql
@@ -154,9 +156,14 @@ helm plugin install https://github.com/rimusz/helm-tiller
 
 brew install eksctl
 
+brew install skaffold
+
 brew install minikube
 
 brew install hyperkit
+
+pip3 install --user localstack
+pip3 install --user aws-local
 
 brew install aspell
 
