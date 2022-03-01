@@ -1,3 +1,8 @@
+*
+!/**/
+!*.*
+!Dockerfile
+
 tags
 *.iml
 build
@@ -12,3 +17,5 @@ annotation-generated-src/*
 node_modules/*
 dist/*
 .idea/*
+vendor/*
+
