@@ -17,6 +17,7 @@ Here we need to install brew to make sure everything installs smoothly. If brew 
 if ! command -v brew &> /dev/null
 then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    export PATH="/opt/homebrew/bin:${PATH}"
 fi
 #+end_src
 
@@ -24,6 +25,14 @@ Then we add ~mas~ which is the =Mac App Store= program which is used to install 
 #+begin_src sh
 brew tap buo/cask-upgrade
 brew install mas
+sudo softwareupdate --install-rosetta
+#+end_src
+
+*** Xcode
+Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
+#+begin_src sh
+mas install 497799835 # Xcode
+sudo xcodebuild -license accept
 #+end_src
 
 ** configure_settings.sh
@@ -57,8 +66,8 @@ echo "fi"                                                      >> ~/.shell_setup
 Since macos uses some aliases and environment values that are different from my standard sort of linux environments, this script sets up the local shell setup files so the system runs smoothly.
 #+begin_src sh :tangle ../scripts/macos/make_path.sh
 #!/bin/bash
-
-echo 'export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.shell_setup/path_setup.local.sh
+echo 'export PATH="/opt/homebrew/bin:${PATH}"'
+echo 'export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:${PATH}"' >> ~/.shell_setup/path_setup.local.sh
 #+end_src
 
 * Applications
@@ -585,12 +594,6 @@ brew install --cask racket
 Great set of HTML tools.
 #+begin_src sh
 brew install tidy-html5
-#+end_src
-
-*** Xcode
-Xcode is the compiler for mac apps. It takes forever to download but it's good to have installed before it's actually needed.
-#+begin_src sh
-mas install 497799835 # Xcode
 #+end_src
 
 *** LaTeX

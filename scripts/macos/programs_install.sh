@@ -3,10 +3,15 @@
 if ! command -v brew &> /dev/null
 then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    export PATH="/opt/homebrew/bin:${PATH}"
 fi
 
 brew tap buo/cask-upgrade
 brew install mas
+sudo softwareupdate --install-rosetta
+
+mas install 497799835 # Xcode
+sudo xcodebuild -license accept
 
 brew install --cask iterm2
 
@@ -186,8 +191,6 @@ brew install haskell-language-server
 brew install --cask racket
 
 brew install tidy-html5
-
-mas install 497799835 # Xcode
 
 brew install texlive
 
