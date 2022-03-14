@@ -1395,6 +1395,13 @@ Then I just add it to my javascript mode.
 (package! systemd)
 #+end_src
 
+**** General interpreter
+***** TabNine
+TabNine is a general purpose autocompleter. It uses Machine learning to find what's suggested to write next.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! company-tabnine)
+#+end_src
+
 ** Fun
 *** XKCD
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el

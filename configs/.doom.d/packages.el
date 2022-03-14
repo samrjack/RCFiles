@@ -84,6 +84,8 @@
 
 (package! systemd)
 
+(package! company-tabnine)
+
 ;; Fun stuff
 (package! xkcd)
 
