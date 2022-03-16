@@ -36,6 +36,8 @@ brew install --cask intellij-idea-ce
 
 brew install --cask goland
 
+brew install --cask webstorm
+
 brew install --cask google-chrome
 
 brew install --cask firefox

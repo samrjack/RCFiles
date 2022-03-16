@@ -150,6 +150,12 @@ An intellij-like IDE (also made by jetbrains) for working with go.
 brew install --cask goland
 #+end_src
 
+*** Webstorm
+A Jetbrains product for working with javascript
+#+begin_src sh
+brew install --cask webstorm
+#+end_src
+
 ** Web Browsers
 *** Chrome
 Chrome is my usual standard choice for a web browser.
