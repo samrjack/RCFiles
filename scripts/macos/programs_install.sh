@@ -52,6 +52,8 @@ brew install --cask gimp
 
 brew install --cask pgadmin4
 
+brew install --cask postman
+
 brew install coreutils
 
 brew install awscli
@@ -157,6 +159,10 @@ brew install gnuplot
 
 brew install kubernetes-cli
 
+brew install minikube
+
+brew install hyperkit
+
 brew install helm
 helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0
 helm plugin install https://github.com/rimusz/helm-tiller
@@ -165,9 +171,7 @@ brew install eksctl
 
 brew install skaffold
 
-brew install minikube
-
-brew install hyperkit
+brew install kustomize
 
 pip3 install --user localstack
 pip3 install --user aws-local
@@ -179,16 +183,23 @@ brew install android-platform-tools
 
 brew install lsusb
 
+brew install editorconfig
+
 brew install go
 
 brew install gopls
 
 brew install golangci-lint
 
+brew install clang-format
+
 brew install black
 
 brew install ghc
 brew install haskell-language-server
+brew install cabal-install
+
+brew install sbcl
 
 brew install --cask racket
 

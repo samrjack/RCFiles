@@ -204,6 +204,12 @@ A good gui for accessing postgres tables.
 brew install --cask pgadmin4
 #+end_src
 
+** Postman
+Postman is an application for making http api requests to services.
+#+begin_src sh
+brew install --cask postman
+#+end_src
+
 * CLI tools
 ** Coreutils
 The standard GNU utilities. Although these are provided with MacOS already, the ones included here should have the standard option flags which will make my life easier (for the most part...).
@@ -503,24 +509,7 @@ Kuberentes command line interface
 brew install kubernetes-cli
 #+end_src
 
-To use kubernetes, we also need to have helm installed. And add some of the more common helm plugins for good measure.
-#+begin_src sh
-brew install helm
-helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0
-helm plugin install https://github.com/rimusz/helm-tiller
-#+end_src
-
-Then this tool is used to create clusters on Amazon EKS. It could go up with the AWS CLI, but it's more related to kubernetes clusters.
-#+begin_src sh
-brew install eksctl
-#+end_src
-
-Skaffold is a program for running persistent updating local testing in kubernetes.
-#+begin_src sh
-brew install skaffold
-#+end_src
-
-** Minikube
+*** Minikube
 Runs a kubernetes cluster locally.
 #+begin_src sh
 brew install minikube
@@ -534,6 +523,33 @@ brew install hyperkit
 To use hyperkit, start minikube as follows:
 #+begin_src sh :tangle no
 minikube start --memory='4g' --cpus='2' --driver='hyperkit'
+#+end_src
+
+
+*** Helm
+To use kubernetes, we also need to have helm installed. And add some of the more common helm plugins for good measure.
+#+begin_src sh
+brew install helm
+helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0
+helm plugin install https://github.com/rimusz/helm-tiller
+#+end_src
+
+*** EKS
+Then this tool is used to create clusters on Amazon EKS. It could go up with the AWS CLI, but it's more related to kubernetes clusters.
+#+begin_src sh
+brew install eksctl
+#+end_src
+
+*** Skaffold
+Skaffold is a program for running persistent updating local testing in kubernetes.
+#+begin_src sh
+brew install skaffold
+#+end_src
+
+*** Kustomize
+Kustomize is a tool to help build kubernetes applications.
+#+begin_src sh
+brew install kustomize
 #+end_src
 
 ** Localstack
@@ -561,6 +577,12 @@ Here are other tools for working with android devices.
 brew install lsusb
 #+end_src
 
+** Editor config
+Another package for Emacs.
+#+begin_src sh
+brew install editorconfig
+#+end_src
+
 ** Programming languages
 *** Go
 A clean simple little language. See the [[https://go.dev][golang]] website.
@@ -577,6 +599,11 @@ And the linter that goes along with it.
 #+begin_src sh
 brew install golangci-lint
 #+end_src
+*** Java
+For formatting java code in emacs.
+#+begin_src sh
+brew install clang-format
+#+end_src
 
 *** Python
 In Emacs, python uses a language formatter called black:
@@ -588,8 +615,13 @@ Install haskell compiler and its language server. Haskell is useful for scriptin
 #+begin_src sh
 brew install ghc
 brew install haskell-language-server
+brew install cabal-install
 #+end_src
-
+*** Common Lisp
+For emacs.
+#+begin_src sh
+brew install sbcl
+#+end_src
 *** Racket
 Racket is a popular lisp language.
 #+begin_src sh
