@@ -395,7 +395,7 @@ endif
     set lazyredraw
 
 """"" Meta changes """""
-    silent !mkdir ~/.swap > /dev/null 2>&1
+    silent! mkdir ~/.swap > /dev/null 2>&1
     set backupdir=~/.swap//,.,/tmp//
     set directory=~/.swap//,.,/tmp//
 
