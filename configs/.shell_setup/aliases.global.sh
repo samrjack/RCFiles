@@ -19,6 +19,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,build,.idea} --exclude={tags}"
+alias search="grep --exclude-dir='vendor' --exclude-dir='.git' --exclude-dir='node-modules'"
 
 alias tmux='tmux -2'
 
