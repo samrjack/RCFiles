@@ -10,16 +10,18 @@
 [push]
 	default = simple
 [alias]
-    finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m%s\\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
+  finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m%s\\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
 	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
-    parselog="log --pretty=format:'[%h] %an %ad %s' --date=short --numstat"
+  parselog="log --pretty=format:'[%h] %an %ad %s' --date=short --numstat"
 	wdiff = diff --color-words
-    fix = "!f() { vim -p `git diff --name-only --diff-filter=U`; }; f"
-    root = "rev-parse --show-toplevel"
-    nlog = "log --numstat"
-    authors = "shortlog -s"
-    count = "rev-list --count"
-    clear = "reset --hard HEAD"
+  fix = "!f() { vim -p `git diff --name-only --diff-filter=U`; }; f"
+  root = "rev-parse --show-toplevel"
+  nlog = "log --numstat"
+  authors = "shortlog -s"
+  count = "rev-list --count"
+  clear = "reset --hard HEAD"
+	ignore = "update-index --assume-unchanged"
+	track = "update-index --no-assume-unchanged"
 [diff]
 	tool = vimdiff2
 [merge]
