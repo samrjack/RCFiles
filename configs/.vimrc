@@ -12,8 +12,8 @@ endfunction
     if !IsVundleInstalled() && executable('git')
         echo "Installing Vundle.."
         echo ""
-        silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+        silent! mkdir -p ~/.vim/bundle
+        silent! git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
         let vundlePreviouslyInstalled=0
     endif
 
@@ -43,9 +43,6 @@ if IsVundleInstalled()
 
     """"" Syntax """""
 
-        " Org mode
-        Plugin 'jceb/vim-orgmode'
-
         " Syntax highlighting for perl-mason
         Plugin 'aming/vim-mason'
 
@@ -74,6 +71,9 @@ if IsVundleInstalled()
 
         " Ruby packages
         Plugin 'tpope/vim-rails'
+
+        " Go packages
+        Plugin 'fatih/vim-go'
 
         " Large syntax highlighting package
         Plugin 'sheerun/vim-polyglot'
@@ -118,8 +118,8 @@ if IsVundleInstalled()
             " Sacred forest
             Plugin 'KKPMW/sacredforest-vim'
 
-            " Nord colorscheme
-            Plugin 'arcticicestudio/nord-vim'
+            " Nord colorscheme - not currently avaliable
+            " Plugin 'arcticicestudio/nord-vim'
 
             "Oceanic colorscheme
             Plugin 'mhartington/oceanic-next'
@@ -153,6 +153,9 @@ if IsVundleInstalled()
 
         " Multiple cursors
         " Plugin 'terryma/vim-multiple-cursors'
+
+        " Snippets
+        " Plugin 'SirVer/ultisnips'
 
     """"" GIT """""
         " NERDTree git plugin
@@ -336,9 +339,9 @@ endif
 
 """"" Indentation """""
     set smarttab           " Indents to the correct spot first time
-    set shiftwidth=4       " Code defaults to 4 space indents
-    set tabstop=4          " Number of visual spaces per TAB
-    set softtabstop=4      " Number of spaces in a tab when editing
+    " set shiftwidth=4       " Code defaults to 4 space indents
+    " set tabstop=4          " Number of visual spaces per TAB
+    " set softtabstop=4      " Number of spaces in a tab when editing
     set autoindent         " Automatically indents when enter is pressed
     set expandtab          " Makes all tabs into spaces
 

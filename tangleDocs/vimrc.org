@@ -69,9 +69,10 @@ if IsVundleInstalled()
     """"" Syntax """""
 #+end_src
 **** Org mode
-#+begin_src vimrc
+This plugin has proven to be annoying so disabling for now.
+#+begin_src vimrc :tangle no
         " Org mode
-        Plugin 'jceb/vim-orgmode'
+        " Plugin 'jceb/vim-orgmode'
 
 #+end_src
 **** Perl Mason
@@ -128,6 +129,13 @@ Modifies =.tmux.conf=.
         Plugin 'tpope/vim-rails'
 
 #+end_src
+**** Golang
+#+begin_src vimrc
+        " Go packages
+        Plugin 'fatih/vim-go'
+
+#+end_src
+
 **** Other
 #+begin_src vimrc
         " Large syntax highlighting package
@@ -192,8 +200,8 @@ Modifies =.tmux.conf=.
             " Sacred forest
             Plugin 'KKPMW/sacredforest-vim'
 
-            " Nord colorscheme
-            Plugin 'arcticicestudio/nord-vim'
+            " Nord colorscheme - not currently avaliable
+            " Plugin 'arcticicestudio/nord-vim'
 
             "Oceanic colorscheme
             Plugin 'mhartington/oceanic-next'
@@ -206,46 +214,67 @@ Modifies =.tmux.conf=.
 #+begin_src vimrc
     """"" Editing """""
 #+end_src
+
+**** Undo tree
 #+begin_src vimrc
         " Undo tree plugin
         Plugin 'mbbill/undotree'
 
 #+end_src
+
+**** Yank from highlighted sections
 #+begin_src vimrc
         " Yanking
         Plugin 'machakann/vim-highlightedyank'
 
 #+end_src
+
+**** Surround notation
 #+begin_src vimrc
         " Allow for surrounding notation
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-repeat'
 
 #+end_src
+
+**** Comments
 #+begin_src vimrc
         " Allow for easy commenting
         Plugin 'tomtom/tcomment_vim'
 
 #+end_src
+
 #+begin_src vimrc
         " Commenting plugin
         Plugin 'scrooloose/nerdcommenter'
 
 #+end_src
+
+**** Date incrementer
 #+begin_src vimrc
         " Incrementer works with dates too
         Plugin 'tpope/vim-speeddating'
 
 #+end_src
+
+**** CSVs
 #+begin_src vimrc
         " Working with CSVs
         Plugin 'chrisbra/csv.vim'
 
 #+end_src
+
+**** Multiple cursors
 #+begin_src vimrc
         " Multiple cursors
         " Plugin 'terryma/vim-multiple-cursors'
 
+#+end_src
+
+**** Snippets
+#+begin_src vimrc
+        " Snippets
+        " Plugin 'SirVer/ultisnips'
 #+end_src
 *** Git
 #+begin_src vimrc
@@ -457,9 +486,9 @@ endif
 #+begin_src vimrc
 """"" Indentation """""
     set smarttab           " Indents to the correct spot first time
-    set shiftwidth=4       " Code defaults to 4 space indents
-    set tabstop=4          " Number of visual spaces per TAB
-    set softtabstop=4      " Number of spaces in a tab when editing
+    " set shiftwidth=4       " Code defaults to 4 space indents
+    " set tabstop=4          " Number of visual spaces per TAB
+    " set softtabstop=4      " Number of spaces in a tab when editing
     set autoindent         " Automatically indents when enter is pressed
     set expandtab          " Makes all tabs into spaces
 
