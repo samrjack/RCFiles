@@ -1,0 +1,43 @@
+#+TITLE: Vs Code
+#+AUTHOR: Samuel Jackson
+#+STARTUP: overview num hidestars indent
+#+DESCRIPTION: Settings file for vs code
+#+STARTUP: overview hidestars indent num
+#+PROPERTY: header-args :results silent :tangle "../configs/.config/Code/User/settings.json"
+
+* File start
+#+begin_src json
+{
+#+end_src
+
+* Vim settings
+** Delimiters
+#+begin_src json
+    "vim.argumentObjectClosingDelimiters": [
+        ")",
+        "]",
+        ">"
+    ],
+    "vim.argumentObjectOpeningDelimiters": [
+        "(",
+        "[",
+        "<"
+    ],
+#+end_src
+** Use vimrc file
+#+begin_src json
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.vimrc",
+#+end_src
+* File end
+#+begin_src json
+    "editor.cursorStyle": "block"
+}
+#+end_src
+
+* Local Variables
+The below allows this file to tangle and produce the output RC file whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:
