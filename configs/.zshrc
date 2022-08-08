@@ -3,6 +3,11 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+#
+# Source all shell generic files
+for file in ${HOME}/.shell_setup/*; do
+    source "$file"
+done;
 
 if [ -d "$ZSH" ]; then
     # Set name of the theme to load --- if set to "random", it will
