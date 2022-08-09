@@ -93,7 +93,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
        taskrunner        ; taskrunner for all your projects
-       ;;terraform         ; infrastructure as code
+       terraform         ; infrastructure as code
        tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
 
@@ -128,7 +128,7 @@
 
        (java +meghanada) ; the poster child for carpal tunnel syndrome
        (javascript +lsp) ; all(hope(abandon(ye(who(enter(here))))))
-       (julia +lsp)      ; a better, faster MATLAB
+       ;;(julia +lsp)      ; a better, faster MATLAB
        (kotlin +lsp)     ; a better, slicker Java(Script)
        (latex +lsp       ; writing papers in Emacs has never been so fun
               +latexmk
