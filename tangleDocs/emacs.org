@@ -616,7 +616,7 @@ Make tab functions accessible from the doom-leader menu as well.
 
 *** Window zooming
 One thing I really like about tmux is the ability to zoom in on windows without destroying my whole windowing setup. This package adds that same functionality to emacs.
-#+begin_src emacs-lisp ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! zoom-window)
 #+end_src
 

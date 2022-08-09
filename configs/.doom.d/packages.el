@@ -16,6 +16,8 @@
 (package! ztree)
 (package! dir-treeview)
 
+(package! zoom-window)
+
 (package! discover-my-major)
 
 (package! marginalia)
