@@ -502,6 +502,11 @@ GNU plot is a tool for creating graphs and other visuals. Used by emacs
 #+begin_src sh
 brew install gnuplot
 #+end_src
+** Graphviz
+A tool for converting certain types of files into graphics.
+#+begin_src sh
+brew install graphviz
+#+end_src
 
 ** Kubernetes
 Kuberentes command line interface
@@ -604,6 +609,11 @@ For formatting java code in emacs.
 #+begin_src sh
 brew install clang-format
 #+end_src
+*** Kotlin
+Kotlin is a JVM language with lots of nice features. Essentially what you would hope java to be.
+#+begin_src sh
+brew install ktlint
+#+end_src
 
 *** Python
 In Emacs, python uses a language formatter called black:
@@ -638,6 +648,12 @@ brew install tidy-html5
 The whole latex environment. It's a big package but there should be enough space on most machines that it won't matter.
 #+begin_src sh
 brew install texlive
+#+end_src
+*** Shell
+Various tools for making shell scripts.
+#+begin_src sh
+brew install shfmt
+brew install shellcheck
 #+end_src
 *** Markdown
 Grip is nice markdown viewer so you can see what you've written before publishing.

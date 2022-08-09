@@ -157,6 +157,8 @@ brew install --cask --cask aws-vpn-client
 
 brew install gnuplot
 
+brew install graphviz
+
 brew install kubernetes-cli
 
 brew install minikube
@@ -193,6 +195,8 @@ brew install golangci-lint
 
 brew install clang-format
 
+brew install ktlint
+
 brew install black
 
 brew install ghc
@@ -206,6 +210,9 @@ brew install --cask racket
 brew install tidy-html5
 
 brew install texlive
+
+brew install shfmt
+brew install shellcheck
 
 brew install grip
 
