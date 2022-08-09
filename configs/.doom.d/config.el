@@ -119,6 +119,13 @@ Position the cursor at it's beginning, according to the current mode."
 
 (map! :leader :desc "Tabs" "T" tab-prefix-map)
 
+(setq zoom-window-use-persp t)
+
+(setq zoom-window-mode-line-color "DarkGreen")
+(map! :leader
+      :desc "Zoom window"
+      "z" #'zoom-window-zoom)
+
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
 

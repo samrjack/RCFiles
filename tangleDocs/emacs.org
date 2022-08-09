@@ -620,6 +620,16 @@ One thing I really like about tmux is the ability to zoom in on windows without 
 (package! zoom-window)
 #+end_src
 
+#+begin_src emacs-lisp
+(setq zoom-window-use-persp t)
+
+(setq zoom-window-mode-line-color "DarkGreen")
+(map! :leader
+      :desc "Zoom window"
+      "z" #'zoom-window-zoom)
+#+end_src
+
+
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
 
