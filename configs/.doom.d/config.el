@@ -389,7 +389,7 @@ if no org extension is given then it will be automatically appended."
 (defun load-directory (dir)
   "Loads all .el files from a provided directory. If the directory doesn't exist, the function loads nothing."
   (interactive)
-  (if (not (f-directory-p dir))
+  (if (not (file-directory-p dir))
       (message "No directory named %s, no scripts loaded." dir)
     (let* ((load-it (lambda (f)
                       (load-file (concat (file-name-as-directory dir) f)))
