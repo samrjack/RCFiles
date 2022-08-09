@@ -5,7 +5,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Samuel Jackson"
-      user-mail-address "dsiq3g@gmail.com")
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
 
 (defun chinese-text-support ()
   "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
@@ -66,23 +66,6 @@ The return value is the yanked text."
 
 ")
 
-(setq tab-bar-show t)
-(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
-(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
-(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
-(map! :n "M->" #'tab-next
-      :n "M-<" #'tab-previous)
-
-(defun tab-bar-format-menu-bar-lambda ()
-  "Produce the Menu button for the tab bar that shows the menu bar."
-  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
-     tab-bar-menu-bar :help "Menu Bar")))
-(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
-
-(which-key-add-key-based-replacements "C-x t" "tabs")
-
-(map! :leader :desc "Tabs" "T" tab-prefix-map)
-
 (defun dired-turn-off-file-info ()
   "Turns off the file info in dired mode"
   (interactive)
@@ -116,6 +99,27 @@ Position the cursor at it's beginning, according to the current mode."
 
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
+
+(setq persp-sort 'created)
+
+(setq tab-bar-show t)
+(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
+(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
+(map! :n "M->" #'tab-next
+      :n "M-<" #'tab-previous)
+
+(defun tab-bar-format-menu-bar-lambda ()
+  "Produce the Menu button for the tab bar that shows the menu bar."
+  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
+     tab-bar-menu-bar :help "Menu Bar")))
+(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
+
+(which-key-add-key-based-replacements "C-x t" "tabs")
+
+(map! :leader :desc "Tabs" "T" tab-prefix-map)
+
+(package! zoom-window)
 
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)

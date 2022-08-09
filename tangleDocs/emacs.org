@@ -360,7 +360,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Samuel Jackson"
-      user-mail-address "dsiq3g@gmail.com")
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
 #+end_src
 
 ** Fonts and language
@@ -488,36 +488,6 @@ The scratch buffer is always present as an area to experiment or take a quick no
 ")
 #+end_src
 
-*** Tab bar mode
-TODO Add commentary
-#+begin_src emacs-lisp
-(setq tab-bar-show t)
-(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
-(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
-(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
-(map! :n "M->" #'tab-next
-      :n "M-<" #'tab-previous)
-#+end_src
-
-Add the menu button to the tab bar so it can be accessed once in a while without taking up space.
-#+begin_src emacs-lisp
-(defun tab-bar-format-menu-bar-lambda ()
-  "Produce the Menu button for the tab bar that shows the menu bar."
-  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
-     tab-bar-menu-bar :help "Menu Bar")))
-(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
-#+end_src
-
-Add global keybinding labeling so tabs are easier to find
-#+begin_src emacs-lisp
-(which-key-add-key-based-replacements "C-x t" "tabs")
-#+end_src
-
-Make tab functions accessible from the doom-leader menu as well.
-#+begin_src emacs-lisp
-(map! :leader :desc "Tabs" "T" tab-prefix-map)
-#+end_src
-
 *** Directory navigation
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; directory management
@@ -604,6 +574,50 @@ This allows you to see all the recursive files in the current tree hierarchy (si
 (package! dirtree)
 (package! ztree)
 (package! dir-treeview)
+#+end_src
+
+*** Buffer handling
+**** Perspectives
+Currently doom emacs is using ~persp-mode~ which is a fork of ~perspective~. This section is for setting the variables that are related to those modes.
+
+#+begin_src emacs-lisp
+(setq persp-sort 'created)
+#+end_src
+
+**** Tab bar mode
+A tab bar for emacs. It works quite well except it reads from global buffers instead of perspective restricted buffers so I have it turned off for now.
+#+begin_src emacs-lisp no
+(setq tab-bar-show t)
+(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
+(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
+(map! :n "M->" #'tab-next
+      :n "M-<" #'tab-previous)
+#+end_src
+
+Add the menu button to the tab bar so it can be accessed once in a while without taking up space.
+#+begin_src emacs-lisp
+(defun tab-bar-format-menu-bar-lambda ()
+  "Produce the Menu button for the tab bar that shows the menu bar."
+  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
+     tab-bar-menu-bar :help "Menu Bar")))
+(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
+#+end_src
+
+Add global keybinding labeling so tabs are easier to find
+#+begin_src emacs-lisp
+(which-key-add-key-based-replacements "C-x t" "tabs")
+#+end_src
+
+Make tab functions accessible from the doom-leader menu as well.
+#+begin_src emacs-lisp
+(map! :leader :desc "Tabs" "T" tab-prefix-map)
+#+end_src
+
+*** Window zooming
+One thing I really like about tmux is the ability to zoom in on windows without destroying my whole windowing setup. This package adds that same functionality to emacs.
+#+begin_src emacs-lisp ../configs/.doom.d/packages.el
+(package! zoom-window)
 #+end_src
 
 ** General utility package settings
