@@ -508,6 +508,12 @@ The scratch buffer is always present as an area to experiment or take a quick no
       :desc "toggle dired file info"
       :n "t d" #'dired-hide-details-mode)
 #+end_src
+*** Whitespace mode
+Adds whitespace management and visualization.
+#+begin_src emacs-lisp
+(setq whitespace-style '(trailing tabs tab-mark))
+#+end_src
+
 
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
@@ -1494,6 +1500,38 @@ Power mode causes the screen to shake and dust to fly with each key that's typed
 #+end_src
 
 ** Experimental personal functions
+*** line-spacing
+#+begin_src emacs-lisp
+(defun toggle-line-spacing ()
+  "Togges between no line spacing and reasonable line spacing"
+  (interactive)
+  (if (null line-spacing)
+      (setq line-spacing 0.15)
+    (setq line-spacing nil))
+  (redraw-frame (selected-frame)))
+
+(defun change-line-spacing (spacing)
+  "Change the vertical spacing between lines to give more room for eyes to read"
+  (interactive "NRequested spacing? ") ; 'N' uses the prefix argument if present and otherwise prompts
+  (if (not spacing)
+      (toggle-line-spacing)
+    (setq line-spacing spacing))
+  (redraw-frame (selected-frame)))
+#+end_src
+
+Then add the bindings to their proper spots.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Toggle line spacing"
+      "t L" #'toggle-line-spacing)
+
+(map! :leader
+      :desc "Change line spacing"
+      "a l" #'change-line-spacing)
+#+end_src
+
+
+*** Pointer position
 #+begin_src emacs-lisp
 (defun print-point-position ()
   "Print the position of point to the message console."

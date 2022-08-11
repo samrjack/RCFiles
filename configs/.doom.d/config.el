@@ -77,6 +77,8 @@ The return value is the yanked text."
       :desc "toggle dired file info"
       :n "t d" #'dired-hide-details-mode)
 
+(setq whitespace-style '(trailing tabs tab-mark))
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -455,6 +457,30 @@ if no org extension is given then it will be automatically appended."
                   (:eval (doom-modeline-segment--major-mode)))))
 
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
+
+(defun toggle-line-spacing ()
+  "Togges between no line spacing and reasonable line spacing"
+  (interactive)
+  (if (null line-spacing)
+      (setq line-spacing 0.15)
+    (setq line-spacing nil))
+  (redraw-frame (selected-frame)))
+
+(defun change-line-spacing (spacing)
+  "Change the vertical spacing between lines to give more room for eyes to read"
+  (interactive "NRequested spacing? ") ; 'N' uses the prefix argument if present and otherwise prompts
+  (if (not spacing)
+      (toggle-line-spacing)
+    (setq line-spacing spacing))
+  (redraw-frame (selected-frame)))
+
+(map! :leader
+      :desc "Toggle line spacing"
+      "t L" #'toggle-line-spacing)
+
+(map! :leader
+      :desc "Change line spacing"
+      "a l" #'change-line-spacing)
 
 (defun print-point-position ()
   "Print the position of point to the message console."
