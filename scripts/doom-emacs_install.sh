@@ -7,5 +7,5 @@ then
 
     # Make directory for personal dictionary
     mkdir -p ${HOME}/.emacs.d/.local/etc/ispell
-    touch ${HOME}/.emacs.d/.local/etc/ispell/en.pws
+    echo "personal_ws-1.1 en 0" > ${HOME}/.emacs.d/.local/etc/ispell/en.pws
 fi
