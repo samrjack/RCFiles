@@ -280,10 +280,6 @@
 #+end_src
 
 * Configuration
-#+begin_src emacs-lisp
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-#+end_src
-
 ** Documentation
 *** Macro documentation
 #+begin_src emacs-lisp :tangle no
