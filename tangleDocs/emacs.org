@@ -1110,6 +1110,11 @@ Finally we can create functions to each of the directories that I access most of
 (defun org-open-project-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
+  (open-work-org-file "meetings" "meeting.org"))
+
+(defun org-open-project-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
   (open-work-org-file "projects" "project.org"))
 
 (defun org-open-work-task ()
@@ -1126,6 +1131,7 @@ Finally we can create functions to each of the directories that I access most of
       (:prefix ("f o" . "Org files")
        :desc "Org file" "o" #'org-open-file
        (:prefix ("w" . "Work")
+        :desc "Meetings" "m" #'org-open-work-meeting
         :desc "Notes" "n" #'org-open-work-note
         :desc "Projects" "p" #'org-open-project-note
         :desc "Tasks" "t" #'org-open-work-task

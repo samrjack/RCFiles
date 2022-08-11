@@ -349,6 +349,11 @@ if no org extension is given then it will be automatically appended."
 (defun org-open-project-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
+  (open-work-org-file "meetings" "meeting.org"))
+
+(defun org-open-project-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
   (open-work-org-file "projects" "project.org"))
 
 (defun org-open-work-task ()
@@ -365,6 +370,7 @@ if no org extension is given then it will be automatically appended."
       (:prefix ("f o" . "Org files")
        :desc "Org file" "o" #'org-open-file
        (:prefix ("w" . "Work")
+        :desc "Meetings" "m" #'org-open-work-meeting
         :desc "Notes" "n" #'org-open-work-note
         :desc "Projects" "p" #'org-open-project-note
         :desc "Tasks" "t" #'org-open-work-task
