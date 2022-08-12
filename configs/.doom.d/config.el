@@ -347,7 +347,7 @@ if no org extension is given then it will be automatically appended."
   (open-work-org-file "notes" "notes.org"))
 
 (defun org-open-project-note ()
-  "Prompts and opens a file in the org work notes directory."
+  "Prompts and opens a file in the org work meeting directory."
   (interactive)
   (open-work-org-file "meetings" "meeting.org"))
 

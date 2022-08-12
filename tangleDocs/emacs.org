@@ -631,7 +631,6 @@ One thing I really like about tmux is the ability to zoom in on windows without 
       "z" #'zoom-window-zoom)
 #+end_src
 
-
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
 
@@ -743,7 +742,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 #+end_src
 
 *** Snippets
-Yas snippets are a nice package for inserting snippets into code.
+Yas-snippets are a nice package for inserting snippets into code.
 
 Turning off the trigger in field for now since it was giving me undesired behavior. Maybe when I learn to use it better then it will come back into the config.
 #+begin_src emacs-lisp :tangle no
@@ -1108,7 +1107,7 @@ Finally we can create functions to each of the directories that I access most of
   (open-work-org-file "notes" "notes.org"))
 
 (defun org-open-project-note ()
-  "Prompts and opens a file in the org work notes directory."
+  "Prompts and opens a file in the org work meeting directory."
   (interactive)
   (open-work-org-file "meetings" "meeting.org"))
 
@@ -1429,7 +1428,7 @@ Then I just add it to my javascript mode.
 
 **** General interpreter
 ***** TabNine
-TabNine is a general purpose autocompleter. It uses Machine learning to find what's suggested to write next.
+TabNine is a general purpose auto-completer. It uses Machine learning to find what's suggested to write next.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! company-tabnine)
 #+end_src
@@ -1531,7 +1530,6 @@ Then add the bindings to their proper spots.
       :desc "Change line spacing"
       "a l" #'change-line-spacing)
 #+end_src
-
 
 *** Pointer position
 #+begin_src emacs-lisp
