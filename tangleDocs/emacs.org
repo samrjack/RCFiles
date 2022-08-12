@@ -510,6 +510,11 @@ Adds whitespace management and visualization.
 (setq whitespace-style '(trailing tabs tab-mark))
 #+end_src
 
+*** Line spacing
+Spacing between lines in a buffer. I like a slight gap where the default emacs is too tight.
+#+begin_src emacs-lisp
+(setq-default line-spacing 0.15)
+#+end_src
 
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later

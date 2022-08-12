@@ -77,6 +77,8 @@ The return value is the yanked text."
 
 (setq whitespace-style '(trailing tabs tab-mark))
 
+(setq-default line-spacing 0.15)
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
