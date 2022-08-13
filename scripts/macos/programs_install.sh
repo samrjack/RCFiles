@@ -187,6 +187,8 @@ brew install lsusb
 
 brew install editorconfig
 
+brew install direnv
+
 brew install go
 
 brew install gopls
