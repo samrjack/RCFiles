@@ -318,6 +318,17 @@ Ffmpeg is a super powerful cli video and photo modifier.
 brew install ffmpeg
 #+end_src
 
+** pdftk
+PDFtk is a utility function that allows you to combine PDFs together into a single PDF document.
+#+begin_src sh
+brew install pdftk-java
+#+end_src
+
+To use PDFtk, you simply need to run a command like the following
+#+begin_src sh :tangle no
+pdftk dir_of_files/* cat output "combined.pdf" # cat stands for for concatenate
+#+end_src
+
 ** Shells
 *** Bash
 #+begin_src sh

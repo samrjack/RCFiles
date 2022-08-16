@@ -90,6 +90,8 @@ brew install tty-clock
 
 brew install ffmpeg
 
+brew install pdftk-java
+
 brew install bash
 brew install bash-completion
 
