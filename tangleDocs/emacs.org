@@ -1536,6 +1536,20 @@ Power mode causes the screen to shake and dust to fly with each key that's typed
 #+end_src
 
 ** Experimental personal functions
+*** Declare personal prefix
+First I want to declare my personal prefix map
+#+begin_src elisp
+(defvar personal-functions-map (make-sparse-keymap))
+#+end_src
+
+Then assign it to a key in the leader map.
+#+begin_src elisp
+(map!
+  :leader
+  :desc "Additional"
+  "A" personal-functions-map)
+#+end_src
+
 *** line-spacing
 #+begin_src emacs-lisp
 (defun toggle-line-spacing ()
@@ -1561,9 +1575,9 @@ Then add the bindings to their proper spots.
       :desc "Toggle line spacing"
       "t L" #'toggle-line-spacing)
 
-(map! :leader
+(map! :map personal-functions-map
       :desc "Change line spacing"
-      "a l" #'change-line-spacing)
+      "l" #'change-line-spacing)
 #+end_src
 
 *** Pointer position
@@ -1573,9 +1587,9 @@ Then add the bindings to their proper spots.
   (interactive)
   (message (number-to-string (point))))
 
-(map! :leader
-      (:prefix-map ("a" . "Additional")
-        (:desc "Point's position" "p" #'print-point-position)))
+(map! :map personal-functions-map
+      :desc "Point's position"
+      "p" #'print-point-position)
 ;;        (:prefix-map ("a" . "test2")
 ;;         (:prefix ("a" . "test")
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry

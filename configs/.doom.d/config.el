@@ -464,6 +464,13 @@ if no org extension is given then it will be automatically appended."
 
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
 
+(defvar personal-functions-map (make-sparse-keymap))
+
+(map!
+  :leader
+  :desc "Additional"
+  "A" personal-functions-map)
+
 (defun toggle-line-spacing ()
   "Togges between no line spacing and reasonable line spacing"
   (interactive)
@@ -484,18 +491,18 @@ if no org extension is given then it will be automatically appended."
       :desc "Toggle line spacing"
       "t L" #'toggle-line-spacing)
 
-(map! :leader
+(map! :map personal-functions-map
       :desc "Change line spacing"
-      "a l" #'change-line-spacing)
+      "l" #'change-line-spacing)
 
 (defun print-point-position ()
   "Print the position of point to the message console."
   (interactive)
   (message (number-to-string (point))))
 
-(map! :leader
-      (:prefix-map ("a" . "Additional")
-        (:desc "Point's position" "p" #'print-point-position)))
+(map! :map personal-functions-map
+      :desc "Point's position"
+      "p" #'print-point-position)
 ;;        (:prefix-map ("a" . "test2")
 ;;         (:prefix ("a" . "test")
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
