@@ -864,6 +864,13 @@ Some files contain details that should be encrypted or scrambled before being pu
 (package! encrypt-region)
 #+end_src
 
+*** Bang!
+Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][github]] for more info.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
+#+end_src
+
+
 ** Independent or external programs
 *** Discord integration
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el

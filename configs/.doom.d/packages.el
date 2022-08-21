@@ -39,6 +39,8 @@
 
 (package! encrypt-region)
 
+(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
+
 (package! elcord)
 
 (package! spray)
