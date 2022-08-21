@@ -37,6 +37,8 @@
 
 (package! diff-ansi :recipe (:host gitlab :repo "ideasman42/emacs-diff-ansi"))
 
+(package! encrypt-region)
+
 (package! elcord)
 
 (package! spray)

@@ -856,6 +856,14 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
 (package! diff-ansi :recipe (:host gitlab :repo "ideasman42/emacs-diff-ansi"))
 #+end_src
 
+*** Encryption
+Some files contain details that should be encrypted or scrambled before being published.
+
+**** Encrypt region
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! encrypt-region)
+#+end_src
+
 ** Independent or external programs
 *** Discord integration
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
