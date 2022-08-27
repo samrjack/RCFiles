@@ -74,6 +74,10 @@
 (package! clj-refactor)
 (package! cider)
 
+(package! org-present)
+
+(package! visual-fill-column)
+
 ;; e-reader
 (package! calibredb)
 (package! nov)

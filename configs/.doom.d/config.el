@@ -400,6 +400,40 @@ if no org extension is given then it will be automatically appended."
 
 )
 
+(defun my/org-present-start ()
+  "Turns on settings I use during an org presentation"
+  ;; Tweak font sizes
+  (setq-local my/pre-org-present-face-alist face-remapping-alist)
+  (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                     (header-line (:height 4.0) variable-pitch)
+                                     (org-document-title (:height 1.75) org-document-title)
+                                     (org-code (:height 1.55) org-code)
+                                     (org-verbatim (:height 1.55) org-verbatim)
+                                     (org-block (:height 1.25) org-block)
+                                     (org-block-begin-line (:height 0.7) org-block)))
+
+  ;; Center the presentation and have line wraps
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1)
+)
+
+(defun my/org-present-end ()
+  "Turns off settings I use during an org presentation"
+  ;; Reset font mapping to normal level.
+  ;; (setq-local face-remapping-alist '((default variable-pitch default)))
+  (setq-local face-remapping-alist my/pre-org-present-face-alist)
+
+  ;; Stop centering and wrapping the text
+  (visual-fill-column-mode 0)
+  (visual-line-mode 0)
+)
+
+(add-hook! 'org-present-mode-hook #'my/org-present-start)
+(add-hook! 'org-present-mode-quit-hook #'my/org-present-end)
+
+(setq visual-fill-column-width 110)
+(setq visual-fill-column-center-text t)
+
 ; Set default file for newly captured notes
 (after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
 
