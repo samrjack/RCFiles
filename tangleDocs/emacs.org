@@ -1592,6 +1592,7 @@ Wordel is a new little game that's a fun distraction.
 #+end_src
 
 *** Fireplace
+
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! fireplace)
 #+end_src
@@ -1654,6 +1655,10 @@ Then add the bindings to their proper spots.
   (interactive)
   (message (number-to-string (point))))
 
+#+end_src
+
+Add to personal function map.
+#+begin_src emacs-lisp
 (map! :map personal-functions-map
       :desc "Point's position"
       "p" #'print-point-position)
@@ -1662,6 +1667,47 @@ Then add the bindings to their proper spots.
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 ;;
+#+end_src
+*** Scratch buffer
+I like being able to make new scratch buffers to test things out in or take quick notes.
+#+begin_src emacs-lisp
+(defun scratch (&optional BUFNUM)
+  "Switches to (and creates if necessary) the scratch buffer corresponding to the provided scratch buffer number. If no number was given, then it creates a new sratch buffer at the next avaliable position.
+Buffer numbers start at 1 to make accessing the default buffer easier.
+
+Buffers are labled as *scratch* through *scratchX*."
+  (interactive "P")
+  (let ((create-buffer-name (lambda (num)
+                              (concat "*scratch"
+                                      (if (= num 1)
+                                          ""
+                                        (int-to-string num))
+                                      "*")))
+        (already-open nil)
+        (n 1)
+        buffer-name)
+    (if BUFNUM
+        (setq buffer-name (funcall create-buffer-name BUFNUM))
+      ;; Loops through possible buffer names until it finds one
+      ;; that doesn't exist
+      (while (progn
+               (setq buffer-name (funcall create-buffer-name n))
+               (setq n (1+ n))
+               (message buffer-name)
+               (get-buffer buffer-name))))
+
+      ;; Check if the buffer already exists before switching so the
+      ;; major mode doesn't get forcibly changed.
+      (setq already-open (get-buffer buffer-name))
+      (switch-to-buffer (get-buffer-create buffer-name))
+      (unless already-open (funcall initial-major-mode))))
+#+end_src
+
+Add to personal functions map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "scratch buffer"
+      "s" #'scratch)
 #+end_src
 
 * Fixes

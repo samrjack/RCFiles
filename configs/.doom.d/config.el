@@ -543,4 +543,39 @@ if no org extension is given then it will be automatically appended."
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 ;;
 
+(defun scratch (&optional BUFNUM)
+  "Switches to (and creates if necessary) the scratch buffer corresponding to the provided scratch buffer number. If no number was given, then it creates a new sratch buffer at the next avaliable position.
+Buffer numbers start at 1 to make accessing the default buffer easier.
+
+Buffers are labled as *scratch* through *scratchX*."
+  (interactive "P")
+  (let ((create-buffer-name (lambda (num)
+                              (concat "*scratch"
+                                      (if (= num 1)
+                                          ""
+                                        (int-to-string num))
+                                      "*")))
+        (already-open nil)
+        (n 1)
+        buffer-name)
+    (if BUFNUM
+        (setq buffer-name (funcall create-buffer-name BUFNUM))
+      ;; Loops through possible buffer names until it finds one
+      ;; that doesn't exist
+      (while (progn
+               (setq buffer-name (funcall create-buffer-name n))
+               (setq n (1+ n))
+               (message buffer-name)
+               (get-buffer buffer-name))))
+
+      ;; Check if the buffer already exists before switching so the
+      ;; major mode doesn't get forcibly changed.
+      (setq already-open (get-buffer buffer-name))
+      (switch-to-buffer (get-buffer-create buffer-name))
+      (unless already-open (funcall initial-major-mode))))
+
+(map! :map personal-functions-map
+      :desc "scratch buffer"
+      "s" #'scratch)
+
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
