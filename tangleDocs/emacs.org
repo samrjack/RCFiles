@@ -1140,7 +1140,7 @@ This helper function contains the shared code for prompting for a file.
   (directory-file-name (read-file-name "Choose org file: " dir default-name)))
 #+end_src
 
-Finally we can create functions to each of the directories that I access most often and map them to key cords.
+Next here are some helper functions that open are more generic for finding and opening work org files.
 #+begin_src emacs-lisp
 (defun org-open-file ()
   "Prompts and opens a file in the default org directory."
@@ -1149,14 +1149,26 @@ Finally we can create functions to each of the directories that I access most of
 
 (defun open-work-org-file (directory default-file)
   "A condensing function for opening an org directory for work purposes"
-  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory)) default-file)))
+  ; Define the destination directory. Currently is hardcoded to the work dir in the org dir.
+  (let ((dest-dir (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory))))
+    ; First create the directory if it doesn't already exist
+    (unless (file-directory-p dest-dir)
+      (if (y-or-n-p (concat "directory '" dest-dir "' is not found. Create? "))
+          (make-directory dest-dir 'parents)
+        (message "No directory created")))
+    ; Only prompt for file if the directory exists
+    (when (file-directory-p dest-dir)
+        (org-open-org-file (prompt-org-file dest-dir default-file)))))
+#+end_src
 
+Then use the helper functions to create a set of convenience functions to open the specific structure I'm looking for.
+#+begin_src emacs-lisp
 (defun org-open-work-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
   (open-work-org-file "notes" "notes.org"))
 
-(defun org-open-project-note ()
+(defun org-open-work-meeting ()
   "Prompts and opens a file in the org work meeting directory."
   (interactive)
   (open-work-org-file "meetings" "meeting.org"))
@@ -1175,7 +1187,10 @@ Finally we can create functions to each of the directories that I access most of
   "Prompts and opens a file in the org work tasks directory."
   (interactive)
   (open-work-org-file "wiki" "toSort.org"))
+#+end_src
 
+Finally, add all the functions to a key map.
+#+begin_src emacs-lisp
 (map! :leader
       (:prefix ("f o" . "Org files")
        :desc "Org file" "o" #'org-open-file

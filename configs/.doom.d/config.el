@@ -341,14 +341,23 @@ if no org extension is given then it will be automatically appended."
 
 (defun open-work-org-file (directory default-file)
   "A condensing function for opening an org directory for work purposes"
-  (org-open-org-file (prompt-org-file (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory)) default-file)))
+  ; Define the destination directory. Currently is hardcoded to the work dir in the org dir.
+  (let ((dest-dir (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory))))
+    ; First create the directory if it doesn't already exist
+    (unless (file-directory-p dest-dir)
+      (if (y-or-n-p (concat "directory '" dest-dir "' is not found. Create? "))
+          (make-directory dest-dir 'parents)
+        (message "No directory created")))
+    ; Only prompt for file if the directory exists
+    (when (file-directory-p dest-dir)
+        (org-open-org-file (prompt-org-file dest-dir default-file)))))
 
 (defun org-open-work-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
   (open-work-org-file "notes" "notes.org"))
 
-(defun org-open-project-note ()
+(defun org-open-work-meeting ()
   "Prompts and opens a file in the org work meeting directory."
   (interactive)
   (open-work-org-file "meetings" "meeting.org"))
