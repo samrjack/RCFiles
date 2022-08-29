@@ -1722,7 +1722,17 @@ This issue is with some hook that is causing all my actions to fail its getting 
 
 This package's git github repo recently changed and so the pinning information is wrong. I'm unpinning it for now so that things build correctly. Eventually this will get fixed and can be removed. This isn't a big risk since this package is not under active development so the no breaking changes should come any time soon.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(unpin! dired-git-info)
+;; (unpin! dired-git-info)
+#+end_src
+
+There is an issue where evil search isn't looking in folded code. See [[https://github.com/doomemacs/doomemacs/issues/6478][issue]]. This is a provided work around until issue is fixed.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+;; This is supposed to fix the issue but doesn't seem to work on macOS. Not sure why.
+;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")
+#+end_src
+
+#+begin_src emacs-lisp
+;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))
 #+end_src
 
 * Auto Tangle

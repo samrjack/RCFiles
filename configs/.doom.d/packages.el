@@ -121,4 +121,7 @@
 
 (package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))
 
-(unpin! dired-git-info)
+;; (unpin! dired-git-info)
+
+;; This is supposed to fix the issue but doesn't seem to work on macOS. Not sure why.
+;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")

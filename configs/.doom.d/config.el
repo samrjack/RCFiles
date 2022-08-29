@@ -580,3 +580,5 @@ Buffers are labled as *scratch* through *scratchX*."
       "s" #'scratch)
 
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
+
+;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))
