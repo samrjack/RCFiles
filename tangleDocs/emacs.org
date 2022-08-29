@@ -960,12 +960,24 @@ And being able to work with helm is a must for kubernetes.
 
 *** Elisp-shell
 #+begin_src emacs-lisp
-(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
+(setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
 #+end_src
 
 **** Elisp shell aliases
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/.eshell-aliases
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/eshell/eshell-aliases
+alias ll 'ls -lh $*'
 #+end_src
+
+**** Eshell functions
+Make the clear function fully clear the screen.
+#+begin_src emacs-lisp
+(defun eshell/clear ()
+  "Clear the eshell buffer."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+#+end_src
+
 
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.

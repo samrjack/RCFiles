@@ -235,7 +235,13 @@ mode map since otherwise it requires forcing the normal mode state to be activat
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
 
-(setq eshell-aliases-file "~/.doom.d/.eshell-aliases")
+(setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
+
+(defun eshell/clear ()
+  "Clear the eshell buffer."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
 
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
