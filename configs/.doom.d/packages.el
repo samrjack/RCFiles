@@ -43,7 +43,7 @@
 
 (package! elcord)
 
-(package! spray)
+(package! spray :recipe (:host nil :repo "https://git.sr.ht/~iank/spray"))
 
 (package! keycast)
 
@@ -76,7 +76,7 @@
 
 (package! org-present)
 
-(package! visual-fill-column)
+(package! visual-fill-column :recipe (:host nil :repo "https://codeberg.org/joostkremers/visual-fill-column"))
 
 ;; e-reader
 (package! calibredb)

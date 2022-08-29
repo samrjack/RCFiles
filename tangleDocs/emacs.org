@@ -507,7 +507,7 @@ Finally we need to create universal keybindings to these functions so they can b
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
 #+begin_src emacs-lisp
-(setq initial-major-mode #'lisp-interactive-mode)
+(setq initial-major-mode #'lisp-interaction-mode)
 
 (setq initial-scratch-message "\
 ;; Welcome to the scratch buffer.
@@ -878,7 +878,7 @@ Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][
 
 *** Speed reading
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! spray)
+(package! spray :recipe (:host nil :repo "https://git.sr.ht/~iank/spray"))
 #+end_src
 
 *** Presentations
@@ -1291,7 +1291,7 @@ And then add some settings and hooks so that the presentation looks a lot cleane
 
 And then these are some packages that support the org-presentation package with a cleaner look.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! visual-fill-column)
+(package! visual-fill-column :recipe (:host nil :repo "https://codeberg.org/joostkremers/visual-fill-column"))
 #+end_src
 
 Then lets configure them.

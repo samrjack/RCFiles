@@ -57,7 +57,7 @@ The return value is the yanked text."
 ;; cursor isn't hugging the bottom edge.
 (setq scroll-margin 2)
 
-(setq initial-major-mode #'lisp-interactive-mode)
+(setq initial-major-mode #'lisp-interaction-mode)
 
 (setq initial-scratch-message "\
 ;; Welcome to the scratch buffer.
