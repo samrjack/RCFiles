@@ -57,7 +57,7 @@ The return value is the yanked text."
 ;; cursor isn't hugging the bottom edge.
 (setq scroll-margin 2)
 
-(setq initial-major-mode 'emacs-lisp-mode)
+(setq initial-major-mode #'lisp-interactive-mode)
 
 (setq initial-scratch-message "\
 ;; Welcome to the scratch buffer.
@@ -572,7 +572,8 @@ Buffers are labled as *scratch* through *scratchX*."
       ;; major mode doesn't get forcibly changed.
       (setq already-open (get-buffer buffer-name))
       (switch-to-buffer (get-buffer-create buffer-name))
-      (unless already-open (funcall initial-major-mode))))
+      (unless already-open (funcall initial-major-mode)
+                           (insert initial-scratch-message))))
 
 (map! :map personal-functions-map
       :desc "scratch buffer"

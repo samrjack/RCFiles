@@ -507,7 +507,7 @@ Finally we need to create universal keybindings to these functions so they can b
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
 #+begin_src emacs-lisp
-(setq initial-major-mode 'emacs-lisp-mode)
+(setq initial-major-mode #'lisp-interactive-mode)
 
 (setq initial-scratch-message "\
 ;; Welcome to the scratch buffer.
@@ -1669,6 +1669,7 @@ Add to personal function map.
 ;;
 #+end_src
 *** Scratch buffer
+TODO - make this able to use a temp file
 I like being able to make new scratch buffers to test things out in or take quick notes.
 #+begin_src emacs-lisp
 (defun scratch (&optional BUFNUM)
@@ -1700,7 +1701,8 @@ Buffers are labled as *scratch* through *scratchX*."
       ;; major mode doesn't get forcibly changed.
       (setq already-open (get-buffer buffer-name))
       (switch-to-buffer (get-buffer-create buffer-name))
-      (unless already-open (funcall initial-major-mode))))
+      (unless already-open (funcall initial-major-mode)
+                           (insert initial-scratch-message))))
 #+end_src
 
 Add to personal functions map.
