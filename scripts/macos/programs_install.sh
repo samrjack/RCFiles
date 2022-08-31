@@ -209,6 +209,8 @@ brew install cabal-install
 
 brew install sbcl
 
+brew install pyenv
+
 brew install --cask racket
 
 brew install tidy-html5

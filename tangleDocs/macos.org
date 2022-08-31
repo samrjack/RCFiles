@@ -648,6 +648,12 @@ For emacs.
 #+begin_src sh
 brew install sbcl
 #+end_src
+*** Python
+When using python, being able to use environments is a must due to the awkward package management.
+#+begin_src sh
+brew install pyenv
+#+end_src
+
 *** Racket
 Racket is a popular lisp language.
 #+begin_src sh
