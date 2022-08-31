@@ -213,6 +213,11 @@ brew install pyenv
 
 brew install --cask racket
 
+brew install rust
+brew install rustc-completion
+
+brew install rustup-init
+
 brew install tidy-html5
 
 brew install texlive

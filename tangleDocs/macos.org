@@ -661,6 +661,25 @@ Racket is a popular lisp language.
 brew install --cask racket
 #+end_src
 
+*** Rust
+Rust is up-and-coming so may as well have all the stuff already available.
+
+First install the compiler and a completion package for it.
+#+begin_src sh
+brew install rust
+brew install rustc-completion
+#+end_src
+
+Then install the rust toolchain.
+#+begin_src sh
+brew install rustup-init
+#+end_src
+
+And then finally an analyzer to measure code performance.
+#+begin_src
+brew install rust-analyzer
+#+end_src
+
 *** Html
 Great set of HTML tools.
 #+begin_src sh
