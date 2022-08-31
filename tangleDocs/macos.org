@@ -5,7 +5,7 @@
 #+PROPERTY: header-args :results silent :tangle "../scripts/macos/programs_install.sh" :tangle-mode (identity #o755)
 
 * Scripts setup
-Many scripts require some setup to make sure the dependencies are met. If a seciton makes its own file that shouldn't be written to by other sections, then those are not initilized here.
+Many scripts require some setup to make sure the dependencies are met. If a section makes its own file that shouldn't be written to by other sections, then those are not initialized here.
 ** programs_install.sh
 Here we need to install brew and add some other package manager related packages to make sure everything installs smoothly.
 #+begin_src sh
@@ -73,7 +73,7 @@ echo 'export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:${PATH}"' >> ~/
 * Applications
 ** Terminals
 *** Iterm
-Iterm is the best terminal on MacOS. This (for me) is primarily because mac has the stupid options button that replaces the alt key and this is one of the only terminals that interpret option key-cords correctly instead of creating some unicode gliph. I really hate this part of MacOS...
+Iterm is the best terminal on MacOS. This (for me) is primarily because mac has the stupid options button that replaces the alt key and this is one of the only terminals that interpret option key-cords correctly instead of creating some unicode glyph. I really hate this part of MacOS...
 #+begin_src sh
 brew install --cask iterm2
 #+end_src
@@ -175,7 +175,7 @@ Brave browser is a privacy focused browser with good adblocking.
 brew install --cask brave-browser
 #+end_src
 *** Qutebrowser
-Qutebrowser is a wonderful little web browser that incorporates vim style keybindings and modal tab management. It's missing plugins and a better adblocker but I still love it! There ARE plugins that privide similar functionality in chrome/firefox that I want to explore some more, but they've never been as fully functioning and as clean to use as my dear qutebrowser.
+Qutebrowser is a wonderful little web browser that incorporates vim style keybindings and modal tab management. It's missing plugins and a better adblocker but I still love it! There ARE plugins that provide similar functionality in chrome/firefox that I want to explore some more, but they've never been as fully functioning and as clean to use as my dear qutebrowser.
 #+begin_src sh
 brew install --cask qutebrowser
 #+end_src
@@ -193,7 +193,7 @@ brew install --cask slack
 #+end_src
 
 ** Gimp
-Best opensource image editor!
+Best open source image editor!
 #+begin_src sh
 brew install --cask gimp
 #+end_src
@@ -247,7 +247,7 @@ brew install httpie
 #+end_src
 
 ** sl
-Sl is the steam locomotive progrom. Who doesn't like trains?
+Sl is the steam locomotive program. Who doesn't like trains?
 #+begin_src sh
 brew install sl
 #+end_src
@@ -265,7 +265,7 @@ brew install ranger
 #+end_src
 
 ** pass
-Pass is an opensource package manager.
+Pass is an open source package manager.
 #+begin_src sh
 brew install pass
 #+end_src
@@ -443,14 +443,14 @@ brew install --cask docker
 #+end_src
 
 ** Lastpass
-Lastpass is a tool for password managment.
+Lastpass is a tool for password management.
 #+begin_src sh
 brew install --cask lastpass
 brew install lastpass-cli
 #+end_src
 
 ** 1clipboard
-1clipboard manages your clipboard history and access what you've coppied before.
+1clipboard manages your clipboard history and access what you've copied before.
 #+begin_src sh
 brew install --cask 1clipboard
 #+end_src
@@ -490,7 +490,7 @@ Allows you to open up a terminal in a particular folder from Finder.
 brew install --cask go2shell
 #+end_src
 ** Spectacle
-A tool for window snap managment.
+A tool for window snap management.
 #+begin_src sh
 brew install --cask spectacle
 #+end_src
@@ -520,7 +520,7 @@ brew install graphviz
 #+end_src
 
 ** Kubernetes
-Kuberentes command line interface
+Kubernetes command line interface
 #+begin_src sh
 brew install kubernetes-cli
 #+end_src
@@ -632,7 +632,7 @@ brew install ktlint
 #+end_src
 
 *** Python
-In Emacs, python uses a language formatter called black:
+In Emacs, python uses a language foratter called black:
 #+begin_src sh
 brew install black
 #+end_src
@@ -731,7 +731,7 @@ TODO prompt to ask about installing doom and fonts. Those are both really long r
 #+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 #+end_src
 
-First we install all the packages. Partly because this is the most instensive part and partly because this ensures that any following scripts have their dependencies installed.
+First we install all the packages. Partly because this is the most intensive part and partly because this ensures that any following scripts have their dependencies installed.
 #+begin_src sh :tangle ../scripts/macos/full_system_install.sh
 ./programs_install.sh
 #+end_src
