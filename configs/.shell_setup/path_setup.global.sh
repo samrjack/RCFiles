@@ -14,14 +14,15 @@ export PATH="${HOME}/Android/Sdk/tools/bin:${PATH}"
 export PATH="${HOME}/Android/Sdk/platform-tools:${PATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
 
-# Rust
-export PATH="${HOME}/.cargo/env:${PATH}"
 
 # Go
-export PATH="/usr/local/go/bin:${PATH}"
+export PATH="${HOME}/go/bin:${PATH}"
 
 # NPM
 export PATH="${HOME}/.npm-global/bin:${PATH}"
+
+# Rust
+export PATH="${HOME}/.cargo/env:${PATH}"
 
 # Rust build system
 export PATH="${HOME}/.cargo/bin:${PATH}"
