@@ -32,7 +32,7 @@ alias emacsc="emacsclient -c -n"
 alias ec="emacsc"
 alias temacsc="emacsc -t"
 alias tec="ec -t"
-alias weather="curl wttr.in?m"
+alias weather="curl 'wttr.in?m'"
 
 alias untar="tar -xvf"
 
