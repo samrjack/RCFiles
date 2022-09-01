@@ -16,75 +16,75 @@ shopt -s dotglob
 
 # Get the path to the config directory for use later
 
-invocationPath=$0
+invocationPath=${0}
 configRelativePath="../configs"
-if [ ! -e "$invocationPath" ]; then
-	case $invocationPath in
+if [ ! -e "${invocationPath}" ]; then
+	case ${invocationPath} in
 		(*/*) (echo "Issue in case 1"; exit 1);;
-		(*) invocationPath=$(command -v -- "$invocationPath") || (echo "Issue in case 2"; exit);;
+		(*) invocationPath=$(command -v -- "${invocationPath}") || (echo "Issue in case 2"; exit);;
 	esac
 fi
-configDir=$( cd -P -- "$(dirname -- "$invocationPath")" && cd $configRelativePath && pwd -P) || exit
+configDir=$( cd -P -- "$(dirname -- "${invocationPath}")" && cd ${configRelativePath} && pwd -P) || exit
 
 #### Setup directory structure ####
-allDirs=$(find "$configDir" -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d)
+allDirs=$(find "${configDir}" -mindepth 1 -not -path '*/\.git/*' -not -name '.git' -not -path '*/\.svn/*' -not -name '.svn' -type d)
 
-for directory in $allDirs; do 
-    dirRelativePath=${directory#"$configDir"/}
-    homePath="$HOME"/"$dirRelativePath"
-    if [ -L "$homePath" ]; then
-        echo "directory is a link, removing and replacing with a hard directory. $homePath"
-        rm -f "$homePath"
-        mkdir "$homePath"
-    elif [ ! -d  "$homePath" ]; then
-        #echo "Making directory $homePath"
-        mkdir "$homePath"
+for directory in ${allDirs}; do
+    dirRelativePath=${directory#"${configDir}"/}
+    homePath="${HOME}"/"${dirRelativePath}"
+    if [ -L "${homePath}" ]; then
+        echo "directory is a link, removing and replacing with a hard directory. ${homePath}"
+        rm -f "${homePath}"
+        mkdir "${homePath}"
+    elif [ ! -d  "${homePath}" ]; then
+        #echo "Making directory ${homePath}"
+        mkdir "${homePath}"
     fi
 done
 
 #### setup up files ####
-allFiles=$(find "$configDir" -not -path '*/\.git/*' -not -path '*/\.svn/*' -not -type d)
+allFiles=$(find "${configDir}" -not -path '*/\.git/*' -not -path '*/\.svn/*' -not -type d)
 
-# A list of files that should not be installed on the system and should instead 
+# A list of files that should not be installed on the system and should instead
 # stay in this folder. Usually are helper files such as install scripts.
-unwantedFiles=$(find "$configDir" -maxdepth 1 -name "*.md" -o -name "*.sh")
+unwantedFiles=$(find "${configDir}" -maxdepth 1 -name "*.md" -o -name "*.sh")
 
-for file in $allFiles; do 
+for file in ${allFiles}; do
     # If the file is unwanted, then skip it.
-    for unwantedFile in $unwantedFiles; do
-        [ "$unwantedFile" = "$file" ] && continue 2
+    for unwantedFile in ${unwantedFiles}; do
+        [ "${unwantedFile}" = "${file}" ] && continue 2
     done
 
     #Process the file and either insert it or interactively prompt for behavior
-    fileRelativePath=${file#"$configDir"/}
-    homePath="$HOME"/"$fileRelativePath"
-    if [ -L "$homePath" ]; then
-        if [ "$(readlink -- "$homePath")" -ef "$file" ]; then
-            #echo "Config link already exists for $file"
+    fileRelativePath=${file#"${configDir}"/}
+    homePath="${HOME}"/"${fileRelativePath}"
+    if [ -L "${homePath}" ]; then
+        if [ "$(readlink -- "${homePath}")" -ef "${file}" ]; then
+            #echo "Config link already exists for ${file}"
             # : is a no-op command that is present just to allow this branch
             # to exist for possible later use.
             :
-        elif [ ! -e "$homePath" ]; then
-            echo "Found broken link. Replacing with $file"
-            rm -f "$homePath"
-            ln -s "$file" "$homePath"
+        elif [ ! -e "${homePath}" ]; then
+            echo "Found broken link. Replacing with ${file}"
+            rm -f "${homePath}"
+            ln -s "${file}" "${homePath}"
         else
-            echo "link points to something else. $file"
+            echo "link points to something else. ${file}"
             # TODO user input needed
             # - Replace sim link
             # - other options from below
         fi
-    elif [ ! -e "$homePath" ]; then
-        #echo "making link to $file at $homePath"
-        ln -s "$file" "$homePath"
-    elif [ -f "$homePath" ]; then
-        echo "The file already exists $homePath"
+    elif [ ! -e "${homePath}" ]; then
+        #echo "making link to ${file} at ${homePath}"
+        ln -s "${file}" "${homePath}"
+    elif [ -f "${homePath}" ]; then
+        echo "The file already exists ${homePath}"
         # TODO user input needed.
         # - replace file
         # - keep file
         # - see diff and return to menu
         # - do a diff merge
     else
-        echo "I don't know what this file is... $file"
+        echo "I don't know what this file is... ${file}"
     fi
 done

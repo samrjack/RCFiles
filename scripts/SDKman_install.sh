@@ -6,5 +6,5 @@
 # the modifications are already in place.
 if [ ! -d "${HOME}/.sdkman" ]; then
     curl -s "https://get.sdkman.io?rcupdate=fase" | bash
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    source "${HOME}/.sdkman/bin/sdkman-init.sh"
 fi
