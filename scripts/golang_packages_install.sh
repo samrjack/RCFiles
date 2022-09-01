@@ -1,3 +1,9 @@
+# Validate that go is installed
+if ! (command -v go > /dev/null); then
+   echo >&2 "Golang must be installed.  Aborting.";
+   exit 1;
+fi
+
 # REPL!
 go install github.com/x-motemen/gore/cmd/gore@latest
 
