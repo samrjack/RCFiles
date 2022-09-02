@@ -84,6 +84,11 @@
 
 (package! scad-mode)
 
+(package! geiser)
+(package! geiser-guile)
+(package! geiser-mit)
+(package! geiser-racket)
+
 (package! prettier-js)
 
 (package! gitlab-ci-mode)
