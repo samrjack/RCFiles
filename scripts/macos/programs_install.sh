@@ -84,6 +84,10 @@ brew install htop
 
 brew install tldr
 
+brew install onefetch
+
+brew install neofetch
+
 brew install jq
 
 brew install tty-clock

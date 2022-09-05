@@ -53,6 +53,9 @@ alias lg="gl"
 alias git-root='cd $(git rev-parse --show-toplevel)'
 alias gr="git-root"
 
+alias gitsum="onefetch"
+alias syssum="neofetch"
+
 alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
 alias dockerc="docker-compose"

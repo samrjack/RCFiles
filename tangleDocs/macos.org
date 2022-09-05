@@ -300,6 +300,18 @@ Tldr is a program that provides example usage for several common cli tools out t
 brew install tldr
 #+end_src
 
+** onefetch
+Onefetch is a tool that summarizes a git repository in a clean way to give you an idea of what it contains and by whom.
+#+begin_src sh
+brew install onefetch
+#+end_src
+
+** neofetch
+Neofetch is a tool that summarizes a system's resources in a nice little print out.
+#+begin_src sh
+brew install neofetch
+#+end_src
+
 ** jq
 Jq is a cli tool for JSON reading and manipulation.
 #+begin_src sh
