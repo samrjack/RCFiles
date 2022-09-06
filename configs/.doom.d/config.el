@@ -15,6 +15,8 @@
 
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
 
+(setq ns-function-modifier 'hyper)
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)

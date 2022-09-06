@@ -445,6 +445,21 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
 #+end_src
 
+*** Modifier keys mapping
+Emacs has 5 different modifier keys that it uses for key cords. Listed in order from least "powerful" to most "powerful", they are:
+- Shift
+- Control
+- Meta
+- Super
+- Hyper
+
+Usually, the super and hyper keys aren't mapped by default since many keyboards don't have those keys available anymore. This also has the implication that the entire key-space they allow for is mostly unused! However, they can be bound to [[http://xahlee.info/emacs/emacs/emacs_hyper_super_keys.html][system keys on the keyboard]], just be careful not to shadow functionality that you want from the system itself.
+
+For me personally, the "super" key should be bound to Windows' windows key and MacOS's command key. Then the hyper key should be bound to the FN key. Since I don't use Windows much, I'll just set the keys I need for MacOS for now.
+#+begin_src emacs-lisp
+(setq ns-function-modifier 'hyper)
+#+end_src
+
 *** Line numbering
 #+begin_src emacs-lisp
 ;; This determines the style of line numbers in effect. If set to `nil', line
