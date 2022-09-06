@@ -1425,6 +1425,30 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 #+end_src
 
+*** LSP mode
+LSP mode is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also avaliable in ~SPC-c~, I want to also have access to to direct implementations when desired.
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (setq lsp-keymap-prefix "s-l")
+  (defvar my-lsp-mode-keymap (make-sparse-keymap))
+  (map! :map my-lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" my-lsp-mode-keymap
+          "L" lsp-mode-map))
+
+  (add-hook! lsp-mode-hook #'add-lsp-keymaps))
+#+end_src
+
 *** Systemd
 *** E-book reader
 **** Packages

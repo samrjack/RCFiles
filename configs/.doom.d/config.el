@@ -467,6 +467,26 @@ if no org extension is given then it will be automatically appended."
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
+(after! lsp-mode
+  (setq lsp-keymap-prefix "s-l")
+  (defvar my-lsp-mode-keymap (make-sparse-keymap))
+  (map! :map my-lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" my-lsp-mode-keymap
+          "L" lsp-mode-map))
+
+  (add-hook! lsp-mode-hook #'add-lsp-keymaps))
+
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config
