@@ -1441,7 +1441,7 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 #+end_src
 
 *** LSP mode
-LSP mode is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also avaliable in ~SPC-c~, I want to also have access to to direct implementations when desired.
+[[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also avaliable in ~SPC-c~, I want to also have access to to direct implementations when desired.
 #+begin_src emacs-lisp
 (after! lsp-mode
   (setq lsp-keymap-prefix "s-l")
