@@ -216,6 +216,11 @@ The standard GNU utilities. Although these are provided with MacOS already, the 
 #+begin_src sh
 brew install coreutils
 #+end_src
+** Moreutils
+Other useful utils for working with command line. Namely ~vipe~ which allows you to use ~$EDITOR~ in middle of a pipeline.
+#+begin_src sh
+brew install moreutils
+#+end_src
 
 ** awscli
 A CLI tool for accessing and using AWS resources.
@@ -421,6 +426,12 @@ brew install pgcli
 A useful network scanner.
 #+begin_src sh
 brew install nmap
+#+end_src
+
+** Difftastic
+A tool for viewing syntax-aware diffs.
+#+begin_src sh
+brew install difftastic
 #+end_src
 
 ** Hstr

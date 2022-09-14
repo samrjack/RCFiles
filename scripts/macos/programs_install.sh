@@ -56,6 +56,8 @@ brew install --cask postman
 
 brew install coreutils
 
+brew install moreutils
+
 brew install awscli
 
 brew install aws-iam-authenticator
@@ -126,6 +128,8 @@ brew install rabbitmq
 brew install pgcli
 
 brew install nmap
+
+brew install difftastic
 
 brew install hstr
 
