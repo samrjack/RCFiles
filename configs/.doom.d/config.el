@@ -542,7 +542,7 @@ if no org extension is given then it will be automatically appended."
   :desc "Additional"
   "A" personal-functions-map)
 
-(defun toggle-line-spacing ()
+(defun local/toggle-line-spacing ()
   "Togges between no line spacing and reasonable line spacing"
   (interactive)
   (if (null line-spacing)
@@ -550,37 +550,37 @@ if no org extension is given then it will be automatically appended."
     (setq line-spacing nil))
   (redraw-frame (selected-frame)))
 
-(defun change-line-spacing (spacing)
+(defun local/change-line-spacing (SPACING)
   "Change the vertical spacing between lines to give more room for eyes to read"
   (interactive "NRequested spacing? ") ; 'N' uses the prefix argument if present and otherwise prompts
-  (if (not spacing)
-      (toggle-line-spacing)
-    (setq line-spacing spacing))
+  (if (not SPACING)
+      (local/toggle-line-spacing)
+    (setq line-spacing SPACING))
   (redraw-frame (selected-frame)))
 
 (map! :leader
       :desc "Toggle line spacing"
-      "t L" #'toggle-line-spacing)
+      "t L" #'local/toggle-line-spacing)
 
 (map! :map personal-functions-map
       :desc "Change line spacing"
-      "l" #'change-line-spacing)
+      "l" #'local/change-line-spacing)
 
-(defun print-point-position ()
+(defun local/print-point-position ()
   "Print the position of point to the message console."
   (interactive)
   (message (number-to-string (point))))
 
 (map! :map personal-functions-map
       :desc "Point's position"
-      "p" #'print-point-position)
+      "p" #'local/print-point-position)
 ;;        (:prefix-map ("a" . "test2")
 ;;         (:prefix ("a" . "test")
 ;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
          ;; :desc "Search journal entry" "s" #'org-journal-search))))
 ;;
 
-(defun scratch (&optional BUFNUM)
+(defun local/scratch (&optional BUFNUM)
   "Switches to (and creates if necessary) the scratch buffer corresponding to the provided scratch buffer number. If no number was given, then it creates a new sratch buffer at the next avaliable position.
 Buffer numbers start at 1 to make accessing the default buffer easier.
 
@@ -614,7 +614,7 @@ Buffers are labled as *scratch* through *scratchX*."
 
 (map! :map personal-functions-map
       :desc "scratch buffer"
-      "s" #'scratch)
+      "s" #'local/scratch)
 
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 
