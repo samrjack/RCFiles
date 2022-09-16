@@ -171,8 +171,7 @@
        ;;php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        purescript        ; javascript, but functional
-       (python +conda    ; beautiful is better than ugly
-               +lsp
+       (python +lsp      ; beautiful is better than ugly
                +poetry
                +pyenv
                +pyright
