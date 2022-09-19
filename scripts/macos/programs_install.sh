@@ -64,6 +64,11 @@ brew install coreutils
 
 brew install moreutils
 
+brew unlink awk
+brew install gawk
+
+brew install mawk
+
 brew install awscli
 
 brew install aws-iam-authenticator

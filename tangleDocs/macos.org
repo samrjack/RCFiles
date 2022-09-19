@@ -278,15 +278,34 @@ brew install --cask postman
 #+end_src
 
 * CLI tools
-** Coreutils
+** Utils
+These are packages that add functionality or utility functions that are often used in basic shell commands to chain things together. Glue code basically.
+
+*** Core utils
 The standard GNU utilities. Although these are provided with MacOS already, the ones included here should have the standard option flags which will make my life easier (for the most part...).
 #+begin_src sh
 brew install coreutils
 #+end_src
-** Moreutils
+
+*** More utils
 Other useful utils for working with command line. Namely ~vipe~ which allows you to use ~$EDITOR~ in middle of a pipeline.
 #+begin_src sh
 brew install moreutils
+#+end_src
+
+*** Other individual tools
+Besides from the utils packages, these are some useful alternative versions of common built in commands.
+**** Gawk
+GNU version of AWK. Turned off so as to not interfere with AWK itself for now. Not sure why it's not included with the name ~gawk~.
+#+begin_src sh
+brew unlink awk
+brew install gawk
+#+end_src
+
+**** Mawk
+Another cool awk interpreter.
+#+begin_src sh
+brew install mawk
 #+end_src
 
 ** awscli
