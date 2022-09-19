@@ -105,13 +105,80 @@ brew install --cask emacs
 
 The standard emacs install that brew provides uses 27.2 but version 28 has a feature that compiles the elisp code to byte code which is too good to pass up!
 #+begin_src sh
+# Emacs build dependencies
+brew install imagemagick
+brew install mailutils
+brew install dbus
+
 brew tap d12frosted/emacs-plus
-brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
+brew update
+brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-cg433n-icon --with-mailutils --with-ctags --with-xwidgets
 #+end_src
 
 Once emacs is installed, it should be added to the applications section.
 #+begin_src sh :tangle ../scripts/macos/configure_settings.sh
 ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+#+end_src
+
+**** Building from source
+When I want to build emacs from source to get some of those extra sweet options, here are the packages that should be installed.
+#+begin_src sh :tangle no
+brew install 'autoconf'
+brew install 'coreutils'
+brew install 'curl'
+brew install 'dbus'
+brew install 'expat'
+brew install 'gcc'
+brew install 'gmake'
+brew install 'gmp'
+brew install 'gnu-sed'
+brew install 'gnutls'
+brew install 'imagemagick'
+brew install 'jansson'
+brew install 'libffi'
+brew install 'libgccjit'
+brew install 'libiconv'
+brew install 'librsvg'
+brew install 'libtasn1'
+brew install 'libunistring'
+brew install 'libxml2'
+brew install 'little-cms2'
+brew install 'mailutils'
+brew install 'make'
+brew install 'ncurses'
+brew install 'nettle'
+brew install 'pkg-config'
+brew install 'sqlite'
+brew install 'texinfo'
+brew install 'wget'
+brew install 'zlib'
+#+end_src
+
+And to build emacs, I run something like the following.
+#+begin_src sh :tangle no
+mkdir -p ~/tmp/emacs
+cd ~/tmp/emacs
+wget https://ftp.gnu.org/gnu/emacs/emacs-28.2.tar.xz
+cd emacs-28.2
+#+end_src
+
+Then run the configure script.
+#+begin_src sh :tangle no
+./configure \
+  -C \
+  --with-x \
+  --with-xwidgets \
+  --with-imagemagick \
+  --with-mailutils \
+  --with-gnutls \
+  --with-json \
+  --with-native-compilation \
+  CFLAGS="-O2 -pipe -fomit-frame-pointer"
+#+end_src
+
+Then build it with a make utility.
+#+begin_src sh :tangle no
+gmake
 #+end_src
 
 *** Sublime-text

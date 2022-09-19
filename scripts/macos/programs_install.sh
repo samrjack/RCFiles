@@ -21,8 +21,14 @@ brew install --cask zoom
 
 brew install --cask vlc
 
+# Emacs build dependencies
+brew install imagemagick
+brew install mailutils
+brew install dbus
+
 brew tap d12frosted/emacs-plus
-brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-alecive-flatwoken-icon
+brew update
+brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-cg433n-icon --with-mailutils --with-ctags --with-xwidgets
 
 brew install sublime-text
 
