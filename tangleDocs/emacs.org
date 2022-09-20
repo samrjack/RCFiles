@@ -874,6 +874,21 @@ This module adds git commit information in line with code when turned on which c
                    :height 140
                    :italic t))))
 #+end_src
+
+***** Styling for magit
+I may be able to format the magit blame in a useful way: [[https://www.reddit.com/r/emacs/comments/tunyg3/comment/i38iknd/][link]]
+summary:
+#+begin_src elisp :tangle no
+(setq local/margin-blame-style
+      '(margin
+        (margin-width . 32)
+        (margin-format . ("%A %a %f"))
+        (margin-face . magit-blame-margin)
+        (margin-body-face . magit-blame-dimmed)
+        (show-message . t)))
+
+(add-to-list 'magit-blame-styles 'local/margin-blame-style)
+#+end_src
 **** Diff
 This is a nice package for visualizing git diffs in a more standard unix way than magit.
 #+begin_src elisp :tangle ../configs/.doom.d/packages.el
