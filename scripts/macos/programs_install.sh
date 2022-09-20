@@ -69,6 +69,14 @@ brew install gawk
 
 brew install mawk
 
+brew install bingrep
+
+brew install grep
+
+brew install ripgrep-all
+
+brew install ag
+
 brew install awscli
 
 brew install aws-iam-authenticator
@@ -121,10 +129,6 @@ brew install zsh-completions
 brew install zsh-you-should-use
 
 brew install cmake
-
-brew install ripgrep
-
-brew install ag
 
 brew install ledger
 

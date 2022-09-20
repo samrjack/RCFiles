@@ -307,6 +307,28 @@ Another cool awk interpreter.
 #+begin_src sh
 brew install mawk
 #+end_src
+**** Bingrep
+A grep utility for searching through binary files.
+#+begin_src sh
+brew install bingrep
+#+end_src
+**** Grep
+The GNU version of grep. Has PCRE lookaheads and what not.
+#+begin_src sh
+brew install grep
+#+end_src
+
+**** Ripgrep
+A fast grep tool for finding files. Used in emacs.
+#+begin_src sh
+brew install ripgrep-all
+#+end_src
+
+**** Silver searcher
+Another fast grep tool for finding files. Also used in emacs.
+#+begin_src sh
+brew install ag
+#+end_src
 
 ** awscli
 A CLI tool for accessing and using AWS resources.
@@ -458,18 +480,6 @@ sudo chmod -R 755 /usr/local/share
 Used for vterm in emacs.
 #+begin_src sh
 brew install cmake
-#+end_src
-
-*** Ripgrep
-A fast grep tool for finding files. Used in emacs.
-#+begin_src sh
-brew install ripgrep
-#+end_src
-
-*** Silver searcher
-Another fast grep tool for finding files. Also used in emacs.
-#+begin_src sh
-brew install ag
 #+end_src
 
 ** Ledger
