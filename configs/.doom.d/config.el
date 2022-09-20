@@ -5,7 +5,7 @@
 (setq user-full-name "Samuel Jackson"
       user-mail-address (concat "dsiq3g" "@" "gmail.com"))
 
-(defun chinese-text-support ()
+(defun local/chinese-text-support ()
   "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
   (interactive)
   (variable-pitch-mode))
@@ -66,11 +66,11 @@ The return value is the yanked text."
 
 ")
 
-(defun dired-turn-off-file-info ()
+(defun local/dired-turn-off-file-info ()
   "Turns off the file info in dired mode"
   (interactive)
   (dired-hide-details-mode t))
-(add-hook! 'dired-mode-hook #'dired-turn-off-file-info)
+(add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
 
 (map! :map dired-mode-map
       :leader
@@ -81,7 +81,7 @@ The return value is the yanked text."
 
 (setq-default line-spacing 0.15)
 
-(defun smart-open-line-above ()
+(defun local/smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
   (interactive)
@@ -113,11 +113,11 @@ Position the cursor at it's beginning, according to the current mode."
 (map! :n "M->" #'tab-next
       :n "M-<" #'tab-previous)
 
-(defun tab-bar-format-menu-bar-lambda ()
+(defun local/tab-bar-format-menu-bar-lambda ()
   "Produce the Menu button for the tab bar that shows the menu bar."
   '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
      tab-bar-menu-bar :help "Menu Bar")))
-(add-to-list 'tab-bar-format #'tab-bar-format-menu-bar-lambda)
+(add-to-list 'tab-bar-format #'local/tab-bar-format-menu-bar-lambda)
 
 (which-key-add-key-based-replacements "C-x t" "tabs")
 
@@ -169,7 +169,7 @@ Position the cursor at it's beginning, according to the current mode."
 (setq evil-snipe-scope 'whole-visible
       evil-snipe-repeat-scope 'whole-visible)
 
-(defun toggle-and-activate-evil-snipe-mode ()
+(defun local/toggle-and-activate-evil-snipe-mode ()
   "Toggles evil-snipe-mode on and off then activates the
 mode map since otherwise it requires forcing the normal mode state to be activated."
   (interactive)
@@ -178,7 +178,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 
 (map! :leader
       :desc "Evil snipe mode"
-      "t S" #'toggle-and-activate-evil-snipe-mode)
+      "t S" #'local/toggle-and-activate-evil-snipe-mode)
 
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
@@ -228,14 +228,14 @@ mode map since otherwise it requires forcing the normal mode state to be activat
   (setq gif-screencast-program "maim"
         gif-screencast-args '("--quality" "3" "-1" ,(string-trim-right (shell-command-to-string "xdotool getactivewindow")))
         gif-screencast-optimize-args '("--batch" "--optimize=3" "--usecolormap=/tmp/doom-color-theme"))
-  (defun gif-screencast-write-colormap ()
+  (defun local/gif-screencast-write-colormap ()
     (f-write-text
      (replace-regexp-in-string "\n+" "\n"
                                (mapconcat (lambda (c) (if (listp (cdr c))) (cadr c)))
                                'utf-8
                                "/tmp/doom-color-theme")))
   (gif-screencast-write-colormap)
-  (add-hook 'doom-load-theme-hook #'gif-screencast-write-colormap))
+  (add-hook 'doom-load-theme-hook #'local/gif-screencast-write-colormap))
 
 (setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
 
@@ -251,7 +251,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 
 (use-package! battery :config
 
-    (defun battery-p ()
+    (defun local/battery-p ()
         "returns t if a battery is present for the system and nil if one is not."
         (and battery-status-function
              battery-echo-area-format
@@ -261,11 +261,11 @@ mode map since otherwise it requires forcing the normal mode state to be activat
                                      (funcall battery-status-function)))
              t))
 
-    (unless (battery-p) (display-battery-mode 1))
+    (unless (local/battery-p) (display-battery-mode 1))
 
 )
 
-(defun doom-modeline-conditional-buffer-encoding ()
+(defun local/doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8,
 so only show the modeline when this is not the case"
   (setq-local doom-modeline-buffer-encoding
@@ -278,7 +278,7 @@ so only show the modeline when this is not the case"
                        (not
                         (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
                 t nil)))
-(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
+(add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
 
 (setq web-mode-script-padding standard-indent)
 (setq web-mode-style-padding standard-indent)
@@ -302,7 +302,7 @@ so only show the modeline when this is not the case"
     :nv "g K" #'org-backward-element)
 
 (setq org-default-extension ".org")
-(defun org-open-org-file (file)
+(defun local/org-open-org-file (file)
   "Opens an org file in the default org folder.
 if no org extension is given then it will be automatically appended."
   (interactive
@@ -328,7 +328,7 @@ if no org extension is given then it will be automatically appended."
                  (eval (cons 'or (mapcar (lambda (extension-regex)
                                            (string-match-p extension-regex input-file-extension))
                                          valid-org-extension-regex-list)))))
-      (setq file (concat file org-default-extension)))) ; Otherwise set file to have an org extension)
+      (setq file (concat file org-default-extension)))) ; Otherwise set file to have an org extension
 
   ; If, after the above checks, the file name still points to a directory, then
   ; throw an error since it can't be opened at that point.
@@ -337,17 +337,17 @@ if no org extension is given then it will be automatically appended."
     (find-file file)
     (org-mode)))
 
-(defun prompt-org-file (&optional dir default-name)
+(defun local/prompt-org-file (&optional dir default-name)
   "Prompts the user for a file inside the specified directory. Uses defualt name when no entry is given if the name is provided."
   (unless dir (setq dir org-directory))
   (directory-file-name (read-file-name "Choose org file: " dir default-name)))
 
-(defun org-open-file ()
+(defun local/org-open-file ()
   "Prompts and opens a file in the default org directory."
   (interactive)
-  (org-open-org-file (prompt-org-file org-directory "notes.org")))
+  (local/org-open-org-file (local/prompt-org-file org-directory "notes.org")))
 
-(defun open-work-org-file (directory default-file)
+(defun local/open-work-org-file (directory default-file)
   "A condensing function for opening an org directory for work purposes"
   ; Define the destination directory. Currently is hardcoded to the work dir in the org dir.
   (let ((dest-dir (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory))))
@@ -358,42 +358,42 @@ if no org extension is given then it will be automatically appended."
         (message "No directory created")))
     ; Only prompt for file if the directory exists
     (when (file-directory-p dest-dir)
-        (org-open-org-file (prompt-org-file dest-dir default-file)))))
+        (local/org-open-org-file (local/prompt-org-file dest-dir default-file)))))
 
-(defun org-open-work-note ()
+(defun local/org-open-work-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
-  (open-work-org-file "notes" "notes.org"))
+  (local/open-work-org-file "notes" "notes.org"))
 
-(defun org-open-work-meeting ()
+(defun local/org-open-work-meeting ()
   "Prompts and opens a file in the org work meeting directory."
   (interactive)
-  (open-work-org-file "meetings" "meeting.org"))
+  (local/open-work-org-file "meetings" "meeting.org"))
 
-(defun org-open-project-note ()
+(defun local/org-open-project-note ()
   "Prompts and opens a file in the org work notes directory."
   (interactive)
-  (open-work-org-file "projects" "project.org"))
+  (local/open-work-org-file "projects" "project.org"))
 
-(defun org-open-work-task ()
+(defun local/org-open-work-task ()
   "Prompts and opens a file in the org work tasks directory."
   (interactive)
-  (open-work-org-file "tasks" "schedule.org"))
+  (local/open-work-org-file "tasks" "schedule.org"))
 
-(defun org-open-work-wiki ()
+(defun local/org-open-work-wiki ()
   "Prompts and opens a file in the org work tasks directory."
   (interactive)
-  (open-work-org-file "wiki" "toSort.org"))
+  (local/open-work-org-file "wiki" "toSort.org"))
 
 (map! :leader
       (:prefix ("f o" . "Org files")
-       :desc "Org file" "o" #'org-open-file
+       :desc "Org file" "o" #'local/org-open-file
        (:prefix ("w" . "Work")
-        :desc "Meetings" "m" #'org-open-work-meeting
-        :desc "Notes" "n" #'org-open-work-note
-        :desc "Projects" "p" #'org-open-project-note
-        :desc "Tasks" "t" #'org-open-work-task
-        :desc "Wiki" "w" #'org-open-work-wiki)))
+        :desc "Meetings" "m" #'local/org-open-work-meeting
+        :desc "Notes" "n" #'local/org-open-work-note
+        :desc "Projects" "p" #'local/org-open-project-note
+        :desc "Tasks" "t" #'local/org-open-work-task
+        :desc "Wiki" "w" #'local/org-open-work-wiki)))
 
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
@@ -417,10 +417,10 @@ if no org extension is given then it will be automatically appended."
 
 )
 
-(defun my/org-present-start ()
+(defun local/org-present-start ()
   "Turns on settings I use during an org presentation"
   ;; Tweak font sizes
-  (setq-local my/pre-org-present-face-alist face-remapping-alist)
+  (setq-local local/pre-org-present-face-alist face-remapping-alist)
   (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
                                      (header-line (:height 4.0) variable-pitch)
                                      (org-document-title (:height 1.75) org-document-title)
@@ -434,19 +434,19 @@ if no org extension is given then it will be automatically appended."
   (visual-line-mode 1)
 )
 
-(defun my/org-present-end ()
+(defun local/org-present-end ()
   "Turns off settings I use during an org presentation"
   ;; Reset font mapping to normal level.
   ;; (setq-local face-remapping-alist '((default variable-pitch default)))
-  (setq-local face-remapping-alist my/pre-org-present-face-alist)
+  (setq-local face-remapping-alist local/pre-org-present-face-alist)
 
   ;; Stop centering and wrapping the text
   (visual-fill-column-mode 0)
   (visual-line-mode 0)
 )
 
-(add-hook! 'org-present-mode-hook #'my/org-present-start)
-(add-hook! 'org-present-mode-quit-hook #'my/org-present-end)
+(add-hook! 'org-present-mode-hook #'local/org-present-start)
+(add-hook! 'org-present-mode-quit-hook #'local/org-present-end)
 
 (setq visual-fill-column-width 110)
 (setq visual-fill-column-center-text t)
@@ -454,7 +454,7 @@ if no org extension is given then it will be automatically appended."
 ; Set default file for newly captured notes
 (after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
 
-(defun load-directory (dir)
+(defun local/load-directory (dir)
   "Loads all .el files from a provided directory. If the directory doesn't exist, the function loads nothing."
   (interactive)
   (if (not (file-directory-p dir))
@@ -464,7 +464,7 @@ if no org extension is given then it will be automatically appended."
                     ))
       (mapc load-it (directory-files dir nil "\\.el$")))))
 
-(load-directory (concat (file-name-as-directory org-directory) "capture-templates"))
+(local/load-directory (concat (file-name-as-directory org-directory) "capture-templates"))
 
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
@@ -479,7 +479,7 @@ if no org extension is given then it will be automatically appended."
         "R" #'lsp-rename
         "t" #'lsp-find-type-definition)
 
-  (defun add-lsp-keymaps ()
+  (defun local/add-lsp-keymaps ()
     "Adds prefix keybindings for lsp keymaps."
     (interactive)
     (map! :leader
@@ -487,14 +487,14 @@ if no org extension is given then it will be automatically appended."
           "l" my-lsp-mode-keymap
           "L" lsp-mode-map))
 
-  (add-hook! lsp-mode-hook #'add-lsp-keymaps))
+  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
 
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config
   (map! :map nov-mode-map
         :n "RET" #'nov-scroll-up)
-  (defun doom-modeline-segment--nov-info ()
+  (defun local/doom-modeline-segment--nov-info ()
     (concat
      " " (propertize
           (cdr (assoc 'creator nov-metadata))
@@ -506,7 +506,7 @@ if no org extension is given then it will be automatically appended."
           'face
           'doom-modeline-info)))
   (advice-add 'nov-render-title :override #'ignore)
-  (defun +nov-mode-setup ()
+  (defun local/+nov-mode-setup ()
     (require 'visual-fill-column nil t)
     (setq-local visual-fill-column-center-text t
                 visual-fill-column-width 80
@@ -518,7 +518,7 @@ if no org extension is given then it will be automatically appended."
     (setq-local mode-line-format
                 `((:eval (doom-modeline-segment--workspace-name))
                   (:eval (doom-modeline-segment--window-number))
-                  (:eval (doom-modeline-segment--nov-info))
+                  (:eval (local/doom-modeline-segment--nov-info))
                   ,(propertize " "
                                'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
                                'display `((space :align-to
@@ -533,7 +533,7 @@ if no org extension is given then it will be automatically appended."
                                                               '(:eval (doom-modeline-segment--major-mode))))))))))
                   (:eval (doom-modeline-segment--major-mode)))))
 
-  (add-hook 'nov-mode-hook #'+nov-mode-setup))
+  (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
 
 (defvar personal-functions-map (make-sparse-keymap))
 
