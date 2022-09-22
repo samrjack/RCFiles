@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: package tangle
+# condition: (string= (buffer-name) "emacs.org")
+# key: package
+# uuid: package
+# --
+#+begin_src emacs-lisp :tange ../configs/.doom.d/packages.el
+`%`$0
+#+end_src
