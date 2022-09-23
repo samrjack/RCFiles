@@ -8,51 +8,334 @@ c: ConfigContainer = c  # noqa: F821 pylint: disable=E0602,C0103
 
 config.load_autoconfig()
 
+c.confirm_quit = ["downloads"]
+
+c.aliases = {
+    "w": "session-save",
+    "q": "close",
+    "qa": "quit",
+    "wq": "quit --save",
+    "wqa": "quit --save",
+}
+
+c.backend = "webengine"
+
+c.changelog_after_upgrade = "patch"
+
+c.auto_save.interval = 15000
+
 c.input.insert_mode.auto_load = True
+c.input.insert_mode.leave_on_load = False
+
+c.input.insert_mode.auto_enter = True
+
+c.input.insert_mode.auto_leave = True
 
 c.input.insert_mode.plugins = True
 
-c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
+c.input.forward_unbound_keys = 'auto'
 
-c.auto_save.session = True
-c.session.default_name = "default"
+c.input.escape_quits_reporter = True
 
-c.scrolling.smooth = True
+c.input.links_included_in_focus_chain = True
 
-c.search.ignore_case = "never"
+c.input.media_keys = True
 
-c.tabs.width = "10%"
+c.input.match_counts = True
 
-c.tabs.position = "top"
+c.input.mode_override = None
 
-c.tabs.last_close = "default-page"
+c.input.mouse.back_forward_buttons = True
 
-c.tabs.show = "multiple"
+c.input.mouse.rocker_gestures = False
 
-c.tabs.select_on_remove = "last-used"
+c.input.partial_timeout = 0
+
+c.input.spatial_navigation = False
+
+c.content.autoplay = False
 
 c.content.plugins = True
-c.content.cache.size = 2147483647
 
-c.content.pdfjs = True
+c.content.cache.size = 2147483647 # ~2GB
+
+c.content.blocking.enabled = True
+c.content.blocking.hosts.block_subdomains = True
+c.content.blocking.method = "auto"
+c.content.blocking.adblock.lists = [
+    "https://easylist.to/easylist/easylist.txt",
+    "https://easylist.to/easylist/easyprivacy.txt",
+]
+c.content.blocking.hosts.lists = [
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+]
+
+c.content.blocking.whitelist = []
+
+from qutebrowser.api import interceptor
+
+    # Youtube adblock
+def filter_yt(info: interceptor.Request):
+    """"""
+    url = info.request_url
+    if (url.host() == 'www.youtube.com' and
+        url.path() == '/get_video_info' and
+            '&adformat=' in url.query()):
+        info.block()
+
+interceptor.register(filter_yt)
+
+c.content.canvas_reading = True
+
+c.content.cookies.accept = "all"
+c.content.cookies.store = True
+
+c.content.default_encoding = "utf-8"
+
+c.content.desktop_capture = "ask"
+
+c.content.geolocation = "ask"
+
+c.content.persistent_storage = "ask"
+
+c.content.tls.certificate_errors = "ask"
+
+c.content.register_protocol_handler = "ask"
+
+c.content.media.audio_capture = "ask"
+
+c.content.media.video_capture = "ask"
+c.content.media.audio_video_capture = "ask"
+
+c.content.mouse_lock = "ask"
+
+c.content.notifications.enabled = False
+
+c.content.notifications.show_origin = True
+c.content.notifications.presenter = "auto"
+
+c.content.dns_prefetch = True
 
 c.content.fullscreen.window = True
 
+c.content.headers.accept_language = "en-US,en;q=0.9"
+c.content.headers.custom = {}
+c.content.headers.referer = "same-domain"
+
+c.content.headers.do_not_track = True
+
+c.content.headers.user_agent = "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}"
+
+c.content.pdfjs = True
+
+c.content.images = True
+
+c.content.hyperlink_auditing = False
+
+c.content.javascript.enabled = True
+
+c.content.javascript.alert = True
+c.content.javascript.prompt = True
+
+c.content.javascript.modal_dialog = False
+
 c.content.javascript.can_access_clipboard = True
 
-c.spellcheck.languages = ["en-US"]
+c.content.javascript.can_open_tabs_automatically = True
+
+c.content.javascript.log = {
+    "unknown": "debug",
+    "info": "debug",
+    "warning": "debug",
+    "error": "debug",
+}
+
+c.content.local_storage = True
+
+c.content.local_content_can_access_remote_urls = True
+c.content.local_content_can_access_file_urls = True
+
+c.content.mute = False
+
+c.content.prefers_reduced_motion = False
+
+c.content.print_element_backgrounds = True
+
+c.content.private_browsing = False
+
+c.content.proxy = "system"
+
+c.content.netrc_file = None
+
+c.content.webgl = True
+
+c.content.site_specific_quirks.enabled = True
+c.content.site_specific_quirks.skip = ["js-string-replaceall"]
+
+c.content.unknown_url_scheme_policy = "allow-from-user-interaction"
+
+c.content.webrtc_ip_handling_policy = "all-interfaces"
+
+c.content.xss_auditing = False
+
+c.content.user_stylesheets = []
+
+c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
+
+c.editor.encoding = "utf-8"
+
+c.editor.remove_file = True
+
+c.auto_save.session = True
+c.session.default_name = "default"
+c.session.lazy_restore = False
+
+c.scrolling.smooth = False
+
+c.scrolling.bar = "overlay"
+
+c.search.ignore_case = "never"
+
+c.search.incremental = True
+
+c.search.incremental = True
+
+c.statusbar.padding = {"top": 2, "bottom": 2, "left": 0, "right": 0}
+c.statusbar.position = "bottom"
+c.statusbar.show = "always"
+
+c.statusbar.widgets = ["keypress", "url", "scroll", "history", "tabs", "progress"]
+
+c.tabs.close_mouse_button = "middle"
+
+c.tabs.close_mouse_button_on_bar = "new-tab"
+
+c.tabs.background = False
+
+c.tabs.mousewheel_switching = True
+
+c.tabs.favicons.show = "always"
+c.tabs.favicons.scale = 1.0
+
+c.tabs.focus_stack_size = 10
+
+c.tabs.indicator.padding = {"top": 2, "bottom": 2, "left": 0, "right": 4}
+c.tabs.indicator.width = 3
+
+c.tabs.last_close = "default-page"
+
+c.tabs.width = "10%"
+
+c.tabs.max_width = -1
+c.tabs.min_width = -1
+
+c.tabs.padding = {"top": 0, "bottom": 0, "left": 5, "right": 5}
+
+c.tabs.new_position.related = "next"
+c.tabs.new_position.stacking = True
+
+c.tabs.new_position.unrelated = "last"
+
+c.tabs.pinned.frozen = True
+c.tabs.pinned.shrink = True
+
+c.tabs.position = "top"
+
+c.tabs.show = "multiple"
+
+c.tabs.show_switching_delay = 3000
+
+c.tabs.select_on_remove = "last-used"
+
+c.tabs.title.alignment = "left"
+
+c.tabs.title.format = "{audio}{aligned_index}: {current_title}"
+c.tabs.title.format_pinned = "{index}"
+
+c.tabs.wrap = True
+
+c.tabs.mode_on_change = "restore"
+
+c.tabs.undo_stack_size = -1
+
+c.tabs.tabs_are_windows = False
+
+c.tabs.tooltips = True
 
 c.colors.webpage.preferred_color_scheme = "dark"
 
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 
 c.hints.chars = "abcdefghijklmnopqrstuvwxyz"
 
 c.completion.cmd_history_max_items = 10000
 c.completion.use_best_match = True
 
+c.downloads.location.prompt = True
+
+c.downloads.location.directory = None
+
+c.downloads.location.remember = True
+
 c.downloads.location.suggestion = "both"
-c.confirm_quit = ["downloads"]
+
+c.downloads.position = "bottom"
+
+c.downloads.open_dispatcher = None
+
+c.downloads.prevent_mixed_content = True
+
+c.downloads.remove_finished = 300000 # 5 min
+
+c.url.auto_search = "naive"
+
+c.url.default_page = "https://start.duckduckgo.com/"
+
+c.url.incdec_segments = ["path", "query"]
+
+c.url.open_base_url = False
+
+c.url.searchengines = {"DEFAULT": "https://duckduckgo.com/?q={}"}
+
+c.url.start_pages = ["https://start.duckduckgo.com"]
+
+c.url.yank_ignored_parameters = [
+    "ref",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+]
+
+c.zoom.default = "100%"
+
+c.zoom.levels = [
+    "25%",
+    "33%",
+    "50%",
+    "67%",
+    "75%",
+    "90%",
+    "100%",
+    "110%",
+    "125%",
+    "150%",
+    "175%",
+    "200%",
+    "250%",
+    "300%",
+    "400%",
+    "500%",
+]
+
+c.zoom.mouse_divider = 512
+
+c.window.hide_decoration = False
+
+c.window.title_format = "{perc}{current_title}{title_sep}qutebrowser"
+
+c.window.transparent = False
 
 config.unbind('b')
 
@@ -140,7 +423,6 @@ config.bind('<Ctrl-l>', 'forward --tab --bg')
 # Open prevous page in a new background tab
 config.bind('<Ctrl-h>', 'back --tab --bg')
 
-config.bind('th', 'back -t')
 config.bind('tl', 'forward -t')
 config.bind('<back>', 'back')
 config.bind('<forward>', 'forward')
@@ -413,15 +695,4 @@ config.bind('<Ctrl-y>', 'prompt-accept yes', mode='prompt')
 # Bindings for register mode
 config.bind('<Escape>', 'mode-leave', mode='register')
 
-from qutebrowser.api import interceptor
-
-    # Youtube adblock
-def filter_yt(info: interceptor.Request):
-    """"""
-    url = info.request_url
-    if (url.host() == 'www.youtube.com' and
-        url.path() == '/get_video_info' and
-            '&adformat=' in url.query()):
-        info.block()
-
-interceptor.register(filter_yt)
+c.spellcheck.languages = ["en-US"]

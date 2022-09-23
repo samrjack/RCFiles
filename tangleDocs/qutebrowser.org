@@ -27,75 +27,287 @@ This is here so setting changes done via the GUI are still loaded. To have GUI s
 config.load_autoconfig()
 #+end_src
 
+* Individual settings
+** Confirm quit
+Only ask if I want to quit when I have things downloading.
+#+begin_src python
+c.confirm_quit = ["downloads"]
+#+end_src
+** Aliases
+#+begin_src python
+c.aliases = {
+    "w": "session-save",
+    "q": "close",
+    "qa": "quit",
+    "wq": "quit --save",
+    "wqa": "quit --save",
+}
+#+end_src
+** Backend
+The backend to use as a page renderer.
+#+begin_src python
+c.backend = "webengine"
+#+end_src
+
+** Change log
+Show the change log after every update.
+#+begin_src python
+c.changelog_after_upgrade = "patch"
+#+end_src
+
+** Auto saving
+Saves config/cookies/ etc. automatically.
+#+begin_src python
+c.auto_save.interval = 15000
+#+end_src
+
 * Input
-** Insert mode when auto focusing on new page
+** Insert mode
 When loading a new page that focuses you immediately into a text field, then enter insert mode.
 #+begin_src python
 c.input.insert_mode.auto_load = True
+c.input.insert_mode.leave_on_load = False
 #+end_src
 
-** Insert mode in plugins
+And also turn on insert mode if you click a text field of some sort.
+#+begin_src python
+c.input.insert_mode.auto_enter = True
+#+end_src
+
+And when clicking outside of an editable area, turn off insert mode.
+#+begin_src python
+c.input.insert_mode.auto_leave = True
+#+end_src
+
 When clicking into a plugin, go into insert mode since usually they can't be operated from keyboard commands anyways.
 #+begin_src python
 c.input.insert_mode.plugins = True
 #+end_src
-
-* Editor
-Use emacs when editing input from qutebrowser since most text editing can be done pretty easily in the browser itself. Anything that needs more complex input can probably use emacs's power.
+** Forwarding unbound keys
+If a key isn't bound to a command, it can be forwarded to the website itself (when not in insert mode) but only when that key isn't an alphanumeric key since often I hit those thinking they actually do something.
 #+begin_src python
-c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
+c.input.forward_unbound_keys = 'auto'
+#+end_src
+** Reporter
+Allow the escape button to quit the crash reporter screen.
+#+begin_src python
+c.input.escape_quits_reporter = True
+#+end_src
+** Focus chain
+include hyperlinks in the keyboard focus chain when tabbing around.
+#+begin_src python
+c.input.links_included_in_focus_chain = True
+#+end_src
+** Media keys
+Allow media keys to be used by browser.
+#+begin_src python
+c.input.media_keys = True
 #+end_src
 
-* Session saving
+** Number prefixes
+Enabling number prefixes for Vi style bindings (disabling it causes emacs style behavior).
 #+begin_src python
-c.auto_save.session = True
-c.session.default_name = "default"
+c.input.match_counts = True
+#+end_src
+** Override mode
+Don't override the mode when changing tabs.
+#+begin_src python
+c.input.mode_override = None
 #+end_src
 
-* Scrolling
+** Mouse
+Enable the mouse back and forward buttons.
 #+begin_src python
-c.scrolling.smooth = True
+c.input.mouse.back_forward_buttons = True
 #+end_src
 
-* Search
-Don't ignore case while searching a page.
+And don't allow a rocker gesture like is in opera.
 #+begin_src python
-c.search.ignore_case = "never"
+c.input.mouse.rocker_gestures = False
 #+end_src
-
-* Tabs
-** Width
-When tabs are on the left or right, I don't want them taking up too much of the screen. The width below is how much of the width of the screen that the tabs take up.
+** Timeout
+Don't have a timeout for key cords being typed out.
 #+begin_src python
-c.tabs.width = "10%"
+c.input.partial_timeout = 0
 #+end_src
-
-** Position
-Start position for the tab bar. It can easily be moved while using qutebrowser by setting them to something else.
+** Spacial navigation
+Allows navigating between focusable elements using the arrow keys. Don't really want that though.
 #+begin_src python
-c.tabs.position = "top"
-#+end_src
-** Last close
-When the last tab is closed, I want the start page to be shown so that I know I can safely close qutebrowser. I would just have qutebrowser itself close, however it is too slow to reopen to make it worth while.
-#+begin_src python
-c.tabs.last_close = "default-page"
-#+end_src
-** Show
-Only show the tab bar when there is more than one tab.
-#+begin_src python
-c.tabs.show = "multiple"
-#+end_src
-
-** On remove
-When a tab is removed, then show the last used tab. Although this can be annoying sometimes, it's often helpful.
-#+begin_src python
-c.tabs.select_on_remove = "last-used"
+c.input.spatial_navigation = False
 #+end_src
 
 * Content
+** Auto play
+Turn off auto play because no one wants it...
+#+begin_src python
+c.content.autoplay = False
+#+end_src
+
+** Plugins
+Allow web pages to use plugins
 #+begin_src python
 c.content.plugins = True
-c.content.cache.size = 2147483647
+#+end_src
+
+** Cache
+First enable HTML5 caching.
+#+begin_src python :tangle no
+c.content.cache.appcache = True
+#+end_src
+
+Then set a large cache so things are snappy
+#+begin_src python
+c.content.cache.size = 2147483647 # ~2GB
+#+end_src
+
+And allow unlimited pages to be cached.
+#+begin_src python :tangle no
+c.content.cache.maximum_pages = 0
+#+end_src
+
+** blocker
+Enable blocking and add basic settings for it.
+#+begin_src python
+c.content.blocking.enabled = True
+c.content.blocking.hosts.block_subdomains = True
+c.content.blocking.method = "auto"
+c.content.blocking.adblock.lists = [
+    "https://easylist.to/easylist/easylist.txt",
+    "https://easylist.to/easylist/easyprivacy.txt",
+]
+c.content.blocking.hosts.lists = [
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+]
+#+end_src
+
+This is a place to put websites that I want to allow ads on.
+#+begin_src python
+c.content.blocking.whitelist = []
+#+end_src
+
+This little function was originally pulled from [[https://gitlab.com/jgkamat/dotfiles/blob/master/qutebrowser/.config/qutebrowser/pyconfig/adblock-yt.py][here]] but will probably be replaced some day with a better plugin. For now, I can't complain and don't want to dive further into qutebrowser plugins.
+#+begin_src python
+from qutebrowser.api import interceptor
+
+    # Youtube adblock
+def filter_yt(info: interceptor.Request):
+    """"""
+    url = info.request_url
+    if (url.host() == 'www.youtube.com' and
+        url.path() == '/get_video_info' and
+            '&adformat=' in url.query()):
+        info.block()
+
+interceptor.register(filter_yt)
+#+end_src
+
+** Canvas reading
+Allow websites to read canvas elements. A lot of pages need this.
+#+begin_src python
+c.content.canvas_reading = True
+#+end_src
+
+** Cookies
+Accept all cookies and store them.
+#+begin_src python
+c.content.cookies.accept = "all"
+c.content.cookies.store = True
+#+end_src
+** Encoding
+Use UTF-8 encoding.
+#+begin_src python
+c.content.default_encoding = "utf-8"
+#+end_src
+
+** Access requests
+Ask for desktop capture.
+#+begin_src python
+c.content.desktop_capture = "ask"
+#+end_src
+
+Ask for geolocation.
+#+begin_src python
+c.content.geolocation = "ask"
+#+end_src
+
+Ask to store something locally.
+#+begin_src python
+c.content.persistent_storage = "ask"
+#+end_src
+
+Ask if there's any certificate error detected.
+#+begin_src python
+c.content.tls.certificate_errors = "ask"
+#+end_src
+
+Ask to disable protocol handlers.
+#+begin_src python
+c.content.register_protocol_handler = "ask"
+#+end_src
+
+Ask to capture audio.
+#+begin_src python
+c.content.media.audio_capture = "ask"
+#+end_src
+
+Ask to capture video.
+#+begin_src python
+c.content.media.video_capture = "ask"
+c.content.media.audio_video_capture = "ask"
+#+end_src
+
+Allow websites to lock mouse pointer.
+#+begin_src python
+c.content.mouse_lock = "ask"
+#+end_src
+
+Disable notifications.
+#+begin_src python
+c.content.notifications.enabled = False
+#+end_src
+
+*** Notifications
+If notifications are enabled, here are some settings for them.
+#+begin_src python
+c.content.notifications.show_origin = True
+c.content.notifications.presenter = "auto"
+#+end_src
+
+** DNS prefetch
+Prefetch DNS entries to speed up browsing.
+#+begin_src python
+c.content.dns_prefetch = True
+#+end_src
+
+** Frames
+Frame flattening flattens all frames to become a single page. Not sure what it looks like in practice. May be worth trying at some point.
+#+begin_src python :tangle no
+c.content.frame_flattening = False
+#+end_src
+
+** Full screen mode
+When content attempts to be fullscreen, it will just fill the browser window so I can make it as big or small as I want using my window manager. This also makes content more consumable by removing distractions while its open.
+#+begin_src python
+c.content.fullscreen.window = True
+#+end_src
+
+** Headers
+Headers to send in requests to web pages.
+#+begin_src python
+c.content.headers.accept_language = "en-US,en;q=0.9"
+c.content.headers.custom = {}
+c.content.headers.referer = "same-domain"
+#+end_src
+
+Ask not to track.
+#+begin_src python
+c.content.headers.do_not_track = True
+#+end_src
+
+
+Set some user agent.
+#+begin_src python
+c.content.headers.user_agent = "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}"
 #+end_src
 
 ** PDFs
@@ -104,32 +316,401 @@ This allows pdfs to be controlled the same way other web content is which is sup
 c.content.pdfjs = True
 #+end_src
 
-
-** Fullscreen mode
-When content attempts to be fullscreen, it will just fill the browser window so I can make it as big or small as I want using my window manager. This also makes content more consumable by removing distractions while its open.
+** Images
+Automatically load the images.
 #+begin_src python
-c.content.fullscreen.window = True
+c.content.images = True
 #+end_src
 
+** Hyperlinks
+Don't need to audit the hyperlinks I don't think.
+#+begin_src python
+c.content.hyperlink_auditing = False
+#+end_src
 
 ** Javascript
+Enable javascript since the web really needs it.
+#+begin_src python
+c.content.javascript.enabled = True
+#+end_src
+
+*** Prompts
+Allow alerts and prompts.
+#+begin_src python
+c.content.javascript.alert = True
+c.content.javascript.prompt = True
+#+end_src
+
+Don't know why this is turned off.
+#+begin_src python
+c.content.javascript.modal_dialog = False
+#+end_src
+
 *** Accessing the clipboard
 #+begin_src python
 c.content.javascript.can_access_clipboard = True
 #+end_src
 
-* Spellcheck
-#+begin_src python
-c.spellcheck.languages = ["en-US"]
+*** Manipulating tabs
+Prevent javascript from closing tabs. May need to change this later if I want a grease monkey script to work, ut other than that I can't think of why I would want this.
+#+begin_src python :tangle no
+c.content.javascript.can_close_tabs = False
 #+end_src
 
+Allow opening tabs for now.
+#+begin_src python
+c.content.javascript.can_open_tabs_automatically = True
+#+end_src
+
+*** Logging
+Log levels to use for javascript console logging messages.
+#+begin_src python
+c.content.javascript.log = {
+    "unknown": "debug",
+    "info": "debug",
+    "warning": "debug",
+    "error": "debug",
+}
+#+end_src
+
+** Local storage
+Enable support for HTML 5 local storage and Web SQL.
+#+begin_src python
+c.content.local_storage = True
+#+end_src
+
+** Local content
+Allow local content to access stuff.
+#+begin_src python
+c.content.local_content_can_access_remote_urls = True
+c.content.local_content_can_access_file_urls = True
+#+end_src
+
+** Mute content
+Mute tabs.
+#+begin_src python
+c.content.mute = False
+#+end_src
+
+** Reduced motion
+Don't care about motion.
+#+begin_src python
+c.content.prefers_reduced_motion = False
+#+end_src
+
+** Element backgrounds
+Draw the background color and images also when the page is printed.
+#+begin_src python
+c.content.print_element_backgrounds = True
+#+end_src
+
+** Default private browsing
+Turn off private browsing by default.
+#+begin_src python
+c.content.private_browsing = False
+#+end_src
+
+** Proxy
+Which proxy you want to use.
+#+begin_src python
+c.content.proxy = "system"
+#+end_src
+#+begin_src python :tangle no
+c.content.proxy_dns_requests = True
+#+end_src
+
+** NetRC
+Allow use of a netrc file at ~~/.netrc~
+#+begin_src python
+c.content.netrc_file = None
+#+end_src
+
+** WebGL
+Enable WebGL.
+#+begin_src python
+c.content.webgl = True
+#+end_src
+
+** quirks
+Allow sites to do wierd things.
+#+begin_src python
+c.content.site_specific_quirks.enabled = True
+c.content.site_specific_quirks.skip = ["js-string-replaceall"]
+#+end_src
+
+** Unknown schemes
+How to handle unknown schemes.
+#+begin_src python
+c.content.unknown_url_scheme_policy = "allow-from-user-interaction"
+#+end_src
+
+** WebRTC
+Which interfaces to expose via WebRTC.
+#+begin_src python
+c.content.webrtc_ip_handling_policy = "all-interfaces"
+#+end_src
+
+** xss auditing
+Monitor load requests for cross-site scripting attempts.
+#+begin_src python
+c.content.xss_auditing = False
+#+end_src
+
+** Stylesheets
+User's personal stylesheets.
+#+begin_src python
+c.content.user_stylesheets = []
+#+end_src
+
+
+* Editor
+** Editing command
+Use emacs when editing input from qutebrowser since most text editing can be done pretty easily in the browser itself. Anything that needs more complex input can probably use emacs's power.
+#+begin_src python
+c.editor.command = ["emacs", "+{line}:{column}", "{file}"]
+#+end_src
+
+** Encoding
+Encoding to use for the editor.
+#+begin_src python
+c.editor.encoding = "utf-8"
+#+end_src
+** Remove file
+Remove temporary files once finished.
+#+begin_src python
+c.editor.remove_file = True
+#+end_src
+
+* Session
+Sessions are a group of tabs that can be saved together and loaded.
+#+begin_src python
+c.auto_save.session = True
+c.session.default_name = "default"
+c.session.lazy_restore = False
+#+end_src
+
+* Scrolling
+** Smooth scrolling
+Have this turned off since it was causing scrolling not to work at all...
+#+begin_src python
+c.scrolling.smooth = False
+#+end_src
+
+** Scroll bar
+Where/how to display the scroll bar.
+#+begin_src python
+c.scrolling.bar = "overlay"
+#+end_src
+
+* Search
+** Case sensitive
+Don't ignore case while searching a page.
+#+begin_src python
+c.search.ignore_case = "never"
+#+end_src
+
+** Incremental
+Perform an incremental search while typing the search out.
+#+begin_src python
+c.search.incremental = True
+#+end_src
+
+** Wrap
+Wrap a search around so it goes back to the beginning after the end.
+#+begin_src python
+c.search.incremental = True
+#+end_src
+
+* Status bar
+** Position
+#+begin_src python
+c.statusbar.padding = {"top": 2, "bottom": 2, "left": 0, "right": 0}
+c.statusbar.position = "bottom"
+c.statusbar.show = "always"
+
+#+end_src
+** Widgets
+Widgets to have in the status bar. Available widgets are:
+- url: Current page URL.
+- scroll: Percentage of the current page position like ~10%~.
+- scroll_raw: Raw percentage of the current page position like ~10~.
+- history: Display an arrow when possible to go back/forward in history.
+- tabs: Current active tab, e.g. ~2~.
+- keypress: Display pressed keys when composing a vi command.
+- progress: Progress bar for the current page loading.
+- text:foo: Display the static text after the colon, ~foo~ in the example.
+#+begin_src python
+c.statusbar.widgets = ["keypress", "url", "scroll", "history", "tabs", "progress"]
+#+end_src
+
+* Tabs
+** Mouse
+Which button to declare as the "close mouse button".
+#+begin_src python
+c.tabs.close_mouse_button = "middle"
+#+end_src
+
+And what to do when that button is pressed on the tab bar.
+#+begin_src python
+c.tabs.close_mouse_button_on_bar = "new-tab"
+#+end_src
+
+And open that new tab in the foreground.
+#+begin_src python
+c.tabs.background = False
+#+end_src
+
+Mouse wheel should change the tab.
+#+begin_src python
+c.tabs.mousewheel_switching = True
+#+end_src
+
+** Favicons
+Normal favicon settings.
+#+begin_src python
+c.tabs.favicons.show = "always"
+c.tabs.favicons.scale = 1.0
+#+end_src
+
+** Focus stack
+Don't have an upper limit on the focus stack size.
+#+begin_src python
+c.tabs.focus_stack_size = 10
+#+end_src
+
+** Indicator
+Tab indicator settings. Not sure what exactly this is.
+#+begin_src python
+c.tabs.indicator.padding = {"top": 2, "bottom": 2, "left": 0, "right": 4}
+c.tabs.indicator.width = 3
+#+end_src
+** Closing the last tab
+When the last tab is closed, I want the start page to be shown so that I know I can safely close qutebrowser. I would just have qutebrowser itself close, however it is too slow to reopen to make it worth while.
+#+begin_src python
+c.tabs.last_close = "default-page"
+#+end_src
+** Tab size
+When tabs are on the left or right, I don't want them taking up too much of the screen. The width below is how much of the width of the screen that the tabs take up.
+#+begin_src python
+c.tabs.width = "10%"
+#+end_src
+
+And when tabs are on top or bottom, we don't really care how wide they are.
+#+begin_src python
+c.tabs.max_width = -1
+c.tabs.min_width = -1
+#+end_src
+
+Add padding around the text in the tab.
+#+begin_src python
+c.tabs.padding = {"top": 0, "bottom": 0, "left": 5, "right": 5}
+#+end_src
+
+** New Tabs
+For tabs opened from within a page, open them next to the current tab and stack them by relevance.
+#+begin_src python
+c.tabs.new_position.related = "next"
+c.tabs.new_position.stacking = True
+#+end_src
+
+Put completely new tabs at the end.
+#+begin_src python
+c.tabs.new_position.unrelated = "last"
+#+end_src
+
+** Pinned
+Keep pinned tabs shrunk and frozen.
+#+begin_src python
+c.tabs.pinned.frozen = True
+c.tabs.pinned.shrink = True
+#+end_src
+
+** Position
+Start position for the tab bar. It can easily be moved while using qutebrowser by setting them to something else.
+#+begin_src python
+c.tabs.position = "top"
+#+end_src
+** Tab bar showing
+Only show the tab bar when there is more than one tab.
+#+begin_src python
+c.tabs.show = "multiple"
+#+end_src
+
+And if it is set to switching, how long to show it for (in milliseconds).
+#+begin_src python
+c.tabs.show_switching_delay = 3000
+#+end_src
+
+** On remove
+When a tab is removed, then show the last used tab. Although this can be annoying sometimes, it's often helpful.
+#+begin_src python
+c.tabs.select_on_remove = "last-used"
+#+end_src
+
+** Title
+How to show the title in a tab.
+#+begin_src python
+c.tabs.title.alignment = "left"
+#+end_src
+
+*** Format
+Formatted title strings have the following defined parameters:
+- ~{perc}~: Percentage as a string like ~[10%]~.
+- ~{perc_raw}~: Raw percentage, e.g. ~10~.
+- ~{current_title}~: Title of # the current web page.
+- ~{title_sep}~: The string ~" - "~ if a title is set, empty otherwise.
+- ~{index}~: Index of this tab.
+- ~{aligned_index}~: Index of this tab padded with spaces to have the same width.
+- ~{relative_index}~: Index of this tab relative to the current tab.
+- ~{id}~: Internal tab ID of this tab.
+- ~{scroll_pos}~: Page scroll position.
+- ~{host}~: Host of the current web page.
+- ~{backend}~: Either ~webkit~ or ~webengine~
+- ~{private}~: Indicates when private mode is enabled.
+- ~{current_url}~: URL of the current web page.
+- ~{protocol}~: Protocol (http/https/...) of the current web page.
+- ~{audio}~: Indicator for audio/mute status.
+
+#+begin_src python
+c.tabs.title.format = "{audio}{aligned_index}: {current_title}"
+c.tabs.title.format_pinned = "{index}"
+#+end_src
+
+** Changing tabs
+Wrap around when changing tabs so I don't need to go backwards to get to the beginning.
+#+begin_src python
+c.tabs.wrap = True
+#+end_src
+
+Restore a tab's mode when switching back to it.
+#+begin_src python
+c.tabs.mode_on_change = "restore"
+#+end_src
+
+** Undo stack
+I like a bigger undo stack.
+#+begin_src python
+c.tabs.undo_stack_size = -1
+#+end_src
+
+** Tabs as windows
+Turned on if tabs should be broken out into windows. (hint: they shouldn't be...)
+#+begin_src python
+c.tabs.tabs_are_windows = False
+#+end_src
+
+** Tool tips
+Show tool tips on tabs.
+#+begin_src python
+c.tabs.tooltips = True
+#+end_src
 * Color theme
 #+begin_src python
 c.colors.webpage.preferred_color_scheme = "dark"
 #+end_src
 
 #+begin_src python
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 #+end_src
 
 * Hinting
@@ -144,9 +725,172 @@ c.completion.use_best_match = True
 #+end_src
 
 * Downloads
+** location
+Ask where to save a file
+#+begin_src python
+c.downloads.location.prompt = True
+#+end_src
+
+Default to a directory if desired.
+#+begin_src python
+c.downloads.location.directory = None
+#+end_src
+
+Once a location is chosen, then remember it.
+#+begin_src python
+c.downloads.location.remember = True
+#+end_src
+
+But always ask for all details when saving something.
 #+begin_src python
 c.downloads.location.suggestion = "both"
-c.confirm_quit = ["downloads"]
+#+end_src
+
+** Position
+Where to show downloads on the screen.
+#+begin_src python
+c.downloads.position = "bottom"
+#+end_src
+** Opening
+What program to use to decide what program to use to open a downloaded file.
+#+begin_src python
+c.downloads.open_dispatcher = None
+#+end_src
+
+** Mixed downloading
+Prevent an https site to have you download an http file.
+#+begin_src python
+c.downloads.prevent_mixed_content = True
+#+end_src
+
+** Removal timer
+Timer to remove downloads from the screen once complete.
+#+begin_src python
+c.downloads.remove_finished = 300000 # 5 min
+#+end_src
+
+* Url
+** Auto search
+When you enter words into the url, what should be done with them if they're not a web address?
+- ~naive~: Use simple/naive check.
+- ~dns~: Use DNS requests (might be slow!).
+- ~never~: Never search automatically.
+- ~schemeless~: Always search automatically unless URL explicitly contains a scheme.
+#+begin_src python
+c.url.auto_search = "naive"
+#+end_src
+
+** Default page
+Page that opens when you open a new tab or a new window.
+#+begin_src python
+c.url.default_page = "https://start.duckduckgo.com/"
+#+end_src
+
+** Increment Decrement segments
+Don't really know what this does. Documentation says: "URL segments where `:navigate increment/decrement` will search for a number."
+#+begin_src python
+c.url.incdec_segments = ["path", "query"]
+#+end_src
+
+** Search engine
+ Open base URL of the search engine if a search engine shortcut is invoked without parameters.
+ #+begin_src python
+c.url.open_base_url = False
+ #+end_src
+
+** Search engines
+Search engines that will automatically perform searches. Left in the documentation since it makes very little sense to me right now.
+
+#+begin_quote
+Search engines which can be used via the address bar. Maps a search engine name (such as ~DEFAULT~, or ~ddg~) to a URL with a ~{}~ placeholder. The placeholder will be replaced by the search term, use ~{{~ and ~}}~ for literal ~{~/~}~ braces. The following further placeholders are defined to configure how special characters in the search terms are replaced by safe characters (called 'quoting'):
+- ~{}~ and ~{semiquoted}~ quote everything except slashes; this is the most sensible choice for almost all search engines (for the search term ~slash/and&amp~ this placeholder expands to ~slash/and%26amp~).
+- ~{quoted}~ quotes all characters (for ~slash/and&amp~ this placeholder expands to ~slash%2Fand%26amp~).
+- ~{unquoted}~ quotes nothing (for ~slash/and&amp~ this placeholder expands to ~slash/and&amp~).
+- ~{0}~ means the same as ~{}~, but can be used multiple times.
+
+The search engine named ~DEFAULT~ is used when ~url.auto_search~ is turned on and something else than a URL was entered to be opened. Other search engines can be used by prepending the search engine name to the search term, e.g. ~:open google qutebrowser~.
+#+end_quote
+#+begin_src python
+c.url.searchengines = {"DEFAULT": "https://duckduckgo.com/?q={}"}
+#+end_src
+
+** Start pages
+Pages to open when qutebrowser first starts up.
+#+begin_src python
+c.url.start_pages = ["https://start.duckduckgo.com"]
+#+end_src
+
+** Yanking
+Parameters to ignore when a URL is yanked.
+#+begin_src python
+c.url.yank_ignored_parameters = [
+    "ref",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+]
+#+end_src
+
+* Zoom
+Defaults to standard zoom.
+#+begin_src python
+c.zoom.default = "100%"
+#+end_src
+
+** Levels
+Zoom levels available in the browser
+#+begin_src python
+c.zoom.levels = [
+    "25%",
+    "33%",
+    "50%",
+    "67%",
+    "75%",
+    "90%",
+    "100%",
+    "110%",
+    "125%",
+    "150%",
+    "175%",
+    "200%",
+    "250%",
+    "300%",
+    "400%",
+    "500%",
+]
+#+end_src
+
+** Mouse
+Divide the mouse into x pieces when zooming
+#+begin_src python
+c.zoom.mouse_divider = 512
+#+end_src
+
+** Text vs Frame
+Determines if the zoom on the page applies to the frame or just the text.
+#+begin_src python :tangle no
+c.zoom.text_only = False
+#+end_src
+
+* Window
+** Decorations
+The thing at the top of the window.
+#+begin_src python
+c.window.hide_decoration = False
+#+end_src
+
+** Format
+Title of each window open
+#+begin_src python
+c.window.title_format = "{perc}{current_title}{title_sep}qutebrowser"
+#+end_src
+
+** Transparency
+Transparency settings on linux systems. Don't use transparency personally though.
+#+begin_src python
+c.window.transparent = False
 #+end_src
 
 * Keybindings
@@ -277,7 +1021,7 @@ config.bind('<Ctrl-h>', 'back --tab --bg')
 
 Then here are some bindings that are more more for consistencies sake. It's nice to have options after all.
 #+begin_src python
-config.bind('th', 'back -t')
+
 config.bind('tl', 'forward -t')
 config.bind('<back>', 'back')
 config.bind('<forward>', 'forward')
@@ -652,21 +1396,9 @@ config.bind('<Ctrl-y>', 'prompt-accept yes', mode='prompt')
 config.bind('<Escape>', 'mode-leave', mode='register')
 #+end_src
 
-* Ad block
-This little function was originally pulled from [[https://gitlab.com/jgkamat/dotfiles/blob/master/qutebrowser/.config/qutebrowser/pyconfig/adblock-yt.py][here]] but will probably be replaced some day with a better plugin. For now, I can't complain and don't want to dive further into qutebrowser plugins.
+* Spellcheck
 #+begin_src python
-from qutebrowser.api import interceptor
-
-    # Youtube adblock
-def filter_yt(info: interceptor.Request):
-    """"""
-    url = info.request_url
-    if (url.host() == 'www.youtube.com' and
-        url.path() == '/get_video_info' and
-            '&adformat=' in url.query()):
-        info.block()
-
-interceptor.register(filter_yt)
+c.spellcheck.languages = ["en-US"]
 #+end_src
 
 * Local Variables
