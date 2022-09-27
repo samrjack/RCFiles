@@ -1253,9 +1253,46 @@ Finally, add all the functions to a key map.
 #+end_src
 
 **** Org Roam
+Unpin org roam so that it stays recent.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(unpin! org-roam)
+#+end_src
+
+Set org roam up to use the roam directory and acknowledge that I want v2 instead of v1.
 #+begin_src emacs-lisp
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
+#+end_src
+
+***** UI
+Add org roam UI so that I can visualize an org roam graph.
+#+begin_src emacs-lisp :tange ../configs/.doom.d/packages.el
+(package! org-roam-ui)
+#+end_src
+
+Then set the dependencies to load after org roam to reduce start up time.
+#+begin_src emacs-lisp
+(use-package! websocket
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+#+end_src
+
+And then add a function that shows the org-roam-ui in an x-widget.
+#+begin_src emacs-lisp
+(defun local/org-roam-toggle-ui-xwidget ()
+  "Shows the org roam ui using emacs x-widgets so you may view it in emacs instead of needing an external browser."
+  (interactive)
+  (let* ((host (concat "localhost:" (number-to-string org-roam-ui-port)))
+         (url (concat "http://" host))
+         (buf (or (xwidget-webkit-get-url-buffer host)
+                  (xwidget-webkit-url-get-create url "*org-roam-ui*"))))
+    (if-let ((window (get-buffer-window buf)))
+        (delete-window window)
+      (switch-to-buffer-other-window buf))))
 #+end_src
 
 **** Timers and clock

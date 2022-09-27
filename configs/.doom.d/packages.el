@@ -74,6 +74,8 @@
 (package! clj-refactor)
 (package! cider)
 
+(unpin! org-roam)
+
 (package! org-present)
 
 (package! visual-fill-column :recipe (:host nil :repo "https://codeberg.org/joostkremers/visual-fill-column"))

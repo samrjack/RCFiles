@@ -398,6 +398,27 @@ if no org extension is given then it will be automatically appended."
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
 
+(package! org-roam-ui)
+
+(use-package! websocket
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+
+(defun local/org-roam-toggle-ui-xwidget ()
+  "Shows the org roam ui using emacs x-widgets so you may view it in emacs instead of needing an external browser."
+  (interactive)
+  (let* ((host (concat "localhost:" (number-to-string org-roam-ui-port)))
+         (url (concat "http://" host))
+         (buf (or (xwidget-webkit-get-url-buffer host)
+                  (xwidget-webkit-url-get-create url "*org-roam-ui*"))))
+    (if-let ((window (get-buffer-window buf)))
+        (delete-window window)
+      (switch-to-buffer-other-window buf))))
+
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 
