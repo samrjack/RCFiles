@@ -4,6 +4,6 @@
 # key: package
 # uuid: package
 # --
-#+begin_src emacs-lisp :tange ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 `%`$0
 #+end_src
