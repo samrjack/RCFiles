@@ -25,7 +25,6 @@
        (emoji +ascii     ;💩 in the text
               +github
               +unicode)
-       fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra             ; Discount modality for mythological beast hunters
        indent-guides     ; highlighted indent columns
