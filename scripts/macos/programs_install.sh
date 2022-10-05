@@ -111,6 +111,8 @@ brew install neofetch
 
 brew install jq
 
+brew install yq
+
 brew install tty-clock
 
 brew install ffmpeg

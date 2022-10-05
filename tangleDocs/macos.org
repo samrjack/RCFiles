@@ -425,10 +425,15 @@ Neofetch is a tool that summarizes a system's resources in a nice little print o
 brew install neofetch
 #+end_src
 
-** jq
+** jq/yq
 Jq is a cli tool for JSON reading and manipulation.
 #+begin_src sh
 brew install jq
+#+end_src
+
+Yq is jq's yaml equivalent.
+#+begin_src sh
+brew install yq
 #+end_src
 
 ** tty-clock
