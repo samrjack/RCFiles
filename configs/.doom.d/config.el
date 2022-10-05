@@ -398,8 +398,6 @@ if no org extension is given then it will be automatically appended."
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)
 
-(package! org-roam-ui)
-
 (use-package! websocket
   :after org-roam
   :config

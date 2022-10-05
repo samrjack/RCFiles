@@ -76,6 +76,8 @@
 
 (unpin! org-roam)
 
+(package! org-roam-ui)
+
 (package! org-present)
 
 (package! visual-fill-column :recipe (:host nil :repo "https://codeberg.org/joostkremers/visual-fill-column"))

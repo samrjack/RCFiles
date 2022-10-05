@@ -1266,7 +1266,7 @@ Set org roam up to use the roam directory and acknowledge that I want v2 instead
 
 ***** UI
 Add org roam UI so that I can visualize an org roam graph.
-#+begin_src emacs-lisp :tange ../configs/.doom.d/packages.el
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! org-roam-ui)
 #+end_src
 
