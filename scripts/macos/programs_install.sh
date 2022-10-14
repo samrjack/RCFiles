@@ -60,6 +60,8 @@ brew install --cask pgadmin4
 
 brew install --cask postman
 
+brew install --cask karabiner-elements
+
 brew install coreutils
 
 brew install moreutils

@@ -277,6 +277,12 @@ Postman is an application for making http api requests to services.
 brew install --cask postman
 #+end_src
 
+** Karabiner
+Karabiner is a program for remapping key functionality on the mac. Awesome for getting keyboards to behave the way you want.
+#+begin_src sh
+brew install --cask karabiner-elements
+#+end_src
+
 * CLI tools
 ** Utils
 These are packages that add functionality or utility functions that are often used in basic shell commands to chain things together. Glue code basically.
