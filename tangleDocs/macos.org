@@ -276,6 +276,11 @@ Postman is an application for making http api requests to services.
 #+begin_src sh
 brew install --cask postman
 #+end_src
+** Spotify
+Want to listen to some tunes.
+#+begin_src sh
+brew install --cask spotify
+#+end_src
 
 ** Karabiner
 Karabiner is a program for remapping key functionality on the mac. Awesome for getting keyboards to behave the way you want.
