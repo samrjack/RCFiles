@@ -34,7 +34,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse"
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
@@ -64,7 +64,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -106,7 +106,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -148,7 +148,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -190,7 +190,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -232,7 +232,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -274,7 +274,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -316,7 +316,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
@@ -358,7 +358,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "strict_inverse",
+                                        "key_up_order": "insensitive",
                                         "to_after_key_up": [
                                             {
                                                 "set_variable": {
