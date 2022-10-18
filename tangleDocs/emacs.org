@@ -623,6 +623,11 @@ The number represents the number of recursive layers it's allowed. Don't make it
 (setq treemacs-collapse-dirs 5)
 #+end_src
 
+When I do want to use treemacs, I don't want tons of projects to show since I really only care about the one I'm in.
+#+begin_src emacs-lisp
+(treemacs-project-follow-mode 1)
+#+end_src
+
 *** Projectile
 #+begin_src emacs-lisp
 (after! projectile

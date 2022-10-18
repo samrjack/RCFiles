@@ -101,6 +101,8 @@ Position the cursor at it's beginning, according to the current mode."
 
 (setq treemacs-collapse-dirs 5)
 
+(treemacs-project-follow-mode 1)
+
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
