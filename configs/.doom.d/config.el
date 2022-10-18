@@ -182,6 +182,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'local/toggle-and-activate-evil-snipe-mode)
 
+(setq local/snippet-dir (concat doom-user-dir "snippets/"))
+(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 

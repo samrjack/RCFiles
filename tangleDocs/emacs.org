@@ -813,6 +813,12 @@ Turning off the trigger in field for now since it was giving me undesired behavi
 (setq yas-triggers-in-field t)
 #+end_src
 
+Adding my personal snippets directory.
+#+begin_src emacs-lisp
+(setq local/snippet-dir (concat doom-user-dir "snippets/"))
+(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+#+end_src
+
 *** VLF (Very Large Files)
 VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
