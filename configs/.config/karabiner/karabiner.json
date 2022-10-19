@@ -55,7 +55,7 @@
                         ]
                     },
                     {
-                        "description": "Program selectors (o launcher)",
+                        "description": "Program selectors",
                         "manipulators": [
                             {
                                 "description": "[ p to take a screen shot",
