@@ -20,6 +20,7 @@
                         "description": "Zoom shortcuts",
                         "manipulators": [
                             {
+                                "description": "[ ; to mute/unmute",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -57,6 +58,7 @@
                         "description": "Program selectors (o launcher)",
                         "manipulators": [
                             {
+                                "description": "[ p to take a screen shot",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -87,6 +89,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ g to open goland",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -129,6 +132,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ w to open web browser",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -171,6 +175,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ f to open finder",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -213,6 +218,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ t to open terminal",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -255,6 +261,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ e to open emacs",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -297,6 +304,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ m to open spotify (music)",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -339,6 +347,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ x to open org capture",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
@@ -381,6 +390,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ s to open slack",
                                 "from": {
                                     "modifiers": {
                                         "mandatory": []
