@@ -1175,6 +1175,16 @@ Several languages require LSPs or other back end code to be configured for babel
     :nv "g K" #'org-backward-element)
 #+end_src
 
+Some keybindings for making it easier to navigate around org structs.
+#+begin_src emacs-lisp
+(map! :map evil-org-mode-map
+      :after evil-org
+      :n "g <up>"    #'org-backward-heading-same-level
+      :n "g <down>"  #'org-forward-heading-same-level
+      :n "g <left>"  #'org-up-element
+      :n "g <right>" #'org-down-element)
+#+end_src
+
 ***** Shortcut to open org files
 This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
 

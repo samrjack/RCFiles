@@ -329,6 +329,13 @@ so only show the modeline when this is not the case"
     :nv "g J" #'org-forward-element
     :nv "g K" #'org-backward-element)
 
+(map! :map evil-org-mode-map
+      :after evil-org
+      :n "g <up>"    #'org-backward-heading-same-level
+      :n "g <down>"  #'org-forward-heading-same-level
+      :n "g <left>"  #'org-up-element
+      :n "g <right>" #'org-down-element)
+
 (setq org-default-extension ".org")
 (defun local/org-open-org-file (file)
   "Opens an org file in the default org folder.
