@@ -1505,6 +1505,11 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 #+end_src
 
+**** Org graph
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+#+end_src
+
 *** LSP mode
 [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
 #+begin_src emacs-lisp

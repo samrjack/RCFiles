@@ -84,6 +84,8 @@
 
 (package! org-chef)
 
+(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+
 ;; e-reader
 (package! calibredb)
 (package! nov)
