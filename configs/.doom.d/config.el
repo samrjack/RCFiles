@@ -452,8 +452,37 @@ if no org extension is given then it will be automatically appended."
         (delete-window window)
       (switch-to-buffer-other-window buf))))
 
-(setq org-clock-persist 'history)
+(setq org-clock-persist t)
 (org-clock-persistence-insinuate)
+
+(defvar local/org-time-map (make-sparse-keymap))
+;; C-t normally creates new workspaces. I'd perfer immediate access to timers.
+(map! :desc "timers/clocks"
+      :n "C-t" local/org-time-map)
+
+(map! :map local/org-time-map
+      ;; Clock commands
+      :desc "Check-in clock"  "i" #'org-clock-in
+      :desc "Check-out clock" "o" #'org-clock-out
+      :desc "Quit clock"      "q" #'org-clock-cancel
+      :desc "Goto clock item" "g" #'org-clock-goto
+      :desc "Effort estimate" "e" #'org-clock-modify-effort-estimate
+      :desc "Display clock"   "d" #'org-clock-display
+
+      ;; timer commands
+      :desc "Start timer"            "s" #'org-timer-start
+      :desc "Start timer"            "0" #'org-timer-start
+
+      :desc "Pause/Play timer"       "p" #'org-timer-pause-or-continue
+      :desc "Pause/Play timer"       "," #'org-timer-pause-or-continue
+
+      :desc "Stop timer"             "x" #'org-timer-stop
+      :desc "Stop timer"             "_" #'org-timer-stop
+
+      :desc "Countdown timer"        ";" #'org-timer-set-timer
+      :desc "Insert timer timestamp" "." #'org-timer
+      :desc "Insert timer list item" "-" #'org-timer-item
+)
 
 (after! org
 
