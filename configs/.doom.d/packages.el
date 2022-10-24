@@ -82,6 +82,8 @@
 
 (package! visual-fill-column :recipe (:host nil :repo "https://codeberg.org/joostkremers/visual-fill-column"))
 
+(package! org-chef)
+
 ;; e-reader
 (package! calibredb)
 (package! nov)
