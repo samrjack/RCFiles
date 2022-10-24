@@ -466,8 +466,8 @@ if no org extension is given then it will be automatically appended."
       :desc "Check-out clock"          "o" #'org-clock-out
       :desc "Quit clock"               "q" #'org-clock-cancel
       :desc "Goto clock item"          "g" #'org-clock-goto
-      :desc "Effort estimate"          "e" #'org-clock-modify-effort-estimate
-      :desc "Effort estimate at point" "E" #'org-set-effort
+      :desc "Effort estimate"          "E" #'org-clock-modify-effort-estimate
+      :desc "Effort estimate at point" "e" #'org-set-effort
       :desc "Display clock"            "d" #'org-clock-display
 
       ;; timer commands
