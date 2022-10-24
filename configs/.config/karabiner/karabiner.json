@@ -89,6 +89,37 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "[ q to lock Mac",
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": []
+                                    },
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "open_bracket"
+                                        },
+                                        {
+                                            "key_code": "q"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_order": "insensitive"
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 500
+                                },
+                                "to": {
+                                    "key_code": "q",
+                                    "modifiers": [
+                                        "left_command",
+                                        "left_control"
+                                    ]
+                                },
+                                "type": "basic"
+                            },
+                            {
                                 "description": "[ g to open goland",
                                 "from": {
                                     "modifiers": {
