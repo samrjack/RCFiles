@@ -462,12 +462,13 @@ if no org extension is given then it will be automatically appended."
 
 (map! :map local/org-time-map
       ;; Clock commands
-      :desc "Check-in clock"  "i" #'org-clock-in
-      :desc "Check-out clock" "o" #'org-clock-out
-      :desc "Quit clock"      "q" #'org-clock-cancel
-      :desc "Goto clock item" "g" #'org-clock-goto
-      :desc "Effort estimate" "e" #'org-clock-modify-effort-estimate
-      :desc "Display clock"   "d" #'org-clock-display
+      :desc "Check-in clock"           "i" #'org-clock-in
+      :desc "Check-out clock"          "o" #'org-clock-out
+      :desc "Quit clock"               "q" #'org-clock-cancel
+      :desc "Goto clock item"          "g" #'org-clock-goto
+      :desc "Effort estimate"          "e" #'org-clock-modify-effort-estimate
+      :desc "Effort estimate at point" "E" #'org-set-effort
+      :desc "Display clock"            "d" #'org-clock-display
 
       ;; timer commands
       :desc "Start timer"            "s" #'org-timer-start
