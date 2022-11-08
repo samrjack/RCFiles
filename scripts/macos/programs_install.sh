@@ -64,6 +64,8 @@ brew install --cask spotify
 
 brew install --cask karabiner-elements
 
+brew install --cask anki
+
 brew install coreutils
 
 brew install moreutils
