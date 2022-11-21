@@ -686,10 +686,15 @@ One thing I really like about tmux is the ability to zoom in on windows without 
 (package! zoom-window)
 #+end_src
 
+To get zoom window to work correctly, I need to set its settings then run the setup command so that they take effect properly.
 #+begin_src emacs-lisp
 (setq zoom-window-use-persp t)
-
 (setq zoom-window-mode-line-color "DarkGreen")
+(zoom-window-setup)
+#+end_src
+
+Then set a convenient key command to activate the zoom. Since tmux uses leader-z, I figured it would work well here too.
+#+begin_src emacs-lisp
 (map! :leader
       :desc "Zoom window"
       "z" #'zoom-window-zoom)

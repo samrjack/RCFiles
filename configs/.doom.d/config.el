@@ -126,8 +126,9 @@ Position the cursor at it's beginning, according to the current mode."
 (map! :leader :desc "Tabs" "T" tab-prefix-map)
 
 (setq zoom-window-use-persp t)
-
 (setq zoom-window-mode-line-color "DarkGreen")
+(zoom-window-setup)
+
 (map! :leader
       :desc "Zoom window"
       "z" #'zoom-window-zoom)
