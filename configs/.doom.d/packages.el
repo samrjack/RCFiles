@@ -86,6 +86,8 @@
 
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
 
+(package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
+
 ;; e-reader
 (package! calibredb)
 (package! nov)
