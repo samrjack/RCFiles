@@ -411,10 +411,23 @@ if no org extension is given then it will be automatically appended."
   (interactive)
   (local/open-work-org-file "projects" "project.org"))
 
-(defun local/org-open-work-task ()
-  "Prompts and opens a file in the org work tasks directory."
+(defun local/org-open-work-file-notes ()
+  "Opens the todo task file."
   (interactive)
-  (local/open-work-org-file "tasks" "schedule.org"))
+  (let ((todo-file-name (concat
+                         (file-name-as-directory org-directory)
+                         (file-name-as-directory "work")
+                         "todo.org")))
+    (local/org-open-org-file todo-file-name)))
+
+(defun local/org-open-work-unfiled-notes ()
+  "Opens the todo task file."
+  (interactive)
+  (let ((note-file-name (concat
+                         (file-name-as-directory org-directory)
+                         (file-name-as-directory "work")
+                         "notes.org")))
+    (local/org-open-org-file note-file-name)))
 
 (defun local/org-open-work-wiki ()
   "Prompts and opens a file in the org work tasks directory."
@@ -429,6 +442,7 @@ if no org extension is given then it will be automatically appended."
         :desc "Notes" "n" #'local/org-open-work-note
         :desc "Projects" "p" #'local/org-open-project-note
         :desc "Tasks" "t" #'local/org-open-work-task
+        :desc "Unfiled Notes" "u" #'local/org-open-work-unfiled-notes
         :desc "Wiki" "w" #'local/org-open-work-wiki)))
 
 (setq org-roam-directory "~/roam")
