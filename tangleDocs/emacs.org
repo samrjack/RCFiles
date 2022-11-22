@@ -592,7 +592,6 @@ When available, I really like to use tab as a quick way to toggle folds.
 
 ** Managing files
 *** Sidebar file explorer
-
 Import a simpler sidebar package for when it's needed.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! dired-sidebar)
@@ -1279,7 +1278,7 @@ Then use the helper functions to create a set of convenience functions to open t
   (interactive)
   (local/open-work-org-file "projects" "project.org"))
 
-(defun local/org-open-work-file-notes ()
+(defun local/org-open-work-task ()
   "Opens the todo task file."
   (interactive)
   (let ((todo-file-name (concat

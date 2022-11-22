@@ -411,7 +411,7 @@ if no org extension is given then it will be automatically appended."
   (interactive)
   (local/open-work-org-file "projects" "project.org"))
 
-(defun local/org-open-work-file-notes ()
+(defun local/org-open-work-task ()
   "Opens the todo task file."
   (interactive)
   (let ((todo-file-name (concat
