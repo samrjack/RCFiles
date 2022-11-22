@@ -288,6 +288,11 @@ Karabiner is a program for remapping key functionality on the mac. Awesome for g
 brew install --cask karabiner-elements
 #+end_src
 
+** Flameshot
+A cool tool for taking screenshots then editing them.
+#+begin_src sh
+brew install --cask flameshot
+#+end_src
 ** Anki
 The best spaced repitition program yet created.
 #+begin_src sh
