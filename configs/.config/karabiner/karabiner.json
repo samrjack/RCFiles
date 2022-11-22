@@ -168,27 +168,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a GoLand.app"
                                     }
@@ -211,27 +197,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a 'Google Chrome.app'"
                                     }
@@ -254,27 +226,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a finder.app"
                                     }
@@ -297,27 +255,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a iTerm.app"
                                     }
@@ -383,27 +327,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a Spotify.app"
                                     }
@@ -426,27 +356,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a zoom.us.app"
                                     }
@@ -469,15 +385,7 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
@@ -485,13 +393,7 @@
                                 },
                                 "to": [
                                     {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
-                                    {
-                                        "shell_command": "~/.emacs.d/bin/org-capture"
+                                        "shell_command": "${HOME}/.emacs.d/bin/org-capture"
                                     }
                                 ],
                                 "type": "basic"
@@ -512,27 +414,13 @@
                                     ],
                                     "simultaneous_options": {
                                         "key_down_order": "strict",
-                                        "key_up_order": "insensitive",
-                                        "to_after_key_up": [
-                                            {
-                                                "set_variable": {
-                                                    "name": "launcher_mode_v4",
-                                                    "value": 0
-                                                }
-                                            }
-                                        ]
+                                        "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "launcher_mode_v4",
-                                            "value": 1
-                                        }
-                                    },
                                     {
                                         "shell_command": "open -a Slack.app"
                                     }
