@@ -127,6 +127,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 (setq zoom-window-use-persp t)
 (setq zoom-window-mode-line-color "DarkGreen")
+(add-hook 'doom-load-theme-hook #'zoom-window-setup)
 (zoom-window-setup)
 
 (map! :leader
