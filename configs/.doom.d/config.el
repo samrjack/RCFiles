@@ -315,7 +315,9 @@ so only show the modeline when this is not the case"
 (setq web-mode-block-padding standard-indent)
 (setq web-mode-part-padding standard-indent)
 
-(setq org-directory "~/org")
+(setq org-directory (file-name-concat "~" "org"))
+;; (setq org-work-directory "~/work-org")
+(setq org-work-directory (file-name-concat org-directory "work"))
 (setq org-archive-location "archive/%s_archive::")
 
 (setq org-bable-clojure-backend 'cider)
@@ -387,7 +389,7 @@ if no org extension is given then it will be automatically appended."
 (defun local/open-work-org-file (directory default-file)
   "A condensing function for opening an org directory for work purposes"
   ; Define the destination directory. Currently is hardcoded to the work dir in the org dir.
-  (let ((dest-dir (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory))))
+  (let ((dest-dir (file-name-concat org-work-directory directory)))
     ; First create the directory if it doesn't already exist
     (unless (file-directory-p dest-dir)
       (if (y-or-n-p (concat "directory '" dest-dir "' is not found. Create? "))
@@ -415,23 +417,17 @@ if no org extension is given then it will be automatically appended."
 (defun local/org-open-work-task ()
   "Opens the todo task file."
   (interactive)
-  (let ((todo-file-name (concat
-                         (file-name-as-directory org-directory)
-                         (file-name-as-directory "work")
-                         "todo.org")))
+  (let ((todo-file-name (file-name-concat org-work-directory "todo.org")))
     (local/org-open-org-file todo-file-name)))
 
 (defun local/org-open-work-unfiled-notes ()
   "Opens the todo task file."
   (interactive)
-  (let ((note-file-name (concat
-                         (file-name-as-directory org-directory)
-                         (file-name-as-directory "work")
-                         "notes.org")))
+  (let ((note-file-name (file-name-concat org-work-directory "notes.org")))
     (local/org-open-org-file note-file-name)))
 
 (defun local/org-open-work-wiki ()
-  "Prompts and opens a file in the org work tasks directory."
+  "Prompts and opens a file in the org wiki tasks directory."
   (interactive)
   (local/open-work-org-file "wiki" "toSort.org"))
 

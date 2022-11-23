@@ -1137,7 +1137,9 @@ so only show the modeline when this is not the case"
 **** Standard Org settings
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
 #+begin_src emacs-lisp
-(setq org-directory "~/org")
+(setq org-directory (file-name-concat "~" "org"))
+;; (setq org-work-directory "~/work-org")
+(setq org-work-directory (file-name-concat org-directory "work"))
 (setq org-archive-location "archive/%s_archive::")
 #+end_src
 
@@ -1230,7 +1232,6 @@ if no org extension is given then it will be automatically appended."
 #+end_src
 
 This helper function contains the shared code for prompting for a file.
-=TODO= Create a function for building a system path.
 #+begin_src emacs-lisp
 (defun local/prompt-org-file (&optional dir default-name)
   "Prompts the user for a file inside the specified directory. Uses defualt name when no entry is given if the name is provided."
@@ -1248,7 +1249,7 @@ Next here are some helper functions that open are more generic for finding and o
 (defun local/open-work-org-file (directory default-file)
   "A condensing function for opening an org directory for work purposes"
   ; Define the destination directory. Currently is hardcoded to the work dir in the org dir.
-  (let ((dest-dir (concat (file-name-as-directory org-directory) (file-name-as-directory "work") (file-name-as-directory directory))))
+  (let ((dest-dir (file-name-concat org-work-directory directory)))
     ; First create the directory if it doesn't already exist
     (unless (file-directory-p dest-dir)
       (if (y-or-n-p (concat "directory '" dest-dir "' is not found. Create? "))
@@ -1279,23 +1280,17 @@ Then use the helper functions to create a set of convenience functions to open t
 (defun local/org-open-work-task ()
   "Opens the todo task file."
   (interactive)
-  (let ((todo-file-name (concat
-                         (file-name-as-directory org-directory)
-                         (file-name-as-directory "work")
-                         "todo.org")))
+  (let ((todo-file-name (file-name-concat org-work-directory "todo.org")))
     (local/org-open-org-file todo-file-name)))
 
 (defun local/org-open-work-unfiled-notes ()
   "Opens the todo task file."
   (interactive)
-  (let ((note-file-name (concat
-                         (file-name-as-directory org-directory)
-                         (file-name-as-directory "work")
-                         "notes.org")))
+  (let ((note-file-name (file-name-concat org-work-directory "notes.org")))
     (local/org-open-org-file note-file-name)))
 
 (defun local/org-open-work-wiki ()
-  "Prompts and opens a file in the org work tasks directory."
+  "Prompts and opens a file in the org wiki tasks directory."
   (interactive)
   (local/open-work-org-file "wiki" "toSort.org"))
 #+end_src
