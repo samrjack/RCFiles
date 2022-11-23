@@ -410,19 +410,16 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
 
 ** Basic Emacs settings
 *** Fonts
+Doom exposes five (optional) variables for controlling fonts in Doom. Here are the three important ones:
+
++ `doom-font'
++ `doom-variable-pitch-font'
++ `doom-big-font' -- used for `doom-big-font-mode'; use this for presentations or streaming.
+
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font string. You generally only need these two:
 #+begin_src emacs-lisp :tangle no
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+end_src
 
 *** Custom settings file
