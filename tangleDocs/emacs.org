@@ -1134,7 +1134,11 @@ so only show the modeline when this is not the case"
 (package! org-pretty-tags)
 #+end_src
 
-**** Standard Org settings
+**** General Org settings
+These settings are for org in general but aren't an extension or certain parts of org.
+***** Standard org settings
+These settings change the default values available in org mode.
+
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
 #+begin_src emacs-lisp
 (setq org-directory (file-name-concat "~" "org"))
@@ -1295,7 +1299,6 @@ Finally, add all the functions to a key map.
 
 **** Babel
 Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
-
 ***** Clojure
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; Clojure related packages
@@ -1394,7 +1397,6 @@ Make timers easier to access in org mode.
 #+end_src
 
 **** Org Agenda
-
 ***** Agenda files
 To set specific files or directories as being "agenda" files, you can use =org-agenda-files=. By setting it here, Agenda will read from all these spots when constructing it's agenda view.
 #+begin_src emacs-lisp
