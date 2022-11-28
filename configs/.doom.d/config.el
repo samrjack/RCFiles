@@ -497,6 +497,15 @@ if no org extension is given then it will be automatically appended."
       :desc "Insert timer list item" "-" #'org-timer-item
 )
 
+(setq org-agenda-files (list org-directory
+                             org-work-directory
+                             (file-name-concat org-work-directory "meetings")
+                             (file-name-concat org-work-directory "notes")
+                             (file-name-concat org-work-directory "projects")
+                             (file-name-concat org-work-directory "retros")
+                             (file-name-concat org-work-directory "retros")
+))
+
 (after! org
 
 (setq org-pomodoro-length 25

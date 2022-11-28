@@ -1394,11 +1394,18 @@ Make timers easier to access in org mode.
 #+end_src
 
 **** Org Agenda
-***** Limiting files
-To set specific files as being "agenda" files, you can use =org-agenda-files= however I've found I like putting schedule markers in various files around my org setup.
-#+begin_src emacs-lisp :tangle no
-(setq org-agenda-files (list "~/org/work.org"
-                             "~/org/todo.org"))
+
+***** Agenda files
+To set specific files or directories as being "agenda" files, you can use =org-agenda-files=. By setting it here, Agenda will read from all these spots when constructing it's agenda view.
+#+begin_src emacs-lisp
+(setq org-agenda-files (list org-directory
+                             org-work-directory
+                             (file-name-concat org-work-directory "meetings")
+                             (file-name-concat org-work-directory "notes")
+                             (file-name-concat org-work-directory "projects")
+                             (file-name-concat org-work-directory "retros")
+                             (file-name-concat org-work-directory "retros")
+))
 #+end_src
 
 **** Pomodoro
