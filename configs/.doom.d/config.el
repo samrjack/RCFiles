@@ -320,8 +320,6 @@ so only show the modeline when this is not the case"
 (setq org-work-directory (file-name-concat org-directory "work"))
 (setq org-archive-location "archive/%s_archive::")
 
-(setq org-bable-clojure-backend 'cider)
-
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
 ;; Use keybinding g m to "go mark" the current location so it can be returned to later.
 (map! :after org
@@ -441,6 +439,8 @@ if no org extension is given then it will be automatically appended."
         :desc "Tasks" "t" #'local/org-open-work-task
         :desc "Unfiled Notes" "u" #'local/org-open-work-unfiled-notes
         :desc "Wiki" "w" #'local/org-open-work-wiki)))
+
+(setq org-bable-clojure-backend 'cider)
 
 (setq org-roam-directory "~/roam")
 (setq org-roam-v2-ack t)

@@ -1149,22 +1149,6 @@ In org mode I like to be able to write in different fonts and languages (such as
 (add-hook 'org-mode-hook #'local/chinese-text-support)
 #+end_src
 
-***** Babel
-Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
-
-****** Clojure
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-;; Clojure related packages
-(package! clojure-mode)
-(package! clojure-mode-extra-font-locking)
-(package! clj-refactor)
-(package! cider)
-#+end_src
-
-#+begin_src emacs-lisp
-(setq org-bable-clojure-backend 'cider)
-#+end_src
-
 ***** Org mode keybindings
 #+begin_src emacs-lisp
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
@@ -1307,6 +1291,22 @@ Finally, add all the functions to a key map.
         :desc "Tasks" "t" #'local/org-open-work-task
         :desc "Unfiled Notes" "u" #'local/org-open-work-unfiled-notes
         :desc "Wiki" "w" #'local/org-open-work-wiki)))
+#+end_src
+
+**** Babel
+Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
+
+***** Clojure
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+;; Clojure related packages
+(package! clojure-mode)
+(package! clojure-mode-extra-font-locking)
+(package! clj-refactor)
+(package! cider)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq org-bable-clojure-backend 'cider)
 #+end_src
 
 **** Org Roam
