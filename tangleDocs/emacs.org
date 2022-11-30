@@ -107,7 +107,7 @@ For modules concerned with the insertion and editing of text. Amen.
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
-       fold              ; (nigh) universal code folding
+       ;;fold              ; (nigh) universal code folding
        (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
@@ -581,10 +581,52 @@ Position the cursor at it's beginning, according to the current mode."
 #+end_src
 
 *** Keybindings
+**** Fold from anywhere on line
+The standard folding capability of emacs only will fold when the cursor is over the thing that is folding.
+This function makes folds occur from anywhere on the line.
+#+begin_src emacs-lisp
+(defun local/execute-at-end-of-line (func)
+  "Takes in a function then executes it at the end of the current line."
+  (save-excursion (end-of-line) (funcall func)))
+
+(defun local/evil-toggle-fold-eol ()
+  "Run evil-toggle-fold at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-toggle-fold))
+
+(defun local/evil-open-fold-eol ()
+  "Run evil-open-fold at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-open-fold))
+
+(defun local/evil-open-fold-rec-eol ()
+  "Run evil-open-fold-rec at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-open-fold-rec))
+
+(defun local/evil-close-fold-eol ()
+  "Run evil-close-fold at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-close-fold))
+#+end_src
+
+Then remap the evil fold functions that need it to use the above function.
+#+begin_src emacs-lisp
+(map! :desc "toggle fold"
+      :nm "za" #'local/evil-toggle-fold-eol
+      :desc "close fold"
+      :nm "zc" #'local/evil-close-fold-eol
+      :desc "open fold"
+      :nm "zo" #'local/evil-open-fold-eol
+      :desc "open fold rec"
+      :nm "zO" #'local/evil-open-fold-rec-eol)
+#+end_src
+
+
 **** Tab as fold toggling
 When available, I really like to use tab as a quick way to toggle folds.
 #+begin_src emacs-lisp
-(map! :n "TAB" #'+fold/toggle)
+(map! :nm [tab] #'local/evil-toggle-fold-eol)
 #+end_src
 
 ** Managing files
@@ -863,6 +905,7 @@ Origami mode
 (package! origami)
 #+end_src
 
+Set the ability to use it anywhere
 #+begin_src emacs-lisp
 (global-origami-mode)
 #+end_src
@@ -1697,6 +1740,7 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 
 **** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
+
 **** Scheme
 Scheme is a pretty nice lisp implementation. These packages make it even easier to work with.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el

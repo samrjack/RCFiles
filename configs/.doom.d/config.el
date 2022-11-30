@@ -90,7 +90,40 @@ Position the cursor at it's beginning, according to the current mode."
   (forward-line -1)
   (indent-according-to-mode))
 
-(map! :n "TAB" #'+fold/toggle)
+(defun local/execute-at-end-of-line (func)
+  "Takes in a function then executes it at the end of the current line."
+  (save-excursion (end-of-line) (funcall func)))
+
+(defun local/evil-toggle-fold-eol ()
+  "Run evil-toggle-fold at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-toggle-fold))
+
+(defun local/evil-open-fold-eol ()
+  "Run evil-open-fold at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-open-fold))
+
+(defun local/evil-open-fold-rec-eol ()
+  "Run evil-open-fold-rec at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-open-fold-rec))
+
+(defun local/evil-close-fold-eol ()
+  "Run evil-close-fold at the end of the line."
+  (interactive)
+  (local/execute-at-end-of-line #'evil-close-fold))
+
+(map! :desc "toggle fold"
+      :nm "za" #'local/evil-toggle-fold-eol
+      :desc "close fold"
+      :nm "zc" #'local/evil-close-fold-eol
+      :desc "open fold"
+      :nm "zo" #'local/evil-open-fold-eol
+      :desc "open fold rec"
+      :nm "zO" #'local/evil-open-fold-rec-eol)
+
+(map! :nm [tab] #'local/evil-toggle-fold-eol)
 
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'+treemacs/toggle)
