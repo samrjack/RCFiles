@@ -517,12 +517,26 @@ Finally we need to create universal keybindings to these functions so they can b
       :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
 #+end_src
 
-*** Scrolling
+
+*** Cursor movement
+**** Scrolling
+Leave some space at the bottom while scrolling down so the cursor isn't hugging the bottom edge.
 #+begin_src emacs-lisp
-;; leave some space at the bottom while scrolling down so the
-;; cursor isn't hugging the bottom edge.
 (setq scroll-margin 2)
 #+end_src
+
+**** TODO Returning from a jump
+After jumping to a different spot like with a search or a definition look up, I want to be able to return to where I was more easily.
+Recommend using ~C-o~ / ~M-,~ which are faster.
+
+TODO - Make this more efficient
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Previous mark location"
+      :n "P" #'better-jumper-jump-backwards)
+#+end_src
+
+
 
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.

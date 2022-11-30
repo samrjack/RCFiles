@@ -55,9 +55,11 @@ The return value is the yanked text."
 (map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
       :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
 
-;; leave some space at the bottom while scrolling down so the
-;; cursor isn't hugging the bottom edge.
 (setq scroll-margin 2)
+
+(map! :leader
+      :desc "Previous mark location"
+      :n "P" #'better-jumper-jump-backwards)
 
 (setq initial-major-mode #'lisp-interaction-mode)
 
