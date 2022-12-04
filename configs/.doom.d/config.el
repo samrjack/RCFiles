@@ -138,6 +138,8 @@ Position the cursor at it's beginning, according to the current mode."
 
 (treemacs-project-follow-mode 1)
 
+(lsp-treemacs-sync-mode 1)
+
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
@@ -609,10 +611,23 @@ if no org extension is given then it will be automatically appended."
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
+(after! tree-sitter
+  (defvar local/tree-sitter-map (make-sparse-keymap))
+  (map! :map local/tree-sitter-map
+        :desc "Debug mode"
+        "d" #'tree-sitter-debug-mode
+        :desc "Query builder"
+        "q" #'tree-sitter-query-builder
+        :desc "Highlight mode"
+        "h" #'tree-sitter-hl-mode)
+
+  (map! :map doom-leader-code-map
+        :desc "Tree-sitter"
+        "T" local/tree-sitter-map))
+
 (after! lsp-mode
-  (setq lsp-keymap-prefix "s-l")
-  (defvar my-lsp-mode-keymap (make-sparse-keymap))
-  (map! :map my-lsp-mode-keymap
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
         "d" #'lsp-find-definition
         "i" #'lsp-find-implementation
         "r" #'lsp-find-references
@@ -624,7 +639,7 @@ if no org extension is given then it will be automatically appended."
     (interactive)
     (map! :leader
           :desc "LSP"
-          "l" my-lsp-mode-keymap
+          "l" local/lsp-mode-keymap
           "L" lsp-mode-map))
 
   (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))

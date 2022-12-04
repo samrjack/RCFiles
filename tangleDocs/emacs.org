@@ -680,6 +680,12 @@ When I do want to use treemacs, I don't want tons of projects to show since I re
 (treemacs-project-follow-mode 1)
 #+end_src
 
+When using LSP, it is important to let treemacs update as needed to reflect what I'm looking at and what is being processed by the LSP engine.
+#+begin_src emacs-lisp
+(lsp-treemacs-sync-mode 1)
+#+end_src
+
+
 *** Projectile
 #+begin_src emacs-lisp
 (after! projectile
@@ -1664,13 +1670,32 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
 #+end_src
 
+*** Tree Sitter mode
+Tree sitter is a program that parses code in a tree structure for better syntax highlighting and for querying code structure.
+Documentation found [[https://emacs-tree-sitter.github.io/syntax-highlighting/queries/][here]].
+
+#+begin_src emacs-lisp
+(after! tree-sitter
+  (defvar local/tree-sitter-map (make-sparse-keymap))
+  (map! :map local/tree-sitter-map
+        :desc "Debug mode"
+        "d" #'tree-sitter-debug-mode
+        :desc "Query builder"
+        "q" #'tree-sitter-query-builder
+        :desc "Highlight mode"
+        "h" #'tree-sitter-hl-mode)
+
+  (map! :map doom-leader-code-map
+        :desc "Tree-sitter"
+        "T" local/tree-sitter-map))
+#+end_src
+
 *** LSP mode
 [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
 #+begin_src emacs-lisp
 (after! lsp-mode
-  (setq lsp-keymap-prefix "s-l")
-  (defvar my-lsp-mode-keymap (make-sparse-keymap))
-  (map! :map my-lsp-mode-keymap
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
         "d" #'lsp-find-definition
         "i" #'lsp-find-implementation
         "r" #'lsp-find-references
@@ -1682,7 +1707,7 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
     (interactive)
     (map! :leader
           :desc "LSP"
-          "l" my-lsp-mode-keymap
+          "l" local/lsp-mode-keymap
           "L" lsp-mode-map))
 
   (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
