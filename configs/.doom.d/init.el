@@ -119,7 +119,7 @@
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
        ;;(dart +flutter)   ; paint ui and not much else
-       ;;data              ; config/data formats
+       data              ; config/data formats
        ;;dhall             ; config as code
        (elixir +lsp)     ; erlang done right
        (elm +lsp         ; care for a cup of TEA?
