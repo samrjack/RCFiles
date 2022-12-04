@@ -961,7 +961,7 @@ summary:
 **** Diff
 This is a nice package for visualizing git diffs in a more standard unix way than magit.
 #+begin_src elisp :tangle ../configs/.doom.d/packages.el
-(package! diff-ansi :recipe (:host gitlab :repo "ideasman42/emacs-diff-ansi"))
+(package! diff-ansi)
 #+end_src
 
 *** Encryption
@@ -2037,6 +2037,8 @@ There is an issue where evil search isn't looking in folded code. See [[https://
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; This is supposed to fix the issue but doesn't seem to work on macOS. Not sure why.
 ;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")
+
+(unpin! straight)
 #+end_src
 
 #+begin_src emacs-lisp

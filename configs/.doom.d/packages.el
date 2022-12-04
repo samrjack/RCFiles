@@ -35,7 +35,7 @@
 
 (package! blamer)
 
-(package! diff-ansi :recipe (:host gitlab :repo "ideasman42/emacs-diff-ansi"))
+(package! diff-ansi)
 
 (package! encrypt-region)
 
@@ -140,3 +140,5 @@
 
 ;; This is supposed to fix the issue but doesn't seem to work on macOS. Not sure why.
 ;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")
+
+(unpin! straight)
