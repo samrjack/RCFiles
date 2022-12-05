@@ -1093,6 +1093,17 @@ And being able to work with helm is a must for kubernetes.
 #+end_src
 
 ** Mode/package settings
+*** Mode Minder
+Although it's not really an important mode in and of itself, mode minder lets you look at all the major modes that are installed which can be quite helpful.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
+#+end_src
+
+And then this package needs to be loaded to work properly for some reason.
+#+begin_src emacs-lisp
+(require 'mode-minder nil 'noerror)
+#+end_src
+
 *** Guix
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! guix)

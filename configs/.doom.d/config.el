@@ -304,6 +304,8 @@ mode map since otherwise it requires forcing the normal mode state to be activat
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'local/gif-screencast-write-colormap))
 
+(require 'mode-minder nil 'noerror)
+
 (setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
 
 (defun eshell/clear ()

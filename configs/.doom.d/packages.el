@@ -58,6 +58,8 @@
 
 (package! kubernetes-helm)
 
+(package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
+
 (package! guix)
 
 (package! org-reverse-datetree)
