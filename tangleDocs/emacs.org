@@ -1092,6 +1092,13 @@ And being able to work with helm is a must for kubernetes.
 (package! kubernetes-helm)
 #+end_src
 
+**** Kubel
+Another package that looks interesting is kubel. Seems to be approaching k9s.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! kubel)
+#+end_src
+may want to compile vterm before using it. Check documentation for more info.
+
 ** Mode/package settings
 *** Mode Minder
 Although it's not really an important mode in and of itself, mode minder lets you look at all the major modes that are installed which can be quite helpful.

@@ -58,6 +58,8 @@
 
 (package! kubernetes-helm)
 
+(package! kubel)
+
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 
 (package! guix)
