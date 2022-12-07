@@ -177,6 +177,10 @@ Position the cursor at it's beginning, according to the current mode."
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
 
+(map! :leader
+      :desc "Centered cursor"
+      "t C" #'centered-cursor-mode)
+
 (map! :n "g /"   #'which-key-show-top-level
       :n "g C-/" #'which-key-show-full-major-mode
       :n "g ?"   #'which-key-show-full-major-mode

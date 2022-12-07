@@ -18,6 +18,8 @@
 
 (package! zoom-window)
 
+(package! centered-cursor-mode)
+
 (package! discover-my-major)
 
 (package! marginalia)

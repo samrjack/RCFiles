@@ -517,7 +517,6 @@ Finally we need to create universal keybindings to these functions so they can b
       :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
 #+end_src
 
-
 *** Cursor movement
 **** Scrolling
 Leave some space at the bottom while scrolling down so the cursor isn't hugging the bottom edge.
@@ -535,7 +534,6 @@ TODO - Make this more efficient
       :desc "Previous mark location"
       :n "P" #'better-jumper-jump-backwards)
 #+end_src
-
 
 
 *** Scratch buffer
@@ -685,7 +683,6 @@ When using LSP, it is important to let treemacs update as needed to reflect what
 (lsp-treemacs-sync-mode 1)
 #+end_src
 
-
 *** Projectile
 #+begin_src emacs-lisp
 (after! projectile
@@ -761,7 +758,6 @@ Then set a convenient key command to activate the zoom. Since tmux uses leader-z
 
 ** General utility package settings
 These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
-
 *** Sub-word movement
 #+begin_src emacs-lisp
 ;; Makes it so movement keys stop at camlecase sub words.
@@ -774,6 +770,20 @@ These aren't file or use case specific changes but instead things that can apply
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
 #+end_src
+
+*** Centered Cursor / Typewriter Mode
+When writing or coding, sometimes it's nice to just see everything around the cursor by keeping the cursor in the middle of the screen. This mode does just that.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! centered-cursor-mode)
+#+end_src
+
+It can be turned on using a toggle option.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Centered cursor"
+      "t C" #'centered-cursor-mode)
+#+end_src
+
 
 *** Key discovery
 **** Which key
