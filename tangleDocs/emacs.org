@@ -1808,7 +1808,6 @@ Javascript folding already works pretty well but there are a few tweaks I'd like
   (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
 #+end_src
 
-*** Systemd
 *** E-book reader
 **** Packages
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
