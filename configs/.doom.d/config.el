@@ -619,7 +619,9 @@ if no org extension is given then it will be automatically appended."
         :desc "Debug mode"
         "d" #'tree-sitter-debug-mode
         :desc "TS folding"
-        "f" #'ts-fold-indicators-mode
+        "f" #'ts-fold-mode
+        :desc "Folding indicators"
+        "i" #'ts-fold-indicators-mode
         :desc "Query builder"
         "q" #'tree-sitter-query-builder
         :desc "Highlight mode"
