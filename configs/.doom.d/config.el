@@ -647,23 +647,22 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
                 (push (cons mode nodes) alist)))
             alist))))
 
-  (defun local/ts-fold-go-const-seq (node offset)
-    "Return the fold range in sequence starting from NODE with the specific considerations of the golang const block in mind. "
-    (let ((beg (+ 7 (tsc-node-start-position node)))
-          (end (1- (tsc-node-end-position node))))
-      (ts-fold--cons-add (cons beg end) offset)))
+(defun local/ts-fold-go-const-seq (node offset)
+  "Return the fold range in sequence starting from NODE with the specific considerations of the golang const block in mind. "
+  (let ((beg (+ 7 (tsc-node-start-position node)))
+        (end (1- (tsc-node-end-position node))))
+    (ts-fold--cons-add (cons beg end) offset)))
 
-  (defun local/ts-fold-parsers-go ()
-    "Rule sets for golang."
-    '((block . ts-fold-range-seq)
-      (comment . ts-fold-range-seq)
-      (method_spec_list . ts-fold-range-seq)
-      (import_spec_list . ts-fold-range-seq)
-      (field_declaration_list . ts-fold-range-seq)
-      (const_declaration . local/ts-fold-go-const-seq)))
+(setq local/ts-fold-parsers-go-list
+      '((block . ts-fold-range-seq)
+        (comment . ts-fold-range-seq)
+        (method_spec_list . ts-fold-range-seq)
+        (import_spec_list . ts-fold-range-seq)
+        (field_declaration_list . ts-fold-range-seq)
+        (const_declaration . local/ts-fold-go-const-seq)))
 
 (after! ts-fold
-  (local/update-ts-fold-definitions 'go-mode (local/ts-fold-parsers-go)))
+  (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
 
 (add-hook! go-mode-hook #'ts-fold-indicators-mode)
 
