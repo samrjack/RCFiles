@@ -827,6 +827,15 @@ Buffers are labled as *scratch* through *scratchX*."
       :desc "scratch buffer"
       "s" #'local/scratch)
 
+(defun local/remove-all-overlays ()
+  "Removes all overlays in the file."
+  (interactive)
+  (remove-overlays))
+
+(map! :map personal-functions-map
+      :desc "Remove overlays"
+      "O" #'local/remove-all-overlays)
+
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 
 ;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))

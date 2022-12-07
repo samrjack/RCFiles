@@ -2140,6 +2140,22 @@ Add to personal functions map.
       "s" #'local/scratch)
 #+end_src
 
+*** Removing overlays
+Sometimes emacs gets into a state where there are code folds in place that won't undo themselves so I need to tell them to go away. Since code folding is done using overlays, I'm going to write a function that simply removes all overlays from a file so I can see the file as written.
+#+begin_src emacs-lisp
+(defun local/remove-all-overlays ()
+  "Removes all overlays in the file."
+  (interactive)
+  (remove-overlays))
+#+end_src
+
+Add to personal functions map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "Remove overlays"
+      "O" #'local/remove-all-overlays)
+#+end_src
+
 * Fixes
 Here are some config fixes for issues I'm running into.
 
