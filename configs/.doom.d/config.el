@@ -636,8 +636,7 @@ if no org extension is given then it will be automatically appended."
     "Update the provided MODE with the new set of folding RULES.
 MODE should be a programming mode such as go-mode.
 RULES should be a list of folding rules in the format of (ts-element . folding-function)"
-    (setq ts-fold-range-alist (assq-delete-all mode ts-fold-range-alist))
-    (add-to-list 'ts-fold-range-alist `(,mode . ,rules))
+    (setf (alist-get mode ts-fold-range-alist) rules)
     (setq ts-fold-foldable-node-alist
           (let (alist)
             (dolist (item ts-fold-range-alist)
