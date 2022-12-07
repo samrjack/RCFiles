@@ -666,6 +666,21 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
 (add-hook! go-mode-hook #'ts-fold-indicators-mode)
 
+(setq local/ts-fold-parsers-javascript-list
+      '((object . ts-fold-range-seq)
+        (array . ts-fold-range-seq)
+        (export_clause . ts-fold-range-seq)
+        (statement_block . ts-fold-range-seq)
+        (comment . ts-fold-range-c-like-comment)))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'javascript-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'rjsx-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js2-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js3-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js3-mode local/ts-fold-parsers-javascript-list))
+
 (after! lsp-mode
   (defvar local/lsp-mode-keymap (make-sparse-keymap))
   (map! :map local/lsp-mode-keymap

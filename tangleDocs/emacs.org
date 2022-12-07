@@ -1766,6 +1766,25 @@ Finally, set go-mode to use ts-fold by default since it gives such good results.
 (add-hook! go-mode-hook #'ts-fold-indicators-mode)
 #+end_src
 
+***** JS Folding
+Javascript folding already works pretty well but there are a few tweaks I'd like to make to get it to run a bit smoother.
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-javascript-list
+      '((object . ts-fold-range-seq)
+        (array . ts-fold-range-seq)
+        (export_clause . ts-fold-range-seq)
+        (statement_block . ts-fold-range-seq)
+        (comment . ts-fold-range-c-like-comment)))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'javascript-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'rjsx-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js2-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js3-mode local/ts-fold-parsers-javascript-list)
+  (local/update-ts-fold-definitions 'js3-mode local/ts-fold-parsers-javascript-list))
+#+end_src
+
 *** LSP mode
 [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
 #+begin_src emacs-lisp
