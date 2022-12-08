@@ -535,7 +535,6 @@ TODO - Make this more efficient
       :n "P" #'better-jumper-jump-backwards)
 #+end_src
 
-
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
 #+begin_src emacs-lisp
@@ -1750,6 +1749,19 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
             alist))))
 #+end_src
 
+Here I want to define a folding function that will only fold if there's a newline character present in the node. That way I can add folding to things like long function parameter lists without it causing all function parameter lists to be condensed. This is in setup since it can be useful in all languages.
+#+begin_src emacs-lisp
+(defun local/ts-fold-range-multi-line-seq (node offset)
+  "Return the fold range in a sequence when the NODE exists over multiple lines."
+  (let ((beg (1+ (tsc-node-start-position node)))
+        (end (1- (tsc-node-end-position node))))
+    (if (save-excursion
+          (goto-char beg)
+          (search-forward "\n" end t))
+        (ts-fold--cons-add (cons beg end) offset)
+      nil)))
+#+end_src
+
 ***** Go Folding
 I have to use golang for work but the standard golang folding capabilities is quite bad. this adds just a few more folding definitions that make the code look SOO much prettier.
 #+begin_src emacs-lisp
@@ -1765,6 +1777,7 @@ I have to use golang for work but the standard golang folding capabilities is qu
         (method_spec_list . ts-fold-range-seq)
         (import_spec_list . ts-fold-range-seq)
         (field_declaration_list . ts-fold-range-seq)
+        (parameter_list . local/ts-fold-range-multi-line-seq)
         (const_declaration . local/ts-fold-go-const-seq)))
 
 (after! ts-fold

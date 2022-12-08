@@ -651,6 +651,16 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
                 (push (cons mode nodes) alist)))
             alist))))
 
+(defun local/ts-fold-range-multi-line-seq (node offset)
+  "Return the fold range in a sequence when the NODE exists over multiple lines."
+  (let ((beg (1+ (tsc-node-start-position node)))
+        (end (1- (tsc-node-end-position node))))
+    (if (save-excursion
+          (goto-char beg)
+          (search-forward "\n" end t))
+        (ts-fold--cons-add (cons beg end) offset)
+      nil)))
+
 (defun local/ts-fold-go-const-seq (node offset)
   "Return the fold range in sequence starting from NODE with the specific considerations of the golang const block in mind. "
   (let ((beg (+ 7 (tsc-node-start-position node)))
@@ -663,6 +673,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (method_spec_list . ts-fold-range-seq)
         (import_spec_list . ts-fold-range-seq)
         (field_declaration_list . ts-fold-range-seq)
+        (parameter_list . local/ts-fold-range-multi-line-seq)
         (const_declaration . local/ts-fold-go-const-seq)))
 
 (after! ts-fold
