@@ -78,6 +78,10 @@ The return value is the yanked text."
 
 (setq-default line-spacing 0.15)
 
+(map! :leader
+      :desc "Turn on debug mode"
+      "t d" #'toggle-debug-on-error)
+
 (defun local/smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."

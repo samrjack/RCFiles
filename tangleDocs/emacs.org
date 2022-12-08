@@ -584,6 +584,14 @@ Spacing between lines in a buffer. I like a slight gap where the default emacs i
 (setq-default line-spacing 0.15)
 #+end_src
 
+*** Debugging
+I've found it necessary to access the debugger more often so here's an easy way to turn it on and off.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Turn on debug mode"
+      "t d" #'toggle-debug-on-error)
+#+end_src
+
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
 #+begin_src emacs-lisp
