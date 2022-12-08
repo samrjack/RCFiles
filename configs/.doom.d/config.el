@@ -678,7 +678,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 (after! ts-fold
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
 
-(add-hook! go-mode-hook #'ts-fold-indicators-mode)
+(add-hook! 'go-mode-hook #'ts-fold-indicators-mode)
 
 (setq local/ts-fold-parsers-javascript-list
       '((object . ts-fold-range-seq)
