@@ -5,7 +5,6 @@
 (package! dracula-theme)
 (package! theme-magic)
 
-;; directory management
 (package! dired-sidebar)
 (package! dired+)
 (package! dired-subtree)

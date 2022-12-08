@@ -547,13 +547,14 @@ The scratch buffer is always present as an area to experiment or take a quick no
 #+end_src
 
 *** Directory navigation
+Dired has a lot of great functionality in it but a few extra packages to for support never hurt.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-;; directory management
 (package! dired-sidebar)
 (package! dired+)
 (package! dired-subtree)
 #+end_src
 
+Within dired, the file info is a much more than I really need most of the time. I'm going to turn it off by default and then I can always turn it back on later if needed.
 #+begin_src emacs-lisp
 (defun local/dired-turn-off-file-info ()
   "Turns off the file info in dired mode"
@@ -561,11 +562,16 @@ The scratch buffer is always present as an area to experiment or take a quick no
   (dired-hide-details-mode t))
 (add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
 
+#+end_src
+
+For showing file info in dired mode, a different keybinding can be added. However, for now, I don't really need it since it's already bound to ~)~.
+#+begin_src emacs-lisp :tangle no
 (map! :map dired-mode-map
       :leader
       :desc "toggle dired file info"
       :n "t d" #'dired-hide-details-mode)
 #+end_src
+
 *** Whitespace mode
 Adds whitespace management and visualization.
 #+begin_src emacs-lisp

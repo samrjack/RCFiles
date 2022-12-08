@@ -74,11 +74,6 @@ The return value is the yanked text."
   (dired-hide-details-mode t))
 (add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
 
-(map! :map dired-mode-map
-      :leader
-      :desc "toggle dired file info"
-      :n "t d" #'dired-hide-details-mode)
-
 (setq whitespace-style '(trailing tabs tab-mark))
 
 (setq-default line-spacing 0.15)
