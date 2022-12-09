@@ -126,7 +126,31 @@ Position the cursor at it's beginning, according to the current mode."
       :desc "open fold rec"
       :nm "zO" #'local/evil-open-fold-rec-eol)
 
-(map! :nm [tab] #'local/evil-toggle-fold-eol)
+(map! :i [tab] (cmds! (and (modulep! :editor snippets)
+                            (yas-maybe-expand-abbrev-key-filter 'yas-expand))
+                       #'yas-expand
+                       (and (bound-and-true-p company-mode)
+                            (modulep! :completion company +tng))
+                       #'company-indent-or-complete-common)
+      :m [tab] (cmds! (and (modulep! :editor snippets)
+                           (evil-visual-state-p)
+                           (or (eq evil-visual-selection 'line)
+                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+                      #'yas-insert-snippet
+                      ;; Fixes #4548: without this, this tab keybind overrides
+                      ;; mode-local ones for modes that don't have an evil
+                      ;; keybinding scheme or users who don't have :editor (evil
+                      ;; +everywhere) enabled.
+                      (or (doom-lookup-key
+                           [tab]
+                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)
+                                 (current-local-map)))
+                          (doom-lookup-key
+                           (kbd "TAB")
+                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)))
+                          (doom-lookup-key (kbd "TAB") (list (current-local-map))))
+                      it
+                      #'local/evil-toggle-fold-eol))
 
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'+treemacs/toggle)
