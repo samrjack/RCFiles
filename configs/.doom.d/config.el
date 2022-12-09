@@ -82,6 +82,8 @@ The return value is the yanked text."
       :desc "Turn on debug mode"
       "t d" #'toggle-debug-on-error)
 
+(setq fill-column 110)
+
 (defun local/smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -849,6 +851,16 @@ Buffers are labled as *scratch* through *scratchX*."
 (map! :map personal-functions-map
       :desc "Remove overlays"
       "O" #'local/remove-all-overlays)
+
+(defun local/set-fill-column-val (col)
+  "Set the fill-column value to COL"
+  ;; (interactive (concat"nNew fill-column value (" (number-to-string fill-column) "): "))
+  (interactive "nNew fill-column value: ")
+  (setq fill-column col))
+
+(map! :map personal-functions-map
+      :desc "set fill-column"
+      "c" #'local/set-fill-column-val)
 
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 

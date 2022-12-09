@@ -591,6 +591,11 @@ I've found it necessary to access the debugger more often so here's an easy way 
       :desc "Turn on debug mode"
       "t d" #'toggle-debug-on-error)
 #+end_src
+*** Fill column
+The fill column used for fill-column mode should be longer than the standard. I think setting it a bit over 100 is fine.
+#+begin_src emacs-lisp
+(setq fill-column 110)
+#+end_src
 
 ** Adding standard vim functionality
 I don't remember why I wrote this line in the first place but it seems useful for later
@@ -2191,6 +2196,24 @@ Add to personal functions map.
       :desc "Remove overlays"
       "O" #'local/remove-all-overlays)
 #+end_src
+
+*** Fill column
+Although I like the fill column as a guide, it's nice to be able to move it around as desired so it can show me whatever needs to be shown.
+#+begin_src emacs-lisp
+(defun local/set-fill-column-val (col)
+  "Set the fill-column value to COL"
+  ;; (interactive (concat"nNew fill-column value (" (number-to-string fill-column) "): "))
+  (interactive "nNew fill-column value: ")
+  (setq fill-column col))
+#+end_src
+
+And then of course, add it to the personal map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "set fill-column"
+      "c" #'local/set-fill-column-val)
+#+end_src
+
 
 * Fixes
 Here are some config fixes for issues I'm running into.
