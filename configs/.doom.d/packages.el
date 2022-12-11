@@ -95,6 +95,8 @@
 
 (package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 
+(unpin! tree-sitter-langs)
+
 ;; e-reader
 (package! calibredb)
 (package! nov)

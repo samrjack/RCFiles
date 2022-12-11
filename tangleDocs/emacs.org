@@ -1744,6 +1744,12 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 Tree sitter is a program that parses code in a tree structure for better syntax highlighting and for querying code structure.
 Documentation found [[https://emacs-tree-sitter.github.io/syntax-highlighting/queries/][here]].
 
+First I want to set all the tree-sitter packages to use the master branch.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(unpin! tree-sitter-langs)
+#+end_src
+
+
 #+begin_src emacs-lisp
 (after! tree-sitter
   (defvar local/tree-sitter-map (make-sparse-keymap))
