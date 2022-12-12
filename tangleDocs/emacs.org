@@ -826,7 +826,6 @@ It can be turned on using a toggle option.
       "t C" #'centered-cursor-mode)
 #+end_src
 
-
 *** Key discovery
 **** Which key
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -1150,6 +1149,11 @@ Another package that looks interesting is kubel. Seems to be approaching k9s.
 (package! kubel)
 #+end_src
 may want to compile vterm before using it. Check documentation for more info.
+*** Bluetooth
+This little [[https://github.com/emacsmirror/bluetooth][package]] is for managing bluetooth devices directly from within emacs.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! bluetooth)
+#+end_src
 
 ** Mode/package settings
 *** Mode Minder

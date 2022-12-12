@@ -61,6 +61,8 @@
 
 (package! kubel)
 
+(package! bluetooth)
+
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 
 (package! guix)
