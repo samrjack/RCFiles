@@ -787,6 +787,8 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
   (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
 
+(add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
+
 (defvar personal-functions-map (make-sparse-keymap))
 
 (map!

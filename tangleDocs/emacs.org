@@ -1962,6 +1962,12 @@ Javascript folding already works pretty well but there are a few tweaks I'd like
 **** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
 
+**** Emacs Lisp
+So far, I've found that hide-show minor mode is the only good way to fold elisp code.
+#+begin_src emacs-lisp
+(add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
+#+end_src
+
 **** Scheme
 Scheme is a pretty nice lisp implementation. These packages make it even easier to work with.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
