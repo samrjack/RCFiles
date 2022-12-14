@@ -652,6 +652,17 @@ Then remap the evil fold functions that need it to use the above function.
       :nm "zO" #'local/evil-open-fold-rec-eol)
 #+end_src
 
+Here's the standard definition
+#+begin_src emacs-lisp tangle: no
+(map! :desc "toggle fold"
+      :nm "za" #'evil-toggle-fold
+      :desc "close fold"
+      :nm "zc" #'evil-close-fold
+      :desc "open fold"
+      :nm "zo" #'evil-open-fold
+      :desc "open fold rec"
+      :nm "zO" #'evil-open-fold-rec)
+#+end_src
 
 **** Tab as fold toggling
 When available, I really like to use tab as a quick way to toggle folds.
