@@ -93,38 +93,56 @@ Position the cursor at it's beginning, according to the current mode."
   (forward-line -1)
   (indent-according-to-mode))
 
+(defun local/count-overlays-on-line ()
+  "Count the number of overlays that are present on the current line."
+  (length (overlays-in
+           (line-beginning-position)
+           (1+ (line-end-position))))) ;; Add one to line end position to make sure it includes the new line.
+
 (defun local/execute-at-end-of-line (func)
   "Takes in a function then executes it at the end of the current line."
   (save-excursion (end-of-line) (funcall func)))
 
-(defun local/evil-toggle-fold-eol ()
+(defun local/smart-fold (func)
+  "Performs a fold at point then at the end of the line if no new folds were detected. This way a greater number of folding situations will be detected."
+  (let ((initial-overlay-count (local/count-overlays-on-line))
+        (fold-result (funcall func)))
+    (if (= initial-overlay-count (local/count-overlays-on-line))
+        (local/execute-at-end-of-line func))
+    fold-result)) ;; If the fold succeeded, then pass the result forward
+
+(defun local/evil-toggle-fold-smart ()
   "Run evil-toggle-fold at the end of the line."
   (interactive)
-  (local/execute-at-end-of-line #'evil-toggle-fold))
+  (local/smart-fold #'evil-toggle-fold))
 
-(defun local/evil-open-fold-eol ()
+(defun local/evil-open-fold-smart ()
   "Run evil-open-fold at the end of the line."
   (interactive)
-  (local/execute-at-end-of-line #'evil-open-fold))
+  (local/smart-fold #'evil-open-fold))
 
-(defun local/evil-open-fold-rec-eol ()
-  "Run evil-open-fold-rec at the end of the line."
-  (interactive)
-  (local/execute-at-end-of-line #'evil-open-fold-rec))
-
-(defun local/evil-close-fold-eol ()
+(defun local/evil-close-fold-smart ()
   "Run evil-close-fold at the end of the line."
   (interactive)
-  (local/execute-at-end-of-line #'evil-close-fold))
+  (local/smart-fold #'evil-close-fold))
 
 (map! :desc "toggle fold"
-      :nm "za" #'local/evil-toggle-fold-eol
+      :nm "za" #'local/evil-toggle-fold-smart
       :desc "close fold"
-      :nm "zc" #'local/evil-close-fold-eol
+      :nm "zc" #'local/evil-close-fold-smart
       :desc "open fold"
-      :nm "zo" #'local/evil-open-fold-eol
+      :nm "zo" #'local/evil-open-fold-smart
       :desc "open fold rec"
-      :nm "zO" #'local/evil-open-fold-rec-eol)
+      :nm "zO" #'local/evil-open-fold-rec-smart)
+
+(map! :desc "toggle fold"
+      :nm "za" #'evil-toggle-fold
+      :desc "close fold"
+      :nm "zc" #'evil-close-fold
+      :desc "open fold"
+      :nm "zo" #'evil-open-fold
+      :desc "open fold rec"
+      :nm "zO" #'evil-open-fold-rec)
 
 (map! :i [tab] (cmds! (and (modulep! :editor snippets)
                             (yas-maybe-expand-abbrev-key-filter 'yas-expand))
@@ -150,7 +168,7 @@ Position the cursor at it's beginning, according to the current mode."
                            (list (evil-get-auxiliary-keymap (current-local-map) evil-state)))
                           (doom-lookup-key (kbd "TAB") (list (current-local-map))))
                       it
-                      #'local/evil-toggle-fold-eol))
+                      #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
 
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'+treemacs/toggle)

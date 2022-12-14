@@ -612,47 +612,65 @@ Position the cursor at it's beginning, according to the current mode."
 
 *** Keybindings
 **** Fold from anywhere on line
-The standard folding capability of emacs only will fold when the cursor is over the thing that is folding.
-This function makes folds occur from anywhere on the line.
+The standard folding capability of emacs only will fold the code at point. However, often times what is intended is to fold the code at the end of point.  Let's write that.
+
+The first thing I need to do to execute this is to be able to detect when a fold has successfully occurred. Folds are performed using overlays so I need to detect if a
+#+begin_src emacs-lisp
+(defun local/count-overlays-on-line ()
+  "Count the number of overlays that are present on the current line."
+  (length (overlays-in
+           (line-beginning-position)
+           (1+ (line-end-position))))) ;; Add one to line end position to make sure it includes the new line.
+#+end_src
+
+Then write a function that will first perform an action at point, but if no change to the number of overlays is detected, then perform the fold action again at the end of the line.
+This way, we can have both meanings available to us.
 #+begin_src emacs-lisp
 (defun local/execute-at-end-of-line (func)
   "Takes in a function then executes it at the end of the current line."
   (save-excursion (end-of-line) (funcall func)))
 
-(defun local/evil-toggle-fold-eol ()
+(defun local/smart-fold (func)
+  "Performs a fold at point then at the end of the line if no new folds were detected. This way a greater number of folding situations will be detected."
+  (let ((initial-overlay-count (local/count-overlays-on-line))
+        (fold-result (funcall func)))
+    (if (= initial-overlay-count (local/count-overlays-on-line))
+        (local/execute-at-end-of-line func))
+    fold-result)) ;; If the fold succeeded, then pass the result forward
+#+end_src
+
+After the smart folding wrapper has been written, we can move on to wrapping up the current folding functions. There may be a way to more cleanly do this but just hard coding wrappers works plenty fine for now.
+#+begin_src emacs-lisp
+(defun local/evil-toggle-fold-smart ()
   "Run evil-toggle-fold at the end of the line."
   (interactive)
-  (local/execute-at-end-of-line #'evil-toggle-fold))
+  (local/smart-fold #'evil-toggle-fold))
 
-(defun local/evil-open-fold-eol ()
+(defun local/evil-open-fold-smart ()
   "Run evil-open-fold at the end of the line."
   (interactive)
-  (local/execute-at-end-of-line #'evil-open-fold))
+  (local/smart-fold #'evil-open-fold))
 
-(defun local/evil-open-fold-rec-eol ()
-  "Run evil-open-fold-rec at the end of the line."
-  (interactive)
-  (local/execute-at-end-of-line #'evil-open-fold-rec))
-
-(defun local/evil-close-fold-eol ()
+(defun local/evil-close-fold-smart ()
   "Run evil-close-fold at the end of the line."
   (interactive)
-  (local/execute-at-end-of-line #'evil-close-fold))
+  (local/smart-fold #'evil-close-fold))
 #+end_src
 
-Then remap the evil fold functions that need it to use the above function.
+
+Finally remap the evil fold keybindings that need to use the above function.
 #+begin_src emacs-lisp
 (map! :desc "toggle fold"
-      :nm "za" #'local/evil-toggle-fold-eol
+      :nm "za" #'local/evil-toggle-fold-smart
       :desc "close fold"
-      :nm "zc" #'local/evil-close-fold-eol
+      :nm "zc" #'local/evil-close-fold-smart
       :desc "open fold"
-      :nm "zo" #'local/evil-open-fold-eol
+      :nm "zo" #'local/evil-open-fold-smart
       :desc "open fold rec"
-      :nm "zO" #'local/evil-open-fold-rec-eol)
+      :nm "zO" #'local/evil-open-fold-rec-smart)
 #+end_src
 
-Here's the standard definition
+If something goes wrong with the new folding behavior, here's the standard definition. This can be turned on to get normal folding back.
 #+begin_src emacs-lisp tangle: no
 (map! :desc "toggle fold"
       :nm "za" #'evil-toggle-fold
@@ -691,7 +709,7 @@ When available, I really like to use tab as a quick way to toggle folds.
                            (list (evil-get-auxiliary-keymap (current-local-map) evil-state)))
                           (doom-lookup-key (kbd "TAB") (list (current-local-map))))
                       it
-                      #'local/evil-toggle-fold-eol))
+                      #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
 #+end_src
 
 ** Managing files
