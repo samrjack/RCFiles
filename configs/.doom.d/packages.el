@@ -95,9 +95,9 @@
 
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
 
-(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
-
 (unpin! tree-sitter-langs)
+
+(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 
 ;; e-reader
 (package! calibredb)
