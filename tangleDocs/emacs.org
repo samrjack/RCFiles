@@ -662,7 +662,6 @@ After the smart folding wrapper has been written, we can move on to wrapping up 
   (local/smart-fold #'evil-close-fold))
 #+end_src
 
-
 Finally remap the evil fold keybindings that need to use the above function.
 #+begin_src emacs-lisp
 (map! :desc "toggle fold"
@@ -1902,6 +1901,13 @@ Javascript folding already works pretty well but there are a few tweaks I'd like
           "L" lsp-mode-map))
 
   (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+#+end_src
+
+Some lsp servers need extra settings in place so those will be added here.
+**** Golang
+In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
+#+begin_src emacs-lisp
+(setq lsp-go-build-flags ["-tags=integration"])
 #+end_src
 
 *** E-book reader

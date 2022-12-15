@@ -748,6 +748,8 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
   (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
 
+(setq lsp-go-build-flags ["-tags=integration"])
+
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config
