@@ -713,7 +713,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 (setq local/ts-fold-parsers-go-list
       '((block . ts-fold-range-seq)
         (comment . ts-fold-range-seq)
-        (method_spec_list . ts-fold-range-seq)
+        ;; (method_spec_list . ts-fold-range-seq)
         (import_spec_list . ts-fold-range-seq)
         (field_declaration_list . ts-fold-range-seq)
         ;; (parameter_list . local/ts-fold-range-multi-line-seq)
