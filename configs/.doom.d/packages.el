@@ -97,7 +97,8 @@
 
 (unpin! tree-sitter-langs)
 
-(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+;; (package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+(package! ts-fold :recipe (:host github :repo "samrjack/ts-fold"))
 
 ;; e-reader
 (package! calibredb)

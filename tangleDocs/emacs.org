@@ -1811,9 +1811,10 @@ First I want to set all the tree-sitter packages to use the master branch.
 **** Folding
 One of the biggest advantages of tree sitter mode is the ability to specify folding patterns.
 
-Lets make sure the ts-fold package is installed so that we can use folding.
+Lets make sure the ts-fold package is installed so that we can use folding. I'm going to use my fork for now since I've changed a few things.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+;; (package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+(package! ts-fold :recipe (:host github :repo "samrjack/ts-fold"))
 #+end_src
 
 ***** Setup
