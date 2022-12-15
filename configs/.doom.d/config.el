@@ -688,16 +688,7 @@ if no org extension is given then it will be automatically appended."
     "Update the provided MODE with the new set of folding RULES.
 MODE should be a programming mode such as go-mode.
 RULES should be a list of folding rules in the format of (ts-element . folding-function)"
-    (setf (alist-get mode ts-fold-range-alist) rules)
-    (setq ts-fold-foldable-node-alist
-          (let (alist)
-            (dolist (item ts-fold-range-alist)
-              (let ((mode (car item))
-                    nodes)
-                (dolist (rule (cdr item))
-                  (push (car rule) nodes))
-                (push (cons mode nodes) alist)))
-            alist))))
+    (setf (alist-get mode ts-fold-range-alist) rules)))
 
 (defun local/ts-fold-range-multi-line-seq (node offset)
   "Return the fold range in a sequence when the NODE exists over multiple lines."
@@ -709,21 +700,14 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (ts-fold--cons-add (cons beg end) offset)
       nil)))
 
-(defun local/ts-fold-go-const-seq (node offset)
-  "Return the fold range in sequence starting from NODE with the specific considerations of the golang const block in mind. "
-  (let ((beg (+ 7 (tsc-node-start-position node)))
-        (end (1- (tsc-node-end-position node))))
-    (ts-fold--cons-add (cons beg end) offset)))
-
 (setq local/ts-fold-parsers-go-list
       '((block . ts-fold-range-seq)
-        (comment . ts-fold-range-seq)
-        ;; (method_spec_list . ts-fold-range-seq)
+        (comment . local/ts-fold-range-multi-line-seq)
         (import_spec_list . ts-fold-range-seq)
         (field_declaration_list . ts-fold-range-seq)
-        ;; (parameter_list . local/ts-fold-range-multi-line-seq)
-        (literal_value . ts-fold-range-seq)
-        (const_declaration . local/ts-fold-go-const-seq)))
+        (parameter_list . local/ts-fold-range-multi-line-seq)
+        (literal_value . local/ts-fold-range-multi-line-seq)
+        (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
