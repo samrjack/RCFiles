@@ -79,7 +79,7 @@ The return value is the yanked text."
 (setq-default line-spacing 0.15)
 
 (map! :leader
-      :desc "Turn on debug mode"
+      :desc "debug on error"
       "t d" #'toggle-debug-on-error)
 
 (setq fill-column 110)

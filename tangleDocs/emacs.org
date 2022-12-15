@@ -588,7 +588,7 @@ Spacing between lines in a buffer. I like a slight gap where the default emacs i
 I've found it necessary to access the debugger more often so here's an easy way to turn it on and off.
 #+begin_src emacs-lisp
 (map! :leader
-      :desc "Turn on debug mode"
+      :desc "debug on error"
       "t d" #'toggle-debug-on-error)
 #+end_src
 *** Fill column
