@@ -121,6 +121,11 @@ Position the cursor at it's beginning, according to the current mode."
   (interactive)
   (local/smart-fold #'evil-open-fold))
 
+(defun local/evil-open-fold-rec-smart ()
+  "Run evil-open-fold-rec at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-open-fold-rec))
+
 (defun local/evil-close-fold-smart ()
   "Run evil-close-fold at the end of the line."
   (interactive)
