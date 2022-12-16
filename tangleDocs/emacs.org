@@ -1068,6 +1068,17 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
 (package! diff-ansi)
 #+end_src
 
+**** Gutter
+Having git information in the gutter of emacs is great for keeping track of what I've changed. First lets activate it everywhere!
+#+begin_src emacs-lisp
+(global-git-gutter-mode)
+#+end_src
+
+But using the gutter for git presents a challenge since other things may also be in the gutter section. For example, fold indicators. For that reason, I'm going to try to experiment with the git gutter on the right hand side. I think it'll still be helpful for showing what changed but seeing the exact line isn't vital.
+#+begin_src emacs-lisp
+(setq git-gutter-fr:side 'right-fringe)
+#+end_src
+
 *** Encryption
 Some files contain details that should be encrypted or scrambled before being published.
 

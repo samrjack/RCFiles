@@ -313,6 +313,10 @@ mode map since otherwise it requires forcing the normal mode state to be activat
                    :height 140
                    :italic t))))
 
+(global-git-gutter-mode)
+
+(setq git-gutter-fr:side 'right-fringe)
+
 (use-package! spray
   :commands spray-mode
   :config
