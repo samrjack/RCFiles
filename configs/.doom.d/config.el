@@ -80,7 +80,9 @@ The return value is the yanked text."
 
 (map! :leader
       :desc "debug on error"
-      "t d" #'toggle-debug-on-error)
+      "t d" #'toggle-debug-on-error
+      :desc "debug on quit"
+      "t D" #'toggle-debug-on-quit)
 
 (setq fill-column 110)
 

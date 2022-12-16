@@ -589,7 +589,9 @@ I've found it necessary to access the debugger more often so here's an easy way 
 #+begin_src emacs-lisp
 (map! :leader
       :desc "debug on error"
-      "t d" #'toggle-debug-on-error)
+      "t d" #'toggle-debug-on-error
+      :desc "debug on quit"
+      "t D" #'toggle-debug-on-quit)
 #+end_src
 *** Fill column
 The fill column used for fill-column mode should be longer than the standard. I think setting it a bit over 100 is fine.
