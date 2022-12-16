@@ -723,6 +723,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (field_declaration_list . ts-fold-range-seq)
         (parameter_list . local/ts-fold-range-multi-line-seq)
         (literal_value . local/ts-fold-range-multi-line-seq)
+        (interface_type . (ts-fold-range-seq 10 0))
         (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
 
 (after! ts-fold
