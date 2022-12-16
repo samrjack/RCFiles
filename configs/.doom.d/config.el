@@ -112,9 +112,21 @@ Position the cursor at it's beginning, according to the current mode."
     fold-result)) ;; If the fold succeeded, then pass the result forward
 
 (defun local/evil-toggle-fold-smart ()
-  "Run evil-toggle-fold at the end of the line."
+  "Run evil-toggle-fold at the end of the line.
+
+It checks for folds in the following order:
+ - Open at point,
+ - Open at EOL
+ - Close at EOL
+ - Close at point
+I find this order matches how I want folds to work"
   (interactive)
-  (local/smart-fold #'evil-toggle-fold))
+  (let ((initial-overlay-count (local/count-overlays-on-line)))
+    (local/smart-fold #'evil-open-fold)
+    (when (= initial-overlay-count (local/count-overlays-on-line))
+      (local/execute-at-end-of-line #'evil-close-fold)
+      (when (= initial-overlay-count (local/count-overlays-on-line))
+          (evil-close-fold)))))
 
 (defun local/evil-open-fold-smart ()
   "Run evil-open-fold at the end of the line."
@@ -795,6 +807,9 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
                   (:eval (doom-modeline-segment--major-mode)))))
 
   (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
+
+(after! go-mode
+  (add-hook 'before-save-hook #'gofmt-before-save))
 
 (add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
 

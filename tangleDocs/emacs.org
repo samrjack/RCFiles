@@ -642,9 +642,21 @@ This way, we can have both meanings available to us.
 After the smart folding wrapper has been written, we can move on to wrapping up the current folding functions. There may be a way to more cleanly do this but just hard coding wrappers works plenty fine for now.
 #+begin_src emacs-lisp
 (defun local/evil-toggle-fold-smart ()
-  "Run evil-toggle-fold at the end of the line."
+  "Run evil-toggle-fold at the end of the line.
+
+It checks for folds in the following order:
+ - Open at point,
+ - Open at EOL
+ - Close at EOL
+ - Close at point
+I find this order matches how I want folds to work"
   (interactive)
-  (local/smart-fold #'evil-toggle-fold))
+  (let ((initial-overlay-count (local/count-overlays-on-line)))
+    (local/smart-fold #'evil-open-fold)
+    (when (= initial-overlay-count (local/count-overlays-on-line))
+      (local/execute-at-end-of-line #'evil-close-fold)
+      (when (= initial-overlay-count (local/count-overlays-on-line))
+          (evil-close-fold)))))
 
 (defun local/evil-open-fold-smart ()
   "Run evil-open-fold at the end of the line."
@@ -1976,6 +1988,13 @@ In golang, a lot of the tests that get written are integration tests. When using
 **** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
 
+Also when in go-mode, I want to ~gofmt~ to be run whenever a save occurs.
+#+begin_src emacs-lisp
+(after! go-mode
+  (add-hook 'before-save-hook #'gofmt-before-save))
+#+end_src
+
+
 **** Emacs Lisp
 So far, I've found that hide-show minor mode is the only good way to fold elisp code.
 #+begin_src emacs-lisp
@@ -2279,7 +2298,6 @@ And then of course, add it to the personal map.
       :desc "set fill-column"
       "c" #'local/set-fill-column-val)
 #+end_src
-
 
 * Fixes
 Here are some config fixes for issues I'm running into.
