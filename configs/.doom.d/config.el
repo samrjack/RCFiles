@@ -706,9 +706,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
   "Return the fold range in a sequence when the NODE exists over multiple lines."
   (let ((beg (1+ (tsc-node-start-position node)))
         (end (1- (tsc-node-end-position node))))
-    (if (save-excursion
-          (goto-char beg)
-          (search-forward "\n" end t))
+    (if (< 1 (count-lines (1- beg) (1+ end)))
         (ts-fold--cons-add (cons beg end) offset)
       nil)))
 
