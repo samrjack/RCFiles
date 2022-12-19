@@ -850,6 +850,11 @@ Grip is nice markdown viewer so you can see what you've written before publishin
 brew install grip
 #+end_src
 
+Prettier is a tool for cleaning up markdown files.
+#+begin_src sh
+brew install prettier
+#+end_src
+
 *** Web
 Npm is the main package manager for anything and everything javascript. Better have it installed!
 #+begin_src sh

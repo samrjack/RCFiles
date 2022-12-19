@@ -260,6 +260,8 @@ brew install shellcheck
 
 brew install grip
 
+brew install prettier
+
 brew install npm
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
