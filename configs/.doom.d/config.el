@@ -718,7 +718,8 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
 (setq local/ts-fold-parsers-go-list
       '((block . ts-fold-range-seq)
-        (comment . local/ts-fold-range-multi-line-seq)
+        ;; (comment . local/ts-fold-range-multi-line-seq)
+        (comment . ts-fold-range-c-like-comment)
         (import_spec_list . ts-fold-range-seq)
         (field_declaration_list . ts-fold-range-seq)
         (parameter_list . local/ts-fold-range-multi-line-seq)
@@ -738,13 +739,19 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (statement_block . ts-fold-range-seq)
         (comment . ts-fold-range-c-like-comment)))
 
+(dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
+  (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list))
+
+(setq local/ts-fold-parsers-shell-list
+      '((do_group . (ts-fold-range-seq 1 -3))
+        (compound_statement . ts-fold-range-seq)
+        (expansion          . ts-fold-range-seq)
+        (comment
+         . (lambda (node offset)
+             (ts-fold-range-line-comment node offset "#")))))
+
 (after! ts-fold
-  (local/update-ts-fold-definitions 'javascript-mode local/ts-fold-parsers-javascript-list)
-  (local/update-ts-fold-definitions 'rjsx-mode local/ts-fold-parsers-javascript-list)
-  (local/update-ts-fold-definitions 'js-mode local/ts-fold-parsers-javascript-list)
-  (local/update-ts-fold-definitions 'js2-mode local/ts-fold-parsers-javascript-list)
-  (local/update-ts-fold-definitions 'js3-mode local/ts-fold-parsers-javascript-list)
-  (local/update-ts-fold-definitions 'js3-mode local/ts-fold-parsers-javascript-list))
+  (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
 
 (after! lsp-mode
   (defvar local/lsp-mode-keymap (make-sparse-keymap))
