@@ -121,12 +121,13 @@
        ;;(dart +flutter)   ; paint ui and not much else
        data              ; config/data formats
        ;;dhall             ; config as code
-       (elixir +lsp)     ; erlang done right
+       (elixir +lsp      ; erlang done right
+               +tree-sitter)
        (elm +lsp         ; care for a cup of TEA?
             +tree-sitter)
        emacs-lisp        ; a parsel-tongue for the oldest serpent
        (erlang +lsp)     ; an elegant language for a more civilized age
-       ess               ; emacs speaks statistics
+       (ess +stan)       ; emacs speaks statistics
        ;;factor
        ;;faust             ; dsp, but you get to keep your soul
        ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
@@ -139,9 +140,12 @@
        (haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       (java +meghanada) ; the poster child for carpal tunnel syndrome
-       (javascript +lsp) ; all(hope(abandon(ye(who(enter(here))))))
-       (json +lsp)       ; At least it ain't XML
+       (java +lsp        ; the poster child for carpal tunnel syndrome
+             +tree-sitter)
+       (javascript +lsp  ; all(hope(abandon(ye(who(enter(here))))))
+                   +tree-sitter)
+       (json +lsp        ; At least it ain't XML
+             +tree-sitter)
        ;;(julia +lsp)      ; a better, faster MATLAB
        (kotlin +lsp)     ; a better, slicker Java(Script)
        (latex +lsp       ; writing papers in Emacs has never been so fun
@@ -150,11 +154,14 @@
               +fold)
        ;;lean              ; for folks with too much to prove
        ledger            ; an accounting system in Emacs
-       lua               ; one-based indices? one-based indices
+       (lua +lsp         ; one-based indices? one-based indices
+            +fennel
+            +moonscript)
        (markdown +grip)  ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
-       ;;ocaml             ; an objective camel
+       (ocaml +lsp       ; an objective camel
+              +tree-sitter)
        (org +brain       ; organize your plain life in plain text
             +dragndrop
             +gnuplot
@@ -169,14 +176,15 @@
             +roam2)
        ;;php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
-       purescript        ; javascript, but functional
+       (purescript +lsp) ; javascript, but functional
        (python +lsp      ; beautiful is better than ugly
                +poetry
                +pyenv
                +pyright
                +tree-sitter)
        ;;qt                ; the 'cutest' gui framework ever
-       racket            ; a DSL for DSLs
+       (racket +lsp      ; a DSL for DSLs
+               +xp)
        ;;raku              ; the artist formerly known as perl6
        (rest +jq)        ; Emacs as a REST client
        rst               ; ReST in peace
