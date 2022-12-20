@@ -1896,8 +1896,9 @@ Javascript folding already works pretty well but there are a few tweaks I'd like
         (statement_block . ts-fold-range-seq)
         (comment . ts-fold-range-c-like-comment)))
 
-(dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
-  (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list))
+(after! ts-fold
+  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
+    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
 #+end_src
 
 ***** Shell Folding

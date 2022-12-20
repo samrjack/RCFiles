@@ -739,8 +739,9 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (statement_block . ts-fold-range-seq)
         (comment . ts-fold-range-c-like-comment)))
 
-(dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
-  (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list))
+(after! ts-fold
+  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
+    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
 
 (setq local/ts-fold-parsers-shell-list
       '((do_group . (ts-fold-range-seq 1 -3))
