@@ -1088,6 +1088,18 @@ Set the ability to use it anywhere.
 (global-origami-mode)
 #+end_src
 
+But disable in modes where it does an awful job.
+#+begin_src emacs-lisp
+(defun local/turn-off-origami ()
+  "Simple function meant for hooks in order to turn off
+origami mode in major modes where it gets annoying."
+  (origami-mode -1))
+
+(dolist (hook '(dired-mode-hook))
+  (add-hook hook #'local/turn-off-origami))
+#+end_src
+
+
 *** Git
 **** Blamer
 This module adds git commit information in line with code when turned on which can be nice when working through a code base.

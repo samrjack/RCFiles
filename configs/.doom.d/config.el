@@ -325,6 +325,14 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 
 (global-origami-mode)
 
+(defun local/turn-off-origami ()
+  "Simple function meant for hooks in order to turn off
+origami mode in major modes where it gets annoying."
+  (origami-mode -1))
+
+(dolist (hook '(dired-mode-hook))
+  (add-hook hook #'local/turn-off-origami))
+
 (use-package blamer
   :defer 20
   :custom
