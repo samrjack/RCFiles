@@ -2399,6 +2399,23 @@ And then of course, add it to the personal map.
       "c" #'local/set-fill-column-val)
 #+end_src
 
+*** Call indicator
+This is a function I've written to see when hooks or other linked functions get called.
+#+begin_src emacs-lisp
+(defun local/hello (&optional var)
+  "Just print hello in the message area"
+  (interactive)
+  (message "Hello")
+  (if var
+      (message "TEST yes")
+    (message "TEST no")))
+#+end_src
+
+Here's an example of using it to see when the ~tree-sitter-mode-hook~ gets called.
+#+begin_src emacs-lisp :tangle no
+(add-hook! 'tree-sitter-mode-hook (lambda () (local/hello tree-sitter-mode)))
+#+end_src
+
 * Fixes
 Here are some config fixes for issues I'm running into.
 

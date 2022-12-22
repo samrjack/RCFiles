@@ -959,6 +959,14 @@ Buffers are labled as *scratch* through *scratchX*."
       :desc "set fill-column"
       "c" #'local/set-fill-column-val)
 
+(defun local/hello (&optional var)
+  "Just print hello in the message area"
+  (interactive)
+  (message "Hello")
+  (if var
+      (message "TEST yes")
+    (message "TEST no")))
+
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 
 ;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))
