@@ -91,7 +91,7 @@ For modules concerned with changing Emacs' appearance or providing interfaces fo
        ophints           ; highlight the region an operation acts on
        (popup            ; tame sudden yet inevitable temporary windows
         +defaults)
-       ;; tabs              ; a tab bar for Emacs
+       ;;tabs              ; a tab bar for Emacs
        (treemacs +lsp)   ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        (vc-gutter +pretty); vcs diff in the fringe
@@ -748,36 +748,88 @@ Import a simpler sidebar package for when it's needed.
 Dired is just so useful that I can't really justify using treemacs. Especially since treemacs has this annoying habit of not saving the location of my cursor so I have to start at the top every time...
 #+begin_src emacs-lisp
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
-(map! :n "M-n" #'+treemacs/toggle)
+(map! :n "M-n" #'treemacs)
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
-(map! :n "C-n" #'+treemacs/toggle)
+(map! :n "C-n" #'treemacs)
 (map! :n "M-n" #'dired-sidebar-toggle-sidebar)
 #+end_src
 
 Make it so that treemacs closes itself when selected no matter which button I press.
 #+begin_src emacs-lisp
 (map! :map 'treemacs-mode-map
-      :ng "M-n" #'+treemacs/toggle
-      :ng "C-n" #'+treemacs/toggle)
+      :ng "M-n" #'treemacs
+      :ng "C-n" #'treemacs)
 #+end_src
 
-**** Settings for sidebars
+**** Settings for treemacs
+Although treemacs can be set up as a module in doom, I find the default settings extremely annoying and would rather just set it up myself.
+
+First set up the package configuration so everything else becomes part of the config step.
+#+begin_src emacs-lisp
+(use-package! treemacs
+  :ensure t
+  :defer t
+  :config
+  (progn
+#+end_src
+
+So when working with treemacs in doom emacs, you need to set this value so that icons appear properly.
+#+begin_src emacs-lisp
+    (setq doom-themes-treemacs-theme "doom-colors")
+#+end_src
+
+
 When a directory contains nothing but a single other directory, this collapses them into a single action to open and close. In treemacs I'm not making new files very often so this option makes sense.
 The number represents the number of recursive layers it's allowed. Don't make it too big otherwise things could freeze up.
 #+begin_src emacs-lisp
-(setq treemacs-collapse-dirs 5)
+    (setq treemacs-collapse-dirs 7)
 #+end_src
 
 When I do want to use treemacs, I don't want tons of projects to show since I really only care about the one I'm in.
 #+begin_src emacs-lisp
-(treemacs-project-follow-mode 1)
+    (treemacs-project-follow-mode 1)
 #+end_src
 
 When using LSP, it is important to let treemacs update as needed to reflect what I'm looking at and what is being processed by the LSP engine.
 #+begin_src emacs-lisp
-(lsp-treemacs-sync-mode 1)
+    (lsp-treemacs-sync-mode t)
+#+end_src
+
+Make treemacs pay attention to the directory structure to watch for new files/folders.
+#+begin_src emacs-lisp
+    (treemacs-filewatch-mode t)
+#+end_src
+
+Set treemacs to use the default theme since file icons provide a lot more visual information.
+#+begin_src emacs-lisp :tangle no
+    (treemacs-load-theme "Default")
+#+end_src
+
+Show how indented files are.
+#+begin_src emacs-lisp
+    (treemacs-indent-guide-mode t)
+#+end_src
+
+Should make cursor go to the current file when opened.
+#+begin_src emacs-lisp
+    (treemacs-follow-mode t)
+#+end_src
+
+Add git support.
+#+begin_src emacs-lisp
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+#+end_src
+
+And finally, close the config wrapping.
+#+begin_src emacs-lisp
+))
 #+end_src
 
 *** Projectile

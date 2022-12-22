@@ -190,17 +190,40 @@ I find this order matches how I want folds to work"
                       #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
 
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
-(map! :n "M-n" #'+treemacs/toggle)
+(map! :n "M-n" #'treemacs)
 
 (map! :map 'treemacs-mode-map
-      :ng "M-n" #'+treemacs/toggle
-      :ng "C-n" #'+treemacs/toggle)
+      :ng "M-n" #'treemacs
+      :ng "C-n" #'treemacs)
 
-(setq treemacs-collapse-dirs 5)
+(use-package! treemacs
+  :ensure t
+  :defer t
+  :config
+  (progn
 
-(treemacs-project-follow-mode 1)
+    (setq doom-themes-treemacs-theme "doom-colors")
 
-(lsp-treemacs-sync-mode 1)
+    (setq treemacs-collapse-dirs 7)
+
+    (treemacs-project-follow-mode 1)
+
+    (lsp-treemacs-sync-mode t)
+
+    (treemacs-filewatch-mode t)
+
+    (treemacs-indent-guide-mode t)
+
+    (treemacs-follow-mode t)
+
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+
+))
 
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
