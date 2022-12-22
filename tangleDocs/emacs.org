@@ -1914,6 +1914,11 @@ Lets make sure the ts-fold package is installed so that we can use folding. I'm 
 #+end_src
 
 ***** Setup
+Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible.
+#+begin_src emacs-lisp
+(global-ts-fold-indicators-mode 1)
+#+end_src
+
 Here we set up the functionality that is (currently) needed to load new definitions of folding patterns. This is a bit of a hack but the way this is designed is quite confusing from an extensibility perspective.
 #+begin_src emacs-lisp
 (after! ts-fold

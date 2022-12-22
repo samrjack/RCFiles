@@ -732,6 +732,8 @@ if no org extension is given then it will be automatically appended."
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
 
+(global-ts-fold-indicators-mode 1)
+
 (after! ts-fold
   (defun local/update-ts-fold-definitions (mode rules)
     "Update the provided MODE with the new set of folding RULES.
