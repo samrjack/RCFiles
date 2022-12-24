@@ -802,6 +802,18 @@ Make treemacs pay attention to the directory structure to watch for new files/fo
     (treemacs-filewatch-mode t)
 #+end_src
 
+However, treemacs has an issue with macOS where the git status doesn't always get updated due to the file system. This workaround plus more info on the issue can be found [[https://github.com/Alexander-Miller/treemacs/issues/152][here]].
+#+begin_src emacs-lisp
+(after! treemacs
+  (defun local/treemacs-force-git-update-current-file ()
+    (let ((file (treemacs-canonical-path buffer-file-name)))
+      (treemacs-run-in-every-buffer
+       (when (treemacs-is-path file :in-workspace)
+         (treemacs-update-single-file-git-state file)))))
+  (when (eq system-type 'darwin) ;; Only need for MacOS
+    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+#+end_src
+
 Set treemacs to use the default theme since file icons provide a lot more visual information.
 #+begin_src emacs-lisp :tangle no
     (treemacs-load-theme "Default")

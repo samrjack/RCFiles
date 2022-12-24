@@ -212,6 +212,15 @@ I find this order matches how I want folds to work"
 
     (treemacs-filewatch-mode t)
 
+(after! treemacs
+  (defun local/treemacs-force-git-update-current-file ()
+    (let ((file (treemacs-canonical-path buffer-file-name)))
+      (treemacs-run-in-every-buffer
+       (when (treemacs-is-path file :in-workspace)
+         (treemacs-update-single-file-git-state file)))))
+  (when (eq system-type 'darwin) ;; Only need for MacOS
+    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+
     (treemacs-indent-guide-mode t)
 
     (treemacs-follow-mode t)
