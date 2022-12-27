@@ -1219,7 +1219,6 @@ This little piece of code switches to the results buffer once the search has con
   (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
 #+end_src
 
-
 ** Independent or external programs
 *** Discord integration
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -2146,6 +2145,14 @@ In golang, a lot of the tests that get written are integration tests. When using
                   (:eval (doom-modeline-segment--major-mode)))))
 
   (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
+#+end_src
+
+*** Project (not projectile)
+Project is the built in emacs project manager. Although I use projectile most of the time, I want project working well if ever I want to look into it more.
+
+The first thing to add is the ability to find the project root more easily. This is one of the best features of projectile.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! project-rootfile)
 #+end_src
 
 *** Programming Languages

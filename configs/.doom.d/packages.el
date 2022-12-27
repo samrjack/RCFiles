@@ -109,6 +109,8 @@
 (package! calibredb)
 (package! nov)
 
+(package! project-rootfile)
+
 (package! scad-mode)
 
 (package! geiser)
