@@ -42,6 +42,8 @@
 
 (package! bang :recipe (:host github :repo "Arian-D/bang.el"))
 
+(package! logos)
+
 (package! elcord)
 
 (package! spray :recipe (:host nil :repo "https://git.sr.ht/~iank/spray"))
