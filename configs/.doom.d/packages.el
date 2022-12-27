@@ -97,8 +97,7 @@
 
 (unpin! tree-sitter-langs)
 
-;; (package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
-(package! ts-fold :recipe (:host github :repo "samrjack/ts-fold"))
+(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 
 ;; e-reader
 (package! calibredb)
@@ -154,3 +153,13 @@
 ;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")
 
 (unpin! straight)
+
+(package! ts-fold :recipe
+  (:host github
+   :repo "samrjack/ts-fold"
+   :branch "golang"))
+
+(package! zoom-window :recipe
+  (:host github
+   :repo "samrjack/zoom-window"
+   :branch "handlePerspRename"))
