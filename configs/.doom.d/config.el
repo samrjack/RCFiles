@@ -424,6 +424,13 @@ origami mode in major modes where it gets annoying."
     (erase-buffer)
     (eshell-send-input)))
 
+(defun local/set-prompt-as-page-delimiter ()
+  "Sets the prompt of eshell as the page delimiter sequence so that each call
+can be seen as seprate pages and consequently can use paging functions such
+as `narrow-to-page' or a package like logos to see paged results."
+  (setq-local page-delimiter eshell-prompt-regexp))
+(add-hook 'eshell-mode-hook #'local/set-prompt-as-page-delimiter)
+
 ;; Add useful data to the mode line.
 (setq display-time-day-and-date t)
 (display-time-mode 1)

@@ -1334,6 +1334,16 @@ Make the clear function fully clear the screen.
     (eshell-send-input)))
 #+end_src
 
+**** Prompt as page delimiter
+#+begin_src emacs-lisp
+(defun local/set-prompt-as-page-delimiter ()
+  "Sets the prompt of eshell as the page delimiter sequence so that each call
+can be seen as seprate pages and consequently can use paging functions such
+as `narrow-to-page' or a package like logos to see paged results."
+  (setq-local page-delimiter eshell-prompt-regexp))
+(add-hook 'eshell-mode-hook #'local/set-prompt-as-page-delimiter)
+#+end_src
+
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
 
