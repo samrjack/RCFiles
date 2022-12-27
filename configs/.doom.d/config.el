@@ -369,6 +369,9 @@ origami mode in major modes where it gets annoying."
       :desc "List"
       "l" #'lorem-ipsum-insert-list)
 
+(with-eval-after-load 'rg
+  (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
+
 (use-package! spray
   :commands spray-mode
   :config
