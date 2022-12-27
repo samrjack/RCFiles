@@ -1925,9 +1925,9 @@ Lets make sure the ts-fold package is installed so that we can use folding. I'm 
 #+end_src
 
 ***** Setup
-Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible.
+Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible. Loaded after tree-sitter though since that's when it's first viable to use anyways.
 #+begin_src emacs-lisp
-(global-ts-fold-indicators-mode 1)
+(after! tree-sitter (global-ts-fold-indicators-mode 1))
 #+end_src
 
 Here we set up the functionality that is (currently) needed to load new definitions of folding patterns. This is a bit of a hack but the way this is designed is quite confusing from an extensibility perspective.
@@ -1967,11 +1967,6 @@ I have to use golang for work but the standard golang folding capabilities is qu
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
-#+end_src
-
-Finally, set go-mode to use ts-fold by default since it gives such good results.
-#+begin_src emacs-lisp
-(add-hook! 'go-mode-hook #'ts-fold-indicators-mode)
 #+end_src
 
 ***** JS Folding

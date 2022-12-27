@@ -741,7 +741,7 @@ if no org extension is given then it will be automatically appended."
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
 
-(global-ts-fold-indicators-mode 1)
+(after! tree-sitter (global-ts-fold-indicators-mode 1))
 
 (after! ts-fold
   (defun local/update-ts-fold-definitions (mode rules)
@@ -771,8 +771,6 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
-
-(add-hook! 'go-mode-hook #'ts-fold-indicators-mode)
 
 (setq local/ts-fold-parsers-javascript-list
       '((object . ts-fold-range-seq)
