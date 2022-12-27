@@ -357,6 +357,18 @@ origami mode in major modes where it gets annoying."
 
 (setq git-gutter-fr:side 'right-fringe)
 
+(defvar local/lorem-ipsum-map (make-sparse-keymap))
+(map! :leader
+      :desc "lorem-ipsum"
+      "i l" local/lorem-ipsum-map)
+(map! :map local/lorem-ipsum-map
+      :desc "Paragraph"
+      "p" #'lorem-ipsum-insert-paragraphs
+      :desc "Sentence"
+      "s" #'lorem-ipsum-insert-sentences
+      :desc "List"
+      "l" #'lorem-ipsum-insert-list)
+
 (use-package! spray
   :commands spray-mode
   :config

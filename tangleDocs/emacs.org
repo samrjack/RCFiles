@@ -1182,6 +1182,30 @@ Logos is a package for working with pages within emacs. Pages can be set with th
 (package! logos)
 #+end_src
 
+*** Text filler
+Sometimes when testing out settings and formats, having filler text is useful.
+
+**** Lorem-ipsum
+The most common filler text is lorem-ipsum.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! lorem-ipsum)
+#+end_src
+
+Set up a key map for lorem-ipsum and add it into the insert section.
+#+begin_src emacs-lisp
+(defvar local/lorem-ipsum-map (make-sparse-keymap))
+(map! :leader
+      :desc "lorem-ipsum"
+      "i l" local/lorem-ipsum-map)
+(map! :map local/lorem-ipsum-map
+      :desc "Paragraph"
+      "p" #'lorem-ipsum-insert-paragraphs
+      :desc "Sentence"
+      "s" #'lorem-ipsum-insert-sentences
+      :desc "List"
+      "l" #'lorem-ipsum-insert-list)
+#+end_src
+
 ** Independent or external programs
 *** Discord integration
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -2485,7 +2509,6 @@ These packages are ones that I'm working on and therefore need to point my confi
    :repo "samrjack/zoom-window"
    :branch "handlePerspRename"))
 #+end_src
-
 
 * Auto Tangle
 The below allows this file to tangle and produce the output configuration files whenever the document is saved.

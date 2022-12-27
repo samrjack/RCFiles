@@ -44,6 +44,8 @@
 
 (package! logos)
 
+(package! lorem-ipsum)
+
 (package! elcord)
 
 (package! spray :recipe (:host nil :repo "https://git.sr.ht/~iank/spray"))
