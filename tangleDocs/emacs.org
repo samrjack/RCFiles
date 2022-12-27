@@ -1320,8 +1320,15 @@ And then this package needs to be loaded to work properly for some reason.
 #+end_src
 
 **** Elisp shell aliases
+Start with the simple ls alias that is seen everywhere.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/eshell/eshell-aliases
 alias ll 'ls -lh $*'
+#+end_src
+
+Add in a couple of aliases for ~view-file~ since it's so useful in shell mode.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/eshell/eshell-aliases
+alias vf 'view-file $1'
+alias emacs 'view-file $1'
 #+end_src
 
 **** Eshell functions

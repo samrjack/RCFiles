@@ -1,1 +1,4 @@
 alias ll 'ls -lh $*'
+
+alias vf 'view-file $1'
+alias emacs 'view-file $1'
