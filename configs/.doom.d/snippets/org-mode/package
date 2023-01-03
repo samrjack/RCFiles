@@ -5,5 +5,5 @@
 # uuid: package
 # --
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-`%`$0
+(package! `%`$0)
 #+end_src
