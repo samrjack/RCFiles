@@ -69,6 +69,8 @@
 
 (package! bluetooth)
 
+(package! crdt)
+
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 
 (package! guix)

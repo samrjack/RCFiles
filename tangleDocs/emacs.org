@@ -1339,6 +1339,29 @@ This little [[https://github.com/emacsmirror/bluetooth][package]] is for managin
 (package! bluetooth)
 #+end_src
 
+*** Collaborative editing
+This package allows sharing buffers with other users. Documentation can be found on the [[https://elpa.gnu.org/packages/crdt.html][ELPA page]].
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! crdt)
+#+end_src
+
+After crdt is enabled, there are a couple of useful extras to enable.
+
+#+begin_src emacs-lisp
+(defun local/crdt-enable-extras ()
+  "Enable the nice extras when crdt is enabled and
+turn them off when disabled."
+  (if crdt-mode
+      (progn
+        (crdt-visualize-author-mode 1)
+        (crdt-org-sync-overlay-mode 1))
+    (crdt-visualize-author-mode -1)
+    (crdt-org-sync-overlay-mode -1)))
+
+(add-hook! 'crdt-mode-hook #'local/crdt-enable-extras)
+#+end_src
+
+
 ** Mode/package settings
 *** Mode Minder
 Although it's not really an important mode in and of itself, mode minder lets you look at all the major modes that are installed which can be quite helpful.

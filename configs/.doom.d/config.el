@@ -429,6 +429,18 @@ origami mode in major modes where it gets annoying."
   (gif-screencast-write-colormap)
   (add-hook 'doom-load-theme-hook #'local/gif-screencast-write-colormap))
 
+(defun local/crdt-enable-extras ()
+  "Enable the nice extras when crdt is enabled and
+turn them off when disabled."
+  (if crdt-mode
+      (progn
+        (crdt-visualize-author-mode 1)
+        (crdt-org-sync-overlay-mode 1))
+    (crdt-visualize-author-mode -1)
+    (crdt-org-sync-overlay-mode -1)))
+
+(add-hook! 'crdt-mode-hook #'local/crdt-enable-extras)
+
 (require 'mode-minder nil 'noerror)
 
 (setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
