@@ -1053,6 +1053,12 @@ Adding my personal snippets directory.
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
 #+end_src
 
+**** Academic writing
+This package provides snippets for making writing sound more academic which can be really useful when you're not sure how to make something sound professional.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! academic-phrases)
+#+end_src
+
 *** VLF (Very Large Files)
 VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
