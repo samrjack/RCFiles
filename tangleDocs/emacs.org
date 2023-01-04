@@ -6,13 +6,15 @@
 
 Welcome to a semi-clean though certainly flawed emacs config. I hope you can find what you're looking for. Feel free to reach out if you have any questions or recommendations!
 
+Unlike other literate configs, this one is not meant to be compiled at start time. This gets tangled together whenever it is saved and then
+
 * Table of contents :quote:toc_9:
 #+BEGIN_QUOTE
 - [[#file-setup][File setup]]
   - [[#initialization][Initialization]]
   - [[#packages][Packages]]
   - [[#configuration][Configuration]]
-- [[#initialization-1][Initialization]]
+- [[#doom-initialization][Doom Initialization]]
   - [[#documentation][Documentation]]
   - [[#start][Start]]
   - [[#input][Input]]
@@ -33,11 +35,11 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
   - [[#documentation-1][Documentation]]
     - [[#macro-documentation][Macro documentation]]
     - [[#packages-documentation][Packages documentation]]
-  - [[#fonts-and-language][Fonts and language]]
-    - [[#chinese-support][Chinese support]]
-    - [[#fonts][Fonts]]
   - [[#basic-emacs-settings][Basic Emacs settings]]
     - [[#personal-identification][Personal Identification]]
+    - [[#fonts-and-language][Fonts and language]]
+      - [[#chinese-support][Chinese support]]
+      - [[#fonts][Fonts]]
     - [[#custom-settings-file][Custom settings file]]
     - [[#theming][Theming]]
     - [[#debugging][Debugging]]
@@ -45,6 +47,7 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
       - [[#date-and-time][Date and time]]
       - [[#battery][Battery]]
       - [[#encoding-format][Encoding format]]
+    - [[#auth-settings][Auth settings]]
   - [[#key-chord-setup][Key-chord setup]]
     - [[#modifier-keys-mapping][Modifier keys mapping]]
     - [[#key-discovery][Key discovery]]
@@ -77,8 +80,6 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
       - [[#whitespace-mode][Whitespace mode]]
       - [[#line-spacing][Line spacing]]
       - [[#tree-sitter-mode][Tree Sitter mode]]
-      - [[#lsp-mode][LSP mode]]
-        - [[#golang][Golang]]
       - [[#code-folding][Code folding]]
         - [[#ts-fold][TS-Fold]]
           - [[#setup][Setup]]
@@ -106,12 +107,13 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
         - [[#centered-cursor--typewriter-mode][Centered Cursor / Typewriter Mode]]
         - [[#logos][Logos]]
         - [[#returning-from-a-jump][Returning from a jump]]
-      - [[#encryption][Encryption]]
-        - [[#encrypt-region][Encrypt region]]
+      - [[#encrypt-region][Encrypt region]]
       - [[#searching][Searching]]
         - [[#case-insensitive-search][Case insensitive search]]
         - [[#rip-grep][Rip-grep]]
         - [[#bang][Bang!]]
+      - [[#lsp-servers][LSP servers]]
+        - [[#golang][Golang]]
   - [[#independent-or-external-programs][Independent or external programs]]
     - [[#version-control][Version control]]
       - [[#blamer][Blamer]]
@@ -130,7 +132,6 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
     - [[#collaborative-editing][Collaborative editing]]
   - [[#modepackage-settings][Mode/package settings]]
     - [[#mode-minder][Mode Minder]]
-    - [[#guix][Guix]]
     - [[#elisp-shell][Elisp-shell]]
       - [[#elisp-shell-aliases][Elisp shell aliases]]
       - [[#eshell-functions][Eshell functions]]
@@ -183,6 +184,7 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
       - [[#tabnine][TabNine]]
     - [[#web-mode][Web mode]]
     - [[#r-data-frames][R data frames]]
+    - [[#guix][Guix]]
   - [[#fun][Fun]]
     - [[#xkcd][XKCD]]
     - [[#typewriter][Typewriter]]
@@ -211,41 +213,44 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
 #+END_QUOTE
 
 * File setup
+This sets up all the files used for configuration with the appropriate elisp file headers.
 ** Initialization
+=init.el= is for anything that needs to be set up prior to emacs running. Generally only the doom module settings go in here.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
 ;;; init.el -*- lexical-binding: t; -*-
 #+end_src
 
 ** Packages
+=packages.el= is for any packages that need to be downloaded have to be declared in here. They are then downloaded or updated whenever ~doom sync~ is run.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 #+end_src
 
 ** Configuration
+=config.el= is the default file for stuff to be written to. this is where basically all emacs settings get put.
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 #+end_src
 
-* Initialization
+* Doom Initialization
 ** Documentation
-#+begin_src emacs-lisp :tangle no
-;; This file controls what Doom modules are enabled and what order they load
-;; in. Remember to run 'doom sync' after modifying it!
+This documentation came with the original doom init file. Keeping for reference. It has been slightly modified to use org markdown syntax.
 
-;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
-;;      documentation. There you'll find a "Module Index" link where you'll find
-;;      a comprehensive list of Doom's modules and what flags they support.
+#+begin_quote
+This file controls what Doom modules are enabled and what order they load in. Remember to run ~doom sync~ after modifying it!
 
-;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
-;;      'C-c c k' for non-vim users) to view its documentation. This works on
-;;      flags as well (those symbols that start with a plus).
-;;
-;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
-;;      directory (for easy access to its source code).
-#+end_src
+*NOTE* Press ~SPC h d h~ (or ~C-h d h~ for non-vim users) to access Doom's documentation. There you'll find a "Module Index" link where you'll find a comprehensive list of Doom's modules and what flags they support.
+
+*NOTE* Move your cursor over a module's name (or its flags) and press ~K~ (or ~C-c c k~ for non-vim users) to view its documentation. This works on flags as well (those symbols that start with a plus).
+
+Alternatively, press ~gd~ (or ~C-c c d~) on a module to browse its directory (for easy access to its source code).
+#+end_quote
+
+I will note that when looking at this literate config within emacs, just pressing ~K~ over a module's name does not work. you have to go through doom's module help section ~SPC h d m~.
 
 ** Start
+This entire section needs to be wrapped in the ~doom!~ macro so the head is placed here so that the following sections can be more modular.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
 (doom!
 ;;; Modules to load
@@ -528,15 +533,15 @@ Modules in this category provide sane defaults or improve your ability to config
 #+end_src
 
 ** End section
+Closes the ~doom!~ macro block.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
 )
 #+end_src
 
 * Configuration
 ** Documentation
+This documentation came with the doom emacs original configs. I'm keeping it here for reference since I often run across it while searching my config.
 *** Macro documentation
-This documentation is pulled directly from the doom initial configs.
-
 Here are some additional functions/macros that could help you configure Doom:
 
 - ~load!~ for loading external *.el files relative to this one
@@ -555,8 +560,6 @@ You can also try ~gd~ (or ~C-c c d~) to jump to their definition and see how
 they are implemented.
 
 *** Packages documentation
-This documentation is pulled directly from the doom initial configs.
-
 To install a package with Doom you must declare them here and run ~doom sync~
 on the command line, then restart Emacs for the changes to take effect -- or
 use ~M-x doom/reload~.
@@ -624,8 +627,18 @@ release. The ~unpin!~ macro allows you to unpin single packages...
 (unpin! t)
 #+end_src
 
-** Fonts and language
-*** Chinese support
+** Basic Emacs settings
+Settings for the general emacs editor and experience. These packages don't affect anything that is package or use case dependent, but instead set up the emacs program as desired.
+*** Personal Identification
+Some functionality uses this to identify you, e.g. GPG configuration, email clients, file templates and snippets.
+#+begin_src emacs-lisp
+(setq user-full-name "Samuel Jackson"
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
+#+end_src
+
+*** Fonts and language
+Having the correct fonts and language support is so important in emacs. This section provides control for it.
+**** Chinese support
 In order for Chinese text to be displayed correctly, some modes needs to be turned on to allow for the unique characteristics of the symbolic language.
 #+begin_src emacs-lisp
 (defun local/chinese-text-support ()
@@ -634,7 +647,7 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
   (variable-pitch-mode))
 #+end_src
 
-*** Fonts
+**** Fonts
 Doom exposes five (optional) variables for controlling fonts in Doom. Here are the three important ones:
 
 + ~doom-font~
@@ -647,22 +660,17 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font 
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+end_src
 
-** Basic Emacs settings
-Settings for the general emacs editor and experience. These packages don't affect anything that is package or use case dependent, but instead set up the emacs program as desired.
-*** Personal Identification
-Some functionality uses this to identify you, e.g. GPG configuration, email clients, file templates and snippets.
-#+begin_src emacs-lisp
-(setq user-full-name "Samuel Jackson"
-      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
-#+end_src
-
 *** Custom settings file
+When things are customized using the customize interface, they get saved to a customize file. I personally quite dislike this form of configuring since it is not clean and harder to trace down. However, some packages require it and sometimes it gets used anyways so I'm setting and loading the file to prevent unexpected issues regarding it.
 #+begin_src emacs-lisp
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
 #+end_src
 
 *** Theming
+Colors and themes are important.
+
+I like dracula for its consistency in all environments and programs but I don't think it has the best look. I'm going to add it here just in case it becomes necessary.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! dracula-theme)
 (package! theme-magic)
@@ -741,6 +749,13 @@ so only show the modeline when this is not the case"
 (add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
 #+end_src
 
+*** Auth settings
+Auth is used for a couple of things. On MacOS, this can pull from the macos-keychain, but elsewhere  I'd like the credentials to be default locations.
+#+begin_src emacs-lisp
+(push 'auth-sources (file-name-concat "~" ".gnupg" "authinfo.gpg") (file-name-concat "~" ".authinfo.gpg"))
+(setq auth-source-cache-expiry nil) ; default is 7200 (2h)
+#+end_src
+
 ** Key-chord setup
 Key-chords are so important in Emacs and many will be set through out the rest of this config. Here I am setting up key chords to function the way I want and initializing any key-chord related packages.
 *** Modifier keys mapping
@@ -800,9 +815,8 @@ Once embark is installed, there are some key-bindings that should be set. The fi
 *** Evil mode
 I need those vim bindings... They're too strongly ingrained!
 **** Evil settings
+Make undo revert smaller sections of text instead of all text added while in insert mode.
 #+begin_src emacs-lisp
-;; Make undo revert smaller sections of text instead of all text
-;; added while in insert mode.
 (setq evil-want-fine-undo t)
 #+end_src
 
@@ -846,12 +860,13 @@ Import a simpler sidebar package for when it's needed.
 (package! dired-sidebar)
 #+end_src
 
-Dired is just so useful that I can't really justify using treemacs. Especially since treemacs has this annoying habit of not saving the location of my cursor so I have to start at the top every time...
+Both treemacs and dired have their uses. Dired is better when I'm exploring the broader file system and kind of know where I'm going. Treemacs is fantastic for looking at a single project or two.
 #+begin_src emacs-lisp
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'treemacs)
 #+end_src
 
+The packages can be swapped but I'm used to their current positions.
 #+begin_src emacs-lisp :tangle no
 (map! :n "C-n" #'treemacs)
 (map! :n "M-n" #'dired-sidebar-toggle-sidebar)
@@ -993,8 +1008,7 @@ For showing file info in dired mode, a different keybinding can be added. Howeve
 *** VLF (Very Large Files)
 VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
-(package! vlf :recipe (:host github :repo "m00natic/vlfi"))
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el")))
 #+end_src
 
 Then setup the package later.
@@ -1043,6 +1057,7 @@ Make tab functions accessible from the doom-leader menu as well.
 #+end_src
 
 *** Projectile
+Projectile is used to organize and search files within a git (or other root indicator) directory.
 #+begin_src emacs-lisp
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
@@ -1059,9 +1074,8 @@ The first thing to add is the ability to find the project root more easily. This
 ** Windows
 This section is about how windows get moved around and resized.
 *** Windows
+Resize all windows when a new one comes in so they have equal space.
 #+begin_src emacs-lisp
-;; Resize all windows when a new one comes in so they have
-;; equal space.
 (setq-default window-combination-resize t
 ;; changes the cursor to be the size of a gliph in the buffer.
               x-stretch-cursor t)
@@ -1092,6 +1106,7 @@ Then set a convenient key command to activate the zoom. Since tmux uses leader-z
 #+end_src
 
 ** Buffers
+Buffers are where the main action of emacs takes place. This section deals with everything that affects buffers and local values.
 *** Buffer display
 This section contains packages and settings that affect how the buffer is rendered and seen by the user. This includes syntax highlighting, spacing preferences, etc.
 **** Line numbering
@@ -1140,36 +1155,6 @@ First I want to set all the tree-sitter packages to use the master branch.
   (map! :map doom-leader-code-map
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
-#+end_src
-
-**** LSP mode
-[[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
-#+begin_src emacs-lisp
-(after! lsp-mode
-  (defvar local/lsp-mode-keymap (make-sparse-keymap))
-  (map! :map local/lsp-mode-keymap
-        "d" #'lsp-find-definition
-        "i" #'lsp-find-implementation
-        "r" #'lsp-find-references
-        "R" #'lsp-rename
-        "t" #'lsp-find-type-definition)
-
-  (defun local/add-lsp-keymaps ()
-    "Adds prefix keybindings for lsp keymaps."
-    (interactive)
-    (map! :leader
-          :desc "LSP"
-          "l" local/lsp-mode-keymap
-          "L" lsp-mode-map))
-
-  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
-#+end_src
-
-Some lsp servers need extra settings in place so those will be added here.
-***** Golang
-In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
-#+begin_src emacs-lisp
-(setq lsp-go-build-flags ["-tags=integration"])
 #+end_src
 
 **** Code folding
@@ -1406,13 +1391,14 @@ The fill column used for fill-column mode should be longer than the standard. I 
 *** Working within a buffer
 This section relates to actually doing stuff within a buffer or buffers.
 **** Undo
+Increase the undo limit since there's no real space limitations on modern systems.
 #+begin_src emacs-lisp
 ;; Let the undo buffer use up to 100Mb
 (setq undo-limit 100000000)
 #+end_src
 
 **** Writing
-These packages are for writing stuff.
+These packages are for writing stuff and actually working with text of any sort.
 ***** Dictionary
 #+begin_src emacs-lisp
 ;; Set the correct dictionary for spell check.
@@ -1516,6 +1502,7 @@ Finally we need to create universal keybindings to these functions so they can b
 #+end_src
 
 **** Movement
+Moving around is vital. These settings affect how that works
 ***** Sub-word movement
 #+begin_src emacs-lisp
 ;; Makes it so movement keys stop at camlecase sub words.
@@ -1558,15 +1545,14 @@ TODO - Make this more efficient
       :n "P" #'better-jumper-jump-backwards)
 #+end_src
 
-**** Encryption
+**** Encrypt region
 Some files contain details that should be encrypted or scrambled before being published.
-
-***** Encrypt region
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! encrypt-region)
 #+end_src
 
 **** Searching
+These settings and packages are for searching around, across, and outside of buffers. Need to find the information somewhere!
 ***** Case insensitive search
 =case-fold-search= is a variable that turns case sensitivity on and off. It is set per buffer. Since I like case sensitivity, I'm setting the default value so that new buffers use case sensitive searches.
 #+begin_src emacs-lisp
@@ -1593,9 +1579,40 @@ Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][
 (package! bang :recipe (:host github :repo "Arian-D/bang.el"))
 #+end_src
 
+**** LSP servers
+[[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun local/add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" local/lsp-mode-keymap
+          "L" lsp-mode-map))
+
+  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+#+end_src
+
+Some lsp servers need extra settings in place so those will be added here.
+***** Golang
+In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
+#+begin_src emacs-lisp
+(setq lsp-go-build-flags ["-tags=integration"])
+#+end_src
+
 ** Independent or external programs
 These are modes that provide some sort of specialized experience outside of the normal writing flow of emacs.
 *** Version control
+The only VC system I use right now is git, but others may come in the future. There are lots of nice functionality here for seeing what has changed in a file.
 **** Blamer
 This module adds git commit information in line with code when turned on which can be nice when working through a code base.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -1647,6 +1664,7 @@ But using the gutter for git presents a challenge since other things may also be
 #+end_src
 
 *** Discord integration
+Supposedly this can be used to connect with discord from emacs. Actual use is TBD.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! elcord)
 #+end_src
@@ -1683,7 +1701,9 @@ Spray is a tool that flashes words on the screen in rapid succession to simulate
 #+end_src
 
 *** Presentations
+Emacs can in theory be a great way to give presentations. Even about things other than emacs!
 **** Key cast
+Key cast mode shows what keys are being pressed so that someone watching a recording can (in theory) keep up.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! keycast)
 #+end_src
@@ -1707,6 +1727,7 @@ Spray is a tool that flashes words on the screen in rapid succession to simulate
 #+end_src
 
 **** Gif Screenshot
+Is supposed to record a screen recording of emacs. Haven't gotten it to work very well yet though.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! gif-screencast)
 #+end_src
@@ -1799,12 +1820,8 @@ And then this package needs to be loaded to work properly for some reason.
 (require 'mode-minder nil 'noerror)
 #+end_src
 
-*** Guix
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! guix)
-#+end_src
-
 *** Elisp-shell
+Eshell is a really nice shell emulator that still provides the power of emacs lisp. Still need to find some better aliases for it though.
 #+begin_src emacs-lisp
 (setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
 #+end_src
@@ -1842,6 +1859,7 @@ as `narrow-to-page' or a package like logos to see paged results."
 #+end_src
 
 *** Org mode
+Org mode is THE package in emacs. Lots of settings, lots of organization.
 **** Org add-on packages
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! org-reverse-datetree)
@@ -1863,7 +1881,7 @@ If you use `org' and don't want your org files in the default location below, ch
 (setq org-directory (file-name-concat "~" "org"))
 ;; (setq org-work-directory "~/work-org")
 (setq org-work-directory (file-name-concat org-directory "work"))
-(setq org-archive-location "archive/%s_archive::")
+(setq org-archive-location (file-name-concat "archive" "%s_archive::"))
 #+end_src
 
 ***** Font support
@@ -2384,6 +2402,7 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 #+end_src
 
 ** Programming Languages
+Since I'm a programmer, I mostly use emacs for programming tasks. This section is all the extra settings I need to add to make that work properly.
 *** Open CAD
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! scad-mode)
@@ -2512,7 +2531,14 @@ This allows emacs to handle R style data frames. This makes some data handling e
 (package! ess-view)
 #+end_src
 
+*** Guix
+Guix is a more open source version of NIX. I don't use it much but hopefully some day I can dive into it.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! guix)
+#+end_src
+
 ** Fun
+Everyone needs some fun. These packages aren't super practical on their own, but can be enjoyable to turn on once in a while.
 *** XKCD
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; Fun stuff
@@ -2581,6 +2607,7 @@ Power mode causes the screen to shake and dust to fly with each key that's typed
 #+end_src
 
 ** Experimental personal functions
+All my hacky functions! Most of them just let me do some modifications that only I could really love.
 *** Declare personal prefix
 First I want to declare my personal prefix map
 #+begin_src elisp

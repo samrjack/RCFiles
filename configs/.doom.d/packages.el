@@ -4,9 +4,11 @@
 (package! dracula-theme)
 (package! theme-magic)
 
-(package! dired-sidebar)
-(package! dired+)
-(package! dired-subtree)
+(package! discover-my-major)
+
+(package! marginalia)
+
+(package! embark)
 
 (package! dired-sidebar)
 
@@ -14,11 +16,21 @@
 (package! ztree)
 (package! dir-treeview)
 
+(package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
+
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el")))
+
+(package! project-rootfile)
+
+(package! zoom-window)
+
+(unpin! tree-sitter-langs)
+
 (package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 
 (package! origami)
-
-(package! zoom-window)
 
 (package! academic-phrases)
 
@@ -28,28 +40,15 @@
 
 (package! logos)
 
+(package! encrypt-region)
+
 (package! rg)
 
 (package! bang :recipe (:host github :repo "Arian-D/bang.el"))
 
-(package! discover-my-major)
-
-(package! marginalia)
-
-(package! embark)
-
-;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
-(package! vlf :recipe (:host github :repo "m00natic/vlfi"))
-
-(package! info-colors)
-
-(package! ess-view)
-
 (package! blamer)
 
 (package! diff-ansi)
-
-(package! encrypt-region)
 
 (package! elcord)
 
@@ -106,13 +105,9 @@
 
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
 
-(unpin! tree-sitter-langs)
-
 ;; e-reader
 (package! calibredb)
 (package! nov)
-
-(package! project-rootfile)
 
 (package! scad-mode)
 
@@ -134,6 +129,8 @@
 (package! systemd)
 
 (package! company-tabnine)
+
+(package! ess-view)
 
 ;; Fun stuff
 (package! xkcd)

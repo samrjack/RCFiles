@@ -1,80 +1,17 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(setq user-full-name "Samuel Jackson"
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
+
 (defun local/chinese-text-support ()
   "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
   (interactive)
   (variable-pitch-mode))
 
-(setq user-full-name "Samuel Jackson"
-      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
-
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
 
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
-
-(setq ns-function-modifier 'hyper)
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
-;; Let the undo buffer use up to 100Mb
-(setq undo-limit 100000000)
-
-;; Resize all windows when a new one comes in so they have
-;; equal space.
-(setq-default window-combination-resize t
-;; changes the cursor to be the size of a gliph in the buffer.
-              x-stretch-cursor t)
-
-;; (setq-default left-margin-width 1)
-;; (set-window-buffer nil (current-buffer))
-
-;; Some paste related settings.
-(setq save-interprogram-paste-before-kill t
-      select-enable-clipboard nil)
-
-(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
-  "Saves the characters in motion into they system clipboard through the '+' register"
-  :move-point nil
-  :repeat nil
-  (interactive "<R><x><y>")
-  (evil-yank beg end type ?+ handler))
-
-(evil-define-command evil-paste-from-clipboard
-  (count &optional _ handler)
-  "Pastes the latest yanked text behind point.
-The return value is the yanked text."
-  :suppress-operator t
-  (interactive "*P<x>")
-  (evil-paste-before count ?+ handler))
-
-(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
-      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
-
-(setq scroll-margin 2)
-
-(map! :leader
-      :desc "Previous mark location"
-      :n "P" #'better-jumper-jump-backwards)
-
-(setq initial-major-mode #'lisp-interaction-mode)
-
-(setq initial-scratch-message "\
-;; Welcome to the scratch buffer.
-
-")
-
-(defun local/dired-turn-off-file-info ()
-  "Turns off the file info in dired mode"
-  (interactive)
-  (dired-hide-details-mode t))
-(add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
-
-(setq whitespace-style '(trailing tabs tab-mark))
-
-(setq-default line-spacing 0.15)
 
 (map! :leader
       :desc "debug on error"
@@ -82,10 +19,73 @@ The return value is the yanked text."
       :desc "debug on quit"
       "t D" #'toggle-debug-on-quit)
 
-(setq fill-column 110)
+(setq display-time-day-and-date t)
+(display-time-mode 1)
 
-(after! projectile
-  (setq projectile-track-known-projects-automatically nil))
+(use-package! battery :config
+
+    (defun local/battery-p ()
+        "returns t if a battery is present for the system and nil if one is not."
+        (and battery-status-function
+             battery-echo-area-format
+             (string-match-p "^Power N/A"
+                             (battery-format
+                                     battery-echo-area-format
+                                     (funcall battery-status-function)))
+             t))
+
+    (unless (local/battery-p) (display-battery-mode 1))
+
+)
+
+(defun local/doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8,
+so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (if (and
+                       ; Checking for UTF-8
+                       (memq
+                        (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                        '(coding-category-utf-8))
+                       ; Checking for LF line ending
+                       (not
+                        (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t nil)))
+(add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
+
+(setq ns-function-modifier 'hyper)
+
+(map! :n "g /"   #'which-key-show-top-level
+      :n "g C-/" #'which-key-show-full-major-mode
+      :n "g ?"   #'which-key-show-full-major-mode
+      :n "g M-/" #'which-key-show-minor-mode-keymap)
+(setq which-key-idle-delay 0.5)
+
+(marginalia-mode)
+
+(map! :map help-map
+      "b B" 'describe-bindings)
+
+(setq evil-want-fine-undo t)
+
+; Remove default snipe mode
+(remove-hook! (doom-first-input) 'evil-snipe-mode)
+; There can be problems between snipe mode and magit mode.
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
+
+(defun local/toggle-and-activate-evil-snipe-mode ()
+  "Toggles evil-snipe-mode on and off then activates the
+mode map since otherwise it requires forcing the normal mode state to be activated."
+  (interactive)
+  (evil-snipe-local-mode)
+  (evil-force-normal-state))
+
+(map! :leader
+      :desc "Evil snipe mode"
+      "t S" #'local/toggle-and-activate-evil-snipe-mode)
 
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
 (map! :n "M-n" #'treemacs)
@@ -132,6 +132,22 @@ The return value is the yanked text."
 
 ))
 
+(setq initial-major-mode #'lisp-interaction-mode)
+
+(setq initial-scratch-message "\
+;; Welcome to the scratch buffer.
+
+")
+
+(defun local/dired-turn-off-file-info ()
+  "Turns off the file info in dired mode"
+  (interactive)
+  (dired-hide-details-mode t))
+(add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
+
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+
 (setq persp-sort 'created)
 
 (setq tab-bar-show t)
@@ -150,6 +166,74 @@ The return value is the yanked text."
 (which-key-add-key-based-replacements "C-x t" "tabs")
 
 (map! :leader :desc "Tabs" "T" tab-prefix-map)
+
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
+
+;; Resize all windows when a new one comes in so they have
+;; equal space.
+(setq-default window-combination-resize t
+;; changes the cursor to be the size of a gliph in the buffer.
+              x-stretch-cursor t)
+
+;; (setq-default left-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
+
+(setq zoom-window-use-persp t)
+(setq zoom-window-mode-line-color "DarkGreen")
+(add-hook 'doom-load-theme-hook #'zoom-window-setup)
+(zoom-window-setup)
+
+(map! :leader
+      :desc "Zoom window"
+      "z" #'zoom-window-zoom)
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
+
+(setq whitespace-style '(trailing tabs tab-mark))
+
+(setq-default line-spacing 0.15)
+
+(after! tree-sitter
+  (defvar local/tree-sitter-map (make-sparse-keymap))
+  (map! :map local/tree-sitter-map
+        :desc "Debug mode"
+        "d" #'tree-sitter-debug-mode
+        :desc "TS folding"
+        "f" #'ts-fold-mode
+        :desc "Folding indicators"
+        "i" #'ts-fold-indicators-mode
+        :desc "Query builder"
+        "q" #'tree-sitter-query-builder
+        :desc "Highlight mode"
+        "h" #'tree-sitter-hl-mode)
+
+  (map! :map doom-leader-code-map
+        :desc "Tree-sitter"
+        "T" local/tree-sitter-map))
+
+(after! lsp-mode
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun local/add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" local/lsp-mode-keymap
+          "L" lsp-mode-map))
+
+  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+
+(setq lsp-go-build-flags ["-tags=integration"])
 
 (after! tree-sitter (global-ts-fold-indicators-mode 1))
 
@@ -311,14 +395,10 @@ I find this order matches how I want folds to work"
                       it
                       #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
 
-(setq zoom-window-use-persp t)
-(setq zoom-window-mode-line-color "DarkGreen")
-(add-hook 'doom-load-theme-hook #'zoom-window-setup)
-(zoom-window-setup)
+(setq fill-column 110)
 
-(map! :leader
-      :desc "Zoom window"
-      "z" #'zoom-window-zoom)
+;; Let the undo buffer use up to 100Mb
+(setq undo-limit 100000000)
 
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
@@ -347,60 +427,49 @@ I find this order matches how I want folds to work"
 ;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! (doom-first-buffer) #'global-flycheck-mode)
 
+;; Some paste related settings.
+(setq save-interprogram-paste-before-kill t
+      select-enable-clipboard nil)
+
+(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
+  "Saves the characters in motion into they system clipboard through the '+' register"
+  :move-point nil
+  :repeat nil
+  (interactive "<R><x><y>")
+  (evil-yank beg end type ?+ handler))
+
+(evil-define-command evil-paste-from-clipboard
+  (count &optional _ handler)
+  "Pastes the latest yanked text behind point.
+The return value is the yanked text."
+  :suppress-operator t
+  (interactive "*P<x>")
+  (evil-paste-before count ?+ handler))
+
+(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
+      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
+
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
+
+(setq scroll-margin 2)
 
 (map! :leader
       :desc "Centered cursor"
       "t C" #'centered-cursor-mode)
+
+(map! :leader
+      :desc "Previous mark location"
+      :n "P" #'better-jumper-jump-backwards)
+
+(push 'auth-sources (file-name-concat "~" ".gnupg" "authinfo.gpg") (file-name-concat "~" ".authinfo.gpg"))
+(setq auth-source-cache-expiry nil) ; default is 7200 (2h)
 
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
 
 (with-eval-after-load 'rg
   (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
-
-(map! :n "g /"   #'which-key-show-top-level
-      :n "g C-/" #'which-key-show-full-major-mode
-      :n "g ?"   #'which-key-show-full-major-mode
-      :n "g M-/" #'which-key-show-minor-mode-keymap)
-(setq which-key-idle-delay 0.5)
-
-(marginalia-mode)
-
-(map! :map help-map
-
-      "b B" 'describe-bindings)
-
-;; Make undo revert smaller sections of text instead of all text
-;; added while in insert mode.
-(setq evil-want-fine-undo t)
-
-; Remove default snipe mode
-(remove-hook! (doom-first-input) 'evil-snipe-mode)
-; There can be problems between snipe mode and magit mode.
-(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-
-(setq evil-snipe-scope 'whole-visible
-      evil-snipe-repeat-scope 'whole-visible)
-
-(defun local/toggle-and-activate-evil-snipe-mode ()
-  "Toggles evil-snipe-mode on and off then activates the
-mode map since otherwise it requires forcing the normal mode state to be activated."
-  (interactive)
-  (evil-snipe-local-mode)
-  (evil-force-normal-state))
-
-(map! :leader
-      :desc "Evil snipe mode"
-      "t S" #'local/toggle-and-activate-evil-snipe-mode)
-
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
-
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-(add-hook 'info-selection-hook 'info-colors-fontify-node)
 
 (use-package blamer
   :defer 20
@@ -503,50 +572,10 @@ as `narrow-to-page' or a package like logos to see paged results."
   (setq-local page-delimiter eshell-prompt-regexp))
 (add-hook 'eshell-mode-hook #'local/set-prompt-as-page-delimiter)
 
-;; Add useful data to the mode line.
-(setq display-time-day-and-date t)
-(display-time-mode 1)
-
-(use-package! battery :config
-
-    (defun local/battery-p ()
-        "returns t if a battery is present for the system and nil if one is not."
-        (and battery-status-function
-             battery-echo-area-format
-             (string-match-p "^Power N/A"
-                             (battery-format
-                                     battery-echo-area-format
-                                     (funcall battery-status-function)))
-             t))
-
-    (unless (local/battery-p) (display-battery-mode 1))
-
-)
-
-(defun local/doom-modeline-conditional-buffer-encoding ()
-  "We expect the encoding to be LF UTF-8,
-so only show the modeline when this is not the case"
-  (setq-local doom-modeline-buffer-encoding
-              (if (and
-                       ; Checking for UTF-8
-                       (memq
-                        (plist-get (coding-system-plist buffer-file-coding-system) :category)
-                        '(coding-category-utf-8))
-                       ; Checking for LF line ending
-                       (not
-                        (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
-                t nil)))
-(add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
-
-(setq web-mode-script-padding standard-indent)
-(setq web-mode-style-padding standard-indent)
-(setq web-mode-block-padding standard-indent)
-(setq web-mode-part-padding standard-indent)
-
 (setq org-directory (file-name-concat "~" "org"))
 ;; (setq org-work-directory "~/work-org")
 (setq org-work-directory (file-name-concat org-directory "work"))
-(setq org-archive-location "archive/%s_archive::")
+(setq org-archive-location (file-name-concat "archive" "%s_archive::"))
 
 ;; Use keybinding g b to "go back" to previous location when a link is followed.
 ;; Use keybinding g m to "go mark" the current location so it can be returned to later.
@@ -802,45 +831,6 @@ if no org extension is given then it will be automatically appended."
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
-(after! tree-sitter
-  (defvar local/tree-sitter-map (make-sparse-keymap))
-  (map! :map local/tree-sitter-map
-        :desc "Debug mode"
-        "d" #'tree-sitter-debug-mode
-        :desc "TS folding"
-        "f" #'ts-fold-mode
-        :desc "Folding indicators"
-        "i" #'ts-fold-indicators-mode
-        :desc "Query builder"
-        "q" #'tree-sitter-query-builder
-        :desc "Highlight mode"
-        "h" #'tree-sitter-hl-mode)
-
-  (map! :map doom-leader-code-map
-        :desc "Tree-sitter"
-        "T" local/tree-sitter-map))
-
-(after! lsp-mode
-  (defvar local/lsp-mode-keymap (make-sparse-keymap))
-  (map! :map local/lsp-mode-keymap
-        "d" #'lsp-find-definition
-        "i" #'lsp-find-implementation
-        "r" #'lsp-find-references
-        "R" #'lsp-rename
-        "t" #'lsp-find-type-definition)
-
-  (defun local/add-lsp-keymaps ()
-    "Adds prefix keybindings for lsp keymaps."
-    (interactive)
-    (map! :leader
-          :desc "LSP"
-          "l" local/lsp-mode-keymap
-          "L" lsp-mode-map))
-
-  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
-
-(setq lsp-go-build-flags ["-tags=integration"])
-
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config
@@ -891,6 +881,11 @@ if no org extension is given then it will be automatically appended."
   (add-hook 'before-save-hook #'gofmt-before-save))
 
 (add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
+
+(setq web-mode-script-padding standard-indent)
+(setq web-mode-style-padding standard-indent)
+(setq web-mode-block-padding standard-indent)
+(setq web-mode-part-padding standard-indent)
 
 (defvar personal-functions-map (make-sparse-keymap))
 
