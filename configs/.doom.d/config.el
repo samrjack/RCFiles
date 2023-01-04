@@ -53,6 +53,10 @@ so only show the modeline when this is not the case"
                 t nil)))
 (add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
 
+(push (file-name-concat "~" ".authinfo.gpg") auth-sources)
+(push (file-name-concat "~" ".gnupg" "authinfo.gpg") auth-sources)
+(setq auth-source-cache-expiry nil) ; default is 7200 (2h)
+
 (setq ns-function-modifier 'hyper)
 
 (map! :n "g /"   #'which-key-show-top-level
@@ -95,7 +99,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :ng "C-n" #'treemacs)
 
 (use-package! treemacs
-  :ensure t
   :defer t
   :config
   (progn
@@ -170,8 +173,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 (after! projectile
   (setq projectile-track-known-projects-automatically nil))
 
-;; Resize all windows when a new one comes in so they have
-;; equal space.
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+
 (setq-default window-combination-resize t
 ;; changes the cursor to be the size of a gliph in the buffer.
               x-stretch-cursor t)
@@ -213,27 +217,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
   (map! :map doom-leader-code-map
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
-
-(after! lsp-mode
-  (defvar local/lsp-mode-keymap (make-sparse-keymap))
-  (map! :map local/lsp-mode-keymap
-        "d" #'lsp-find-definition
-        "i" #'lsp-find-implementation
-        "r" #'lsp-find-references
-        "R" #'lsp-rename
-        "t" #'lsp-find-type-definition)
-
-  (defun local/add-lsp-keymaps ()
-    "Adds prefix keybindings for lsp keymaps."
-    (interactive)
-    (map! :leader
-          :desc "LSP"
-          "l" local/lsp-mode-keymap
-          "L" lsp-mode-map))
-
-  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
-
-(setq lsp-go-build-flags ["-tags=integration"])
 
 (after! tree-sitter (global-ts-fold-indicators-mode 1))
 
@@ -462,14 +445,32 @@ The return value is the yanked text."
       :desc "Previous mark location"
       :n "P" #'better-jumper-jump-backwards)
 
-(push 'auth-sources (file-name-concat "~" ".gnupg" "authinfo.gpg") (file-name-concat "~" ".authinfo.gpg"))
-(setq auth-source-cache-expiry nil) ; default is 7200 (2h)
-
 ;; Make searches case sensitive
 (setq-default case-fold-search nil)
 
 (with-eval-after-load 'rg
   (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
+
+(after! lsp-mode
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun local/add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" local/lsp-mode-keymap
+          "L" lsp-mode-map))
+
+  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+
+(setq lsp-go-build-flags ["-tags=integration"])
 
 (use-package blamer
   :defer 20

@@ -75,8 +75,6 @@
 
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 
-(package! guix)
-
 (package! org-reverse-datetree)
 ;(package! ox-gfm) ; Causing problems with pandoc at the moment.
 (package! org-ref)
@@ -131,6 +129,8 @@
 (package! company-tabnine)
 
 (package! ess-view)
+
+(package! guix)
 
 ;; Fun stuff
 (package! xkcd)

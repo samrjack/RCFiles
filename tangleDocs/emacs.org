@@ -6,7 +6,7 @@
 
 Welcome to a semi-clean though certainly flawed emacs config. I hope you can find what you're looking for. Feel free to reach out if you have any questions or recommendations!
 
-Unlike other literate configs, this one is not meant to be compiled at start time. This gets tangled together whenever it is saved and then
+Unlike other literate configs, this one is not meant to be compiled at start time. This gets tangled together whenever it is saved and then can be compiled further using ~doom sync~ or ~SPC h r r~.
 
 * Table of contents :quote:toc_9:
 #+BEGIN_QUOTE
@@ -72,7 +72,8 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#projectile][Projectile]]
     - [[#project-other][Project (other)]]
   - [[#windows][Windows]]
-    - [[#windows-1][Windows]]
+    - [[#window-splitting][Window splitting]]
+    - [[#resizing-windows][Resizing windows]]
     - [[#window-zooming][Window zooming]]
   - [[#buffers][Buffers]]
     - [[#buffer-display][Buffer display]]
@@ -752,7 +753,8 @@ so only show the modeline when this is not the case"
 *** Auth settings
 Auth is used for a couple of things. On MacOS, this can pull from the macos-keychain, but elsewhere  I'd like the credentials to be default locations.
 #+begin_src emacs-lisp
-(push 'auth-sources (file-name-concat "~" ".gnupg" "authinfo.gpg") (file-name-concat "~" ".authinfo.gpg"))
+(push (file-name-concat "~" ".authinfo.gpg") auth-sources)
+(push (file-name-concat "~" ".gnupg" "authinfo.gpg") auth-sources)
 (setq auth-source-cache-expiry nil) ; default is 7200 (2h)
 #+end_src
 
@@ -885,7 +887,6 @@ Although treemacs can be set up as a module in doom, I find the default settings
 First set up the package configuration so everything else becomes part of the config step.
 #+begin_src emacs-lisp
 (use-package! treemacs
-  :ensure t
   :defer t
   :config
   (progn
@@ -1073,7 +1074,14 @@ The first thing to add is the ability to find the project root more easily. This
 
 ** Windows
 This section is about how windows get moved around and resized.
-*** Windows
+*** Window splitting
+When splitting a window, especially when specifying a file to split into, I want the new file to be on the right, not the left.
+#+begin_src emacs-lisp
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+#+end_src
+
+*** Resizing windows
 Resize all windows when a new one comes in so they have equal space.
 #+begin_src emacs-lisp
 (setq-default window-combination-resize t
