@@ -127,6 +127,8 @@
 
 (package! vimrc-mode)
 
+(package! sed-mode)
+
 (package! graphviz-dot-mode)
 
 (package! systemd)

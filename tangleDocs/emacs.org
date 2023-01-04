@@ -2270,6 +2270,12 @@ Then I just add it to my javascript mode.
 (package! vimrc-mode)
 #+end_src
 
+*** Sed
+I don't work with sed scripts very often, but when I do it's best to have help.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! sed-mode)
+#+end_src
+
 *** Graphviz
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! graphviz-dot-mode)
