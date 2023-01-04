@@ -329,81 +329,93 @@ Modules in this category provide sane defaults or improve your ability to config
 * Configuration
 ** Documentation
 *** Macro documentation
-#+begin_src emacs-lisp :tangle no
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-#+end_src
+This documentation is pulled directly from the doom initial configs.
+
+Here are some additional functions/macros that could help you configure Doom:
+
+- ~load!~ for loading external *.el files relative to this one
+- ~use-package!~ for configuring packages
+- ~after!~ for running code after a package has loaded
+- ~add-load-path!~ for adding directories to the ~load-path~, relative to
+  this file. Emacs searches the ~load-path~ when you load packages with
+  ~require~ or ~use-package~.
+- ~map!~ for binding new keys
+
+To get information about any of these functions/macros, move the cursor over
+the highlighted symbol at press ~K~ (non-evil users must press ~C-c c k~).
+This will open documentation for it, including demos of how they are used.
+
+You can also try ~gd~ (or ~C-c c d~) to jump to their definition and see how
+they are implemented.
 
 *** Packages documentation
+This documentation is pulled directly from the doom initial configs.
+
+To install a package with Doom you must declare them here and run ~doom sync~
+on the command line, then restart Emacs for the changes to take effect -- or
+use ~M-x doom/reload~.
+
+To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 #+begin_src emacs-lisp :tangle no
-;; To install a package with Doom you must declare them here and run 'doom sync'
-;; on the command line, then restart Emacs for the changes to take effect -- or
-;; use 'M-x doom/reload'.
-
-;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
-;(package! some-package)
-
-;; To install a package directly from a remote git repo, you must specify a
-;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
-;; https://github.com/raxod502/straight.el#the-recipe-format
-;(package! another-package
-;  :recipe (:host github :repo "username/repo"))
-
-;; If the package you are trying to install does not contain a PACKAGENAME.el
-;; file, or is located in a subdirectory of the repo, you'll need to specify
-;; `:files' in the `:recipe':
-;(package! this-package
-;  :recipe (:host github :repo "username/repo"
-;           :files ("some-file.el" "src/lisp/*.el")))
-
-;; If you'd like to disable a package included with Doom, you can do so here
-;; with the `:disable' property:
-;(package! builtin-package :disable t)
-
-;; You can override the recipe of a built in package without having to specify
-;; all the properties for `:recipe'. These will inherit the rest of its recipe
-;; from Doom or MELPA/ELPA/Emacsmirror:
-;(package! builtin-package :recipe (:nonrecursive t))
-;(package! builtin-package-2 :recipe (:repo "myfork/package"))
-
-;; Specify a `:branch' to install a package from a particular branch or tag.
-;; This is required for some packages whose default branch isn't 'master' (which
-;; our package manager can't deal with; see raxod502/straight.el#279)
-;(package! builtin-package :recipe (:branch "develop"))
-
-;; Use `:pin' to specify a particular commit to install.
-;(package! builtin-package :pin "1a2b3c4d5e")
-
-;; Doom's packages are pinned to a specific commit and updated from release to
-;; release. The `unpin!' macro allows you to unpin single packages...
-;(unpin! pinned-package)
-;; ...or multiple packages
-;(unpin! pinned-package another-pinned-package)
-;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
-;(unpin! t)
-
+(package! some-package)
 #+end_src
 
-** Personal Identification
-#+begin_src emacs-lisp
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Samuel Jackson"
-      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
+To install a package directly from a remote git repo, you must specify a
+~:recipe~. You'll find documentation on what ~:recipe~ accepts on the [[https://github.com/raxod502/straight.el#the-recipe-format][straight docs]].
+#+begin_src emacs-lisp :tangle no
+(package! another-package
+  :recipe (:host github :repo "username/repo"))
+#+end_src
+
+If the package you are trying to install does not contain a PACKAGENAME.el
+file, or is located in a sub-directory of the repo, you'll need to specify
+~:files~ in the ~:recipe~:
+#+begin_src emacs-lisp :tangle no
+(package! this-package
+  :recipe (:host github :repo "username/repo"
+           :files ("some-file.el" "src/lisp/*.el")))
+#+end_src
+
+If you'd like to disable a package included with Doom, you can do so here
+with the ~:disable~ property:
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :disable t)
+#+end_src
+
+You can override the recipe of a built in package without having to specify
+all the properties for ~:recipe~. These will inherit the rest of its recipe
+from Doom or MELPA/ELPA/Emacsmirror:
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :recipe (:nonrecursive t))
+(package! builtin-package-2 :recipe (:repo "myfork/package"))
+#+end_src
+
+Specify a ~:branch~ to install a package from a particular branch or tag.
+This is required for some packages whose default branch isn't =master= (which
+our package manager can't deal with; see raxod502/straight.el#279)
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :recipe (:branch "develop"))
+#+end_src
+
+Use ~:pin~ to specify a particular commit to install.
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :pin "1a2b3c4d5e")
+#+end_src
+
+Doom's packages are pinned to a specific commit and updated from release to
+release. The ~unpin!~ macro allows you to unpin single packages...
+#+begin_src emacs-lisp :tangle no
+(unpin! pinned-package)
+#+end_src
+
+...or multiple packages
+#+begin_src emacs-lisp :tangle no
+(unpin! pinned-package another-pinned-package)
+#+end_src
+
+...Or *all* packages (*NOT RECOMMENDED*; will likely break things)
+#+begin_src emacs-lisp :tangle no
+(unpin! t)
 #+end_src
 
 ** Fonts and language
@@ -416,18 +428,26 @@ In order for Chinese text to be displayed correctly, some modes needs to be turn
   (variable-pitch-mode))
 #+end_src
 
-** Basic Emacs settings
 *** Fonts
 Doom exposes five (optional) variables for controlling fonts in Doom. Here are the three important ones:
 
-+ `doom-font'
-+ `doom-variable-pitch-font'
-+ `doom-big-font' -- used for `doom-big-font-mode'; use this for presentations or streaming.
++ ~doom-font~
++ ~doom-variable-pitch-font~
++ ~doom-big-font~ -- used for ~doom-big-font-mode~; use this for presentations or streaming.
 
 They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font string. You generally only need these two:
 #+begin_src emacs-lisp :tangle no
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+#+end_src
+
+** Basic Emacs settings
+Settings for the general emacs editor and experience. These packages don't affect anything that is package or use case dependent, but instead set up the emacs program as desired.
+*** Personal Identification
+Some functionality uses this to identify you, e.g. GPG configuration, email clients, file templates and snippets.
+#+begin_src emacs-lisp
+(setq user-full-name "Samuel Jackson"
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
 #+end_src
 
 *** Custom settings file
@@ -438,7 +458,6 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font 
 
 *** Theming
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-;; Themes
 (package! dracula-theme)
 (package! theme-magic)
 #+end_src
@@ -448,6 +467,76 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
 #+end_src
 
+*** Debugging
+I've found it necessary to access the debugger more often so here's an easy way to turn it on and off.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "debug on error"
+      "t d" #'toggle-debug-on-error
+      :desc "debug on quit"
+      "t D" #'toggle-debug-on-quit)
+#+end_src
+*** Mode line
+Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
+
+**** Date and time
+Add useful data to the mode line.
+#+begin_src emacs-lisp
+(setq display-time-day-and-date t)
+(display-time-mode 1)
+#+end_src
+
+**** Battery
+For the battery, I don't want it to appear in the the mode line if there is no battery present.
+
+Since the following functions require the battery package, I need to wrap it in ~use-package~ to make sure all the definitions are loaded.
+#+begin_src emacs-lisp
+(use-package! battery :config
+#+end_src
+
+Sadly, there are no default functions for finding if a battery is present so I'll start by writing my own based off of the ~battery~ function in [[https://github.com/emacs-mirror/emacs/blob/3af9e84ff59811734dcbb5d55e04e1fdb7051e77/lisp/battery.el#L219][battery.el]].
+#+begin_src emacs-lisp
+    (defun local/battery-p ()
+        "returns t if a battery is present for the system and nil if one is not."
+        (and battery-status-function
+             battery-echo-area-format
+             (string-match-p "^Power N/A"
+                             (battery-format
+                                     battery-echo-area-format
+                                     (funcall battery-status-function)))
+             t))
+#+end_src
+
+If a battery source is detected, then show the batter level in the mode bar.
+#+begin_src emacs-lisp
+    (unless (local/battery-p) (display-battery-mode 1))
+#+end_src
+
+Finally, close the battery package wrapper.
+#+begin_src emacs-lisp
+)
+#+end_src
+
+**** Encoding format
+#+begin_src emacs-lisp
+(defun local/doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8,
+so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (if (and
+                       ; Checking for UTF-8
+                       (memq
+                        (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                        '(coding-category-utf-8))
+                       ; Checking for LF line ending
+                       (not
+                        (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t nil)))
+(add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
+#+end_src
+
+** Key-chord setup
+Key-chords are so important in Emacs and many will be set through out the rest of this config. Here I am setting up key chords to function the way I want and initializing any key-chord related packages.
 *** Modifier keys mapping
 Emacs has 5 different modifier keys that it uses for key cords. Listed in order from least "powerful" to most "powerful", they are:
 - Shift
@@ -463,282 +552,88 @@ For me personally, the "super" key should be bound to Windows' windows key and M
 (setq ns-function-modifier 'hyper)
 #+end_src
 
-*** Line numbering
-#+begin_src emacs-lisp
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-#+end_src
-
-*** Undo
-#+begin_src emacs-lisp
-;; Let the undo buffer use up to 100Mb
-(setq undo-limit 100000000)
-#+end_src
-
-*** Windows
-#+begin_src emacs-lisp
-;; Resize all windows when a new one comes in so they have
-;; equal space.
-(setq-default window-combination-resize t
-;; changes the cursor to be the size of a gliph in the buffer.
-              x-stretch-cursor t)
-
-;; (setq-default left-margin-width 1)
-;; (set-window-buffer nil (current-buffer))
-#+end_src
-
-*** Clipboard
-Prevents system clipboard from being accidentally overwritten. Must now write to register "+ to write to system clipboard.
-#+begin_src emacs-lisp
-;; Some paste related settings.
-(setq save-interprogram-paste-before-kill t
-      select-enable-clipboard nil)
-#+end_src
-
-In order to provide copy and paste functionality directly from the keyboard, I need to capture the inputs and make functions that force the register that corresponds with the clipboard to be used (the + register).
-
-First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. In order to get the ascii number of a character, we simply need to put a '?' before it.
-#+begin_src emacs-lisp
-(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
-  "Saves the characters in motion into they system clipboard through the '+' register"
-  :move-point nil
-  :repeat nil
-  (interactive "<R><x><y>")
-  (evil-yank beg end type ?+ handler))
-#+end_src
-
-And here is the paste function.
-#+begin_src emacs-lisp
-(evil-define-command evil-paste-from-clipboard
-  (count &optional _ handler)
-  "Pastes the latest yanked text behind point.
-The return value is the yanked text."
-  :suppress-operator t
-  (interactive "*P<x>")
-  (evil-paste-before count ?+ handler))
-#+end_src
-
-Finally we need to create universal keybindings to these functions so they can be called from anywhere.
-#+begin_src emacs-lisp
-(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
-      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
-#+end_src
-
-*** Cursor movement
-**** Scrolling
-Leave some space at the bottom while scrolling down so the cursor isn't hugging the bottom edge.
-#+begin_src emacs-lisp
-(setq scroll-margin 2)
-#+end_src
-
-**** TODO Returning from a jump
-After jumping to a different spot like with a search or a definition look up, I want to be able to return to where I was more easily.
-Recommend using ~C-o~ / ~M-,~ which are faster.
-
-TODO - Make this more efficient
-#+begin_src emacs-lisp
-(map! :leader
-      :desc "Previous mark location"
-      :n "P" #'better-jumper-jump-backwards)
-#+end_src
-
-*** Scratch buffer
-The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
-#+begin_src emacs-lisp
-(setq initial-major-mode #'lisp-interaction-mode)
-
-(setq initial-scratch-message "\
-;; Welcome to the scratch buffer.
-
-")
-#+end_src
-
-*** Directory navigation
-Dired has a lot of great functionality in it but a few extra packages to for support never hurt.
+*** Key discovery
+When working with key-chord shortcuts, discovery is super important. This section sets up the key-chord discovery packages to simplify the discovery process.
+**** Which key
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! dired-sidebar)
-(package! dired+)
-(package! dired-subtree)
+(package! discover-my-major)
 #+end_src
 
-Within dired, the file info is a much more than I really need most of the time. I'm going to turn it off by default and then I can always turn it back on later if needed.
 #+begin_src emacs-lisp
-(defun local/dired-turn-off-file-info ()
-  "Turns off the file info in dired mode"
+(map! :n "g /"   #'which-key-show-top-level
+      :n "g C-/" #'which-key-show-full-major-mode
+      :n "g ?"   #'which-key-show-full-major-mode
+      :n "g M-/" #'which-key-show-minor-mode-keymap)
+(setq which-key-idle-delay 0.5)
+#+end_src
+
+**** Embark
+Embark is a package that allows you to search through key bindings and is a good supplement to which-key.
+
+In order to use embark, we first need to add a dependency: marginalia.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! marginalia)
+#+end_src
+
+Then it just needs to be turned on. Since marginalia is fairly light, this (hopefully) shouldn't impact startup times.
+#+begin_src emacs-lisp
+(marginalia-mode)
+#+end_src
+
+Then for the main package itself, embark.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! embark)
+#+end_src
+
+Once embark is installed, there are some key-bindings that should be set. The first of which is replacing the describe bindings function because that one isn't the most helpful. However, I want to keep it around since once in a while it may prove useful.
+#+begin_src emacs-lisp
+(map! :map help-map
+      "b B" 'describe-bindings)
+#+end_src
+
+*** Evil mode
+I need those vim bindings... They're too strongly ingrained!
+**** Evil settings
+#+begin_src emacs-lisp
+;; Make undo revert smaller sections of text instead of all text
+;; added while in insert mode.
+(setq evil-want-fine-undo t)
+#+end_src
+
+**** Evil snipe mode
+***** Snipe mode off by default
+I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
+#+begin_src emacs-lisp
+; Remove default snipe mode
+(remove-hook! (doom-first-input) 'evil-snipe-mode)
+; There can be problems between snipe mode and magit mode.
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+#+end_src
+
+***** Settings
+Some settings for when snipe mode is on.
+#+begin_src emacs-lisp
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
+#+end_src
+
+***** New keybinding
+This allows you to toggle evil snipe mode on and off (though it's still off by default)
+#+begin_src emacs-lisp
+(defun local/toggle-and-activate-evil-snipe-mode ()
+  "Toggles evil-snipe-mode on and off then activates the
+mode map since otherwise it requires forcing the normal mode state to be activated."
   (interactive)
-  (dired-hide-details-mode t))
-(add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
+  (evil-snipe-local-mode)
+  (evil-force-normal-state))
 
-#+end_src
-
-For showing file info in dired mode, a different keybinding can be added. However, for now, I don't really need it since it's already bound to ~)~.
-#+begin_src emacs-lisp :tangle no
-(map! :map dired-mode-map
-      :leader
-      :desc "toggle dired file info"
-      :n "t d" #'dired-hide-details-mode)
-#+end_src
-
-*** Whitespace mode
-Adds whitespace management and visualization.
-#+begin_src emacs-lisp
-(setq whitespace-style '(trailing tabs tab-mark))
-#+end_src
-
-*** Line spacing
-Spacing between lines in a buffer. I like a slight gap where the default emacs is too tight.
-#+begin_src emacs-lisp
-(setq-default line-spacing 0.15)
-#+end_src
-
-*** Debugging
-I've found it necessary to access the debugger more often so here's an easy way to turn it on and off.
-#+begin_src emacs-lisp
 (map! :leader
-      :desc "debug on error"
-      "t d" #'toggle-debug-on-error
-      :desc "debug on quit"
-      "t D" #'toggle-debug-on-quit)
-#+end_src
-*** Fill column
-The fill column used for fill-column mode should be longer than the standard. I think setting it a bit over 100 is fine.
-#+begin_src emacs-lisp
-(setq fill-column 110)
+      :desc "Evil snipe mode"
+      "t S" #'local/toggle-and-activate-evil-snipe-mode)
 #+end_src
 
-** Adding standard vim functionality
-I don't remember why I wrote this line in the first place but it seems useful for later
-#+begin_src emacs-lisp
-(defun local/smart-open-line-above ()
-  "Insert an empty line above the current line.
-Position the cursor at it's beginning, according to the current mode."
-  (interactive)
-  (move-beginning-of-line nil)
-  (newline-and-indent)
-  (forward-line -1)
-  (indent-according-to-mode))
-#+end_src
-
-*** Keybindings
-**** Fold from anywhere on line
-The standard folding capability of emacs only will fold the code at point. However, often times what is intended is to fold the code at the end of point.  Let's write that.
-
-The first thing I need to do to execute this is to be able to detect when a fold has successfully occurred. Folds are performed using overlays so I need to detect if a
-#+begin_src emacs-lisp
-(defun local/count-overlays-on-line ()
-  "Count the number of overlays that are present on the current line."
-  (length (overlays-in
-           (line-beginning-position)
-           (1+ (line-end-position))))) ;; Add one to line end position to make sure it includes the new line.
-#+end_src
-
-Then write a function that will first perform an action at point, but if no change to the number of overlays is detected, then perform the fold action again at the end of the line.
-This way, we can have both meanings available to us.
-#+begin_src emacs-lisp
-(defun local/execute-at-end-of-line (func)
-  "Takes in a function then executes it at the end of the current line."
-  (save-excursion (end-of-line) (funcall func)))
-
-(defun local/smart-fold (func)
-  "Performs a fold at point then at the end of the line if no new folds were detected. This way a greater number of folding situations will be detected."
-  (let ((initial-overlay-count (local/count-overlays-on-line))
-        (fold-result (funcall func)))
-    (if (= initial-overlay-count (local/count-overlays-on-line))
-        (local/execute-at-end-of-line func))
-    fold-result)) ;; If the fold succeeded, then pass the result forward
-#+end_src
-
-After the smart folding wrapper has been written, we can move on to wrapping up the current folding functions. There may be a way to more cleanly do this but just hard coding wrappers works plenty fine for now.
-#+begin_src emacs-lisp
-(defun local/evil-toggle-fold-smart ()
-  "Run evil-toggle-fold at the end of the line.
-
-It checks for folds in the following order:
- - Open at point,
- - Open at EOL
- - Close at EOL
- - Close at point
-I find this order matches how I want folds to work"
-  (interactive)
-  (let ((initial-overlay-count (local/count-overlays-on-line)))
-    (local/smart-fold #'evil-open-fold)
-    (when (= initial-overlay-count (local/count-overlays-on-line))
-      (local/execute-at-end-of-line #'evil-close-fold)
-      (when (= initial-overlay-count (local/count-overlays-on-line))
-          (evil-close-fold)))))
-
-(defun local/evil-open-fold-smart ()
-  "Run evil-open-fold at the end of the line."
-  (interactive)
-  (local/smart-fold #'evil-open-fold))
-
-(defun local/evil-open-fold-rec-smart ()
-  "Run evil-open-fold-rec at the end of the line."
-  (interactive)
-  (local/smart-fold #'evil-open-fold-rec))
-
-(defun local/evil-close-fold-smart ()
-  "Run evil-close-fold at the end of the line."
-  (interactive)
-  (local/smart-fold #'evil-close-fold))
-#+end_src
-
-Finally remap the evil fold keybindings that need to use the above function.
-#+begin_src emacs-lisp
-(map! :desc "toggle fold"
-      :nm "za" #'local/evil-toggle-fold-smart
-      :desc "close fold"
-      :nm "zc" #'local/evil-close-fold-smart
-      :desc "open fold"
-      :nm "zo" #'local/evil-open-fold-smart
-      :desc "open fold rec"
-      :nm "zO" #'local/evil-open-fold-rec-smart)
-#+end_src
-
-If something goes wrong with the new folding behavior, here's the standard definition. This can be turned on to get normal folding back.
-#+begin_src emacs-lisp tangle: no
-(map! :desc "toggle fold"
-      :nm "za" #'evil-toggle-fold
-      :desc "close fold"
-      :nm "zc" #'evil-close-fold
-      :desc "open fold"
-      :nm "zo" #'evil-open-fold
-      :desc "open fold rec"
-      :nm "zO" #'evil-open-fold-rec)
-#+end_src
-
-**** Tab as fold toggling
-When available, I really like to use tab as a quick way to toggle folds.
-#+begin_src emacs-lisp
-(map! :i [tab] (cmds! (and (modulep! :editor snippets)
-                            (yas-maybe-expand-abbrev-key-filter 'yas-expand))
-                       #'yas-expand
-                       (and (bound-and-true-p company-mode)
-                            (modulep! :completion company +tng))
-                       #'company-indent-or-complete-common)
-      :m [tab] (cmds! (and (modulep! :editor snippets)
-                           (evil-visual-state-p)
-                           (or (eq evil-visual-selection 'line)
-                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
-                      #'yas-insert-snippet
-                      ;; Fixes #4548: without this, this tab keybind overrides
-                      ;; mode-local ones for modes that don't have an evil
-                      ;; keybinding scheme or users who don't have :editor (evil
-                      ;; +everywhere) enabled.
-                      (or (doom-lookup-key
-                           [tab]
-                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)
-                                 (current-local-map)))
-                          (doom-lookup-key
-                           (kbd "TAB")
-                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)))
-                          (doom-lookup-key (kbd "TAB") (list (current-local-map))))
-                      it
-                      #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
-#+end_src
-
-** Managing files
+** File management and selection
+When looking for files, these packages and settings help find what I'm looking for.
 *** Sidebar file explorer
 Import a simpler sidebar package for when it's needed.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -844,13 +739,7 @@ And finally, close the config wrapping.
 ))
 #+end_src
 
-*** Projectile
-#+begin_src emacs-lisp
-(after! projectile
-  (setq projectile-track-known-projects-automatically nil))
-#+end_src
-
-*** Tree viewer
+*** File tree viewer
 This allows you to see all the recursive files in the current tree hierarchy (similar to the ~tree~ command).
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! dirtree)
@@ -858,15 +747,66 @@ This allows you to see all the recursive files in the current tree hierarchy (si
 (package! dir-treeview)
 #+end_src
 
-*** Buffer handling
-**** Perspectives
+*** Scratch buffer
+The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
+#+begin_src emacs-lisp
+(setq initial-major-mode #'lisp-interaction-mode)
+
+(setq initial-scratch-message "\
+;; Welcome to the scratch buffer.
+
+")
+#+end_src
+
+*** Directory navigation
+Dired has a lot of great functionality in it but a few extra packages to for support never hurt.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
+#+end_src
+
+Within dired, the file info is a much more than I really need most of the time. I'm going to turn it off by default and then I can always turn it back on later if needed.
+#+begin_src emacs-lisp
+(defun local/dired-turn-off-file-info ()
+  "Turns off the file info in dired mode"
+  (interactive)
+  (dired-hide-details-mode t))
+(add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
+
+#+end_src
+
+For showing file info in dired mode, a different keybinding can be added. However, for now, I don't really need it since it's already bound to ~)~.
+#+begin_src emacs-lisp :tangle no
+(map! :map dired-mode-map
+      :leader
+      :desc "toggle dired file info"
+      :n "t d" #'dired-hide-details-mode)
+#+end_src
+
+*** VLF (Very Large Files)
+VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
+(package! vlf :recipe (:host github :repo "m00natic/vlfi"))
+#+end_src
+
+Then setup the package later.
+#+begin_src emacs-lisp
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+#+end_src
+
+** Workspace management
+Workspaces control how buffers and windows get stored and grouped so that you can have several different setups all at once.
+*** Perspectives
 Currently doom emacs is using ~persp-mode~ which is a fork of ~perspective~. This section is for setting the variables that are related to those modes.
 
 #+begin_src emacs-lisp
 (setq persp-sort 'created)
 #+end_src
 
-**** Tab bar mode
+*** Tab bar mode
 A tab bar for emacs. It works quite well except it reads from global buffers instead of perspective restricted buffers so I have it turned off for now.
 #+begin_src emacs-lisp no
 (setq tab-bar-show t)
@@ -896,6 +836,34 @@ Make tab functions accessible from the doom-leader menu as well.
 (map! :leader :desc "Tabs" "T" tab-prefix-map)
 #+end_src
 
+*** Projectile
+#+begin_src emacs-lisp
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
+#+end_src
+
+*** Project (other)
+Project is the built in emacs project manager. Although I use projectile most of the time, I want project working well if ever I want to look into it more.
+
+The first thing to add is the ability to find the project root more easily. This is one of the best features of projectile.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! project-rootfile)
+#+end_src
+
+** Windows
+This section is about how windows get moved around and resized.
+*** Windows
+#+begin_src emacs-lisp
+;; Resize all windows when a new one comes in so they have
+;; equal space.
+(setq-default window-combination-resize t
+;; changes the cursor to be the size of a gliph in the buffer.
+              x-stretch-cursor t)
+
+;; (setq-default left-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
+#+end_src
+
 *** Window zooming
 One thing I really like about tmux is the ability to zoom in on windows without destroying my whole windowing setup. This package adds similar functionality to emacs.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -917,185 +885,174 @@ Then set a convenient key command to activate the zoom. Since tmux uses leader-z
       "z" #'zoom-window-zoom)
 #+end_src
 
-** General utility package settings
-These aren't file or use case specific changes but instead things that can apply over many different major modes and situations.
-*** Sub-word movement
+** Buffers
+*** Buffer display
+This section contains packages and settings that affect how the buffer is rendered and seen by the user. This includes syntax highlighting, spacing preferences, etc.
+**** Line numbering
 #+begin_src emacs-lisp
-;; Makes it so movement keys stop at camlecase sub words.
-(global-subword-mode 1)
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
 #+end_src
 
-*** Case insensitive search
-=case-fold-search= is a variable that turns case sensitivity on and off. It is set per buffer. Since I like case sensitivity, I'm setting the default value so that new buffers use case sensitive searches.
+**** Whitespace mode
+Adds whitespace management and visualization.
 #+begin_src emacs-lisp
-;; Make searches case sensitive
-(setq-default case-fold-search nil)
+(setq whitespace-style '(trailing tabs tab-mark))
 #+end_src
 
-*** Centered Cursor / Typewriter Mode
-When writing or coding, sometimes it's nice to just see everything around the cursor by keeping the cursor in the middle of the screen. This mode does just that.
+**** Line spacing
+Spacing between lines in a buffer. I like a slight gap where the default emacs is too tight.
+#+begin_src emacs-lisp
+(setq-default line-spacing 0.15)
+#+end_src
+
+**** Tree Sitter mode
+Tree sitter is a program that parses code in a tree structure for better syntax highlighting and for querying code structure.
+Documentation found [[https://emacs-tree-sitter.github.io/syntax-highlighting/queries/][here]].
+
+First I want to set all the tree-sitter packages to use the master branch.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! centered-cursor-mode)
+(unpin! tree-sitter-langs)
 #+end_src
 
-It can be turned on using a toggle option.
 #+begin_src emacs-lisp
-(map! :leader
-      :desc "Centered cursor"
-      "t C" #'centered-cursor-mode)
+(after! tree-sitter
+  (defvar local/tree-sitter-map (make-sparse-keymap))
+  (map! :map local/tree-sitter-map
+        :desc "Debug mode"
+        "d" #'tree-sitter-debug-mode
+        :desc "TS folding"
+        "f" #'ts-fold-mode
+        :desc "Folding indicators"
+        "i" #'ts-fold-indicators-mode
+        :desc "Query builder"
+        "q" #'tree-sitter-query-builder
+        :desc "Highlight mode"
+        "h" #'tree-sitter-hl-mode)
+
+  (map! :map doom-leader-code-map
+        :desc "Tree-sitter"
+        "T" local/tree-sitter-map))
 #+end_src
 
-*** Key discovery
-**** Which key
+**** LSP mode
+[[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun local/add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" local/lsp-mode-keymap
+          "L" lsp-mode-map))
+
+  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+#+end_src
+
+Some lsp servers need extra settings in place so those will be added here.
+***** Golang
+In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
+#+begin_src emacs-lisp
+(setq lsp-go-build-flags ["-tags=integration"])
+#+end_src
+
+**** Code folding
+***** TS-Fold
+One of the biggest advantages of tree sitter mode is the ability to specify folding patterns.
+
+Lets make sure the ts-fold package is installed so that we can use folding. I'm going to use my fork for now since I've changed a few things.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! discover-my-major)
+(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 #+end_src
 
+****** Setup
+Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible. Loaded after tree-sitter though since that's when it's first viable to use anyways.
 #+begin_src emacs-lisp
-(map! :n "g /"   #'which-key-show-top-level
-      :n "g C-/" #'which-key-show-full-major-mode
-      :n "g ?"   #'which-key-show-full-major-mode
-      :n "g M-/" #'which-key-show-minor-mode-keymap)
-(setq which-key-idle-delay 0.5)
+(after! tree-sitter (global-ts-fold-indicators-mode 1))
 #+end_src
 
-**** Embark
-Embark is a package that allows you to search through key bindings and is a good supplement to which-key.
-
-In order to use embark, we first need to add a dependency: marginalia.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! marginalia)
-#+end_src
-
-Then it just needs to be turned on. Since marginalia is fairly light, this (hopefully) shouldn't impact startup times.
+Here we set up the functionality that is (currently) needed to load new definitions of folding patterns. This is a bit of a hack but the way this is designed is quite confusing from an extensibility perspective.
 #+begin_src emacs-lisp
-(marginalia-mode)
+(after! ts-fold
+  (defun local/update-ts-fold-definitions (mode rules)
+    "Update the provided MODE with the new set of folding RULES.
+MODE should be a programming mode such as go-mode.
+RULES should be a list of folding rules in the format of (ts-element . folding-function)"
+    (setf (alist-get mode ts-fold-range-alist) rules)))
 #+end_src
 
-Then for the main package itself, embark.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! embark)
-#+end_src
-
-Once embark is installed, there are some key-bindings that should be set. The first of which is replacing the describe bindings function because that one isn't the most helpful. However, I want to keep it around since once in a while it may prove useful.
+Here I want to define a folding function that will only fold if there's a newline character present in the node. That way I can add folding to things like long function parameter lists without it causing all function parameter lists to be condensed. This is in setup since it can be useful in all languages.
 #+begin_src emacs-lisp
-(map! :map help-map
-      "b b" 'embark-bindings
-      "b B" 'describe-bindings)
+(defun local/ts-fold-range-multi-line-seq (node offset)
+  "Return the fold range in a sequence when the NODE exists over multiple lines."
+  (let ((beg (1+ (tsc-node-start-position node)))
+        (end (1- (tsc-node-end-position node))))
+    (if (< 1 (count-lines (1- beg) (1+ end)))
+        (ts-fold--cons-add (cons beg end) offset)
+      nil)))
 #+end_src
 
-*** Write good mode
+****** Go Folding
+I have to use golang for work but the standard golang folding capabilities is quite bad. this adds just a few more folding definitions that make the code look SOO much prettier.
 #+begin_src emacs-lisp
-(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
-(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
-(map! :leader
-      :desc "Write good mode"
-      "t W" #'writegood-mode)
+(setq local/ts-fold-parsers-go-list
+      '((block . ts-fold-range-seq)
+        ;; (comment . local/ts-fold-range-multi-line-seq)
+        (comment . ts-fold-range-c-like-comment)
+        (import_spec_list . ts-fold-range-seq)
+        (field_declaration_list . ts-fold-range-seq)
+        (parameter_list . local/ts-fold-range-multi-line-seq)
+        (literal_value . local/ts-fold-range-multi-line-seq)
+        ;; (interface_type . (ts-fold-range-seq 10 0))
+        ;; (type_declaration . (lambda (node offset) (ts-fold-range-markers node offset "[{(]" "[})]")))
+        (interface_type . (lambda (node offset) (ts-fold-range-markers node offset "{" "}")))
+        (const_declaration . (lambda (node offset) (ts-fold-range-markers node offset "(" ")")))))
+        ;; (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
 #+end_src
 
-*** Flycheck mode
+****** JS Folding
+Javascript folding already works pretty well but there are a few tweaks I'd like to make to get it to run a bit smoother.
 #+begin_src emacs-lisp
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+(setq local/ts-fold-parsers-javascript-list
+      '((object . ts-fold-range-seq)
+        (array . ts-fold-range-seq)
+        (export_clause . ts-fold-range-seq)
+        (statement_block . ts-fold-range-seq)
+        (comment . ts-fold-range-c-like-comment)))
+
+(after! ts-fold
+  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
+    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
 #+end_src
 
-*** Evil mode
-**** Evil settings
+****** Shell Folding
 #+begin_src emacs-lisp
-;; Make undo revert smaller sections of text instead of all text
-;; added while in insert mode.
-(setq evil-want-fine-undo t)
+(setq local/ts-fold-parsers-shell-list
+      '((do_group . (ts-fold-range-seq 1 -3))
+        (compound_statement . ts-fold-range-seq)
+        (expansion          . ts-fold-range-seq)
+        (comment
+         . (lambda (node offset)
+             (ts-fold-range-line-comment node offset "#")))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
 #+end_src
 
-**** Evil snipe mode
-***** Snipe mode off by default
-I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
-#+begin_src emacs-lisp
-; Remove default snipe mode
-(remove-hook! (doom-first-input) 'evil-snipe-mode)
-; There can be problems between snipe mode and magit mode.
-(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-#+end_src
-
-***** Settings
-Some settings for when snipe mode is on.
-#+begin_src emacs-lisp
-(setq evil-snipe-scope 'whole-visible
-      evil-snipe-repeat-scope 'whole-visible)
-#+end_src
-
-***** New keybinding
-This allows you to toggle evil snipe mode on and off (though it's still off by default)
-#+begin_src emacs-lisp
-(defun local/toggle-and-activate-evil-snipe-mode ()
-  "Toggles evil-snipe-mode on and off then activates the
-mode map since otherwise it requires forcing the normal mode state to be activated."
-  (interactive)
-  (evil-snipe-local-mode)
-  (evil-force-normal-state))
-
-(map! :leader
-      :desc "Evil snipe mode"
-      "t S" #'local/toggle-and-activate-evil-snipe-mode)
-#+end_src
-
-*** Snippets
-Yas-snippets are a nice package for inserting snippets into code.
-
-Turning off the trigger in field for now since it was giving me undesired behavior. Maybe when I learn to use it better then it will come back into the config.
-#+begin_src emacs-lisp :tangle no
-(setq yas-triggers-in-field t)
-#+end_src
-
-Adding my personal snippets directory.
-#+begin_src emacs-lisp
-(setq local/snippet-dir (concat doom-user-dir "snippets/"))
-(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
-#+end_src
-
-**** Academic writing
-This package provides snippets for making writing sound more academic which can be really useful when you're not sure how to make something sound professional.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! academic-phrases)
-#+end_src
-
-*** VLF (Very Large Files)
-VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
-(package! vlf :recipe (:host github :repo "m00natic/vlfi"))
-#+end_src
-
-Then setup the package later.
-#+begin_src emacs-lisp
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
-#+end_src
-
-*** Colored info
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! info-colors)
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-(add-hook 'info-selection-hook 'info-colors-fontify-node)
-#+end_src
-
-*** R data frames
-This allows emacs to handle R style data frames. This makes some data handling easier in various files.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! ess-view)
-#+end_src
-
-*** Dictionary
-#+begin_src emacs-lisp
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
-#+end_src
-
-*** Code folding
+***** Origami folding
 Origami mode has pretty good default folding for normal code blocks. See ts-fold for a good, though more specific, alternative method.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! origami)
@@ -1117,7 +1074,322 @@ origami mode in major modes where it gets annoying."
   (add-hook hook #'local/turn-off-origami))
 #+end_src
 
-*** Git
+***** Fold from anywhere on line
+The standard folding capability of emacs only will fold the code at point. However, often times what is intended is to fold the code at the end of point.  Let's write that.
+
+The first thing I need to do to execute this is to be able to detect when a fold has successfully occurred. Folds are performed using overlays so I need to detect if a
+#+begin_src emacs-lisp
+(defun local/count-overlays-on-line ()
+  "Count the number of overlays that are present on the current line."
+  (length (overlays-in
+           (line-beginning-position)
+           (1+ (line-end-position))))) ;; Add one to line end position to make sure it includes the new line.
+#+end_src
+
+Then write a function that will first perform an action at point, but if no change to the number of overlays is detected, then perform the fold action again at the end of the line.
+This way, we can have both meanings available to us.
+#+begin_src emacs-lisp
+(defun local/execute-at-end-of-line (func)
+  "Takes in a function then executes it at the end of the current line."
+  (save-excursion (end-of-line) (funcall func)))
+
+(defun local/smart-fold (func)
+  "Performs a fold at point then at the end of the line if no new folds were detected. This way a greater number of folding situations will be detected."
+  (let ((initial-overlay-count (local/count-overlays-on-line))
+        (fold-result (funcall func)))
+    (if (= initial-overlay-count (local/count-overlays-on-line))
+        (local/execute-at-end-of-line func))
+    fold-result)) ;; If the fold succeeded, then pass the result forward
+#+end_src
+
+After the smart folding wrapper has been written, we can move on to wrapping up the current folding functions. There may be a way to more cleanly do this but just hard coding wrappers works plenty fine for now.
+#+begin_src emacs-lisp
+(defun local/evil-toggle-fold-smart ()
+  "Run evil-toggle-fold at the end of the line.
+
+It checks for folds in the following order:
+ - Open at point,
+ - Open at EOL
+ - Close at EOL
+ - Close at point
+I find this order matches how I want folds to work"
+  (interactive)
+  (let ((initial-overlay-count (local/count-overlays-on-line)))
+    (local/smart-fold #'evil-open-fold)
+    (when (= initial-overlay-count (local/count-overlays-on-line))
+      (local/execute-at-end-of-line #'evil-close-fold)
+      (when (= initial-overlay-count (local/count-overlays-on-line))
+          (evil-close-fold)))))
+
+(defun local/evil-open-fold-smart ()
+  "Run evil-open-fold at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-open-fold))
+
+(defun local/evil-open-fold-rec-smart ()
+  "Run evil-open-fold-rec at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-open-fold-rec))
+
+(defun local/evil-close-fold-smart ()
+  "Run evil-close-fold at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-close-fold))
+#+end_src
+
+Finally remap the evil fold keybindings that need to use the above function.
+#+begin_src emacs-lisp
+(map! :desc "toggle fold"
+      :nm "za" #'local/evil-toggle-fold-smart
+      :desc "close fold"
+      :nm "zc" #'local/evil-close-fold-smart
+      :desc "open fold"
+      :nm "zo" #'local/evil-open-fold-smart
+      :desc "open fold rec"
+      :nm "zO" #'local/evil-open-fold-rec-smart)
+#+end_src
+
+If something goes wrong with the new folding behavior, here's the standard definition. This can be turned on to get normal folding back.
+#+begin_src emacs-lisp tangle: no
+(map! :desc "toggle fold"
+      :nm "za" #'evil-toggle-fold
+      :desc "close fold"
+      :nm "zc" #'evil-close-fold
+      :desc "open fold"
+      :nm "zo" #'evil-open-fold
+      :desc "open fold rec"
+      :nm "zO" #'evil-open-fold-rec)
+#+end_src
+
+***** Tab as fold toggling
+When available, I really like to use tab as a quick way to toggle folds.
+#+begin_src emacs-lisp
+(map! :i [tab] (cmds! (and (modulep! :editor snippets)
+                            (yas-maybe-expand-abbrev-key-filter 'yas-expand))
+                       #'yas-expand
+                       (and (bound-and-true-p company-mode)
+                            (modulep! :completion company +tng))
+                       #'company-indent-or-complete-common)
+      :m [tab] (cmds! (and (modulep! :editor snippets)
+                           (evil-visual-state-p)
+                           (or (eq evil-visual-selection 'line)
+                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+                      #'yas-insert-snippet
+                      ;; Fixes #4548: without this, this tab keybind overrides
+                      ;; mode-local ones for modes that don't have an evil
+                      ;; keybinding scheme or users who don't have :editor (evil
+                      ;; +everywhere) enabled.
+                      (or (doom-lookup-key
+                           [tab]
+                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)
+                                 (current-local-map)))
+                          (doom-lookup-key
+                           (kbd "TAB")
+                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)))
+                          (doom-lookup-key (kbd "TAB") (list (current-local-map))))
+                      it
+                      #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
+#+end_src
+
+**** Fill column
+The fill column used for fill-column mode should be longer than the standard. I think setting it a bit over 100 is fine.
+#+begin_src emacs-lisp
+(setq fill-column 110)
+#+end_src
+
+*** Working within a buffer
+This section relates to actually doing stuff within a buffer or buffers.
+**** Undo
+#+begin_src emacs-lisp
+;; Let the undo buffer use up to 100Mb
+(setq undo-limit 100000000)
+#+end_src
+
+**** Writing
+These packages are for writing stuff.
+***** Dictionary
+#+begin_src emacs-lisp
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+#+end_src
+
+***** Snippets
+Yas-snippets are a nice package for inserting snippets into code.
+
+Turning off the trigger in field for now since it was giving me undesired behavior. Maybe when I learn to use it better then it will come back into the config.
+#+begin_src emacs-lisp :tangle no
+(setq yas-triggers-in-field t)
+#+end_src
+
+Adding my personal snippets directory.
+#+begin_src emacs-lisp
+(setq local/snippet-dir (concat doom-user-dir "snippets/"))
+(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+#+end_src
+
+****** Academic writing
+This package provides snippets for making writing sound more academic which can be really useful when you're not sure how to make something sound professional.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! academic-phrases)
+#+end_src
+
+***** Text filler
+Sometimes when testing out settings and formats, having filler text is useful.
+
+****** Lorem-ipsum
+The most common filler text is lorem-ipsum.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! lorem-ipsum)
+#+end_src
+
+Set up a key map for lorem-ipsum and add it into the insert section.
+#+begin_src emacs-lisp
+(defvar local/lorem-ipsum-map (make-sparse-keymap))
+(map! :leader
+      :desc "lorem-ipsum"
+      "i l" local/lorem-ipsum-map)
+(map! :map local/lorem-ipsum-map
+      :desc "Paragraph"
+      "p" #'lorem-ipsum-insert-paragraphs
+      :desc "Sentence"
+      "s" #'lorem-ipsum-insert-sentences
+      :desc "List"
+      "l" #'lorem-ipsum-insert-list)
+#+end_src
+
+***** Write good mode
+#+begin_src emacs-lisp
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'writegood-mode)
+#+end_src
+
+***** Flycheck mode
+#+begin_src emacs-lisp
+;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+#+end_src
+
+***** Clipboard
+Prevents system clipboard from being accidentally overwritten. Must now write to register "+ to write to system clipboard.
+#+begin_src emacs-lisp
+;; Some paste related settings.
+(setq save-interprogram-paste-before-kill t
+      select-enable-clipboard nil)
+#+end_src
+
+In order to provide copy and paste functionality directly from the keyboard, I need to capture the inputs and make functions that force the register that corresponds with the clipboard to be used (the + register).
+
+First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. In order to get the ascii number of a character, we simply need to put a '?' before it.
+#+begin_src emacs-lisp
+(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
+  "Saves the characters in motion into they system clipboard through the '+' register"
+  :move-point nil
+  :repeat nil
+  (interactive "<R><x><y>")
+  (evil-yank beg end type ?+ handler))
+#+end_src
+
+And here is the paste function.
+#+begin_src emacs-lisp
+(evil-define-command evil-paste-from-clipboard
+  (count &optional _ handler)
+  "Pastes the latest yanked text behind point.
+The return value is the yanked text."
+  :suppress-operator t
+  (interactive "*P<x>")
+  (evil-paste-before count ?+ handler))
+#+end_src
+
+Finally we need to create universal keybindings to these functions so they can be called from anywhere.
+#+begin_src emacs-lisp
+(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
+      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
+#+end_src
+
+**** Movement
+***** Sub-word movement
+#+begin_src emacs-lisp
+;; Makes it so movement keys stop at camlecase sub words.
+(global-subword-mode 1)
+#+end_src
+
+***** Scrolling
+Leave some space at the bottom while scrolling down so the cursor isn't hugging the bottom edge.
+#+begin_src emacs-lisp
+(setq scroll-margin 2)
+#+end_src
+
+***** Centered Cursor / Typewriter Mode
+When writing or coding, sometimes it's nice to just see everything around the cursor by keeping the cursor in the middle of the screen. This mode does just that.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! centered-cursor-mode)
+#+end_src
+
+It can be turned on using a toggle option.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Centered cursor"
+      "t C" #'centered-cursor-mode)
+#+end_src
+
+***** Logos
+Logos is a package for working with pages within emacs. Pages can be set with the page character.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! logos)
+#+end_src
+
+***** TODO Returning from a jump
+After jumping to a different spot like with a search or a definition look up, I want to be able to return to where I was more easily.
+Recommend using ~C-o~ / ~M-,~ which are faster.
+
+TODO - Make this more efficient
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Previous mark location"
+      :n "P" #'better-jumper-jump-backwards)
+#+end_src
+
+**** Encryption
+Some files contain details that should be encrypted or scrambled before being published.
+
+***** Encrypt region
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! encrypt-region)
+#+end_src
+
+**** Searching
+***** Case insensitive search
+=case-fold-search= is a variable that turns case sensitivity on and off. It is set per buffer. Since I like case sensitivity, I'm setting the default value so that new buffers use case sensitive searches.
+#+begin_src emacs-lisp
+;; Make searches case sensitive
+(setq-default case-fold-search nil)
+#+end_src
+
+***** Rip-grep
+Rip grep is a package for quickly finding a search query within a directory.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! rg)
+#+end_src
+
+This little piece of code switches to the results buffer once the search has concluded. It is annoying to have to add ~advice~, but getting this to work as expected is better than nothing.
+*Note:* Pulled from [[https://github.com/dajva/rg.el/issues/142][here]].
+#+begin_src emacs-lisp
+(with-eval-after-load 'rg
+  (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
+#+end_src
+
+***** Bang!
+Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][github]] for more info.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
+#+end_src
+
+** Independent or external programs
+These are modes that provide some sort of specialized experience outside of the normal writing flow of emacs.
+*** Version control
 **** Blamer
 This module adds git commit information in line with code when turned on which can be nice when working through a code base.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -1168,64 +1440,6 @@ But using the gutter for git presents a challenge since other things may also be
 (setq git-gutter-fr:side 'right-fringe)
 #+end_src
 
-*** Encryption
-Some files contain details that should be encrypted or scrambled before being published.
-
-**** Encrypt region
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! encrypt-region)
-#+end_src
-
-*** Bang!
-Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][github]] for more info.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
-#+end_src
-
-*** Logos
-Logos is a package for working with pages within emacs. Pages can be set with the page character.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! logos)
-#+end_src
-
-*** Text filler
-Sometimes when testing out settings and formats, having filler text is useful.
-
-**** Lorem-ipsum
-The most common filler text is lorem-ipsum.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! lorem-ipsum)
-#+end_src
-
-Set up a key map for lorem-ipsum and add it into the insert section.
-#+begin_src emacs-lisp
-(defvar local/lorem-ipsum-map (make-sparse-keymap))
-(map! :leader
-      :desc "lorem-ipsum"
-      "i l" local/lorem-ipsum-map)
-(map! :map local/lorem-ipsum-map
-      :desc "Paragraph"
-      "p" #'lorem-ipsum-insert-paragraphs
-      :desc "Sentence"
-      "s" #'lorem-ipsum-insert-sentences
-      :desc "List"
-      "l" #'lorem-ipsum-insert-list)
-#+end_src
-
-*** Rip-grep
-Rip grep is a package for quickly finding a search query within a directory.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! rg)
-#+end_src
-
-This little piece of code switches to the results buffer once the search has concluded. It is annoying to have to add ~advice~, but getting this to work as expected is better than nothing.
-*Note:* Pulled from [[https://github.com/dajva/rg.el/issues/142][here]].
-#+begin_src emacs-lisp
-(with-eval-after-load 'rg
-  (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
-#+end_src
-
-** Independent or external programs
 *** Discord integration
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! elcord)
@@ -1367,7 +1581,6 @@ turn them off when disabled."
 (add-hook! 'crdt-mode-hook #'local/crdt-enable-extras)
 #+end_src
 
-
 ** Mode/package settings
 *** Mode Minder
 Although it's not really an important mode in and of itself, mode minder lets you look at all the major modes that are installed which can be quite helpful.
@@ -1420,73 +1633,6 @@ can be seen as seprate pages and consequently can use paging functions such
 as `narrow-to-page' or a package like logos to see paged results."
   (setq-local page-delimiter eshell-prompt-regexp))
 (add-hook 'eshell-mode-hook #'local/set-prompt-as-page-delimiter)
-#+end_src
-
-*** Mode line
-Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
-
-**** Date and time
-#+begin_src emacs-lisp
-;; Add useful data to the mode line.
-(setq display-time-day-and-date t)
-(display-time-mode 1)
-#+end_src
-
-**** Battery
-For the battery, I don't want it to appear in the the mode line if there is no battery present.
-
-Since the following functions require the battery package, I need to wrap it in ~use-package~ to make sure all the definitions are loaded.
-#+begin_src emacs-lisp
-(use-package! battery :config
-#+end_src
-
-Sadly, there are no default functions for finding if a battery is present so I'll start by writing my own based off of the ~battery~ function in [[https://github.com/emacs-mirror/emacs/blob/3af9e84ff59811734dcbb5d55e04e1fdb7051e77/lisp/battery.el#L219][battery.el]].
-#+begin_src emacs-lisp
-    (defun local/battery-p ()
-        "returns t if a battery is present for the system and nil if one is not."
-        (and battery-status-function
-             battery-echo-area-format
-             (string-match-p "^Power N/A"
-                             (battery-format
-                                     battery-echo-area-format
-                                     (funcall battery-status-function)))
-             t))
-#+end_src
-
-If a battery source is detected, then show the batter level in the mode bar.
-#+begin_src emacs-lisp
-    (unless (local/battery-p) (display-battery-mode 1))
-#+end_src
-
-Finally, close the battery package wrapper.
-#+begin_src emacs-lisp
-)
-#+end_src
-
-**** Encoding format
-#+begin_src emacs-lisp
-(defun local/doom-modeline-conditional-buffer-encoding ()
-  "We expect the encoding to be LF UTF-8,
-so only show the modeline when this is not the case"
-  (setq-local doom-modeline-buffer-encoding
-              (if (and
-                       ; Checking for UTF-8
-                       (memq
-                        (plist-get (coding-system-plist buffer-file-coding-system) :category)
-                        '(coding-category-utf-8))
-                       ; Checking for LF line ending
-                       (not
-                        (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
-                t nil)))
-(add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
-#+end_src
-
-*** Web mode
-#+begin_src emacs-lisp
-(setq web-mode-script-padding standard-indent)
-(setq web-mode-style-padding standard-indent)
-(setq web-mode-block-padding standard-indent)
-(setq web-mode-part-padding standard-indent)
 #+end_src
 
 *** Org mode
@@ -1974,151 +2120,6 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
 #+end_src
 
-*** Tree Sitter mode
-Tree sitter is a program that parses code in a tree structure for better syntax highlighting and for querying code structure.
-Documentation found [[https://emacs-tree-sitter.github.io/syntax-highlighting/queries/][here]].
-
-First I want to set all the tree-sitter packages to use the master branch.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(unpin! tree-sitter-langs)
-#+end_src
-
-
-#+begin_src emacs-lisp
-(after! tree-sitter
-  (defvar local/tree-sitter-map (make-sparse-keymap))
-  (map! :map local/tree-sitter-map
-        :desc "Debug mode"
-        "d" #'tree-sitter-debug-mode
-        :desc "TS folding"
-        "f" #'ts-fold-mode
-        :desc "Folding indicators"
-        "i" #'ts-fold-indicators-mode
-        :desc "Query builder"
-        "q" #'tree-sitter-query-builder
-        :desc "Highlight mode"
-        "h" #'tree-sitter-hl-mode)
-
-  (map! :map doom-leader-code-map
-        :desc "Tree-sitter"
-        "T" local/tree-sitter-map))
-#+end_src
-
-**** Folding
-One of the biggest advantages of tree sitter mode is the ability to specify folding patterns.
-
-Lets make sure the ts-fold package is installed so that we can use folding. I'm going to use my fork for now since I've changed a few things.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
-#+end_src
-
-***** Setup
-Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible. Loaded after tree-sitter though since that's when it's first viable to use anyways.
-#+begin_src emacs-lisp
-(after! tree-sitter (global-ts-fold-indicators-mode 1))
-#+end_src
-
-Here we set up the functionality that is (currently) needed to load new definitions of folding patterns. This is a bit of a hack but the way this is designed is quite confusing from an extensibility perspective.
-#+begin_src emacs-lisp
-(after! ts-fold
-  (defun local/update-ts-fold-definitions (mode rules)
-    "Update the provided MODE with the new set of folding RULES.
-MODE should be a programming mode such as go-mode.
-RULES should be a list of folding rules in the format of (ts-element . folding-function)"
-    (setf (alist-get mode ts-fold-range-alist) rules)))
-#+end_src
-
-Here I want to define a folding function that will only fold if there's a newline character present in the node. That way I can add folding to things like long function parameter lists without it causing all function parameter lists to be condensed. This is in setup since it can be useful in all languages.
-#+begin_src emacs-lisp
-(defun local/ts-fold-range-multi-line-seq (node offset)
-  "Return the fold range in a sequence when the NODE exists over multiple lines."
-  (let ((beg (1+ (tsc-node-start-position node)))
-        (end (1- (tsc-node-end-position node))))
-    (if (< 1 (count-lines (1- beg) (1+ end)))
-        (ts-fold--cons-add (cons beg end) offset)
-      nil)))
-#+end_src
-
-***** Go Folding
-I have to use golang for work but the standard golang folding capabilities is quite bad. this adds just a few more folding definitions that make the code look SOO much prettier.
-#+begin_src emacs-lisp
-(setq local/ts-fold-parsers-go-list
-      '((block . ts-fold-range-seq)
-        ;; (comment . local/ts-fold-range-multi-line-seq)
-        (comment . ts-fold-range-c-like-comment)
-        (import_spec_list . ts-fold-range-seq)
-        (field_declaration_list . ts-fold-range-seq)
-        (parameter_list . local/ts-fold-range-multi-line-seq)
-        (literal_value . local/ts-fold-range-multi-line-seq)
-        ;; (interface_type . (ts-fold-range-seq 10 0))
-        (type_declaration . (lambda (node offset) (ts-fold-range-markers node offset "[{(]" "[})]")))
-        ;; (interface_type . (lambda (node offset) (ts-fold-range-markers node offset "{" "}")))
-        (const_declaration . (lambda (node offset) (ts-fold-range-markers node offset "(" ")")))))
-        ;; (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
-
-(after! ts-fold
-  (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
-#+end_src
-
-***** JS Folding
-Javascript folding already works pretty well but there are a few tweaks I'd like to make to get it to run a bit smoother.
-#+begin_src emacs-lisp
-(setq local/ts-fold-parsers-javascript-list
-      '((object . ts-fold-range-seq)
-        (array . ts-fold-range-seq)
-        (export_clause . ts-fold-range-seq)
-        (statement_block . ts-fold-range-seq)
-        (comment . ts-fold-range-c-like-comment)))
-
-(after! ts-fold
-  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
-    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
-#+end_src
-
-***** Shell Folding
-#+begin_src emacs-lisp
-(setq local/ts-fold-parsers-shell-list
-      '((do_group . (ts-fold-range-seq 1 -3))
-        (compound_statement . ts-fold-range-seq)
-        (expansion          . ts-fold-range-seq)
-        (comment
-         . (lambda (node offset)
-             (ts-fold-range-line-comment node offset "#")))))
-
-(after! ts-fold
-  (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
-#+end_src
-
-*** LSP mode
-[[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers. By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
-#+begin_src emacs-lisp
-(after! lsp-mode
-  (defvar local/lsp-mode-keymap (make-sparse-keymap))
-  (map! :map local/lsp-mode-keymap
-        "d" #'lsp-find-definition
-        "i" #'lsp-find-implementation
-        "r" #'lsp-find-references
-        "R" #'lsp-rename
-        "t" #'lsp-find-type-definition)
-
-  (defun local/add-lsp-keymaps ()
-    "Adds prefix keybindings for lsp keymaps."
-    (interactive)
-    (map! :leader
-          :desc "LSP"
-          "l" local/lsp-mode-keymap
-          "L" lsp-mode-map))
-
-  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
-#+end_src
-
-Some lsp servers need extra settings in place so those will be added here.
-**** Golang
-In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
-#+begin_src emacs-lisp
-(setq lsp-go-build-flags ["-tags=integration"])
-#+end_src
-
 *** E-book reader
 **** Packages
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -2176,21 +2177,13 @@ In golang, a lot of the tests that get written are integration tests. When using
   (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
 #+end_src
 
-*** Project (not projectile)
-Project is the built in emacs project manager. Although I use projectile most of the time, I want project working well if ever I want to look into it more.
-
-The first thing to add is the ability to find the project root more easily. This is one of the best features of projectile.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! project-rootfile)
-#+end_src
-
-*** Programming Languages
-**** Open CAD
+** Programming Languages
+*** Open CAD
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! scad-mode)
 #+end_src
 
-**** Go mode
+*** Go mode
 Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
 
 Also when in go-mode, I want to ~gofmt~ to be run whenever a save occurs.
@@ -2199,14 +2192,13 @@ Also when in go-mode, I want to ~gofmt~ to be run whenever a save occurs.
   (add-hook 'before-save-hook #'gofmt-before-save))
 #+end_src
 
-
-**** Emacs Lisp
+*** Emacs Lisp
 So far, I've found that hide-show minor mode is the only good way to fold elisp code.
 #+begin_src emacs-lisp
 (add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
 #+end_src
 
-**** Scheme
+*** Scheme
 Scheme is a pretty nice lisp implementation. These packages make it even easier to work with.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! geiser)
@@ -2215,10 +2207,10 @@ Scheme is a pretty nice lisp implementation. These packages make it even easier 
 (package! geiser-racket)
 #+end_src
 
-**** Javascript
+*** Javascript
 When working with Javascript, I want to make sure that files fit the standard that I'm working with when I save them so I want to run eslint and/or prettier.
 
-***** Eslint
+**** Eslint
 Luckily eslint is can be used through LSP mode so for now the stuff below is unneeded.
 
 First I need to be able to run eslint from Emacs.
@@ -2257,7 +2249,7 @@ Finally I need to be able to insert that into the save hook when the javascript 
 (add-hook 'js2-mode-hook #'local/run-eslint-on-save)
 #+end_src
 
-***** Prettier
+**** Prettier
 First I need to add prettier mode so that I don't need to write it myself.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! prettier-js)
@@ -2268,17 +2260,17 @@ Then I just add it to my javascript mode.
 (add-hook 'js2-mode-hook #'prettier-js-mode)
 #+end_src
 
-**** Gitlab CI
+*** Gitlab CI
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! gitlab-ci-mode)
 #+end_src
 
-**** Vimrc
+*** Vimrc
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! vimrc-mode)
 #+end_src
 
-**** Graphviz
+*** Graphviz
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! graphviz-dot-mode)
 #+end_src
@@ -2287,11 +2279,25 @@ Then I just add it to my javascript mode.
 (package! systemd)
 #+end_src
 
-**** General interpreter
-***** TabNine
+*** General interpreter
+**** TabNine
 TabNine is a general purpose auto-completer. It uses Machine learning to find what's suggested to write next.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! company-tabnine)
+#+end_src
+
+*** Web mode
+#+begin_src emacs-lisp
+(setq web-mode-script-padding standard-indent)
+(setq web-mode-style-padding standard-indent)
+(setq web-mode-block-padding standard-indent)
+(setq web-mode-part-padding standard-indent)
+#+end_src
+
+*** R data frames
+This allows emacs to handle R style data frames. This makes some data handling easier in various files.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! ess-view)
 #+end_src
 
 ** Fun

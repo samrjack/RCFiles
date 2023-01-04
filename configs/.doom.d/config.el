@@ -1,14 +1,12 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Samuel Jackson"
-      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
-
 (defun local/chinese-text-support ()
   "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
   (interactive)
   (variable-pitch-mode))
+
+(setq user-full-name "Samuel Jackson"
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
 
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
@@ -86,14 +84,138 @@ The return value is the yanked text."
 
 (setq fill-column 110)
 
-(defun local/smart-open-line-above ()
-  "Insert an empty line above the current line.
-Position the cursor at it's beginning, according to the current mode."
-  (interactive)
-  (move-beginning-of-line nil)
-  (newline-and-indent)
-  (forward-line -1)
-  (indent-according-to-mode))
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
+
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "M-n" #'treemacs)
+
+(map! :map 'treemacs-mode-map
+      :ng "M-n" #'treemacs
+      :ng "C-n" #'treemacs)
+
+(use-package! treemacs
+  :ensure t
+  :defer t
+  :config
+  (progn
+
+    (setq doom-themes-treemacs-theme "doom-colors")
+
+    (setq treemacs-collapse-dirs 7)
+
+    (treemacs-project-follow-mode 1)
+
+    (lsp-treemacs-sync-mode t)
+
+    (treemacs-filewatch-mode t)
+
+(after! treemacs
+  (defun local/treemacs-force-git-update-current-file ()
+    (let ((file (treemacs-canonical-path buffer-file-name)))
+      (treemacs-run-in-every-buffer
+       (when (treemacs-is-path file :in-workspace)
+         (treemacs-update-single-file-git-state file)))))
+  (when (eq system-type 'darwin) ;; Only need for MacOS
+    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+
+    (treemacs-indent-guide-mode t)
+
+    (treemacs-follow-mode t)
+
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+
+))
+
+(setq persp-sort 'created)
+
+(setq tab-bar-show t)
+(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
+(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
+(map! :n "M->" #'tab-next
+      :n "M-<" #'tab-previous)
+
+(defun local/tab-bar-format-menu-bar-lambda ()
+  "Produce the Menu button for the tab bar that shows the menu bar."
+  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
+     tab-bar-menu-bar :help "Menu Bar")))
+(add-to-list 'tab-bar-format #'local/tab-bar-format-menu-bar-lambda)
+
+(which-key-add-key-based-replacements "C-x t" "tabs")
+
+(map! :leader :desc "Tabs" "T" tab-prefix-map)
+
+(after! tree-sitter (global-ts-fold-indicators-mode 1))
+
+(after! ts-fold
+  (defun local/update-ts-fold-definitions (mode rules)
+    "Update the provided MODE with the new set of folding RULES.
+MODE should be a programming mode such as go-mode.
+RULES should be a list of folding rules in the format of (ts-element . folding-function)"
+    (setf (alist-get mode ts-fold-range-alist) rules)))
+
+(defun local/ts-fold-range-multi-line-seq (node offset)
+  "Return the fold range in a sequence when the NODE exists over multiple lines."
+  (let ((beg (1+ (tsc-node-start-position node)))
+        (end (1- (tsc-node-end-position node))))
+    (if (< 1 (count-lines (1- beg) (1+ end)))
+        (ts-fold--cons-add (cons beg end) offset)
+      nil)))
+
+(setq local/ts-fold-parsers-go-list
+      '((block . ts-fold-range-seq)
+        ;; (comment . local/ts-fold-range-multi-line-seq)
+        (comment . ts-fold-range-c-like-comment)
+        (import_spec_list . ts-fold-range-seq)
+        (field_declaration_list . ts-fold-range-seq)
+        (parameter_list . local/ts-fold-range-multi-line-seq)
+        (literal_value . local/ts-fold-range-multi-line-seq)
+        ;; (interface_type . (ts-fold-range-seq 10 0))
+        ;; (type_declaration . (lambda (node offset) (ts-fold-range-markers node offset "[{(]" "[})]")))
+        (interface_type . (lambda (node offset) (ts-fold-range-markers node offset "{" "}")))
+        (const_declaration . (lambda (node offset) (ts-fold-range-markers node offset "(" ")")))))
+        ;; (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
+
+(setq local/ts-fold-parsers-javascript-list
+      '((object . ts-fold-range-seq)
+        (array . ts-fold-range-seq)
+        (export_clause . ts-fold-range-seq)
+        (statement_block . ts-fold-range-seq)
+        (comment . ts-fold-range-c-like-comment)))
+
+(after! ts-fold
+  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
+    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
+
+(setq local/ts-fold-parsers-shell-list
+      '((do_group . (ts-fold-range-seq 1 -3))
+        (compound_statement . ts-fold-range-seq)
+        (expansion          . ts-fold-range-seq)
+        (comment
+         . (lambda (node offset)
+             (ts-fold-range-line-comment node offset "#")))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
+
+(global-origami-mode)
+
+(defun local/turn-off-origami ()
+  "Simple function meant for hooks in order to turn off
+origami mode in major modes where it gets annoying."
+  (origami-mode -1))
+
+(dolist (hook '(dired-mode-hook))
+  (add-hook hook #'local/turn-off-origami))
 
 (defun local/count-overlays-on-line ()
   "Count the number of overlays that are present on the current line."
@@ -189,73 +311,6 @@ I find this order matches how I want folds to work"
                       it
                       #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
 
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
-(map! :n "M-n" #'treemacs)
-
-(map! :map 'treemacs-mode-map
-      :ng "M-n" #'treemacs
-      :ng "C-n" #'treemacs)
-
-(use-package! treemacs
-  :ensure t
-  :defer t
-  :config
-  (progn
-
-    (setq doom-themes-treemacs-theme "doom-colors")
-
-    (setq treemacs-collapse-dirs 7)
-
-    (treemacs-project-follow-mode 1)
-
-    (lsp-treemacs-sync-mode t)
-
-    (treemacs-filewatch-mode t)
-
-(after! treemacs
-  (defun local/treemacs-force-git-update-current-file ()
-    (let ((file (treemacs-canonical-path buffer-file-name)))
-      (treemacs-run-in-every-buffer
-       (when (treemacs-is-path file :in-workspace)
-         (treemacs-update-single-file-git-state file)))))
-  (when (eq system-type 'darwin) ;; Only need for MacOS
-    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
-
-    (treemacs-indent-guide-mode t)
-
-    (treemacs-follow-mode t)
-
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple)))
-
-))
-
-(after! projectile
-  (setq projectile-track-known-projects-automatically nil))
-
-(setq persp-sort 'created)
-
-(setq tab-bar-show t)
-(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
-(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
-(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
-(map! :n "M->" #'tab-next
-      :n "M-<" #'tab-previous)
-
-(defun local/tab-bar-format-menu-bar-lambda ()
-  "Produce the Menu button for the tab bar that shows the menu bar."
-  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
-     tab-bar-menu-bar :help "Menu Bar")))
-(add-to-list 'tab-bar-format #'local/tab-bar-format-menu-bar-lambda)
-
-(which-key-add-key-based-replacements "C-x t" "tabs")
-
-(map! :leader :desc "Tabs" "T" tab-prefix-map)
-
 (setq zoom-window-use-persp t)
 (setq zoom-window-mode-line-color "DarkGreen")
 (add-hook 'doom-load-theme-hook #'zoom-window-setup)
@@ -265,15 +320,45 @@ I find this order matches how I want folds to work"
       :desc "Zoom window"
       "z" #'zoom-window-zoom)
 
+;; Set the correct dictionary for spell check.
+(setq ispell-dictionary "en")
+
+(setq local/snippet-dir (concat doom-user-dir "snippets/"))
+(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+
+(defvar local/lorem-ipsum-map (make-sparse-keymap))
+(map! :leader
+      :desc "lorem-ipsum"
+      "i l" local/lorem-ipsum-map)
+(map! :map local/lorem-ipsum-map
+      :desc "Paragraph"
+      "p" #'lorem-ipsum-insert-paragraphs
+      :desc "Sentence"
+      "s" #'lorem-ipsum-insert-sentences
+      :desc "List"
+      "l" #'lorem-ipsum-insert-list)
+
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'writegood-mode)
+
+;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
-
-;; Make searches case sensitive
-(setq-default case-fold-search nil)
 
 (map! :leader
       :desc "Centered cursor"
       "t C" #'centered-cursor-mode)
+
+;; Make searches case sensitive
+(setq-default case-fold-search nil)
+
+(with-eval-after-load 'rg
+  (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
 
 (map! :n "g /"   #'which-key-show-top-level
       :n "g C-/" #'which-key-show-full-major-mode
@@ -284,17 +369,8 @@ I find this order matches how I want folds to work"
 (marginalia-mode)
 
 (map! :map help-map
-      "b b" 'embark-bindings
+
       "b B" 'describe-bindings)
-
-(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
-(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
-(map! :leader
-      :desc "Write good mode"
-      "t W" #'writegood-mode)
-
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
-(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
 
 ;; Make undo revert smaller sections of text instead of all text
 ;; added while in insert mode.
@@ -319,28 +395,12 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'local/toggle-and-activate-evil-snipe-mode)
 
-(setq local/snippet-dir (concat doom-user-dir "snippets/"))
-(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
-
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 (add-hook 'info-selection-hook 'info-colors-fontify-node)
-
-;; Set the correct dictionary for spell check.
-(setq ispell-dictionary "en")
-
-(global-origami-mode)
-
-(defun local/turn-off-origami ()
-  "Simple function meant for hooks in order to turn off
-origami mode in major modes where it gets annoying."
-  (origami-mode -1))
-
-(dolist (hook '(dired-mode-hook))
-  (add-hook hook #'local/turn-off-origami))
 
 (use-package blamer
   :defer 20
@@ -356,21 +416,6 @@ origami mode in major modes where it gets annoying."
 (global-git-gutter-mode)
 
 (setq git-gutter-fr:side 'right-fringe)
-
-(defvar local/lorem-ipsum-map (make-sparse-keymap))
-(map! :leader
-      :desc "lorem-ipsum"
-      "i l" local/lorem-ipsum-map)
-(map! :map local/lorem-ipsum-map
-      :desc "Paragraph"
-      "p" #'lorem-ipsum-insert-paragraphs
-      :desc "Sentence"
-      "s" #'lorem-ipsum-insert-sentences
-      :desc "List"
-      "l" #'lorem-ipsum-insert-list)
-
-(with-eval-after-load 'rg
-  (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
 
 (use-package! spray
   :commands spray-mode
@@ -774,62 +819,6 @@ if no org extension is given then it will be automatically appended."
   (map! :map doom-leader-code-map
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
-
-(after! tree-sitter (global-ts-fold-indicators-mode 1))
-
-(after! ts-fold
-  (defun local/update-ts-fold-definitions (mode rules)
-    "Update the provided MODE with the new set of folding RULES.
-MODE should be a programming mode such as go-mode.
-RULES should be a list of folding rules in the format of (ts-element . folding-function)"
-    (setf (alist-get mode ts-fold-range-alist) rules)))
-
-(defun local/ts-fold-range-multi-line-seq (node offset)
-  "Return the fold range in a sequence when the NODE exists over multiple lines."
-  (let ((beg (1+ (tsc-node-start-position node)))
-        (end (1- (tsc-node-end-position node))))
-    (if (< 1 (count-lines (1- beg) (1+ end)))
-        (ts-fold--cons-add (cons beg end) offset)
-      nil)))
-
-(setq local/ts-fold-parsers-go-list
-      '((block . ts-fold-range-seq)
-        ;; (comment . local/ts-fold-range-multi-line-seq)
-        (comment . ts-fold-range-c-like-comment)
-        (import_spec_list . ts-fold-range-seq)
-        (field_declaration_list . ts-fold-range-seq)
-        (parameter_list . local/ts-fold-range-multi-line-seq)
-        (literal_value . local/ts-fold-range-multi-line-seq)
-        ;; (interface_type . (ts-fold-range-seq 10 0))
-        (type_declaration . (lambda (node offset) (ts-fold-range-markers node offset "[{(]" "[})]")))
-        ;; (interface_type . (lambda (node offset) (ts-fold-range-markers node offset "{" "}")))
-        (const_declaration . (lambda (node offset) (ts-fold-range-markers node offset "(" ")")))))
-        ;; (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
-
-(after! ts-fold
-  (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
-
-(setq local/ts-fold-parsers-javascript-list
-      '((object . ts-fold-range-seq)
-        (array . ts-fold-range-seq)
-        (export_clause . ts-fold-range-seq)
-        (statement_block . ts-fold-range-seq)
-        (comment . ts-fold-range-c-like-comment)))
-
-(after! ts-fold
-  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
-    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
-
-(setq local/ts-fold-parsers-shell-list
-      '((do_group . (ts-fold-range-seq 1 -3))
-        (compound_statement . ts-fold-range-seq)
-        (expansion          . ts-fold-range-seq)
-        (comment
-         . (lambda (node offset)
-             (ts-fold-range-line-comment node offset "#")))))
-
-(after! ts-fold
-  (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
 
 (after! lsp-mode
   (defvar local/lsp-mode-keymap (make-sparse-keymap))

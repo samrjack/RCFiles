@@ -1,7 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; Themes
 (package! dracula-theme)
 (package! theme-magic)
 
@@ -15,17 +14,29 @@
 (package! ztree)
 (package! dir-treeview)
 
+(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+
+(package! origami)
+
 (package! zoom-window)
 
+(package! academic-phrases)
+
+(package! lorem-ipsum)
+
 (package! centered-cursor-mode)
+
+(package! logos)
+
+(package! rg)
+
+(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
 
 (package! discover-my-major)
 
 (package! marginalia)
 
 (package! embark)
-
-(package! academic-phrases)
 
 ;; [[file:~/.config/doom/config.org::*Very large files][Very large files:1]]
 (package! vlf :recipe (:host github :repo "m00natic/vlfi"))
@@ -34,21 +45,11 @@
 
 (package! ess-view)
 
-(package! origami)
-
 (package! blamer)
 
 (package! diff-ansi)
 
 (package! encrypt-region)
-
-(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
-
-(package! logos)
-
-(package! lorem-ipsum)
-
-(package! rg)
 
 (package! elcord)
 
@@ -106,8 +107,6 @@
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
 
 (unpin! tree-sitter-langs)
-
-(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 
 ;; e-reader
 (package! calibredb)
