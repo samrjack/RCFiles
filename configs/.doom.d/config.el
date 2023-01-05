@@ -895,6 +895,11 @@ if no org extension is given then it will be automatically appended."
 (setq web-mode-block-padding standard-indent)
 (setq web-mode-part-padding standard-indent)
 
+(map! :mode 'xkcd-mode
+      :n "h" #'xkcd-prev
+      :n "l" #'xkcd-next
+      :n "r" #'xkcd-rand)
+
 (defvar personal-functions-map (make-sparse-keymap))
 
 (map!

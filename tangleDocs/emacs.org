@@ -2562,9 +2562,17 @@ Guix is a more open source version of NIX. I don't use it much but hopefully som
 ** Fun
 Everyone needs some fun. These packages aren't super practical on their own, but can be enjoyable to turn on once in a while.
 *** XKCD
+XKCD is a fun comic to read once in a while. This lets me read it from within emacs itself.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-;; Fun stuff
 (package! xkcd)
+#+end_src
+
+Once I'm in xkcd mode, these are the controls I can use.
+#+begin_src emacs-lisp
+(map! :mode 'xkcd-mode
+      :n "h" #'xkcd-prev
+      :n "l" #'xkcd-next
+      :n "r" #'xkcd-rand)
 #+end_src
 
 *** Typewriter
@@ -2788,7 +2796,7 @@ Here's an example of using it to see when the ~tree-sitter-mode-hook~ gets calle
 (add-hook! 'tree-sitter-mode-hook (lambda () (local/hello tree-sitter-mode)))
 #+end_src
 
-* Fixes                                                     :fix:issues:patch:doom:
+* Fixes                                                     :fix:issues:patch:
 Here are some config fixes for issues I'm running into.
 
 This issue is with some hook that is causing all my actions to fail its getting really annoying. I couldn't even use magit. Well now you're gone little guy, hope you're happy.
