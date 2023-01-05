@@ -698,6 +698,13 @@ if no org extension is given then it will be automatically appended."
         :desc "Unfiled Notes" "u" #'local/org-open-work-unfiled-notes
         :desc "Wiki" "w" #'local/org-open-work-wiki)))
 
+(setq org-tags-column 60)
+
+(defun local/org-align-all-tags()
+  "Just align all the tags please."
+  (interactivek
+  (org-align-tags t)))
+
 (setq org-bable-clojure-backend 'cider)
 
 (setq org-roam-directory "~/roam")

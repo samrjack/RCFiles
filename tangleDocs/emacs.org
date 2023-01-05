@@ -8,7 +8,7 @@ Welcome to a semi-clean though certainly flawed emacs config. I hope you can fin
 
 Unlike other literate configs, this one is not meant to be compiled at start time. This gets tangled together whenever it is saved and then can be compiled further using ~doom sync~ or ~SPC h r r~.
 
-* Table of contents :quote:toc_9:
+* Table of contents                                         :quote:toc_9:
 #+BEGIN_QUOTE
 - [[#file-setup][File setup]]
   - [[#initialization][Initialization]]
@@ -144,6 +144,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#font-support][Font support]]
         - [[#org-mode-keybindings][Org mode keybindings]]
         - [[#shortcut-to-open-org-files][Shortcut to open org files]]
+        - [[#tags][Tags]]
       - [[#babel][Babel]]
         - [[#clojure][Clojure]]
       - [[#org-roam][Org Roam]]
@@ -213,7 +214,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
 - [[#auto-tangle][Auto Tangle]]
 #+END_QUOTE
 
-* File setup
+* File setup                                                :init:
 This sets up all the files used for configuration with the appropriate elisp file headers.
 ** Initialization
 =init.el= is for anything that needs to be set up prior to emacs running. Generally only the doom module settings go in here.
@@ -234,7 +235,7 @@ This sets up all the files used for configuration with the appropriate elisp fil
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 #+end_src
 
-* Doom Initialization
+* Doom Initialization                                       :doom:
 ** Documentation
 This documentation came with the original doom init file. Keeping for reference. It has been slightly modified to use org markdown syntax.
 
@@ -539,7 +540,7 @@ Closes the ~doom!~ macro block.
 )
 #+end_src
 
-* Configuration
+* Configuration                                             :config:
 ** Documentation
 This documentation came with the doom emacs original configs. I'm keeping it here for reference since I often run across it while searching my config.
 *** Macro documentation
@@ -2042,6 +2043,19 @@ Finally, add all the functions to a key map.
         :desc "Wiki" "w" #'local/org-open-work-wiki)))
 #+end_src
 
+***** Tags
+Tags are useful for marking particular sub-trees.
+#+begin_src emacs-lisp
+(setq org-tags-column 60)
+#+end_src
+
+#+begin_src emacs-lisp
+(defun local/org-align-all-tags()
+  "Just align all the tags please."
+  (interactivek
+  (org-align-tags t)))
+#+end_src
+
 **** Babel
 Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
 ***** Clojure
@@ -2774,7 +2788,7 @@ Here's an example of using it to see when the ~tree-sitter-mode-hook~ gets calle
 (add-hook! 'tree-sitter-mode-hook (lambda () (local/hello tree-sitter-mode)))
 #+end_src
 
-* Fixes
+* Fixes                                                     :fix:issues:patch:doom:
 Here are some config fixes for issues I'm running into.
 
 This issue is with some hook that is causing all my actions to fail its getting really annoying. I couldn't even use magit. Well now you're gone little guy, hope you're happy.
@@ -2813,7 +2827,7 @@ These packages are ones that I'm working on and therefore need to point my confi
    :branch "handlePerspRename"))
 #+end_src
 
-* Auto Tangle
+* Auto Tangle                                               :tangle:
 The below allows this file to tangle and produce the output configuration files whenever the document is saved.
 
 ;; Local Variables:
