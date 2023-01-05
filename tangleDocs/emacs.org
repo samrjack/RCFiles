@@ -2805,6 +2805,18 @@ Here's an example of using it to see when the ~tree-sitter-mode-hook~ gets calle
 * Fixes                                                     :fix:issues:patch:
 Here are some config fixes for issues I'm running into.
 
+On MacOS, I'm often running into an issue where emacs is showing an error =Too many open files= when trying to open files in treemacs. I found [[https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html][this]] article with helpful information about this. It's supposedly because treemacs and lsp both watch lots of files which greatly inflates the number of "open files" emacs has. To clear this, a function is provided to clean it up a bit at least. I don't know if this is the best long term solution but for now it'll keep emacs usable.
+#+begin_src emacs-lisp
+(defun local/file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+#+end_src
+
+
 This issue is with some hook that is causing all my actions to fail its getting really annoying. I couldn't even use magit. Well now you're gone little guy, hope you're happy.
 #+begin_src emacs-lisp
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)

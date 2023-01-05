@@ -1010,6 +1010,14 @@ Buffers are labled as *scratch* through *scratchX*."
       (message "TEST yes")
     (message "TEST no")))
 
+(defun local/file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 
 ;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))
