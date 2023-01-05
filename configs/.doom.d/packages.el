@@ -132,7 +132,6 @@
 
 (package! guix)
 
-;; Fun stuff
 (package! xkcd)
 
 (package! selectric-mode)

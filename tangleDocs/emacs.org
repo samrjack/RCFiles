@@ -905,6 +905,12 @@ The number represents the number of recursive layers it's allowed. Don't make it
     (setq treemacs-collapse-dirs 7)
 #+end_src
 
+By default, when opening a file, default to opening it in the buffer that was last used. The normal default seems to be to open the file in the first buffer but that is quite annoying.
+#+begin_src emacs-lisp
+    (setq treemacs-default-visit-action #'treemacs-visit-node-in-most-recently-used-window)
+#+end_src
+
+
 When I do want to use treemacs, I don't want tons of projects to show since I really only care about the one I'm in.
 #+begin_src emacs-lisp
     (treemacs-project-follow-mode 1)
