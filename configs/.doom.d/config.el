@@ -1032,6 +1032,12 @@ Buffers are labled as *scratch* through *scratchX*."
      (file-notify-rm-watch key))
    file-notify-descriptors))
 
+(after! dap-mode
+  (define-key dap-mode-map [left-margin mouse-1]
+    nil)
+  (define-key dap-mode-map [left-fringe mouse-1]
+    nil))
+
 (remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
 
 ;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))
