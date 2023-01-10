@@ -85,6 +85,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#ts-fold][TS-Fold]]
           - [[#setup][Setup]]
           - [[#go-folding][Go Folding]]
+          - [[#yaml-folding][Yaml Folding]]
           - [[#js-folding][JS Folding]]
           - [[#shell-folding][Shell Folding]]
         - [[#origami-folding][Origami folding]]
@@ -1176,6 +1177,11 @@ First I want to set all the tree-sitter packages to use the master branch.
         "T" local/tree-sitter-map))
 #+end_src
 
+Finally, enable global tree-sitter mode which will turn on tree-sitter whenever there's a grammar installed for the mode.
+#+begin_src emacs-lisp
+(global-tree-sitter-mode 1)
+#+end_src
+
 **** Code folding
 ***** TS-Fold
 One of the biggest advantages of tree sitter mode is the ability to specify folding patterns.
@@ -1189,6 +1195,11 @@ Lets make sure the ts-fold package is installed so that we can use folding. I'm 
 Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible. Loaded after tree-sitter though since that's when it's first viable to use anyways.
 #+begin_src emacs-lisp
 (after! tree-sitter (global-ts-fold-indicators-mode 1))
+#+end_src
+
+Enable folding for line comments.
+#+begin_src emacs-lisp
+(add-hook! 'ts-fold-mode-hook #'ts-fold-line-comment-mode)
 #+end_src
 
 Here we set up the functionality that is (currently) needed to load new definitions of folding patterns. This is a bit of a hack but the way this is designed is quite confusing from an extensibility perspective.
@@ -1231,6 +1242,16 @@ I have to use golang for work but the standard golang folding capabilities is qu
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
+#+end_src
+
+****** Yaml Folding
+Yaml is a format for config files such as k8s files or helm files. I have to use it a lot so good folding is important.
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-yaml-list
+      '((block_mapping_pair . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'yaml-mode local/ts-fold-parsers-yaml-list))
 #+end_src
 
 ****** JS Folding

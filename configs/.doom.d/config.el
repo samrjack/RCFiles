@@ -224,7 +224,11 @@ mode map since otherwise it requires forcing the normal mode state to be activat
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
 
+(global-tree-sitter-mode 1)
+
 (after! tree-sitter (global-ts-fold-indicators-mode 1))
+
+(add-hook! 'ts-fold-mode-hook #'ts-fold-line-comment-mode)
 
 (after! ts-fold
   (defun local/update-ts-fold-definitions (mode rules)
@@ -257,6 +261,12 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
+
+(setq local/ts-fold-parsers-yaml-list
+      '((block_mapping_pair . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'yaml-mode local/ts-fold-parsers-yaml-list))
 
 (setq local/ts-fold-parsers-javascript-list
       '((object . ts-fold-range-seq)
