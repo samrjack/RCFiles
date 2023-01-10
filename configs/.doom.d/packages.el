@@ -163,12 +163,12 @@
 
 (unpin! straight)
 
-(package! ts-fold :recipe
-  (:host github
-   :repo "samrjack/ts-fold"
-   :branch "golang"))
+;; (package! ts-fold :recipe
+;;   (:host github
+;;    :repo "samrjack/ts-fold"
+;;    :branch "golang"))
 
-(package! zoom-window :recipe
-  (:host github
-   :repo "samrjack/zoom-window"
-   :branch "handlePerspRename"))
+;; (package! zoom-window :recipe
+;;   (:host github
+;;    :repo "samrjack/zoom-window"
+;;    :branch "handlePerspRename"))

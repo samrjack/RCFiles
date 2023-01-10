@@ -2869,22 +2869,22 @@ There is an issue where evil search isn't looking in folded code. See [[https://
 (unpin! straight)
 #+end_src
 
-#+begin_src emacs-lisp
-;; (after! evil (evil-select-search-module 'evil-search-module 'isearch))
+#+begin_src emacs-lisp :tangle no
+(after! evil (evil-select-search-module 'evil-search-module 'isearch))
 #+end_src
 
 * Shadowed packages
 These packages are ones that I'm working on and therefore need to point my configuration at my own fork instead of towards the parent repo so they can be tested and verified.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! ts-fold :recipe
-  (:host github
-   :repo "samrjack/ts-fold"
-   :branch "golang"))
+;; (package! ts-fold :recipe
+;;   (:host github
+;;    :repo "samrjack/ts-fold"
+;;    :branch "golang"))
 
-(package! zoom-window :recipe
-  (:host github
-   :repo "samrjack/zoom-window"
-   :branch "handlePerspRename"))
+;; (package! zoom-window :recipe
+;;   (:host github
+;;    :repo "samrjack/zoom-window"
+;;    :branch "handlePerspRename"))
 #+end_src
 
 * Auto Tangle                                               :tangle:
