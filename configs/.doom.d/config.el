@@ -17,7 +17,11 @@
       :desc "debug on error"
       "t d" #'toggle-debug-on-error
       :desc "debug on quit"
-      "t D" #'toggle-debug-on-quit)
+      "t D" #'toggle-debug-on-quit
+      :desc "debug on entry"
+      "t C-d" #'debug-on-entry
+      :desc "cancel debug on entry"
+      "t M-d" #'cancel-debug-on-entry)
 
 (setq display-time-day-and-date t)
 (display-time-mode 1)

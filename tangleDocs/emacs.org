@@ -690,7 +690,11 @@ I've found it necessary to access the debugger more often so here's an easy way 
       :desc "debug on error"
       "t d" #'toggle-debug-on-error
       :desc "debug on quit"
-      "t D" #'toggle-debug-on-quit)
+      "t D" #'toggle-debug-on-quit
+      :desc "debug on entry"
+      "t C-d" #'debug-on-entry
+      :desc "cancel debug on entry"
+      "t M-d" #'cancel-debug-on-entry)
 #+end_src
 *** Mode line
 Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
