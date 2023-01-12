@@ -1428,6 +1428,9 @@ The fill column used for fill-column mode should be longer than the standard. I 
 (setq fill-column 110)
 #+end_src
 
+**** Minimap
+Minimap is a nice way to visualize the structure of a long file.
+
 *** Working within a buffer
 This section relates to actually doing stuff within a buffer or buffers.
 **** Undo
