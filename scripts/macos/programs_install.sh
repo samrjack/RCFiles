@@ -68,6 +68,8 @@ brew install --cask flameshot
 
 brew install --cask anki
 
+brew install --cask musescore
+
 brew install coreutils
 
 brew install moreutils

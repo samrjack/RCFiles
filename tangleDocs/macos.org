@@ -300,6 +300,12 @@ The best spaced repitition program yet created.
 brew install --cask anki
 #+end_src
 
+** Musescore
+Musescore 4 is an open source music score writing software. There's a great video about its creation [[https://www.youtube.com/watch?v=Qct6LKbneKQ][here]]. Mostly just installing to look at it eventually; after all, who needs hard drive space?
+#+begin_src sh
+brew install --cask musescore
+#+end_src
+
 * CLI tools
 ** Utils
 These are packages that add functionality or utility functions that are often used in basic shell commands to chain things together. Glue code basically.
