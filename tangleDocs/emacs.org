@@ -183,6 +183,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#vimrc][Vimrc]]
     - [[#sed][Sed]]
     - [[#graphviz][Graphviz]]
+    - [[#systemd][Systemd]]
     - [[#general-interpreter][General interpreter]]
       - [[#tabnine][TabNine]]
     - [[#web-mode][Web mode]]
@@ -2567,6 +2568,7 @@ I don't work with sed scripts very often, but when I do it's best to have help.
 (package! graphviz-dot-mode)
 #+end_src
 
+*** Systemd
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! systemd)
 #+end_src
