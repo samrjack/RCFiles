@@ -8,6 +8,13 @@
   (interactive)
   (variable-pitch-mode))
 
+(defun local/remove-display-text-property (start end)
+  "Remote all text properties from START to END.
+This is useful when copying stuff with a display property set
+from elsewhere."
+  (interactive "r")
+  (set-text-properties start end nil))
+
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
 

@@ -40,6 +40,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#fonts-and-language][Fonts and language]]
       - [[#chinese-support][Chinese support]]
       - [[#fonts][Fonts]]
+      - [[#text-properties][Text properties]]
     - [[#custom-settings-file][Custom settings file]]
     - [[#theming][Theming]]
     - [[#debugging][Debugging]]
@@ -662,6 +663,17 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font 
 #+begin_src emacs-lisp :tangle no
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+#+end_src
+
+**** Text properties
+Sometimes text properties can get in the way of debugging so this function makes it easy to remove it.
+#+begin_src emacs-lisp
+(defun local/remove-display-text-property (start end)
+  "Remote all text properties from START to END.
+This is useful when copying stuff with a display property set
+from elsewhere."
+  (interactive "r")
+  (set-text-properties start end nil))
 #+end_src
 
 *** Custom settings file
