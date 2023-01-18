@@ -9,7 +9,7 @@
         {
             "complex_modifications": {
                 "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
+                    "basic.simultaneous_threshold_milliseconds": 1500,
                     "basic.to_delayed_action_delay_milliseconds": 500,
                     "basic.to_if_alone_timeout_milliseconds": 1000,
                     "basic.to_if_held_down_threshold_milliseconds": 500,
@@ -37,9 +37,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": {
                                     "key_code": "4",
@@ -69,9 +66,6 @@
                                         "key_up_order": "insensitive"
                                     }
                                 },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
-                                },
                                 "to": {
                                     "key_code": "q",
                                     "modifiers": [
@@ -99,9 +93,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -132,9 +123,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -171,9 +159,6 @@
                                         "key_up_order": "insensitive"
                                     }
                                 },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
-                                },
                                 "to": [
                                     {
                                         "shell_command": "open -a GoLand.app"
@@ -199,9 +184,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -229,9 +211,6 @@
                                         "key_up_order": "insensitive"
                                     }
                                 },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
-                                },
                                 "to": [
                                     {
                                         "shell_command": "open -a finder.app"
@@ -257,9 +236,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -295,9 +271,6 @@
                                         ]
                                     }
                                 },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
-                                },
                                 "to": [
                                     {
                                         "set_variable": {
@@ -330,9 +303,6 @@
                                         "key_up_order": "insensitive"
                                     }
                                 },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
-                                },
                                 "to": [
                                     {
                                         "shell_command": "open -a Spotify.app"
@@ -358,9 +328,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -388,9 +355,6 @@
                                         "key_up_order": "insensitive"
                                     }
                                 },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
-                                },
                                 "to": [
                                     {
                                         "shell_command": "${HOME}/.emacs.d/bin/org-capture"
@@ -416,9 +380,6 @@
                                         "key_down_order": "strict",
                                         "key_up_order": "insensitive"
                                     }
-                                },
-                                "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -877,9 +838,6 @@
                 }
             ],
             "name": "Default profile",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
-            },
             "selected": true,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
