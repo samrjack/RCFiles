@@ -1448,6 +1448,11 @@ These packages are for writing stuff and actually working with text of any sort.
 (setq ispell-dictionary "en")
 #+end_src
 
+Setting my personal dictionary to add words to so that its within my own files.
+#+begin_src emacs-lisp
+(setq ispell-personal-dictionary (file-name-concat "~" ".doom.d" "ispell" "en.pws"))
+#+end_src
+
 ***** Snippets
 Yas-snippets are a nice package for inserting snippets into code.
 
