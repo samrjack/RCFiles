@@ -93,6 +93,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#fold-from-anywhere-on-line][Fold from anywhere on line]]
         - [[#tab-as-fold-toggling][Tab as fold toggling]]
       - [[#fill-column][Fill column]]
+      - [[#minimap][Minimap]]
     - [[#working-within-a-buffer][Working within a buffer]]
       - [[#undo][Undo]]
       - [[#writing][Writing]]
@@ -2928,6 +2929,10 @@ These packages are ones that I'm working on and therefore need to point my confi
 ;;   (:host github
 ;;    :repo "samrjack/zoom-window"
 ;;    :branch "handlePerspRename"))
+
+(package! minimap :recipe
+  (:host github
+   :repo "samrjack/minimap"))
 #+end_src
 
 * Auto Tangle                                               :tangle:

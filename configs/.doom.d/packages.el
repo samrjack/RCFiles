@@ -172,3 +172,7 @@
 ;;   (:host github
 ;;    :repo "samrjack/zoom-window"
 ;;    :branch "handlePerspRename"))
+
+(package! minimap :recipe
+  (:host github
+   :repo "samrjack/minimap"))
