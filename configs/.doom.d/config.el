@@ -481,6 +481,12 @@ The return value is the yanked text."
   (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
 
 (after! lsp-mode
+  (setq lsp-headerline-breadcrumb-enable t)
+  (setq lsp-lens-enable t)
+  (setq lsp-use-lsp-ui t)
+  )
+
+(after! lsp-mode
   (defvar local/lsp-mode-keymap (make-sparse-keymap))
   (map! :map local/lsp-mode-keymap
         "d" #'lsp-find-definition
