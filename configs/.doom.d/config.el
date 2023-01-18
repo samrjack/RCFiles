@@ -209,7 +209,11 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-(setq whitespace-style '(trailing tabs tab-mark))
+(setq whitespace-style '(face
+                         tabs spaces trailing lines space-before-tab newline
+                         indentation empty space-after-tab
+                         space-mark tab-mark newline-mark
+                         missing-newline-at-eof))
 
 (setq-default line-spacing 0.15)
 
