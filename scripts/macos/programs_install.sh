@@ -22,9 +22,12 @@ brew install --cask zoom
 brew install --cask vlc
 
 # Emacs build dependencies
+brew install gcc
+brew install libgccjit
 brew install imagemagick
 brew install mailutils
 brew install dbus
+brew install tree-sitter
 
 brew tap d12frosted/emacs-plus
 brew update

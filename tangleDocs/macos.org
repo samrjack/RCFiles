@@ -104,17 +104,26 @@ Emacs is a lisp programming environment that's better known for it's text editin
 brew install --cask emacs
 #+end_src
 
-The standard emacs install that brew provides uses 27.2 but version 28 has a feature that compiles the elisp code to byte code which is too good to pass up!
+The standard emacs install that brew provides uses 28 but being able to specify build flags is fantastic. See [[https://github.com/d12frosted/homebrew-emacs-plus][here]] for documentation.
 #+begin_src sh
 # Emacs build dependencies
+brew install gcc
+brew install libgccjit
 brew install imagemagick
 brew install mailutils
 brew install dbus
+brew install tree-sitter
 
 brew tap d12frosted/emacs-plus
 brew update
 brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-cg433n-icon --with-mailutils --with-ctags --with-xwidgets
 #+end_src
+
+Here's the formula for installing emacs 29 which will be coming up soon.
+#+begin_src sh :tangle no
+brew install emacs-plus@29 --with-imagemagick --with-native-comp --with-dbus --with-modern-cg433n-icon --with-mailutils --with-ctags --with-xwidgets --with-poll
+#+end_src
+
 
 Once emacs is installed, it should be added to the applications section.
 #+begin_src sh :tangle ../scripts/macos/configure_settings.sh
