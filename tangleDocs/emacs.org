@@ -2121,14 +2121,15 @@ Finally, add all the functions to a key map.
 ***** Tags
 Tags are useful for marking particular sub-trees.
 #+begin_src emacs-lisp
-(setq org-tags-column 60)
+(after! org
+  (setq org-tags-column 60))
 #+end_src
 
 #+begin_src emacs-lisp
-(defun local/org-align-all-tags()
+(defun local/org-align-all-tags ()
   "Just align all the tags please."
-  (interactivek
-  (org-align-tags t)))
+  (interactive)
+  (org-align-tags t))
 #+end_src
 
 **** Babel
@@ -2498,7 +2499,7 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
   (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
 #+end_src
 
-** Programming Languages
+** Programming Languages                                   :programming:
 Since I'm a programmer, I mostly use emacs for programming tasks. This section is all the extra settings I need to add to make that work properly.
 *** Open CAD
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -2918,7 +2919,7 @@ There is an issue where evil search isn't looking in folded code. See [[https://
 (after! evil (evil-select-search-module 'evil-search-module 'isearch))
 #+end_src
 
-* Shadowed packages
+* Shadowed packages                                         :fix:
 These packages are ones that I'm working on and therefore need to point my configuration at my own fork instead of towards the parent repo so they can be tested and verified.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 ;; (package! ts-fold :recipe
