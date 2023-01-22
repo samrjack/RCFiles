@@ -413,8 +413,6 @@ I find this order matches how I want folds to work"
 ;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 
-(setq ispell-personal-dictionary (file-name-concat "~" ".doom.d" "ispell" "en.pws"))
-
 (setq local/snippet-dir (concat doom-user-dir "snippets/"))
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
 

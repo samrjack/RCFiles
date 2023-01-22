@@ -1471,9 +1471,19 @@ These packages are for writing stuff and actually working with text of any sort.
 #+end_src
 
 Setting my personal dictionary to add words to so that its within my own files.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq ispell-personal-dictionary (file-name-concat "~" ".doom.d" "ispell" "en.pws"))
 #+end_src
+
+Register personal dictionary with ispell.
+#+begin_src emacs-lisp :tangle no
+(add-hook! 'spell-fu-mode-hook
+  (lambda ()
+    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "zh"))
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary "en-personal" (file-name-concat "~" ".doom.d" "ispell" "en.pws")))))
+#+end_src
+
 
 ***** Snippets
 Yas-snippets are a nice package for inserting snippets into code.
