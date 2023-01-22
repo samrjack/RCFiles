@@ -332,188 +332,8 @@ brew install --cask musescore
 #+end_src
 
 * CLI tools
-** Utils
-These are packages that add functionality or utility functions that are often used in basic shell commands to chain things together. Glue code basically.
-
-*** Core utils
-The standard GNU utilities. Although these are provided with MacOS already, the ones included here should have the standard option flags which will make my life easier (for the most part...).
-#+begin_src sh
-brew install coreutils
-#+end_src
-
-*** More utils
-Other useful utils for working with command line. Namely ~vipe~ which allows you to use ~$EDITOR~ in middle of a pipeline.
-#+begin_src sh
-brew install moreutils
-#+end_src
-
-*** Other individual tools
-Besides from the utils packages, these are some useful alternative versions of common built in commands.
-**** Gawk
-GNU version of AWK. Turned off so as to not interfere with AWK itself for now. Not sure why it's not included with the name ~gawk~.
-#+begin_src sh
-brew unlink awk
-brew install gawk
-#+end_src
-
-**** Mawk
-Another cool awk interpreter.
-#+begin_src sh
-brew install mawk
-#+end_src
-**** Bingrep
-A grep utility for searching through binary files.
-#+begin_src sh
-brew install bingrep
-#+end_src
-**** Grep
-The GNU version of grep. Has PCRE lookaheads and what not.
-#+begin_src sh
-brew install grep
-#+end_src
-
-**** Ripgrep
-A fast grep tool for finding files. Used in emacs.
-#+begin_src sh
-brew install ripgrep-all
-#+end_src
-
-**** Silver searcher
-Another fast grep tool for finding files. Also used in emacs.
-#+begin_src sh
-brew install ag
-#+end_src
-
-** awscli
-A CLI tool for accessing and using AWS resources.
-#+begin_src sh
-brew install awscli
-#+end_src
-
-Along with this, usually when using the aws CLI you also need to authenticate and hence use this:
-#+begin_src sh
-brew install aws-iam-authenticator
-#+end_src
-
-** tmux
-Tmux is a terminal multiplexer and session daemon. It works really well for having your own set of desktops in the terminal itself.
-#+begin_src sh
-brew install tmux
-#+end_src
-
-** wget
-Wget is a web downloader similar to curl. It gets used instead of curl in a couple of places so it's good to have installed.
-#+begin_src sh
-brew install wget
-#+end_src
-
-** HttPie
-An alternative to curl and wget.
-#+begin_src sh
-brew install httpie
-#+end_src
-
-** sl
-Sl is the steam locomotive program. Who doesn't like trains?
-#+begin_src sh
-brew install sl
-#+end_src
-
-** fd
-Fd is a find-like utility.
-#+begin_src sh
-brew install fd
-#+end_src
-
-** ranger
-Ranger is a terminal file manager. Nice to use when you need to manipulate files.
-#+begin_src sh
-brew install ranger
-#+end_src
-
-** pass
-Pass is an open source package manager.
-#+begin_src sh
-brew install pass
-#+end_src
-
-** cmatrix
-Cmatrix allows you to enter the (c)Matrix!
-#+begin_src sh
-brew install cmatrix
-#+end_src
-
-** pandoc
-Pandoc is a converter that transpiles several different kinds of docs such as markdown into latex or Org into latex or wikix into latex... I mostly use it for turning org files into pdfs or wiki pages.
-#+begin_src sh
-brew install pandoc
-#+end_src
-
-** asciidoc
-Converts asciidoc files into DocBook or HTML.
-#+begin_src sh
-brew install asciidoc
-#+end_src
-
-** htop
-Htop is a terminal based process viewer and manager.
-#+begin_src sh
-brew install htop
-#+end_src
-
-** tldr
-Tldr is a program that provides example usage for several common cli tools out there.
-#+begin_src sh
-brew install tldr
-#+end_src
-
-** onefetch
-Onefetch is a tool that summarizes a git repository in a clean way to give you an idea of what it contains and by whom.
-#+begin_src sh
-brew install onefetch
-#+end_src
-
-** neofetch
-Neofetch is a tool that summarizes a system's resources in a nice little print out.
-#+begin_src sh
-brew install neofetch
-#+end_src
-
-** jq/yq
-Jq is a cli tool for JSON reading and manipulation.
-#+begin_src sh
-brew install jq
-#+end_src
-
-Yq is jq's yaml equivalent.
-#+begin_src sh
-brew install yq
-#+end_src
-
-** tty-clock
-Tty-clock is a... clock, in the... tty.
-#+begin_src sh
-brew install tty-clock
-#+end_src
-
-** ffmpeg
-Ffmpeg is a super powerful cli video and photo modifier.
-#+begin_src sh
-brew install ffmpeg
-#+end_src
-
-** pdftk
-PDFtk is a utility function that allows you to combine PDFs together into a single PDF document.
-#+begin_src sh
-brew install pdftk-java
-#+end_src
-
-To use PDFtk, you simply need to run a command like the following
-#+begin_src sh :tangle no
-pdftk dir_of_files/* cat output "combined.pdf" # cat stands for for concatenate
-#+end_src
-
 ** Shells
+Anything that deals with shells or working within the terminal.
 *** Bash
 #+begin_src sh
 brew install bash
@@ -535,79 +355,198 @@ There's a weird issue that causes zsh to show a warning when starting up. This f
 sudo chmod -R 755 /usr/local/share
 #+end_src
 
-** Cmake
+*** tmux
+Tmux is a terminal multiplexer and session daemon. It works really well for having your own set of desktops in the terminal itself.
+#+begin_src sh
+brew install tmux
+#+end_src
+
+** CLI interface functions
+These functions are simple cli interfaces that follow the unix standard, and as such are useful for piping things to do processing.
+*** Utils
+These are packages that add functionality or utility functions that are often used in basic shell commands to chain things together. Glue code basically.
+**** Core utils
+The standard GNU utilities. Although these are provided with MacOS already, the ones included here should have the standard option flags which will make my life easier (for the most part...).
+#+begin_src sh
+brew install coreutils
+#+end_src
+
+**** More utils
+Other useful utils for working with command line. Namely ~vipe~ which allows you to use ~$EDITOR~ in middle of a pipeline.
+#+begin_src sh
+brew install moreutils
+#+end_src
+
+**** Other individual tools
+Besides from the utils packages, these are some useful alternative versions of common built in commands.
+***** Gawk
+GNU version of AWK. Turned off so as to not interfere with AWK itself for now. Not sure why it's not included with the name ~gawk~.
+#+begin_src sh
+brew unlink awk
+brew install gawk
+#+end_src
+
+***** Mawk
+Another cool awk interpreter.
+#+begin_src sh
+brew install mawk
+#+end_src
+***** Bingrep
+A grep utility for searching through binary files.
+#+begin_src sh
+brew install bingrep
+#+end_src
+***** Grep
+The GNU version of grep. Has PCRE lookaheads and what not.
+#+begin_src sh
+brew install grep
+#+end_src
+
+***** Ripgrep
+A fast grep tool for finding files. Used in emacs.
+#+begin_src sh
+brew install ripgrep-all
+#+end_src
+
+***** Silver searcher
+Another fast grep tool for finding files. Also used in emacs.
+#+begin_src sh
+brew install ag
+#+end_src
+
+*** awscli
+A CLI tool for accessing and using AWS resources.
+#+begin_src sh
+brew install awscli
+#+end_src
+
+Along with this, usually when using the aws CLI you also need to authenticate and hence use this:
+#+begin_src sh
+brew install aws-iam-authenticator
+#+end_src
+
+*** wget
+Wget is a web downloader similar to curl. It gets used instead of curl in a couple of places so it's good to have installed.
+#+begin_src sh
+brew install wget
+#+end_src
+
+*** HttPie
+An alternative to curl and wget.
+#+begin_src sh
+brew install httpie
+#+end_src
+
+*** fd
+Fd is a find-like utility.
+#+begin_src sh
+brew install fd
+#+end_src
+
+*** jq/yq
+Jq is a cli tool for JSON reading and manipulation.
+#+begin_src sh
+brew install jq
+#+end_src
+
+Yq is jq's yaml equivalent.
+#+begin_src sh
+brew install yq
+#+end_src
+
+*** Cmake
 Used for vterm in emacs.
 #+begin_src sh
 brew install cmake
 #+end_src
 
-** Ledger
-Ledger is a CLI program for double-entry accounting. Neat!
-#+begin_src sh
-brew install ledger
-#+end_src
-
-** Cloc
-Cloc is a program that counts lines of code in files.
-#+begin_src sh
-brew install cloc
-#+end_src
-
-** Sops
-Tool for working with encrypted files and secrets.
-#+begin_src sh
-brew install sops
-#+end_src
-
-** k9 interface
-Cli tool for interfacing with kubernetes
-#+begin_src sh
-brew install k9s
-#+end_src
-
-** RabbitMQ
-A local viewer for the [[https://www.rabbitmq.com/][Rabbit MQ]] messaging system.
-#+begin_src sh
-brew install rabbitmq
-#+end_src
-
-** Pgcli
-A tool for accessing postgresSQL databases from command line. Has some pretty neat auto-completion and syntax highlighting!
-#+begin_src sh
-brew install pgcli
-#+end_src
-
-** Nmap
-A useful network scanner.
-#+begin_src sh
-brew install nmap
-#+end_src
-
-** Difftastic
-A tool for viewing syntax-aware diffs.
-#+begin_src sh
-brew install difftastic
-#+end_src
-
-** Hstr
-A history manager that provides suggestions of previous commands.
-#+begin_src sh
-brew install hstr
-#+end_src
-
-** Speedtest cli
-When dealing with internet issues, it helps to be able to run a speed test from the command line.
-#+begin_src sh
-brew install speedtest_cli
-#+end_src
-
-** Z
+*** Z
 A smart ~cd~.
 #+begin_src sh
 brew install z
 #+end_src
 
-** Git simulator
+** CLI programs
+These are full on programs in the CLI that aren't meant to be paired with other tools in a chain.
+*** sl
+Sl is the steam locomotive program. Who doesn't like trains?
+#+begin_src sh
+brew install sl
+#+end_src
+
+*** ranger
+Ranger is a terminal file manager. Nice to use when you need to manipulate files.
+#+begin_src sh
+brew install ranger
+#+end_src
+
+*** cmatrix
+Cmatrix allows you to enter the (c)Matrix!
+#+begin_src sh
+brew install cmatrix
+#+end_src
+
+*** htop
+Htop is a terminal based process viewer and manager.
+#+begin_src sh
+brew install htop
+#+end_src
+
+*** tldr
+Tldr is a program that provides example usage for several common cli tools out there.
+#+begin_src sh
+brew install tldr
+#+end_src
+
+*** Ledger
+Ledger is a CLI program for double-entry accounting. Neat!
+#+begin_src sh
+brew install ledger
+#+end_src
+
+*** tty-clock
+Tty-clock is a... clock, in the... tty.
+#+begin_src sh
+brew install tty-clock
+#+end_src
+
+*** Nmap
+A useful network scanner.
+#+begin_src sh
+brew install nmap
+#+end_src
+
+*** k9 interface
+Cli tool for interfacing with kubernetes
+#+begin_src sh
+brew install k9s
+#+end_src
+
+*** RabbitMQ
+A local viewer for the [[https://www.rabbitmq.com/][Rabbit MQ]] messaging system.
+#+begin_src sh
+brew install rabbitmq
+#+end_src
+
+*** pass
+Pass is an open source package manager.
+#+begin_src sh
+brew install pass
+#+end_src
+
+*** Pgcli
+A tool for accessing postgresSQL databases from command line. Has some pretty neat auto-completion and syntax highlighting!
+#+begin_src sh
+brew install pgcli
+#+end_src
+
+*** Hstr
+A history manager that provides suggestions of previous commands.
+#+begin_src sh
+brew install hstr
+#+end_src
+
+*** Git simulator
 This little tool is helpful for showing how git's commands work. Info [[   https://initialcommit.com/blog/git-sim][here]].
 
 First we need to install dependencies.
@@ -619,6 +558,75 @@ pip3 install manim
 Then install git-sim through pip.
 #+begin_src sh
 pip3 install git-sim
+#+end_src
+
+*** Difftastic
+A tool for viewing syntax-aware diffs.
+#+begin_src sh
+brew install difftastic
+#+end_src
+
+*** Speedtest cli
+When dealing with internet issues, it helps to be able to run a speed test from the command line.
+#+begin_src sh
+brew install speedtest_cli
+#+end_src
+
+** info dumpers
+These help provide info about the system they're running on.
+*** onefetch
+Onefetch is a tool that summarizes a git repository in a clean way to give you an idea of what it contains and by whom.
+#+begin_src sh
+brew install onefetch
+#+end_src
+
+*** neofetch
+Neofetch is a tool that summarizes a system's resources in a nice little print out.
+#+begin_src sh
+brew install neofetch
+#+end_src
+
+*** Cloc
+Cloc is a program that counts lines of code in files.
+#+begin_src sh
+brew install cloc
+#+end_src
+
+** Converts
+These programs run conversions.
+*** pdftk
+PDFtk is a utility function that allows you to combine PDFs together into a single PDF document.
+#+begin_src sh
+brew install pdftk-java
+#+end_src
+
+To use PDFtk, you simply need to run a command like the following
+#+begin_src sh :tangle no
+pdftk dir_of_files/* cat output "combined.pdf" # cat stands for for concatenate
+#+end_src
+
+*** ffmpeg
+Ffmpeg is a super powerful cli video and photo modifier.
+#+begin_src sh
+brew install ffmpeg
+#+end_src
+
+*** pandoc
+Pandoc is a converter that transpiles several different kinds of docs such as markdown into latex or Org into latex or wikix into latex... I mostly use it for turning org files into pdfs or wiki pages.
+#+begin_src sh
+brew install pandoc
+#+end_src
+
+*** asciidoc
+Converts asciidoc files into DocBook or HTML.
+#+begin_src sh
+brew install asciidoc
+#+end_src
+
+*** Sops
+Tool for working with encrypted files and secrets.
+#+begin_src sh
+brew install sops
 #+end_src
 
 * Utilities

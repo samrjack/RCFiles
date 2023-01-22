@@ -81,6 +81,19 @@ brew install --cask anki
 
 brew install --cask musescore
 
+brew install bash
+brew install bash-completion
+
+brew install zsh
+brew install zsh-autosuggestions
+brew install zsh-navigation-tools
+brew install zsh-lovers
+brew install zsh-syntax-highlighting
+brew install zsh-completions
+brew install zsh-you-should-use
+
+brew install tmux
+
 brew install coreutils
 
 brew install moreutils
@@ -102,83 +115,70 @@ brew install awscli
 
 brew install aws-iam-authenticator
 
-brew install tmux
-
 brew install wget
 
 brew install httpie
 
-brew install sl
-
 brew install fd
-
-brew install ranger
-
-brew install pass
-
-brew install cmatrix
-
-brew install pandoc
-
-brew install asciidoc
-
-brew install htop
-
-brew install tldr
-
-brew install onefetch
-
-brew install neofetch
 
 brew install jq
 
 brew install yq
 
-brew install tty-clock
-
-brew install ffmpeg
-
-brew install pdftk-java
-
-brew install bash
-brew install bash-completion
-
-brew install zsh
-brew install zsh-autosuggestions
-brew install zsh-navigation-tools
-brew install zsh-lovers
-brew install zsh-syntax-highlighting
-brew install zsh-completions
-brew install zsh-you-should-use
-
 brew install cmake
+
+brew install z
+
+brew install sl
+
+brew install ranger
+
+brew install cmatrix
+
+brew install htop
+
+brew install tldr
 
 brew install ledger
 
-brew install cloc
+brew install tty-clock
 
-brew install sops
+brew install nmap
 
 brew install k9s
 
 brew install rabbitmq
 
+brew install pass
+
 brew install pgcli
 
-brew install nmap
-
-brew install difftastic
-
 brew install hstr
-
-brew install speedtest_cli
-
-brew install z
 
 brew install py3cairo ffmpeg pango scipy
 pip3 install manim
 
 pip3 install git-sim
+
+brew install difftastic
+
+brew install speedtest_cli
+
+brew install onefetch
+
+brew install neofetch
+
+brew install cloc
+
+brew install pdftk-java
+
+brew install ffmpeg
+
+brew install pandoc
+
+brew install asciidoc
+
+brew install sops
 
 brew install postgresql
 brew install golang-migrate
