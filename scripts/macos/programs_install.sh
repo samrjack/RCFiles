@@ -254,13 +254,13 @@ brew install ktlint
 
 brew install black
 
+brew install pyenv
+
 brew install ghc
 brew install haskell-language-server
 brew install cabal-install
 
 brew install sbcl
-
-brew install pyenv
 
 brew install --cask racket
 
@@ -268,6 +268,8 @@ brew install rust
 brew install rustc-completion
 
 brew install rustup-init
+
+brew install rust-analyzer
 
 brew install tidy-html5
 
@@ -279,8 +281,6 @@ brew install shellcheck
 brew install grip
 
 brew install prettier
-
-brew install npm
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 

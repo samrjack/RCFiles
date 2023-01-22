@@ -825,10 +825,17 @@ brew install ktlint
 #+end_src
 
 *** Python
-In Emacs, python uses a language foratter called black:
+In Emacs, python uses a language formatter called black.
 #+begin_src sh
 brew install black
 #+end_src
+
+When using python, being able to use environments is a must due to the awkward package management.
+#+begin_src sh
+brew install pyenv
+#+end_src
+
+
 *** Haskell
 Install haskell compiler and its language server. Haskell is useful for scripting some things.
 #+begin_src sh
@@ -836,16 +843,11 @@ brew install ghc
 brew install haskell-language-server
 brew install cabal-install
 #+end_src
+
 *** Common Lisp
-For emacs.
+Common lisp is one of the most popular flavors of lisp in the wild. I Need it installed for use with emacs.
 #+begin_src sh
 brew install sbcl
-#+end_src
-
-*** Python
-When using python, being able to use environments is a must due to the awkward package management.
-#+begin_src sh
-brew install pyenv
 #+end_src
 
 *** Racket
@@ -869,7 +871,7 @@ brew install rustup-init
 #+end_src
 
 And then finally an analyzer to measure code performance.
-#+begin_src
+#+begin_src sh
 brew install rust-analyzer
 #+end_src
 
@@ -884,12 +886,14 @@ The whole latex environment. It's a big package but there should be enough space
 #+begin_src sh
 brew install texlive
 #+end_src
+
 *** Shell
 Various tools for making shell scripts.
 #+begin_src sh
 brew install shfmt
 brew install shellcheck
 #+end_src
+
 *** Markdown
 Grip is nice markdown viewer so you can see what you've written before publishing.
 #+begin_src sh
@@ -902,10 +906,6 @@ brew install prettier
 #+end_src
 
 *** Web
-Npm is the main package manager for anything and everything javascript. Better have it installed!
-#+begin_src sh
-brew install npm
-#+end_src
 
 Nvm for managing node versions.
 #+begin_src sh
