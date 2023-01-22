@@ -87,14 +87,6 @@ echo "#     compinit"                                            >> ~/.shell_set
 echo "# fi"                                                      >> ~/.shell_setup/aliases.local.sh
 #+end_src
 
-* Path
-Since macos uses some aliases and environment values that are different from my standard sort of linux environments, this script sets up the local shell setup files so the system runs smoothly.
-#+begin_src sh :tangle ../scripts/macos/make_path.sh
-#!/bin/bash
-echo 'export PATH="/opt/homebrew/bin:${PATH}"'
-echo 'export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:${PATH}"' >> ~/.shell_setup/path_setup.local.sh
-#+end_src
-
 * Applications
 ** Terminals
 *** Iterm
