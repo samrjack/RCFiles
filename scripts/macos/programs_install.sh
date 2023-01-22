@@ -7,8 +7,16 @@ then
 fi
 
 brew tap buo/cask-upgrade
+
+brew tap buo/cask-upgrade
 brew install mas
 sudo softwareupdate --install-rosetta
+
+brew install python3
+
+pip3 install poetry
+
+brew install npm
 
 mas install 497799835 # Xcode
 sudo xcodebuild -license accept

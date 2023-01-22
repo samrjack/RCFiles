@@ -12,6 +12,7 @@ Here we need to install brew and add some other package manager related packages
 #!/bin/bash
 #+end_src
 
+*** Brew
 Here we need to install brew to make sure everything installs smoothly. If brew is already installed we don't reinstall it since that is a pain.
 #+begin_src sh
 if ! command -v brew &> /dev/null
@@ -21,11 +22,34 @@ then
 fi
 #+end_src
 
+Once brew is installed, We'll tap this repo to help with cask management.
+#+begin_src sh
+brew tap buo/cask-upgrade
+#+end_src
+
+*** Mac App Store
 Then we add ~mas~ which is the =Mac App Store= program which is used to install app store apps from the command line.
 #+begin_src sh
 brew tap buo/cask-upgrade
 brew install mas
 sudo softwareupdate --install-rosetta
+#+end_src
+
+*** Pip
+Pip is the package manager for python. It is used to install a ton of useful python utilities.
+#+begin_src sh
+brew install python3
+#+end_src
+
+And then install poetry since it's a standard dependency manager for pip.
+#+begin_src sh
+pip3 install poetry
+#+end_src
+
+*** NPM
+Npm is the main package manager for anything and everything javascript. Better have it installed!
+#+begin_src sh
+brew install npm
 #+end_src
 
 *** Xcode
