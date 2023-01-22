@@ -607,6 +607,20 @@ A smart ~cd~.
 brew install z
 #+end_src
 
+** Git simulator
+This little tool is helpful for showing how git's commands work. Info [[   https://initialcommit.com/blog/git-sim][here]].
+
+First we need to install dependencies.
+#+begin_src sh
+brew install py3cairo ffmpeg pango scipy
+pip3 install manim
+#+end_src
+
+Then install git-sim through pip.
+#+begin_src sh
+pip3 install git-sim
+#+end_src
+
 * Utilities
 ** Postgresql
 #+begin_src sh
@@ -803,6 +817,7 @@ For formatting java code in emacs.
 #+begin_src sh
 brew install clang-format
 #+end_src
+
 *** Kotlin
 Kotlin is a JVM language with lots of nice features. Essentially what you would hope java to be.
 #+begin_src sh

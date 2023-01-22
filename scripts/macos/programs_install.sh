@@ -175,6 +175,11 @@ brew install speedtest_cli
 
 brew install z
 
+brew install py3cairo ffmpeg pango scipy
+pip3 install manim
+
+pip3 install git-sim
+
 brew install postgresql
 brew install golang-migrate
 
