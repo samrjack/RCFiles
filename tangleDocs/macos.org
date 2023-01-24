@@ -38,7 +38,7 @@ sudo softwareupdate --install-rosetta
 *** Pip
 Pip is the package manager for python. It is used to install a ton of useful python utilities.
 #+begin_src sh
-brew install python3
+brew install python
 #+end_src
 
 And then install poetry since it's a standard dependency manager for pip.
@@ -331,6 +331,12 @@ Musescore 4 is an open source music score writing software. There's a great vide
 brew install --cask musescore
 #+end_src
 
+** Locust
+This is a load testing program for hitting endpoints.
+#+begin_src sh
+brew intsall locust
+#+end_src
+
 * CLI tools
 ** Shells
 Anything that deals with shells or working within the terminal.
@@ -572,6 +578,11 @@ When dealing with internet issues, it helps to be able to run a speed test from 
 brew install speedtest_cli
 #+end_src
 
+*** Youtube-dl
+This program helps to download youtube videos from the command line.
+#+begin_src sh
+brew install youtube-dl
+#+end_src
 ** info dumpers
 These help provide info about the system they're running on.
 *** onefetch
@@ -805,6 +816,12 @@ brew install direnv
 #+end_src
 
 ** Programming languages
+*** Android
+Sometimes being able to open up and work on android apps is useful. Here I'll install android studio so that it is available when needed.
+#+begin_src sh
+brew install --cask android-studio
+#+end_src
+
 *** Go
 A clean simple little language. See the [[https://go.dev][golang]] website.
 #+begin_src sh
@@ -820,8 +837,18 @@ And the linter that goes along with it.
 #+begin_src sh
 brew install golangci-lint
 #+end_src
+*** C
+Always have to be able to compile some quick C code!
+#+begin_src sh
+brew install gcc
+#+end_src
 *** Java
-For formatting java code in emacs.
+Installing java to for industrial purposes.
+#+begin_src sh
+brew install java
+#+end_src
+
+For formatting java code in editors.
 #+begin_src sh
 brew install clang-format
 #+end_src
@@ -829,10 +856,53 @@ brew install clang-format
 *** Kotlin
 Kotlin is a JVM language with lots of nice features. Essentially what you would hope java to be.
 #+begin_src sh
+brew install kotlin
+#+end_src
+
+Pre-install the kotlin LSP server.
+#+begin_src sh
+brew install kotlin-language-server
+#+end_src
+
+Kotlin has a linter too.
+#+begin_src sh
 brew install ktlint
 #+end_src
 
+*** Scala
+The second most functional JVM language.
+#+begin_src sh
+brew install scala
+#+end_src
+
+*** Clojure
+Clojure is the lisp-y jvm language.
+#+begin_src sh
+brew install clojure
+#+end_src
+
+And get that LSP!
+#+begin_src sh
+brew install clojure-lsp
+#+end_src
+
+And then this is a formatter for clojure and clojurescript.
+#+begin_src sh
+brew install --cask zprint
+#+end_src
+
+*** Clojurescript
+clojurescript is for writing clojure for the web.
+#+begin_src sh
+brew install clojurescript
+#+end_src
+
 *** Python
+Python should be installed above for pip, but marking it here too to be sure.
+#+begin_src sh
+brew install python
+#+end_src
+
 In Emacs, python uses a language formatter called black.
 #+begin_src sh
 brew install black
@@ -843,6 +913,10 @@ When using python, being able to use environments is a must due to the awkward p
 brew install pyenv
 #+end_src
 
+and finally an LSP server for making this easier to use.
+#+begin_src sh
+pip3 install pyright
+#+end_src
 
 *** Haskell
 Install haskell compiler and its language server. Haskell is useful for scripting some things.
@@ -852,6 +926,12 @@ brew install haskell-language-server
 brew install cabal-install
 #+end_src
 
+*** Elm
+Haskell for the web.
+#+begin_src sh
+brew install elm
+brew install elm-format
+#+end_src
 *** Common Lisp
 Common lisp is one of the most popular flavors of lisp in the wild. I Need it installed for use with emacs.
 #+begin_src sh
@@ -862,6 +942,13 @@ brew install sbcl
 Racket is a popular lisp language.
 #+begin_src sh
 brew install --cask racket
+#+end_src
+
+*** Scheme
+There isn't really any one single scheme, but they all are lisps so close enough.
+#+begin_src sh
+brew install gambit-scheme
+brew install sagittarius-scheme
 #+end_src
 
 *** Rust
@@ -883,6 +970,23 @@ And then finally an analyzer to measure code performance.
 brew install rust-analyzer
 #+end_src
 
+*** Erlang
+#+begin_src sh
+brew install erlang
+brew install wrangler
+#+end_src
+*** Elixer
+An erlang for the web.
+#+begin_src sh
+brew install elixir
+brew install elixir-ls
+#+end_src
+
+*** Ocaml
+An interesting functional programming language.
+#+begin_src sh
+brew install ocaml
+#+end_src
 *** Html
 Great set of HTML tools.
 #+begin_src sh
@@ -911,6 +1015,28 @@ brew install grip
 Prettier is a tool for cleaning up markdown files.
 #+begin_src sh
 brew install prettier
+#+end_src
+
+This is an lsp tool for markdown (and LaTeX, but I don't use that as much).
+#+begin_src sh
+brew install ltex-ls
+#+end_src
+
+*** Terraform
+A tool for standardizing web architecture.
+#+begin_src sh
+brew install terraform
+brew install terraform-docs
+#+end_src
+
+The most common LSP.
+#+begin_src sh
+brew install terraform-ls
+#+end_src
+
+And this tool helps convert existing architecture into terraform files.
+#+begin_src sh
+brew install terraformer
 #+end_src
 
 *** Web

@@ -12,7 +12,7 @@ brew tap buo/cask-upgrade
 brew install mas
 sudo softwareupdate --install-rosetta
 
-brew install python3
+brew install python
 
 pip3 install poetry
 
@@ -80,6 +80,8 @@ brew install --cask flameshot
 brew install --cask anki
 
 brew install --cask musescore
+
+brew intsall locust
 
 brew install bash
 brew install bash-completion
@@ -164,6 +166,8 @@ brew install difftastic
 
 brew install speedtest_cli
 
+brew install youtube-dl
+
 brew install onefetch
 
 brew install neofetch
@@ -242,27 +246,57 @@ brew install editorconfig
 
 brew install direnv
 
+brew install --cask android-studio
+
 brew install go
 
 brew install gopls
 
 brew install golangci-lint
 
+brew install gcc
+
+brew install java
+
 brew install clang-format
 
+brew install kotlin
+
+brew install kotlin-language-server
+
 brew install ktlint
+
+brew install scala
+
+brew install clojure
+
+brew install clojure-lsp
+
+brew install --cask zprint
+
+brew install clojurescript
+
+brew install python
 
 brew install black
 
 brew install pyenv
 
+pip3 install pyright
+
 brew install ghc
 brew install haskell-language-server
 brew install cabal-install
 
+brew install elm
+brew install elm-format
+
 brew install sbcl
 
 brew install --cask racket
+
+brew install gambit-scheme
+brew install sagittarius-scheme
 
 brew install rust
 brew install rustc-completion
@@ -270,6 +304,14 @@ brew install rustc-completion
 brew install rustup-init
 
 brew install rust-analyzer
+
+brew install erlang
+brew install wrangler
+
+brew install elixir
+brew install elixir-ls
+
+brew install ocaml
 
 brew install tidy-html5
 
@@ -281,6 +323,15 @@ brew install shellcheck
 brew install grip
 
 brew install prettier
+
+brew install ltex-ls
+
+brew install terraform
+brew install terraform-docs
+
+brew install terraform-ls
+
+brew install terraformer
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
