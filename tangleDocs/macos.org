@@ -344,6 +344,7 @@ Anything that deals with shells or working within the terminal.
 #+begin_src sh
 brew install bash
 brew install bash-completion
+brew install bash-language-server
 #+end_src
 *** Zsh
 #+begin_src sh
@@ -411,13 +412,14 @@ brew install grep
 ***** Ripgrep
 A fast grep tool for finding files. Used in emacs.
 #+begin_src sh
+brew install ripgrep
 brew install ripgrep-all
 #+end_src
 
 ***** Silver searcher
 Another fast grep tool for finding files. Also used in emacs.
 #+begin_src sh
-brew install ag
+brew install the_silver_searcher
 #+end_src
 
 *** awscli
@@ -665,6 +667,7 @@ brew install sops
 #+begin_src sh
 brew install postgresql
 brew install golang-migrate
+brew install sql-language-server
 #+end_src
 
 ** Docker
@@ -861,11 +864,13 @@ brew install golangci-lint
 Always have to be able to compile some quick C code!
 #+begin_src sh
 brew install gcc
+brew install ccls
 #+end_src
 *** Java
 Installing java to for industrial purposes.
 #+begin_src sh
 brew install java
+brew install jdtls
 #+end_src
 
 For formatting java code in editors.
@@ -893,6 +898,7 @@ brew install ktlint
 The second most functional JVM language.
 #+begin_src sh
 brew install scala
+brew install metals
 #+end_src
 
 *** Clojure
@@ -944,6 +950,7 @@ Install haskell compiler and its language server. Haskell is useful for scriptin
 brew install ghc
 brew install haskell-language-server
 brew install cabal-install
+brew install haskell-stack
 #+end_src
 
 *** Elm
@@ -1039,6 +1046,7 @@ brew install prettier
 
 This is an lsp tool for markdown (and LaTeX, but I don't use that as much).
 #+begin_src sh
+brew install marksman
 brew install ltex-ls
 #+end_src
 
@@ -1059,6 +1067,12 @@ And this tool helps convert existing architecture into terraform files.
 brew install terraformer
 #+end_src
 
+*** Ansible
+A tool to automate deployment, configuration, and upgrading remote servers.
+#+begin_src sh
+brew install ansible
+brew install ansible-language-server
+#+end_src
 *** Web
 
 Nvm for managing node versions.
@@ -1072,6 +1086,13 @@ npm -g install js-beautify
 npm -g install stylelint
 #+end_src
 
+*** Other
+A place for other programming language things like LSPs that aren't worth their own section.
+
+LSP for YAML.
+#+begin_src sh
+brew install yaml-language-server
+#+end_src
 * Full system install script
 When I need to install on a whole system, I want to have a single script I can run to install basically everything and not need to worry about which scripts to run first or in what order.
 #+begin_src sh :tangle ../scripts/macos/full_system_install.sh

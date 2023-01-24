@@ -85,6 +85,7 @@ brew intsall locust
 
 brew install bash
 brew install bash-completion
+brew install bash-language-server
 
 brew install zsh
 brew install zsh-autosuggestions
@@ -109,9 +110,10 @@ brew install bingrep
 
 brew install grep
 
+brew install ripgrep
 brew install ripgrep-all
 
-brew install ag
+brew install the_silver_searcher
 
 brew install awscli
 
@@ -198,6 +200,7 @@ brew install sops
 
 brew install postgresql
 brew install golang-migrate
+brew install sql-language-server
 
 brew install --cask docker
 
@@ -267,8 +270,10 @@ brew install gopls
 brew install golangci-lint
 
 brew install gcc
+brew install ccls
 
 brew install java
+brew install jdtls
 
 brew install clang-format
 
@@ -279,6 +284,7 @@ brew install kotlin-language-server
 brew install ktlint
 
 brew install scala
+brew install metals
 
 brew install clojure
 
@@ -299,6 +305,7 @@ pip3 install pyright
 brew install ghc
 brew install haskell-language-server
 brew install cabal-install
+brew install haskell-stack
 
 brew install elm
 brew install elm-format
@@ -336,6 +343,7 @@ brew install grip
 
 brew install prettier
 
+brew install marksman
 brew install ltex-ls
 
 brew install terraform
@@ -345,7 +353,12 @@ brew install terraform-ls
 
 brew install terraformer
 
+brew install ansible
+brew install ansible-language-server
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 npm -g install js-beautify
 npm -g install stylelint
+
+brew install yaml-language-server
