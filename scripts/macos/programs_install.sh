@@ -176,7 +176,19 @@ brew install cloc
 
 brew install pdftk-java
 
-brew install ffmpeg
+brew tap homebrew-ffmpeg/ffmpeg
+brew upfdate
+
+brew install chromaprint
+
+brew tap amiaopensource/amiaos
+brew install amiaopensource/amiaos/decklinksdk
+
+brew tap lescanauxdiscrets/tap
+brew install lescanauxdiscrets/tap/zvbi
+
+brew uninstall ffmpeg # Uninstall in case it was previously installed
+brew install homebrew-ffmpeg/ffmpeg/ffmpeg $(brew options homebrew-ffmpeg/ffmpeg/ffmpeg --compact)
 
 brew install pandoc
 
