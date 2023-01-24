@@ -67,6 +67,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#scratch-buffer][Scratch buffer]]
     - [[#directory-navigation][Directory navigation]]
     - [[#vlf-very-large-files][VLF (Very Large Files)]]
+    - [[#file-info][File info]]
   - [[#workspace-management][Workspace management]]
     - [[#perspectives][Perspectives]]
     - [[#tab-bar-mode][Tab bar mode]]
@@ -1046,6 +1047,23 @@ Then setup the package later.
 #+begin_src emacs-lisp
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+#+end_src
+
+*** File info
+This little package displays info about a file in a clean usable way.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! file-info :recipe (:host github :repo "artawower/file-info.el"))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! file-info
+  :config
+  (setq hydra-hint-display-type 'posframe)
+  (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
+                                               :internal-border-width 2
+                                               :internal-border-color "#61AFEF"
+                                               :left-fringe 16
+                                               :right-fringe 16)))
 #+end_src
 
 ** Workspace management

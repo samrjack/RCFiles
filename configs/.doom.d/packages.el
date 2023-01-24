@@ -22,6 +22,8 @@
 
 (package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el")))
 
+(package! file-info :recipe (:host github :repo "artawower/file-info.el"))
+
 (package! project-rootfile)
 
 (package! zoom-window)
