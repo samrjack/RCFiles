@@ -83,6 +83,8 @@ brew install --cask musescore
 
 brew intsall locust
 
+brew install homebrew/cask-versions/virtualbox-beta
+
 brew install bash
 brew install bash-completion
 brew install bash-language-server

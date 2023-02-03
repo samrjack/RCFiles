@@ -337,6 +337,12 @@ This is a load testing program for hitting endpoints.
 brew intsall locust
 #+end_src
 
+** Virtual Box
+A virtual environment program.
+#+begin_src sh
+brew install homebrew/cask-versions/virtualbox-beta
+#+end_src
+
 * CLI tools
 ** Shells
 Anything that deals with shells or working within the terminal.
