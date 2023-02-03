@@ -91,6 +91,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
           - [[#js-folding][JS Folding]]
           - [[#java-folding][Java Folding]]
           - [[#shell-folding][Shell Folding]]
+          - [[#python-folding][Python Folding]]
         - [[#origami-folding][Origami folding]]
         - [[#fold-from-anywhere-on-line][Fold from anywhere on line]]
         - [[#tab-as-fold-toggling][Tab as fold toggling]]
@@ -1341,6 +1342,24 @@ Javascript folding already works pretty well but there are a few tweaks I'd like
 (after! ts-fold
   (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
 #+end_src
+
+****** Python Folding
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-python-list
+      '((function_definition . ts-fold-range-python)
+        (class_definition . ts-fold-range-python)
+        (list . ts-fold-range-seq)
+        (if_statement . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (comment lambda
+                 (node offset)
+                 (ts-fold-range-line-comment node offset "#"))))
+
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'python-mode local/ts-fold-parsers-python-list))
+#+end_src
+
+
 
 ***** Origami folding
 Origami mode has pretty good default folding for normal code blocks. See ts-fold for a good, though more specific, alternative method.
