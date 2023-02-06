@@ -85,6 +85,9 @@ brew intsall locust
 
 brew install homebrew/cask-versions/virtualbox-beta
 
+brew tap iina/homebrew-mpv-iina
+brew install mpv-iina
+
 brew install bash
 brew install bash-completion
 brew install bash-language-server
@@ -212,6 +215,12 @@ brew install lastpass-cli
 brew install --cask 1clipboard
 
 brew install --cask background-music
+
+brew install --cask hiddenbar
+
+brew install --cask keycastr
+
+brew install --cask monitorcontrol
 
 mas install 937984704 # Amphetamine
 

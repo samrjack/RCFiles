@@ -343,6 +343,12 @@ A virtual environment program.
 brew install homebrew/cask-versions/virtualbox-beta
 #+end_src
 
+** IINA
+iina is a great video player that will play all sorts of high res or other formats that may be hard to get working elsewhere.
+#+begin_src sh
+brew tap iina/homebrew-mpv-iina
+brew install mpv-iina
+#+end_src
 * CLI tools
 ** Shells
 Anything that deals with shells or working within the terminal.
@@ -699,6 +705,23 @@ brew install --cask 1clipboard
 Background music is a nice program for managing the audio streams on your computer.
 #+begin_src sh
 brew install --cask background-music
+#+end_src
+
+** Hidden bar
+This tool lets you control what gets shown in the program bar at the top of the screen.
+#+begin_src sh
+brew install --cask hiddenbar
+#+end_src
+
+** Key castr
+A tool for showing what keys have been pressed. Important for demonstrating macros or validating behavior.
+#+begin_src sh
+brew install --cask keycastr
+#+end_src
+** Monitor control
+A tool for adjusting a monitor's volume and brightness.
+#+begin_src sh
+brew install --cask monitorcontrol
 #+end_src
 
 ** Amphetamine
