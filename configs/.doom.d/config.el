@@ -330,6 +330,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (class_definition . ts-fold-range-python)
         (list . ts-fold-range-seq)
         (if_statement . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (dictionary . ts-fold-range-seq)
         (comment lambda
                  (node offset)
                  (ts-fold-range-line-comment node offset "#"))))

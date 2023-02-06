@@ -19,3 +19,4 @@ dist/*
 .idea/*
 vendor/*
 local*.yaml
+/venv
