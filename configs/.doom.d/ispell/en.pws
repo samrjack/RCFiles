@@ -1,14 +1,16 @@
-personal_ws-1.1 en 83
+personal_ws-1.1 en 88
 SPC
 anil
 anki
 ansible
 args
 auth
+authed
 backend
 clojurescript
 config
 configs
+dev
 dired
 duckduckgo
 el
@@ -56,7 +58,10 @@ otas
 pacmacs
 pandoc
 pomodoro
+pre
 prototyped
+provisionable
+py
 racket
 repo
 rust
