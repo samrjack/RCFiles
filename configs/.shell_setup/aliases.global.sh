@@ -67,6 +67,7 @@ alias add="awk '{ sum += \$1 } END { print sum }'"
 alias locst="localstack"
 
 alias viewPath='echo $PATH | sed -e "s/:/\n/g"'
+alias path='echo $PATH | sed -e "s/:/\n/g"'
 
 function magit () {
     git_root=$(git rev-parse --show-toplevel)
