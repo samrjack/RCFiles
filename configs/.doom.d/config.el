@@ -283,17 +283,18 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
   (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
 
 (setq local/ts-fold-parsers-yaml-list
-      '((block_mapping_pair . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))))
+      '((comment . (lambda (node offset) (ts-fold-range-line-comment node offset "#")))
+        (block_mapping_pair . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))))
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'yaml-mode local/ts-fold-parsers-yaml-list))
 
 (setq local/ts-fold-parsers-javascript-list
-      '((object . ts-fold-range-seq)
-        (array . ts-fold-range-seq)
-        (export_clause . ts-fold-range-seq)
+      '((object          . ts-fold-range-seq)
+        (array           . ts-fold-range-seq)
+        (export_clause   . ts-fold-range-seq)
         (statement_block . ts-fold-range-seq)
-        (comment . ts-fold-range-c-like-comment)))
+        (comment         . ts-fold-range-c-like-comment)))
 
 (after! ts-fold
   (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
@@ -301,15 +302,15 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
 (setq local/ts-fold-parsers-java-list
       '((block . ts-fold-range-seq)
-       (element_value_array_initializer . ts-fold-range-seq)
-       (module_body . ts-fold-range-seq)
-       (enum_body . ts-fold-range-seq)
-       (class_body . ts-fold-range-seq)
-       (constructor_body . ts-fold-range-seq)
-       (annotation_type_body . ts-fold-range-seq)
-       (interface_body . ts-fold-range-seq)
-       (array_initializer . ts-fold-range-seq)
-       (block_comment . (ts-fold-range-seq 1 -1))))
+        (element_value_array_initializer . ts-fold-range-seq)
+        (module_body . ts-fold-range-seq)
+        (enum_body . ts-fold-range-seq)
+        (class_body . ts-fold-range-seq)
+        (constructor_body . ts-fold-range-seq)
+        (annotation_type_body . ts-fold-range-seq)
+        (interface_body . ts-fold-range-seq)
+        (array_initializer . ts-fold-range-seq)
+        (block_comment . (ts-fold-range-seq 1 -1))))
 
 (after! ts-fold
   (local/update-ts-fold-definitions 'java-mode local/ts-fold-parsers-java-list))
@@ -317,7 +318,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 (setq local/ts-fold-parsers-shell-list
       '((do_group . (ts-fold-range-seq 1 -3))
         (compound_statement . ts-fold-range-seq)
-        (expansion          . ts-fold-range-seq)
+        (if_statement . (lambda (node offset) (ts-fold-range-markers node offset "then" "fi")))
         (comment
          . (lambda (node offset)
              (ts-fold-range-line-comment node offset "#")))))
@@ -327,13 +328,13 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 
 (setq local/ts-fold-parsers-python-list
       '((function_definition . ts-fold-range-python)
-        (class_definition . ts-fold-range-python)
-        (list . ts-fold-range-seq)
-        (if_statement . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
-        (dictionary . ts-fold-range-seq)
-        (comment lambda
-                 (node offset)
-                 (ts-fold-range-line-comment node offset "#"))))
+        (class_definition    . ts-fold-range-python)
+        (list                . ts-fold-range-seq)
+        (dictionary          . ts-fold-range-seq)
+        (block               . (ts-fold-range-seq -1 1))
+        ;; (if_statement        . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (comment             . (lambda (node offset) (ts-fold-range-line-comment node offset "#")))))
+
 
 
 (after! ts-fold
