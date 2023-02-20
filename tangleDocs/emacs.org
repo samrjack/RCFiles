@@ -3023,6 +3023,12 @@ There is an issue where evil search isn't looking in folded code. See [[https://
 (after! evil (evil-select-search-module 'evil-search-module 'isearch))
 #+end_src
 
+Fix ~global-git-commit-mode~ issue.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
+(package! with-editor :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab")
+#+end_src
+
 * Shadowed packages                                         :fix:
 These packages are ones that I'm working on and therefore need to point my configuration at my own fork instead of towards the parent repo so they can be tested and verified.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
