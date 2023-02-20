@@ -1,4 +1,4 @@
-personal_ws-1.1 en 91
+personal_ws-1.1 en 95
 SPC
 anil
 anki
@@ -8,6 +8,7 @@ auth
 authed
 backend
 backfill
+cli
 clojurescript
 config
 configs
@@ -48,6 +49,7 @@ kotlin
 kubernetes
 lastpass
 linter
+lookaheads
 lorem
 lsp
 lsps
@@ -80,6 +82,7 @@ toolchain
 transpiles
 treemacs
 ui
+utils
 viktor
 vimrc
 vterm
@@ -90,3 +93,4 @@ workspaces
 xcode
 xkcd
 yaml
+zsh

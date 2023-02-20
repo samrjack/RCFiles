@@ -380,6 +380,11 @@ Tmux is a terminal multiplexer and session daemon. It works really well for havi
 brew install tmux
 #+end_src
 
+This little package may or may not be needed for some of MacOS's specific needs with tmux.
+#+begin_src sh
+brew install reattach-to-user-namespace
+#+end_src
+
 ** CLI interface functions
 These functions are simple cli interfaces that follow the unix standard, and as such are useful for piping things to do processing.
 *** Utils

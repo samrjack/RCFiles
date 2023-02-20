@@ -102,6 +102,8 @@ brew install zsh-you-should-use
 
 brew install tmux
 
+brew install reattach-to-user-namespace
+
 brew install coreutils
 
 brew install moreutils
