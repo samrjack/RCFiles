@@ -852,6 +852,12 @@ Make undo revert smaller sections of text instead of all text added while in ins
 (setq evil-want-fine-undo t)
 #+end_src
 
+Remove evil repeat key from ~M-.~.
+#+begin_src emacs-lisp
+(after! evil
+  (define-key evil-normal-state-map (kbd "M-.") nil))
+#+end_src
+
 **** Evil snipe mode
 ***** Snipe mode off by default
 I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.

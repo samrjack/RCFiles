@@ -83,6 +83,9 @@ so only show the modeline when this is not the case"
 
 (setq evil-want-fine-undo t)
 
+(after! evil
+  (define-key evil-normal-state-map (kbd "M-.") nil))
+
 ; Remove default snipe mode
 (remove-hook! (doom-first-input) 'evil-snipe-mode)
 ; There can be problems between snipe mode and magit mode.
