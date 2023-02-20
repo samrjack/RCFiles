@@ -979,6 +979,19 @@ if no org extension is given then it will be automatically appended."
 (after! go-mode
   (add-hook 'before-save-hook #'gofmt-before-save))
 
+(setq dap-python-debugger 'debugpy)
+(defun dap-python--pyenv-executable-find (command)
+  (with-venv (executable-find "python")))
+
+(defun local/setup-dap-for-python ()
+  "sets up all the dap settings for use with python."
+  (require 'dap-python))
+
+(use-package! dap-mode
+  :after lsp-mode
+  :commands dap-debug
+  :hook ((python-mode . dap-ui-mode) (python-mode . dap-mode) (python-mode . local/setup-dap-for-python)))
+
 (add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
 
 (setq web-mode-script-padding standard-indent)

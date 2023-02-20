@@ -184,6 +184,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
   - [[#programming-languages-1][Programming Languages]]
     - [[#open-cad][Open CAD]]
     - [[#go-mode][Go mode]]
+    - [[#python][Python]]
     - [[#emacs-lisp][Emacs Lisp]]
     - [[#scheme][Scheme]]
     - [[#javascript][Javascript]]
@@ -2617,6 +2618,30 @@ Also when in go-mode, I want to ~gofmt~ to be run whenever a save occurs.
 #+begin_src emacs-lisp
 (after! go-mode
   (add-hook 'before-save-hook #'gofmt-before-save))
+#+end_src
+
+*** Python
+Python is a popular programming language with some annoying setup requirements.
+
+First we want this ~with-env~ package for working with python's environment system.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! with-venv)
+#+end_src
+
+And then we'll want to set up ~dap~ for debugging.
+#+begin_src emacs-lisp
+(setq dap-python-debugger 'debugpy)
+(defun dap-python--pyenv-executable-find (command)
+  (with-venv (executable-find "python")))
+
+(defun local/setup-dap-for-python ()
+  "sets up all the dap settings for use with python."
+  (require 'dap-python))
+
+(use-package! dap-mode
+  :after lsp-mode
+  :commands dap-debug
+  :hook ((python-mode . dap-ui-mode) (python-mode . dap-mode) (python-mode . local/setup-dap-for-python)))
 #+end_src
 
 *** Emacs Lisp

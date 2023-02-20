@@ -111,6 +111,8 @@
 
 (package! scad-mode)
 
+(package! with-venv)
+
 (package! geiser)
 (package! geiser-guile)
 (package! geiser-mit)
