@@ -1,4 +1,4 @@
-personal_ws-1.1 en 88
+personal_ws-1.1 en 90
 SPC
 anil
 anki
@@ -7,6 +7,7 @@ args
 auth
 authed
 backend
+backfill
 clojurescript
 config
 configs
@@ -45,6 +46,7 @@ keychain
 keymap
 kotlin
 kubernetes
+lastpass
 linter
 lorem
 lsp
