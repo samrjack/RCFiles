@@ -1109,6 +1109,11 @@ Nvm for managing node versions.
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 #+end_src
 
+Install javascript run time.
+#+begin_src sh
+brew install deno
+#+end_src
+
 Once npm is installed, it can be used to install packages useful for web development.
 #+begin_src sh
 npm -g install js-beautify

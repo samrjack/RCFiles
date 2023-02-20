@@ -369,6 +369,8 @@ brew install ansible-language-server
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
+brew install deno
+
 npm -g install js-beautify
 npm -g install stylelint
 
