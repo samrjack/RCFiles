@@ -185,3 +185,7 @@
 (package! minimap :recipe
   (:host github
    :repo "samrjack/minimap"))
+
+(package! treemacs :recipe
+  (:host github
+   :repo "samrjack/treemacs"))
