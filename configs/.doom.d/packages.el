@@ -12,6 +12,8 @@
 
 (package! dired-sidebar)
 
+(unpin! treemacs)
+
 (package! dirtree)
 (package! ztree)
 (package! dir-treeview)

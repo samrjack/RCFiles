@@ -892,6 +892,11 @@ Import a simpler sidebar package for when it's needed.
 (package! dired-sidebar)
 #+end_src
 
+Import a more up-to-date version of treemacs.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(unpin! treemacs)
+#+end_src
+
 Both treemacs and dired have their uses. Dired is better when I'm exploring the broader file system and kind of know where I'm going. Treemacs is fantastic for looking at a single project or two.
 #+begin_src emacs-lisp
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
