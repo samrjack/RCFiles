@@ -516,11 +516,29 @@ The return value is the yanked text."
 (with-eval-after-load 'rg
   (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
 
+(setq lsp-log-io t)
+
 (after! lsp-mode
   (setq lsp-headerline-breadcrumb-enable t)
   (setq lsp-lens-enable t)
-  (setq lsp-use-lsp-ui t)
-  )
+  (setq lsp-use-lsp-ui t))
+
+(add-hook! 'lsp-mode-hook #'lsp-ui-mode)
+(setq lsp-ui-sideline-show-diagnostics t
+      lsp-ui-sideline-show-hover t
+      lsp-ui-sideline-show-code-actions t
+      lsp-ui-sideline-update-mode 'point)
+
+(setq lsp-ui-peek-enable t)
+
+(after! lsp-ui
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+
+(setq lsp-ui-doc-enable 't
+      lsp-ui-doc-position 'at-point
+      lsp-ui-doc-show-with-cursor nil
+      lsp-ui-doc-show-with-mouse 't)
 
 (after! lsp-mode
   (defvar local/lsp-mode-keymap (make-sparse-keymap))

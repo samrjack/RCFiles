@@ -118,7 +118,7 @@
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
-       ;;csharp            ; unity, .NET, and mono shenanigans
+       ;;(csharp +lsp)     ; unity, .NET, and mono shenanigans
        ;;(dart +flutter)   ; paint ui and not much else
        data              ; config/data formats
        ;;dhall             ; config as code
@@ -201,12 +201,12 @@
            +tree-sitter)
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
-       ;;swift             ; who asked for emoji variables?
+       ;;(swift +lsp)      ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp         ; the tubes
             +tree-sitter)
        (yaml +lsp)       ; JSON, but readable
-       ;;zig               ; C, but simpler
+       ;;(zig +lsp)        ; C, but simpler
 
        :email
        (mu4e +gmail)     ; the great filter Hanson hadn't anticipated

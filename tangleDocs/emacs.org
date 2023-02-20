@@ -121,6 +121,9 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#bang][Bang!]]
       - [[#lsp-servers][LSP servers]]
         - [[#lsp-settings][lsp settings]]
+        - [[#lsp-ui][LSP ui]]
+        - [[#lsp-peek][LSP peek]]
+        - [[#lsp-ui-docs][LSP ui docs]]
         - [[#key-bindings][Key bindings]]
         - [[#golang][Golang]]
   - [[#independent-or-external-programs][Independent or external programs]]
@@ -421,7 +424,7 @@ These modules specialize in integration particular languages and their ecosystem
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
-       ;;csharp            ; unity, .NET, and mono shenanigans
+       ;;(csharp +lsp)     ; unity, .NET, and mono shenanigans
        ;;(dart +flutter)   ; paint ui and not much else
        data              ; config/data formats
        ;;dhall             ; config as code
@@ -504,12 +507,12 @@ These modules specialize in integration particular languages and their ecosystem
            +tree-sitter)
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
-       ;;swift             ; who asked for emoji variables?
+       ;;(swift +lsp)      ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp         ; the tubes
             +tree-sitter)
        (yaml +lsp)       ; JSON, but readable
-       ;;zig               ; C, but simpler
+       ;;(zig +lsp)        ; C, but simpler
 #+end_src
 
 ** Email
@@ -1719,14 +1722,49 @@ Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][
 **** LSP servers
 [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers.
 
+Turn on logging.
+#+begin_src emacs-lisp
+(setq lsp-log-io t)
+#+end_src
+
 ***** lsp settings
 Here are some settings to configure LSP mode.
 #+begin_src emacs-lisp
 (after! lsp-mode
   (setq lsp-headerline-breadcrumb-enable t)
   (setq lsp-lens-enable t)
-  (setq lsp-use-lsp-ui t)
-  )
+  (setq lsp-use-lsp-ui t))
+#+end_src
+
+***** LSP ui
+Activate ~lsp-ui-mode~.
+#+begin_src emacs-lisp
+(add-hook! 'lsp-mode-hook #'lsp-ui-mode)
+(setq lsp-ui-sideline-show-diagnostics t
+      lsp-ui-sideline-show-hover t
+      lsp-ui-sideline-show-code-actions t
+      lsp-ui-sideline-update-mode 'point)
+#+end_src
+
+***** LSP peek
+Make it so that checking sources using LSP only shows a small context instead of jumping to the file right away.
+#+begin_src emacs-lisp
+(setq lsp-ui-peek-enable t)
+#+end_src
+
+#+begin_src emacs-lisp
+(after! lsp-ui
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+#+end_src
+
+***** LSP ui docs
+Show docs for items.
+#+begin_src emacs-lisp
+(setq lsp-ui-doc-enable 't
+      lsp-ui-doc-position 'at-point
+      lsp-ui-doc-show-with-cursor nil
+      lsp-ui-doc-show-with-mouse 't)
 #+end_src
 
 ***** Key bindings
