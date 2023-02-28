@@ -1188,9 +1188,8 @@ Buffers are where the main action of emacs takes place. This section deals with 
 *** Buffer display
 This section contains packages and settings that affect how the buffer is rendered and seen by the user. This includes syntax highlighting, spacing preferences, etc.
 **** Line numbering
+This determines the style of line numbers in effect. If set to `nil', line numbers are disabled. For relative line numbers, set this to `relative'.
 #+begin_src emacs-lisp
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 #+end_src
 
@@ -1543,8 +1542,18 @@ Increase the undo limit since there's no real space limitations on modern system
 **** Writing
 These packages are for writing stuff and actually working with text of any sort.
 ***** Dictionary
+Fix spell-fu not being on main branch by default.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(unpin! spell-fu)
+(package! spell-fu :recipe
+  (:host codeberg
+   :repo "ideasman42/emacs-spell-fu"
+   :branch "main"))
+#+end_src
+
+
+Set the correct dictionary for spell check.
 #+begin_src emacs-lisp
-;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
 #+end_src
 
@@ -1555,11 +1564,21 @@ Setting my personal dictionary to add words to so that its within my own files.
 
 Register personal dictionary with ispell.
 #+begin_src emacs-lisp :tangle no
-(add-hook! 'spell-fu-mode-hook
-  (lambda ()
-    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "zh"))
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary "en-personal" (file-name-concat "~" ".doom.d" "ispell" "en.pws")))))
+(after! spell-fu
+  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "zh"))
+  (spell-fu-dictionary-add
+   (spell-fu-get-personal-dictionary "en-personal" (file-name-concat "~" ".doom.d" "ispell" "en.pws"))))
+#+end_src
+
+These are some help functions to work with spell-fu so that it's easier to debug and use.
+#+begin_src emacs-lisp
+(defun local/ispell-debug ()
+  "Toggle spell-fu debug and reset spell-fu mode"
+  (interactive)
+  (if spell-fu-debug
+      (setq spell-fu-debug nil)
+    (setq spell-fu-debug t))
+  (spell-fu-reset))
 #+end_src
 
 ***** Snippets
@@ -1616,8 +1635,8 @@ Set up a key map for lorem-ipsum and add it into the insert section.
 #+end_src
 
 ***** Flycheck mode
+Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 #+begin_src emacs-lisp
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! (doom-first-buffer) #'global-flycheck-mode)
 #+end_src
 
@@ -3075,6 +3094,11 @@ Fix ~global-git-commit-mode~ issue.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
 (package! with-editor :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab")
+#+end_src
+
+Fix double percent sign.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(unpin! doom-modeline)
 #+end_src
 
 * Shadowed packages                                         :fix:

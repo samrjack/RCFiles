@@ -220,8 +220,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Zoom window"
       "z" #'zoom-window-zoom)
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
 (setq whitespace-style '(face
@@ -456,8 +454,15 @@ I find this order matches how I want folds to work"
 ;; Let the undo buffer use up to 100Mb
 (setq undo-limit 100000000)
 
-;; Set the correct dictionary for spell check.
 (setq ispell-dictionary "en")
+
+(defun local/ispell-debug ()
+  "Toggle spell-fu debug and reset spell-fu mode"
+  (interactive)
+  (if spell-fu-debug
+      (setq spell-fu-debug nil)
+    (setq spell-fu-debug t))
+  (spell-fu-reset))
 
 (setq local/snippet-dir (concat doom-user-dir "snippets/"))
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
@@ -480,7 +485,6 @@ I find this order matches how I want folds to work"
       :desc "Write good mode"
       "t W" #'writegood-mode)
 
-;; Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
 (remove-hook! (doom-first-buffer) #'global-flycheck-mode)
 
 ;; Some paste related settings.
