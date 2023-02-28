@@ -337,8 +337,9 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
         (class_definition    . ts-fold-range-python)
         (list                . ts-fold-range-seq)
         (dictionary          . ts-fold-range-seq)
-        (block               . (ts-fold-range-seq -1 1))
-        ;; (if_statement        . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (for_statement       . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (if_statement        . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (elif_clause         . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
         (comment             . (lambda (node offset) (ts-fold-range-line-comment node offset "#")))))
 
 
