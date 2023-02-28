@@ -5,7 +5,7 @@
 
        :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
-       chinese           ; spend your 3 hours a week in Emacs
+       ;;chinese           ; spend your 3 hours a week in Emacs
        ;;japanese          ; ah, a man of culture
        ;;layout            ; auie,ctsrnm is the superior home row
 
@@ -14,8 +14,8 @@
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
-       (vertico +icons   ; tomorrow's search engine
-                +childframe)
+       ;;(vertico +icons   ; tomorrow's search engine
+       ;;         +childframe)
 
        :ui
        deft              ; notational velocity for Emacs

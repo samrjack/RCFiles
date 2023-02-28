@@ -142,6 +142,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
       - [[#kubel][Kubel]]
     - [[#bluetooth][Bluetooth]]
     - [[#collaborative-editing][Collaborative editing]]
+    - [[#startup-profiling][Startup profiling]]
   - [[#modepackage-settings][Mode/package settings]]
     - [[#mode-minder][Mode Minder]]
     - [[#elisp-shell][Elisp-shell]]
@@ -277,7 +278,7 @@ Modules in this category extend Emacs support for additional keyboard layouts an
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
        :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
-       chinese           ; spend your 3 hours a week in Emacs
+       ;;chinese           ; spend your 3 hours a week in Emacs
        ;;japanese          ; ah, a man of culture
        ;;layout            ; auie,ctsrnm is the superior home row
 #+end_src
@@ -290,8 +291,8 @@ These modules provide interfaces and frameworks completion, including code compl
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
-       (vertico +icons   ; tomorrow's search engine
-                +childframe)
+       ;;(vertico +icons   ; tomorrow's search engine
+       ;;         +childframe)
 #+end_src
 
 ** UI
@@ -2033,6 +2034,14 @@ turn them off when disabled."
 (add-hook! 'crdt-mode-hook #'local/crdt-enable-extras)
 #+end_src
 
+*** Startup profiling
+This is the directions for benchmarking doom's startup process.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! benchmark-init)
+#+end_src
+
+To use it, start up emacs using ~emacs --debug-init~ and then view the results with ~M-x benchmark-init/show-durations-tabuled~ or ~M-x benchmark-init/show-durations-tree~.
+
 ** Mode/package settings
 *** Mode Minder
 Although it's not really an important mode in and of itself, mode minder lets you look at all the major modes that are installed which can be quite helpful.
@@ -3114,6 +3123,7 @@ These packages are ones that I'm working on and therefore need to point my confi
 ;;    :repo "samrjack/zoom-window"
 ;;    :branch "handlePerspRename"))
 
+(unpin! minimap)
 (package! minimap :recipe
   (:host github
    :repo "samrjack/minimap"))

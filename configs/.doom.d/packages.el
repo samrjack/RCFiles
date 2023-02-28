@@ -83,6 +83,8 @@
 
 (package! crdt)
 
+(package! benchmark-init)
+
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 
 (package! org-reverse-datetree)
@@ -192,6 +194,7 @@
 ;;    :repo "samrjack/zoom-window"
 ;;    :branch "handlePerspRename"))
 
+(unpin! minimap)
 (package! minimap :recipe
   (:host github
    :repo "samrjack/minimap"))
