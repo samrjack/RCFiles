@@ -61,9 +61,9 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#settings][Settings]]
         - [[#new-keybinding][New keybinding]]
   - [[#file-management-and-selection][File management and selection]]
+    - [[#file-tree-viewer][File tree viewer]]
     - [[#sidebar-file-explorer][Sidebar file explorer]]
       - [[#settings-for-treemacs][Settings for treemacs]]
-    - [[#file-tree-viewer][File tree viewer]]
     - [[#scratch-buffer][Scratch buffer]]
     - [[#directory-navigation][Directory navigation]]
     - [[#vlf-very-large-files][VLF (Very Large Files)]]
@@ -892,6 +892,14 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 
 ** File management and selection
 When looking for files, these packages and settings help find what I'm looking for.
+*** File tree viewer
+This allows you to see all the recursive files in the current tree hierarchy (similar to the ~tree~ command).
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! dirtree)
+(package! ztree)
+(package! dir-treeview)
+#+end_src
+
 *** Sidebar file explorer
 Import a simpler sidebar package for when it's needed.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
@@ -1007,15 +1015,6 @@ And finally, close the config wrapping.
 #+begin_src emacs-lisp
 ))
 #+end_src
-
-*** File tree viewer
-This allows you to see all the recursive files in the current tree hierarchy (similar to the ~tree~ command).
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! dirtree)
-(package! ztree)
-(package! dir-treeview)
-#+end_src
-
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
 #+begin_src emacs-lisp
@@ -1042,8 +1041,14 @@ Within dired, the file info is a much more than I really need most of the time. 
   (interactive)
   (dired-hide-details-mode t))
 (add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
-
 #+end_src
+
+Add tab as a toggle for showing subtree.
+#+begin_src emacs-lisp
+(map! :map dired-mode-map
+      :n [tab] #'dired-subtree-toggle)
+#+end_src
+
 
 For showing file info in dired mode, a different keybinding can be added. However, for now, I don't really need it since it's already bound to ~)~.
 #+begin_src emacs-lisp :tangle no

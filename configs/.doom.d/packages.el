@@ -10,13 +10,13 @@
 
 (package! embark)
 
-(package! dired-sidebar)
-
-(unpin! treemacs)
-
 (package! dirtree)
 (package! ztree)
 (package! dir-treeview)
+
+(package! dired-sidebar)
+
+(unpin! treemacs)
 
 (package! dired-sidebar)
 (package! dired+)

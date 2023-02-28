@@ -164,6 +164,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
   (dired-hide-details-mode t))
 (add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
 
+(map! :map dired-mode-map
+      :n [tab] #'dired-subtree-toggle)
+
 (use-package! vlf-setup
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
