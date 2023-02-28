@@ -228,6 +228,4 @@
 
 )
 
-(when init-file-debug
-  (require 'benchmark-init)
-  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
+(setq byte-compile-warnings '(cl-functions))

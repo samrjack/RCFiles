@@ -1,5 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(when init-file-debug
+  (require 'benchmark-init)
+  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
+
 (setq user-full-name "Samuel Jackson"
       user-mail-address (concat "dsiq3g" "@" "gmail.com"))
 

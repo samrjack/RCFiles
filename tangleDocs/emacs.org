@@ -14,6 +14,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
   - [[#initialization][Initialization]]
   - [[#packages][Packages]]
   - [[#configuration][Configuration]]
+    - [[#benchmarking][Benchmarking]]
 - [[#doom-initialization][Doom Initialization]]
   - [[#documentation][Documentation]]
   - [[#start][Start]]
@@ -249,6 +250,16 @@ This sets up all the files used for configuration with the appropriate elisp fil
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 #+end_src
+
+*** Benchmarking
+This needs to be at the top of the file so that it can profile the rest of the loading sequence. Only used when running in ~debug-init~ mode.
+#+begin_src emacs-lisp
+(when init-file-debug
+  (require 'benchmark-init)
+  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
+#+end_src
+
+To use it, start up emacs using ~emacs --debug-init~ and then view the results with ~M-x benchmark-init/show-durations-tabuled~ or ~M-x benchmark-init/show-durations-tree~.
 
 * Doom Initialization                                       :doom:
 ** Documentation
@@ -2040,14 +2051,7 @@ This is the directions for benchmarking doom's startup process.
 (package! benchmark-init)
 #+end_src
 
-Then these lines turn it on when entering debug mode.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
-(when init-file-debug
-  (require 'benchmark-init)
-  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
-#+end_src
-
-To use it, start up emacs using ~emacs --debug-init~ and then view the results with ~M-x benchmark-init/show-durations-tabuled~ or ~M-x benchmark-init/show-durations-tree~.
+The main code for this package is in the file initialization section since it needs to be at the very top of the file.
 
 ** Mode/package settings
 *** Mode Minder
