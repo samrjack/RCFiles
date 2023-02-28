@@ -657,8 +657,6 @@ turn them off when disabled."
 
 (add-hook! 'crdt-mode-hook #'local/crdt-enable-extras)
 
-(require 'mode-minder nil 'noerror)
-
 (setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
 
 (defun eshell/clear ()

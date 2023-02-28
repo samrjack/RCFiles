@@ -2049,8 +2049,8 @@ Although it's not really an important mode in and of itself, mode minder lets yo
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 #+end_src
 
-And then this package needs to be loaded to work properly for some reason.
-#+begin_src emacs-lisp
+And then this package needs to be loaded to work properly for some reason. Not needed if using my own fork.
+#+begin_src emacs-lisp :tangle no
 (require 'mode-minder nil 'noerror)
 #+end_src
 
@@ -3131,6 +3131,10 @@ These packages are ones that I'm working on and therefore need to point my confi
 (package! treemacs :recipe
   (:host github
    :repo "samrjack/treemacs"))
+
+(package! mode-minder :recipe
+  (:host github
+   :repo "samrjack/mode-minder"))
 #+end_src
 
 * Auto Tangle                                               :tangle:
