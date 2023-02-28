@@ -2040,6 +2040,13 @@ This is the directions for benchmarking doom's startup process.
 (package! benchmark-init)
 #+end_src
 
+Then these lines turn it on when entering debug mode.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/init.el
+(when init-file-debug
+  (require 'benchmark-init)
+  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
+#+end_src
+
 To use it, start up emacs using ~emacs --debug-init~ and then view the results with ~M-x benchmark-init/show-durations-tabuled~ or ~M-x benchmark-init/show-durations-tree~.
 
 ** Mode/package settings
