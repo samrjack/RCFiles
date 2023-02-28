@@ -172,12 +172,10 @@
 
 (package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))
 
-;; (unpin! dired-git-info)
+(unpin! straight)
 
 ;; This is supposed to fix the issue but doesn't seem to work on macOS. Not sure why.
 ;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")
-
-(unpin! straight)
 
 (package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
 (package! with-editor :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab")
