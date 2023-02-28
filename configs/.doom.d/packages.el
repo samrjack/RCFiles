@@ -158,6 +158,8 @@
 
 (package! wordel :recipe (:host github :repo "progfolio/wordel"))
 
+(package! gnugo)
+
 (package! fireplace)
 
 (package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))

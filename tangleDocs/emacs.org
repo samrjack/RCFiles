@@ -212,6 +212,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
       - [[#threes][threes]]
       - [[#pacmacs][Pacmacs]]
       - [[#wordel][Wordel]]
+      - [[#gnu-go][GNU Go]]
     - [[#fireplace][Fireplace]]
     - [[#power-mode][Power mode!]]
   - [[#experimental-personal-functions][Experimental personal functions]]
@@ -1560,7 +1561,6 @@ Register personal dictionary with ispell.
      (spell-fu-get-personal-dictionary "en-personal" (file-name-concat "~" ".doom.d" "ispell" "en.pws")))))
 #+end_src
 
-
 ***** Snippets
 Yas-snippets are a nice package for inserting snippets into code.
 
@@ -2844,6 +2844,12 @@ A package for accessing and organizing your steam library from within emacs
 Wordel is a new little game that's a fun distraction.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! wordel :recipe (:host github :repo "progfolio/wordel"))
+#+end_src
+
+**** GNU Go
+Have fun playing some weiqi in emacs.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! gnugo)
 #+end_src
 
 *** Fireplace
