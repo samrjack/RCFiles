@@ -834,7 +834,7 @@ if no org extension is given then it will be automatically appended."
       (switch-to-buffer-other-window buf))))
 
 (setq org-clock-persist t)
-(org-clock-persistence-insinuate)
+(after! org-mode (org-clock-persistence-insinuate))
 
 (defvar local/org-time-map (make-sparse-keymap))
 ;; C-t normally creates new workspaces. I'd perfer immediate access to timers.

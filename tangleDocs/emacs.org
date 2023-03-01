@@ -2362,7 +2362,7 @@ And then add a function that shows the org-roam-ui in an x-widget.
 Cause timers to be saved and continue running even when emacs itself isn't running.
 #+begin_src emacs-lisp
 (setq org-clock-persist t)
-(org-clock-persistence-insinuate)
+(after! org-mode (org-clock-persistence-insinuate))
 #+end_src
 
 Make timers easier to access in org mode.
