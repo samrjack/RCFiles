@@ -470,6 +470,7 @@ I find this order matches how I want folds to work"
 
 (setq local/snippet-dir (concat doom-user-dir "snippets/"))
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+(yas-load-directory local/snippet-dir)
 
 (defvar local/lorem-ipsum-map (make-sparse-keymap))
 (map! :leader

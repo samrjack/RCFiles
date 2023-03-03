@@ -1612,6 +1612,7 @@ Adding my personal snippets directory.
 #+begin_src emacs-lisp
 (setq local/snippet-dir (concat doom-user-dir "snippets/"))
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+(yas-load-directory local/snippet-dir)
 #+end_src
 
 ****** Academic writing
