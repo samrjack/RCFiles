@@ -973,7 +973,23 @@ When using python, being able to use environments is a must due to the awkward p
 brew install pyenv
 #+end_src
 
-and finally an LSP server for making this easier to use.
+To properly manage imports, python has a tool called ~pyflakes~. And then to sort those imports, it has a separate tool called ~isort~.
+#+begin_src sh
+pip3 install pyflakes
+pip3 install isort
+#+end_src
+
+To work with python environments in emacs and elsewhere, I'll need the ~pipenv~ package.
+#+begin_src sh
+pip3 install pipenv
+#+end_src
+
+And testing in python is done using ~nosetests~.
+#+begin_src sh
+pip3 install nose3
+#+end_src
+
+And finally an LSP server for making this easier to use.
 #+begin_src sh
 pip3 install pyright
 #+end_src

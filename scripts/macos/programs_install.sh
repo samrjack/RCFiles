@@ -313,6 +313,13 @@ brew install black
 
 brew install pyenv
 
+pip3 install pyflakes
+pip3 install isort
+
+pip3 install pipenv
+
+pip3 install nose3
+
 pip3 install pyright
 
 brew install ghc
