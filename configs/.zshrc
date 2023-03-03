@@ -100,6 +100,9 @@ fi
 unset __conda_setup
 # <<< conda init <<<
 
+# Ocaml setup
+[[ ! -r "${HOME}/.opam/opam-init/init.zsh" ]] || source ${HOME}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 function kot() {
     kotlinc $1 -include-runtime -d a.jar
     java -jar a.jar

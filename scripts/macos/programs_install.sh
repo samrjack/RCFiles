@@ -345,6 +345,15 @@ brew install elixir-ls
 
 brew install ocaml
 
+brew install opam # Ocaml package manager
+[[ -d "${HOME}/.opam" ]] || opam init
+opam install -y dune # Ocaml build system
+opam install -y utop # Ocaml repl
+opam install -y ocp-indent # Ocaml auto indent
+opam install -y merlin # Ocaml completion engine
+opam install -y ocaml-lsp-server # Ocaml lsp server
+opam install -y ocamlformat # Code auto-formatter
+
 brew install tidy-html5
 
 brew install texlive

@@ -1044,9 +1044,21 @@ brew install elixir-ls
 #+end_src
 
 *** Ocaml
-An interesting functional programming language.
+An interesting functional programming language in the ML family.
 #+begin_src sh
 brew install ocaml
+#+end_src
+
+Of course, Ocaml has its own package manager that can be used to install ocaml packages. Maybe some day this will get moved to the top of for more general package installs but for now it works fine down here since I only use it to install Ocaml dependencies
+#+begin_src sh
+brew install opam # Ocaml package manager
+[[ -d "${HOME}/.opam" ]] || opam init
+opam install -y dune # Ocaml build system
+opam install -y utop # Ocaml repl
+opam install -y ocp-indent # Ocaml auto indent
+opam install -y merlin # Ocaml completion engine
+opam install -y ocaml-lsp-server # Ocaml lsp server
+opam install -y ocamlformat # Code auto-formatter
 #+end_src
 *** Html
 Great set of HTML tools.
