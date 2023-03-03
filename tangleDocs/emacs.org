@@ -995,17 +995,6 @@ Make treemacs pay attention to the directory structure to watch for new files/fo
     (treemacs-filewatch-mode t)
 #+end_src
 
-However, treemacs has an issue with macOS where the git status doesn't always get updated due to the file system. This workaround plus more info on the issue can be found [[https://github.com/Alexander-Miller/treemacs/issues/152][here]].
-#+begin_src emacs-lisp
-(after! treemacs
-  (defun local/treemacs-force-git-update-current-file ()
-    (let ((file (treemacs-canonical-path buffer-file-name)))
-      (treemacs-run-in-every-buffer
-       (when (treemacs-is-path file :in-workspace)
-         (treemacs-update-single-file-git-state file)))))
-  (when (eq system-type 'darwin) ;; Only need for MacOS
-    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
-#+end_src
 
 Set treemacs to use the default theme since file icons provide a lot more visual information.
 #+begin_src emacs-lisp :tangle no
@@ -1032,10 +1021,28 @@ Add git support.
        (treemacs-git-mode 'simple)))
 #+end_src
 
+Set width of sidebar.
+#+begin_src emacs-lisp
+    (setq treemacs-width 35)
+#+end_src
+
 And finally, close the config wrapping.
 #+begin_src emacs-lisp
 ))
 #+end_src
+
+However, treemacs has an issue with macOS where the git status doesn't always get updated due to the file system. This workaround plus more info on the issue can be found [[https://github.com/Alexander-Miller/treemacs/issues/152][here]].
+#+begin_src emacs-lisp
+(after! treemacs
+  (defun local/treemacs-force-git-update-current-file ()
+    (let ((file (treemacs-canonical-path buffer-file-name)))
+      (treemacs-run-in-every-buffer
+       (when (treemacs-is-path file :in-workspace)
+         (treemacs-update-single-file-git-state file)))))
+  (when (eq system-type 'darwin) ;; Only need for MacOS
+    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+#+end_src
+
 *** Scratch buffer
 The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
 #+begin_src emacs-lisp
