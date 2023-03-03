@@ -297,7 +297,8 @@ brew install kotlin-language-server
 brew install ktlint
 
 brew install scala
-brew install metals
+brew install metals # Scala LSP
+brew install coursier # Scala artifact fetcher
 
 brew install clojure
 

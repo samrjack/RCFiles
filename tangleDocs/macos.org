@@ -932,7 +932,8 @@ brew install ktlint
 The second most functional JVM language.
 #+begin_src sh
 brew install scala
-brew install metals
+brew install metals # Scala LSP
+brew install coursier # Scala artifact fetcher
 #+end_src
 
 *** Clojure
