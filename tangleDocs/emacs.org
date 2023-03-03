@@ -129,8 +129,9 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#golang][Golang]]
   - [[#independent-or-external-programs][Independent or external programs]]
     - [[#version-control][Version control]]
-      - [[#blamer][Blamer]]
+      - [[#inline-blame][Inline blame]]
         - [[#styling-for-magit][Styling for magit]]
+      - [[#sideline-blame][Sideline blame]]
       - [[#diff][Diff]]
       - [[#gutter][Gutter]]
     - [[#discord-integration][Discord integration]]
@@ -732,13 +733,13 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 I've found it necessary to access the debugger more often so here's an easy way to turn it on and off.
 #+begin_src emacs-lisp
 (map! :leader
-      :desc "debug on error"
+      :desc "Debug on error"
       "t d" #'toggle-debug-on-error
-      :desc "debug on quit"
+      :desc "Debug on quit"
       "t D" #'toggle-debug-on-quit
-      :desc "debug on entry"
+      :desc "Debug on entry"
       "t C-d" #'debug-on-entry
-      :desc "cancel debug on entry"
+      :desc "Cancel debug on entry"
       "t M-d" #'cancel-debug-on-entry)
 #+end_src
 *** Mode line
@@ -1851,19 +1852,20 @@ Some lsp servers need extra settings in place so those will be added here.
 ***** Golang
 In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
 #+begin_src emacs-lisp
-(setq lsp-go-build-flags ["-tags=integration"])
+(setq lsp-go-build-flags ["-tags=integration,e2e"])
 #+end_src
 
 ** Independent or external programs
 These are modes that provide some sort of specialized experience outside of the normal writing flow of emacs.
 *** Version control
 The only VC system I use right now is git, but others may come in the future. There are lots of nice functionality here for seeing what has changed in a file.
-**** Blamer
+**** Inline blame
 This module adds git commit information in line with code when turned on which can be nice when working through a code base.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! blamer)
 #+end_src
 
+This configures it to be a bit prettier.
 #+begin_src emacs-lisp
 (use-package blamer
   :defer 20
@@ -1873,9 +1875,19 @@ This module adds git commit information in line with code when turned on which c
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
                    :background nil
-                   :height 140
+                   :height 120
                    :italic t))))
 #+end_src
+
+I'm going to put the map in two places. The first is in the toggle menu and the second is in the git menu. That way I have multiple ways to stumble across this when I need it.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Git blamer"
+      "t B" #'blamer-mode
+      :desc "Git blamer"
+      "g C-b" #'blamer-mode)
+#+end_src
+
 
 ***** Styling for magit
 I may be able to format the magit blame in a useful way: [[https://www.reddit.com/r/emacs/comments/tunyg3/comment/i38iknd/][link]]
@@ -1891,6 +1903,22 @@ summary:
 
 (add-to-list 'magit-blame-styles 'local/margin-blame-style)
 #+end_src
+**** Sideline blame
+Packages for performing blame in the sideline of the buffer.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! sideline
+  :recipe (:host github :repo "emacs-sideline/sideline"))
+(package! sideline-blame
+  :recipe (:host github :repo "emacs-sideline/sideline-blame"))
+#+end_src
+
+Leaving off for now. Package still seems to be under development.
+#+begin_src emacs-lisp :tangle no
+(use-package sideline-blame
+  :init
+  (setq sideline-backends-left '((sideline-blame . down))))
+#+end_src
+
 **** Diff
 This is a nice package for visualizing git diffs in a more standard unix way than magit.
 #+begin_src elisp :tangle ../configs/.doom.d/packages.el

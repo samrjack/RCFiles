@@ -58,6 +58,11 @@
 
 (package! blamer)
 
+(package! sideline
+  :recipe (:host github :repo "emacs-sideline/sideline"))
+(package! sideline-blame
+  :recipe (:host github :repo "emacs-sideline/sideline-blame"))
+
 (package! diff-ansi)
 
 (package! elcord)

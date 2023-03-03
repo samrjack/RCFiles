@@ -25,13 +25,13 @@ from elsewhere."
 (setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
 
 (map! :leader
-      :desc "debug on error"
+      :desc "Debug on error"
       "t d" #'toggle-debug-on-error
-      :desc "debug on quit"
+      :desc "Debug on quit"
       "t D" #'toggle-debug-on-quit
-      :desc "debug on entry"
+      :desc "Debug on entry"
       "t C-d" #'debug-on-entry
-      :desc "cancel debug on entry"
+      :desc "Cancel debug on entry"
       "t M-d" #'cancel-debug-on-entry)
 
 (setq display-time-day-and-date t)
@@ -586,8 +586,14 @@ The return value is the yanked text."
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
                    :background nil
-                   :height 140
+                   :height 120
                    :italic t))))
+
+(map! :leader
+      :desc "Git blamer"
+      "t B" #'blamer-mode
+      :desc "Git blamer"
+      "g C-b" #'blamer-mode)
 
 (global-git-gutter-mode)
 
