@@ -196,6 +196,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#gitlab-ci][Gitlab CI]]
     - [[#vimrc][Vimrc]]
     - [[#sed][Sed]]
+    - [[#json][Json]]
     - [[#graphviz][Graphviz]]
     - [[#systemd][Systemd]]
     - [[#general-interpreter][General interpreter]]
@@ -2825,6 +2826,17 @@ Then I just add it to my javascript mode.
 I don't work with sed scripts very often, but when I do it's best to have help.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! sed-mode)
+#+end_src
+
+*** Json
+This is a good lispy-like json editor.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! json-par)
+#+end_src
+
+And turn it on for json mode.
+#+begin_src emacs-lisp
+(add-hook 'json-mode-hook (lambda () (json-par-mode 1)))
 #+end_src
 
 *** Graphviz

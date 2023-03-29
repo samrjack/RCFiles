@@ -141,6 +141,8 @@
 
 (package! sed-mode)
 
+(package! json-par)
+
 (package! graphviz-dot-mode)
 
 (package! systemd)

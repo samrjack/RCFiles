@@ -1016,6 +1016,8 @@ if no org extension is given then it will be automatically appended."
 
 (add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
 
+(add-hook 'json-mode-hook (lambda () (json-par-mode 1)))
+
 (setq web-mode-script-padding standard-indent)
 (setq web-mode-style-padding standard-indent)
 (setq web-mode-block-padding standard-indent)
