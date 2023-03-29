@@ -2750,6 +2750,11 @@ So far, I've found that hide-show minor mode is the only good way to fold elisp 
 (add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
 #+end_src
 
+Also want to have lispy available.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! lispy)
+#+end_src
+
 *** Scheme
 Scheme is a pretty nice lisp implementation. These packages make it even easier to work with.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el

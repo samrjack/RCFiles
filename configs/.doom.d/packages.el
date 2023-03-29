@@ -128,6 +128,8 @@
 
 (package! with-venv)
 
+(package! lispy)
+
 (package! geiser)
 (package! geiser-guile)
 (package! geiser-mit)
