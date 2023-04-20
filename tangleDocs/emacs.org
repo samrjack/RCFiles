@@ -1953,7 +1953,7 @@ Supposedly this can be used to connect with discord from emacs. Actual use is TB
 *** Speed reading
 Spray is a tool that flashes words on the screen in rapid succession to simulate speed reading. Sometimes useful to prevent yourself from re-reading over and over again.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! spray :recipe (:host nil :repo "https://git.sr.ht/~iank/spray"))
+(package! spray :recipe (:host github :repo "emacsmirror/spray"))
 #+end_src
 
 #+begin_src emacs-lisp

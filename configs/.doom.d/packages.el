@@ -67,7 +67,7 @@
 
 (package! elcord)
 
-(package! spray :recipe (:host nil :repo "https://git.sr.ht/~iank/spray"))
+(package! spray :recipe (:host github :repo "emacsmirror/spray"))
 
 (package! keycast)
 
