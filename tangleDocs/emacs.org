@@ -161,6 +161,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#tags][Tags]]
       - [[#babel][Babel]]
         - [[#clojure][Clojure]]
+        - [[#http][HTTP]]
       - [[#org-roam][Org Roam]]
         - [[#ui-1][UI]]
       - [[#timers-and-clock][Timers and clock]]
@@ -2353,6 +2354,12 @@ Several languages require LSPs or other back end code to be configured for babel
 
 #+begin_src emacs-lisp
 (setq org-bable-clojure-backend 'cider)
+#+end_src
+
+***** HTTP
+This lets me make http calls from within org mode.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! ob-http)
 #+end_src
 
 **** Org Roam
