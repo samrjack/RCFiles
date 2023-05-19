@@ -34,3 +34,7 @@
 	path = ~/.gitconfig.local
 [init]
 	defaultBranch = main
+[fech]
+	prune = true
+[rebase]
+	updateRefs = true
