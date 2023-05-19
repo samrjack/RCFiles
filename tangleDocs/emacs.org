@@ -182,6 +182,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
       - [[#org-chef][Org Chef]]
       - [[#org-graph][Org graph]]
       - [[#org-gantt][Org Gantt]]
+      - [[#org-verb][Org verb]]
     - [[#e-book-reader][E-book reader]]
       - [[#packages-1][Packages]]
       - [[#settings-2][Settings]]
@@ -2656,6 +2657,21 @@ Org chef is a package for saving cooking recipes from sites like [[https://www.a
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
 #+end_src
+
+**** Org verb
+This package is specifically about using org mode to structure large numbers of HTTP requests in headings.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! verb)
+#+end_src
+
+Then add the verb command map to the org map.
+#+begin_src emacs-lisp
+(map! :map org-mode-map
+      :localleader
+      :desc "verb requests"
+      "v" verb-command-map)
+#+end_src
+
 
 *** E-book reader
 **** Packages

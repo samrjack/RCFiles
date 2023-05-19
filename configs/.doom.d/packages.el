@@ -106,6 +106,8 @@
 (package! clj-refactor)
 (package! cider)
 
+(package! ob-http)
+
 (unpin! org-roam)
 
 (package! org-roam-ui)
@@ -119,6 +121,8 @@
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
 
 (package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
+
+(package! verb)
 
 ;; e-reader
 (package! calibredb)
