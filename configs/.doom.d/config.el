@@ -300,11 +300,14 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
   (local/update-ts-fold-definitions 'yaml-mode local/ts-fold-parsers-yaml-list))
 
 (setq local/ts-fold-parsers-javascript-list
-      '((object          . ts-fold-range-seq)
-        (array           . ts-fold-range-seq)
-        (export_clause   . ts-fold-range-seq)
-        (statement_block . ts-fold-range-seq)
-        (comment         . ts-fold-range-c-like-comment)))
+      '((object                   . ts-fold-range-seq)
+        (array                    . ts-fold-range-seq)
+        (export_clause            . ts-fold-range-seq)
+        (statement_block          . ts-fold-range-seq)
+        (formal_parameters        . local/ts-fold-range-multi-line-seq)
+        (arguments                . local/ts-fold-range-multi-line-seq)
+        (parenthesized_expression . local/ts-fold-range-multi-line-seq)
+        (comment                  . ts-fold-range-c-like-comment)))
 
 (after! ts-fold
   (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
@@ -578,7 +581,7 @@ The return value is the yanked text."
 
   (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
 
-(setq lsp-go-build-flags ["-tags=integration"])
+(setq lsp-go-build-flags ["-tags=integration,e2e"])
 
 (use-package blamer
   :defer 20
@@ -951,6 +954,11 @@ if no org extension is given then it will be automatically appended."
 
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
+
+(map! :map org-mode-map
+      :localleader
+      :desc "verb requests"
+      "v" verb-command-map)
 
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)

@@ -1349,11 +1349,14 @@ Yaml is a format for config files such as k8s files or helm files. I have to use
 Javascript folding already works pretty well but there are a few tweaks I'd like to make to get it to run a bit smoother.
 #+begin_src emacs-lisp
 (setq local/ts-fold-parsers-javascript-list
-      '((object          . ts-fold-range-seq)
-        (array           . ts-fold-range-seq)
-        (export_clause   . ts-fold-range-seq)
-        (statement_block . ts-fold-range-seq)
-        (comment         . ts-fold-range-c-like-comment)))
+      '((object                   . ts-fold-range-seq)
+        (array                    . ts-fold-range-seq)
+        (export_clause            . ts-fold-range-seq)
+        (statement_block          . ts-fold-range-seq)
+        (formal_parameters        . local/ts-fold-range-multi-line-seq)
+        (arguments                . local/ts-fold-range-multi-line-seq)
+        (parenthesized_expression . local/ts-fold-range-multi-line-seq)
+        (comment                  . ts-fold-range-c-like-comment)))
 
 (after! ts-fold
   (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
