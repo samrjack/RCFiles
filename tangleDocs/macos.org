@@ -491,6 +491,12 @@ Git annex is a tool for managing large files within git.
 brew install git-annex
 #+end_src
 
+*** XDG Ninja
+Checks and makes recommendations for managing config files.
+#+begin_src sh
+brew install xdg-ninja
+#+end_src
+
 *** Z
 A smart ~cd~.
 #+begin_src sh
