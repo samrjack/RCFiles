@@ -138,6 +138,8 @@ brew install yq
 
 brew install cmake
 
+brew install git-annex
+
 brew install z
 
 brew install sl

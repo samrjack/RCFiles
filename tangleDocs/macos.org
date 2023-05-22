@@ -485,6 +485,12 @@ Used for vterm in emacs.
 brew install cmake
 #+end_src
 
+*** Git Annex
+Git annex is a tool for managing large files within git.
+#+begin_src sh
+brew install git-annex
+#+end_src
+
 *** Z
 A smart ~cd~.
 #+begin_src sh
