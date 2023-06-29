@@ -195,6 +195,8 @@
 
 (package! doom-modeline :pin "918730eff72e155cfb31b012493a7f425bc48ff8")
 
+(unpin! lsp-mode)
+
 ;; (package! ts-fold :recipe
 ;;   (:host github
 ;;    :repo "samrjack/ts-fold"
