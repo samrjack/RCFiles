@@ -36,5 +36,3 @@
 	defaultBranch = main
 [fech]
 	prune = true
-[rebase]
-	updateRefs = true
