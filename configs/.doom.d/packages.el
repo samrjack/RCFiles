@@ -193,7 +193,7 @@
 (package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
 (package! with-editor :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab")
 
-(unpin! doom-modeline)
+(package! doom-modeline :pin "918730eff72e155cfb31b012493a7f425bc48ff8")
 
 ;; (package! ts-fold :recipe
 ;;   (:host github

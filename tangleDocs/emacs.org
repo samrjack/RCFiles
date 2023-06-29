@@ -3207,8 +3207,9 @@ Fix ~global-git-commit-mode~ issue.
 
 ** Double percent sign in modeline battery reporting
 Fix double percent sign.
+Pinned at a version just before the mode line transitioned to nerd fonts since nerd fonts don't seem to work well and don't seem to be generally integrated with doom emacs.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(unpin! doom-modeline)
+(package! doom-modeline :pin "918730eff72e155cfb31b012493a7f425bc48ff8")
 #+end_src
 
 ** Remove cl deprecation warning from startup
