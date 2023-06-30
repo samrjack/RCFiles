@@ -18,6 +18,13 @@
 
 (unpin! treemacs)
 
+(package! treemacs-all-the-icons)
+(package! treemacs-tab-bar)
+(package! treemacs-persp)
+(package! treemacs-magit)
+(package! treemacs-evil)
+(package! treemacs-projectile)
+
 (package! dired-sidebar)
 (package! dired+)
 (package! dired-subtree)

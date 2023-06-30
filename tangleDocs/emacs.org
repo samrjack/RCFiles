@@ -936,6 +936,17 @@ Import a more up-to-date version of treemacs.
 (unpin! treemacs)
 #+end_src
 
+Import other treemacs related packages.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! treemacs-all-the-icons)
+(package! treemacs-tab-bar)
+(package! treemacs-persp)
+(package! treemacs-magit)
+(package! treemacs-evil)
+(package! treemacs-projectile)
+#+end_src
+
+
 Both treemacs and dired have their uses. Dired is better when I'm exploring the broader file system and kind of know where I'm going. Treemacs is fantastic for looking at a single project or two.
 #+begin_src emacs-lisp
 (map! :n "C-n" #'dired-sidebar-toggle-sidebar)
@@ -1802,19 +1813,21 @@ Turn on logging.
 Here are some settings to configure LSP mode.
 #+begin_src emacs-lisp
 (after! lsp-mode
-  (setq lsp-headerline-breadcrumb-enable t)
-  (setq lsp-lens-enable t)
-  (setq lsp-use-lsp-ui t))
+  (setq lsp-headerline-breadcrumb-enable t
+        lsp-lens-enable t
+        lsp-use-lsp-ui t))
 #+end_src
 
 ***** LSP ui
 Activate ~lsp-ui-mode~.
 #+begin_src emacs-lisp
 (add-hook! 'lsp-mode-hook #'lsp-ui-mode)
-(setq lsp-ui-sideline-show-diagnostics t
-      lsp-ui-sideline-show-hover t
-      lsp-ui-sideline-show-code-actions t
-      lsp-ui-sideline-update-mode 'point)
+(after! lsp-ui
+  (setq lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-delay 0.7
+        lsp-ui-sideline-update-mode 'point))
 #+end_src
 
 ***** LSP peek
@@ -1832,10 +1845,12 @@ Make it so that checking sources using LSP only shows a small context instead of
 ***** LSP ui docs
 Show docs for items.
 #+begin_src emacs-lisp
-(setq lsp-ui-doc-enable 't
-      lsp-ui-doc-position 'at-point
-      lsp-ui-doc-show-with-cursor nil
-      lsp-ui-doc-show-with-mouse 't)
+(after! lsp-ui
+  (setq lsp-ui-doc-enable 't
+        lsp-ui-doc-position 'at-point
+        ;; disabled showing with cursor since the doc gets very annoying to have pop up all the time
+        lsp-ui-doc-show-with-cursor nil
+        lsp-ui-doc-show-with-mouse 't))
 #+end_src
 
 ***** Key bindings
@@ -1848,6 +1863,7 @@ By default there's no keybindings associated with the LSP functions so I want to
         "d" #'lsp-find-definition
         "i" #'lsp-find-implementation
         "r" #'lsp-find-references
+        "m" #'lsp-ui-imenu
         "R" #'lsp-rename
         "t" #'lsp-find-type-definition)
 
@@ -1857,9 +1873,10 @@ By default there's no keybindings associated with the LSP functions so I want to
     (map! :leader
           :desc "LSP"
           "l" local/lsp-mode-keymap
+          :desc "LSP Official"
           "L" lsp-mode-map))
 
-  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+  (add-hook! 'lsp-mode-hook #'local/add-lsp-keymaps))
 #+end_src
 
 Some lsp servers need extra settings in place so those will be added here.

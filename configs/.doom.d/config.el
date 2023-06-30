@@ -541,15 +541,17 @@ The return value is the yanked text."
 (setq lsp-log-io t)
 
 (after! lsp-mode
-  (setq lsp-headerline-breadcrumb-enable t)
-  (setq lsp-lens-enable t)
-  (setq lsp-use-lsp-ui t))
+  (setq lsp-headerline-breadcrumb-enable t
+        lsp-lens-enable t
+        lsp-use-lsp-ui t))
 
 (add-hook! 'lsp-mode-hook #'lsp-ui-mode)
-(setq lsp-ui-sideline-show-diagnostics t
-      lsp-ui-sideline-show-hover t
-      lsp-ui-sideline-show-code-actions t
-      lsp-ui-sideline-update-mode 'point)
+(after! lsp-ui
+  (setq lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-delay 0.7
+        lsp-ui-sideline-update-mode 'point))
 
 (setq lsp-ui-peek-enable t)
 
@@ -557,10 +559,12 @@ The return value is the yanked text."
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
-(setq lsp-ui-doc-enable 't
-      lsp-ui-doc-position 'at-point
-      lsp-ui-doc-show-with-cursor nil
-      lsp-ui-doc-show-with-mouse 't)
+(after! lsp-ui
+  (setq lsp-ui-doc-enable 't
+        lsp-ui-doc-position 'at-point
+        ;; disabled showing with cursor since the doc gets very annoying to have pop up all the time
+        lsp-ui-doc-show-with-cursor nil
+        lsp-ui-doc-show-with-mouse 't))
 
 (after! lsp-mode
   (defvar local/lsp-mode-keymap (make-sparse-keymap))
@@ -568,6 +572,7 @@ The return value is the yanked text."
         "d" #'lsp-find-definition
         "i" #'lsp-find-implementation
         "r" #'lsp-find-references
+        "m" #'lsp-ui-imenu
         "R" #'lsp-rename
         "t" #'lsp-find-type-definition)
 
@@ -577,9 +582,10 @@ The return value is the yanked text."
     (map! :leader
           :desc "LSP"
           "l" local/lsp-mode-keymap
+          :desc "LSP Official"
           "L" lsp-mode-map))
 
-  (add-hook! lsp-mode-hook #'local/add-lsp-keymaps))
+  (add-hook! 'lsp-mode-hook #'local/add-lsp-keymaps))
 
 (setq lsp-go-build-flags ["-tags=integration,e2e"])
 
