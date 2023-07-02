@@ -398,3 +398,11 @@ npm -g install js-beautify
 npm -g install stylelint
 
 brew install yaml-language-server
+
+brew tap homebrew/cask-fonts
+brew install --cask font-space-mono-nerd-font
+brew install --cask font-open-dyslexic-nerd-font
+brew install --cask font-go-mono-nerd-font
+brew install --cask font-hasklug-nerd-font
+brew install --cask font-symbols-nerd-font
+brew install --cask font-daddy-time-mono-nerd-font

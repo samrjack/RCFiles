@@ -1173,6 +1173,19 @@ LSP for YAML.
 #+begin_src sh
 brew install yaml-language-server
 #+end_src
+* Other
+** Fonts
+*** Nerd Fonts
+#+begin_src sh
+brew tap homebrew/cask-fonts
+brew install --cask font-space-mono-nerd-font
+brew install --cask font-open-dyslexic-nerd-font
+brew install --cask font-go-mono-nerd-font
+brew install --cask font-hasklug-nerd-font
+brew install --cask font-symbols-nerd-font
+brew install --cask font-daddy-time-mono-nerd-font
+#+end_src
+
 * Full system install script
 When I need to install on a whole system, I want to have a single script I can run to install basically everything and not need to worry about which scripts to run first or in what order.
 #+begin_src sh :tangle ../scripts/macos/full_system_install.sh
