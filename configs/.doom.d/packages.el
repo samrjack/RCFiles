@@ -1,6 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
+(package! nerd-icons)
+
 (package! dracula-theme)
 (package! theme-magic)
 
@@ -14,16 +16,18 @@
 (package! ztree)
 (package! dir-treeview)
 
-(package! dired-sidebar)
-
 (unpin! treemacs)
 
-(package! treemacs-all-the-icons)
 (package! treemacs-tab-bar)
 (package! treemacs-persp)
 (package! treemacs-magit)
 (package! treemacs-evil)
 (package! treemacs-projectile)
+
+(package! treemacs-all-the-icons)
+(package! treemacs-nerd-icons)
+
+(package! dired-sidebar)
 
 (package! dired-sidebar)
 (package! dired+)

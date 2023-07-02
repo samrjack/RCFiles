@@ -41,6 +41,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#fonts-and-language][Fonts and language]]
       - [[#chinese-support][Chinese support]]
       - [[#fonts][Fonts]]
+        - [[#nerd-fonts][Nerd Fonts]]
       - [[#text-properties][Text properties]]
     - [[#custom-settings-file][Custom settings file]]
     - [[#theming][Theming]]
@@ -63,8 +64,8 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#new-keybinding][New keybinding]]
   - [[#file-management-and-selection][File management and selection]]
     - [[#file-tree-viewer][File tree viewer]]
+    - [[#treemacs][Treemacs]]
     - [[#sidebar-file-explorer][Sidebar file explorer]]
-      - [[#settings-for-treemacs][Settings for treemacs]]
     - [[#scratch-buffer][Scratch buffer]]
     - [[#directory-navigation][Directory navigation]]
     - [[#vlf-very-large-files][VLF (Very Large Files)]]
@@ -700,6 +701,12 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font 
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+end_src
+***** Nerd Fonts
+Nerd font is an up and coming popular font pack that is helpful to have installed.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! nerd-icons)
+#+end_src
+
 
 **** Text properties
 Sometimes text properties can get in the way of debugging so this function makes it easy to remove it.
@@ -925,20 +932,16 @@ This allows you to see all the recursive files in the current tree hierarchy (si
 (package! dir-treeview)
 #+end_src
 
-*** Sidebar file explorer
-Import a simpler sidebar package for when it's needed.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! dired-sidebar)
-#+end_src
+*** Treemacs
+Although treemacs can be set up as a module in doom, I find the default settings extremely annoying and would rather just set it up myself.
 
-Import a more up-to-date version of treemacs.
+Import a more up-to-date version of treemacs. This should have the persp changes I've worked on too!
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (unpin! treemacs)
 #+end_src
 
-Import other treemacs related packages.
+Import other treemacs related packages. Most of these are in the parent treemacs package itself but having them separate like this makes sure they don't break long term.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! treemacs-all-the-icons)
 (package! treemacs-tab-bar)
 (package! treemacs-persp)
 (package! treemacs-magit)
@@ -946,28 +949,18 @@ Import other treemacs related packages.
 (package! treemacs-projectile)
 #+end_src
 
+And then add some treemacs themes too.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! treemacs-all-the-icons)
+(package! treemacs-nerd-icons)
+#+end_src
 
-Both treemacs and dired have their uses. Dired is better when I'm exploring the broader file system and kind of know where I'm going. Treemacs is fantastic for looking at a single project or two.
+When treemacs loads, register the new themes with it. Note that the last one will probably be the default theme so import them with that in mind.
 #+begin_src emacs-lisp
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
-(map! :n "M-n" #'treemacs)
+(after! treemacs
+  (require 'treemacs-nerd-icons)
+  (require 'treemacs-all-the-icons))
 #+end_src
-
-The packages can be swapped but I'm used to their current positions.
-#+begin_src emacs-lisp :tangle no
-(map! :n "C-n" #'treemacs)
-(map! :n "M-n" #'dired-sidebar-toggle-sidebar)
-#+end_src
-
-Make it so that treemacs closes itself when selected no matter which button I press.
-#+begin_src emacs-lisp
-(map! :map 'treemacs-mode-map
-      :ng "M-n" #'treemacs
-      :ng "C-n" #'treemacs)
-#+end_src
-
-**** Settings for treemacs
-Although treemacs can be set up as a module in doom, I find the default settings extremely annoying and would rather just set it up myself.
 
 First set up the package configuration so everything else becomes part of the config step.
 #+begin_src emacs-lisp
@@ -1056,6 +1049,32 @@ However, treemacs has an issue with macOS where the git status doesn't always ge
          (treemacs-update-single-file-git-state file)))))
   (when (eq system-type 'darwin) ;; Only need for MacOS
     (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+#+end_src
+
+*** Sidebar file explorer
+Import a simpler sidebar package for when it's needed.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! dired-sidebar)
+#+end_src
+
+
+Both treemacs and dired have their uses. Dired is better when I'm exploring the broader file system and kind of know where I'm going. Treemacs is fantastic for looking at a single project or two.
+#+begin_src emacs-lisp
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "M-n" #'treemacs)
+#+end_src
+
+The packages can be swapped but I'm used to their current positions.
+#+begin_src emacs-lisp :tangle no
+(map! :n "C-n" #'treemacs)
+(map! :n "M-n" #'dired-sidebar-toggle-sidebar)
+#+end_src
+
+Make it so that treemacs closes itself when selected no matter which button I press.
+#+begin_src emacs-lisp
+(map! :map 'treemacs-mode-map
+      :ng "M-n" #'treemacs
+      :ng "C-n" #'treemacs)
 #+end_src
 
 *** Scratch buffer

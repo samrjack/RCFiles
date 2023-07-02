@@ -109,12 +109,9 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Evil snipe mode"
       "t S" #'local/toggle-and-activate-evil-snipe-mode)
 
-(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
-(map! :n "M-n" #'treemacs)
-
-(map! :map 'treemacs-mode-map
-      :ng "M-n" #'treemacs
-      :ng "C-n" #'treemacs)
+(after! treemacs
+  (require 'treemacs-nerd-icons)
+  (require 'treemacs-all-the-icons))
 
 (use-package! treemacs
   :defer t
@@ -156,6 +153,13 @@ mode map since otherwise it requires forcing the normal mode state to be activat
          (treemacs-update-single-file-git-state file)))))
   (when (eq system-type 'darwin) ;; Only need for MacOS
     (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "M-n" #'treemacs)
+
+(map! :map 'treemacs-mode-map
+      :ng "M-n" #'treemacs
+      :ng "C-n" #'treemacs)
 
 (setq initial-major-mode #'lisp-interaction-mode)
 
