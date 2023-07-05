@@ -3278,9 +3278,9 @@ These packages are ones that I'm working on and therefore need to point my confi
   (:host github
    :repo "samrjack/minimap"))
 
-(package! treemacs :recipe
-  (:host github
-   :repo "samrjack/treemacs"))
+;; (package! treemacs :recipe
+;;   (:host github
+;;    :repo "samrjack/treemacs"))
 
 (package! mode-minder :recipe
   (:host github

@@ -223,9 +223,9 @@
   (:host github
    :repo "samrjack/minimap"))
 
-(package! treemacs :recipe
-  (:host github
-   :repo "samrjack/treemacs"))
+;; (package! treemacs :recipe
+;;   (:host github
+;;    :repo "samrjack/treemacs"))
 
 (package! mode-minder :recipe
   (:host github
