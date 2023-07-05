@@ -143,6 +143,10 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 
     (setq treemacs-width 35)
 
+(map! :map 'treemacs-mode-map
+      :desc "Add project"
+      "a" #'treemacs-add-project-to-workspace)
+
 ))
 
 (after! treemacs

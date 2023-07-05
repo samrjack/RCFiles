@@ -1034,6 +1034,13 @@ Set width of sidebar.
     (setq treemacs-width 35)
 #+end_src
 
+Because sometimes when treemacs loads up in a new workspace, it doesn't have the correct project in place so I want a key to easily add it.
+#+begin_src emacs-lisp
+(map! :map 'treemacs-mode-map
+      :desc "Add project"
+      "a" #'treemacs-add-project-to-workspace)
+#+end_src
+
 And finally, close the config wrapping.
 #+begin_src emacs-lisp
 ))
