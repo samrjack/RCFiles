@@ -124,8 +124,6 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 
     (setq treemacs-default-visit-action #'treemacs-visit-node-in-most-recently-used-window)
 
-    (treemacs-project-follow-mode 1)
-
     (lsp-treemacs-sync-mode t)
 
     (treemacs-filewatch-mode t)

@@ -989,7 +989,8 @@ By default, when opening a file, default to opening it in the buffer that was la
 
 
 When I do want to use treemacs, I don't want tons of projects to show since I really only care about the one I'm in.
-#+begin_src emacs-lisp
+(actually, turning it off for now to see if it's fine not to use)
+#+begin_src emacs-lisp :tangle no
     (treemacs-project-follow-mode 1)
 #+end_src
 
