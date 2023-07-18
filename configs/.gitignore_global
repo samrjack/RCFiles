@@ -22,3 +22,4 @@ local*.yaml
 /venv
 .project
 .settings/*
+/go.work
