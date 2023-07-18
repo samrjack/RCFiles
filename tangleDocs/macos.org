@@ -491,6 +491,12 @@ Git annex is a tool for managing large files within git.
 brew install git-annex
 #+end_src
 
+*** Lazy git
+Lazy git is a cli gui for working with git.
+#+begin_src sh
+brew install jesseduffield/lazygit/lazygit
+#+end_src
+
 *** XDG Ninja
 Checks and makes recommendations for managing config files.
 #+begin_src sh

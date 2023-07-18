@@ -140,6 +140,8 @@ brew install cmake
 
 brew install git-annex
 
+brew install jesseduffield/lazygit/lazygit
+
 brew install xdg-ninja
 
 brew install z
