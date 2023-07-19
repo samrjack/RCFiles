@@ -142,6 +142,32 @@
                         "description": "Program selectors",
                         "manipulators": [
                             {
+                                "description": "[ d to open display preferences",
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": []
+                                    },
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "open_bracket"
+                                        },
+                                        {
+                                            "key_code": "d"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_order": "insensitive"
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open /System/Library/PreferencePanes/Displays.prefPane"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
                                 "description": "[ g to open goland",
                                 "from": {
                                     "modifiers": {
