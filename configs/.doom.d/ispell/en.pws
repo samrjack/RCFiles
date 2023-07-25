@@ -1,4 +1,4 @@
-personal_ws-1.1 en 115
+personal_ws-1.1 en 120
 SPC
 anil
 anki
@@ -7,6 +7,7 @@ apis
 args
 auth
 authed
+autocmds
 autoload
 backend
 backfill
@@ -27,6 +28,7 @@ elixer
 emacs
 emacsmirror
 env
+esc
 eshell
 eslint
 eval
@@ -57,6 +59,7 @@ jvm
 karabiner
 keychain
 keymap
+keymaps
 kotlin
 kubernetes
 lastpass
@@ -71,6 +74,8 @@ macos's
 magit
 minimap
 modeline
+natively
+neovim
 num
 otas
 pacmacs

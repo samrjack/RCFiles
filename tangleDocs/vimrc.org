@@ -4,15 +4,16 @@
 #+STARTUP: overview hidestars indent num
 #+PROPERTY: header-args :results silent :tangle "../configs/.vimrc"
 
+* Vim
 Welcome to my Vim rc literate programming file. In here, I will be building up my vimrc file step by step.
 #+begin_src vimrc
 " This file has been generated using org tangle. To modify, please see the org file.
 set nocompatible      " VI improve allowed
 #+end_src
-* Vundle and package setup
-** What is Vundle
-** Setting up Vundle
-*** Checking if Vundle is installed
+** Vundle and package setup
+*** What is Vundle
+*** Setting up Vundle
+**** Checking if Vundle is installed
 #+begin_src vimrc
 filetype off
 function! IsVundleInstalled()
@@ -21,7 +22,7 @@ function! IsVundleInstalled()
 endfunction
 #+end_src
 
-*** Installing Vundle
+**** Installing Vundle
 #+begin_src vimrc
 " Install vundle if needed
     let vundlePreviouslyInstalled=1
@@ -35,7 +36,7 @@ endfunction
 
 #+end_src
 
-*** Add Vundle to necessary settings to allow it to work
+**** Add Vundle to necessary settings to allow it to work
 #+begin_src vimrc
     if IsVundleInstalled()
         set rtp+=~/.vim/bundle/Vundle.vim/
@@ -52,7 +53,7 @@ endfunction
 " END - Setting up Vundle
 
 #+end_src
-** Installing packages
+*** Installing packages
 #+begin_src vimrc
 " set the runtime path to include Vundle and initialize
 if IsVundleInstalled()
@@ -64,50 +65,50 @@ if IsVundleInstalled()
 
     """"""""""""""""""" All plugins here """""""""""""""""""
 #+end_src
-*** Extension handlers
+**** Extension handlers
 #+begin_src vimrc
     """"" Syntax """""
 #+end_src
-**** Org mode
+***** Org mode
 This plugin has proven to be annoying so disabling for now.
 #+begin_src vimrc :tangle no
         " Org mode
         " Plugin 'jceb/vim-orgmode'
 
 #+end_src
-**** Perl Mason
+***** Perl Mason
 #+begin_src vimrc
         " Syntax highlighting for perl-mason
         Plugin 'aming/vim-mason'
 
 #+end_src
-**** Haskell
+***** Haskell
 #+begin_src vimrc
         " Haskell folding capability
         Plugin 'vim-scripts/haskellFold'
 
 #+end_src
-**** Javascript
+***** Javascript
 #+begin_src vimrc
         " JS React highlighting
         Plugin 'maxmellon/vim-jsx-pretty'
         Plugin 'pangloss/vim-javascript'
 
 #+end_src
-**** Tmux
+***** Tmux
 Modifies =.tmux.conf=.
 #+begin_src vimrc
         " Tmux environment
         Plugin 'tmux-plugins/vim-tmux'
 
 #+end_src
-**** Ansi
+***** Ansi
 #+begin_src vimrc
         " Allow Ansi color escape characters to be shown
         Plugin 'powerman/vim-plugin-AnsiEsc'
 
 #+end_src
-**** Python
+***** Python
 #+begin_src vimrc
         " Python IDE style completion
         " Plugin 'python-mode/python-mode'
@@ -116,33 +117,33 @@ Modifies =.tmux.conf=.
         "Plugin 'numirias/semshi' " Commented out due to causing errors when saving hidden files.
 
 #+end_src
-**** Clojure
+***** Clojure
 #+begin_src vimrc
         " Clojure packages
         Plugin 'guns/vim-clojure-static'
         Plugin 'tpope/vim-fireplace'
 
 #+end_src
-**** Ruby
+***** Ruby
 #+begin_src vimrc
         " Ruby packages
         Plugin 'tpope/vim-rails'
 
 #+end_src
-**** Golang
+***** Golang
 #+begin_src vimrc
         " Go packages
         Plugin 'fatih/vim-go'
 
 #+end_src
 
-**** Other
+***** Other
 #+begin_src vimrc
         " Large syntax highlighting package
         Plugin 'sheerun/vim-polyglot'
 
 #+end_src
-*** Navigation
+**** Navigation
 #+begin_src vimrc
     """"" Navigation """""
         " Nerd tree directory navigator
@@ -154,7 +155,7 @@ Modifies =.tmux.conf=.
         Plugin 'kien/ctrlp.vim'
 
 #+end_src
-*** Viewing
+**** Viewing
 #+begin_src vimrc
     """"" Viewing """""
         " Differenc color parentheses
@@ -182,7 +183,7 @@ Modifies =.tmux.conf=.
         Plugin 'chrisbra/Colorizer'
 
 #+end_src
-*** Themes
+**** Themes
 #+begin_src vimrc
         """ Themes
             " Dracula theme
@@ -210,26 +211,26 @@ Modifies =.tmux.conf=.
             Plugin 'sainnhe/lightline_foobar.vim'
 
 #+end_src
-*** Editing
+**** Editing
 #+begin_src vimrc
     """"" Editing """""
 #+end_src
 
-**** Undo tree
+***** Undo tree
 #+begin_src vimrc
         " Undo tree plugin
         Plugin 'mbbill/undotree'
 
 #+end_src
 
-**** Yank from highlighted sections
+***** Yank from highlighted sections
 #+begin_src vimrc
         " Yanking
         Plugin 'machakann/vim-highlightedyank'
 
 #+end_src
 
-**** Surround notation
+***** Surround notation
 #+begin_src vimrc
         " Allow for surrounding notation
         Plugin 'tpope/vim-surround'
@@ -237,7 +238,7 @@ Modifies =.tmux.conf=.
 
 #+end_src
 
-**** Comments
+***** Comments
 #+begin_src vimrc
         " Allow for easy commenting
         Plugin 'tomtom/tcomment_vim'
@@ -250,33 +251,33 @@ Modifies =.tmux.conf=.
 
 #+end_src
 
-**** Date incrementer
+***** Date incrementer
 #+begin_src vimrc
         " Incrementer works with dates too
         Plugin 'tpope/vim-speeddating'
 
 #+end_src
 
-**** CSVs
+***** CSVs
 #+begin_src vimrc
         " Working with CSVs
         Plugin 'chrisbra/csv.vim'
 
 #+end_src
 
-**** Multiple cursors
+***** Multiple cursors
 #+begin_src vimrc
         " Multiple cursors
         " Plugin 'terryma/vim-multiple-cursors'
 
 #+end_src
 
-**** Snippets
+***** Snippets
 #+begin_src vimrc
         " Snippets
         " Plugin 'SirVer/ultisnips'
 #+end_src
-*** Git
+**** Git
 #+begin_src vimrc
     """"" GIT """""
         " NERDTree git plugin
@@ -291,7 +292,7 @@ Modifies =.tmux.conf=.
         Plugin 'rhysd/git-messenger.vim'
 
 #+end_src
-*** Other
+**** Other
 #+begin_src vimrc
     """"" Other """""
         " Calandar
@@ -310,7 +311,7 @@ Modifies =.tmux.conf=.
 #+begin_src vimrc
     """"""""""""""""""" Plugins end """""""""""""""""""
 #+end_src
-** Wrap-up
+*** Wrap-up
 #+begin_src vimrc
     call vundle#end()            " All plugins before here
 endif
@@ -320,12 +321,12 @@ filetype on
 
 #+end_src
 
-* Settings
+** Settings
 #+begin_src vimrc
 """"""""""""""""""" Configure Plugin values and mappings """""""""""""""""""
 #+end_src
 
-*** Settings for Vundle managed packages
+**** Settings for Vundle managed packages
 #+begin_src vimrc
 if IsVundleInstalled()
     """"" Navigation """""
@@ -437,7 +438,7 @@ if IsVundleInstalled()
 endif
 
 #+end_src
-*** Vundle agnostic settings
+**** Vundle agnostic settings
 #+begin_src vimrc
 """"""""""""""""""" Environment Values """""""""""""""""""
 """"" Colors """""
@@ -449,7 +450,7 @@ endif
         endif
 
 #+end_src
-**** Setting color scheme
+***** Setting color scheme
 #+begin_src vimrc
     " Set colorscheme
         try
@@ -493,7 +494,7 @@ endif
     set expandtab          " Makes all tabs into spaces
 
 #+end_src
-*** Interface settings
+**** Interface settings
 #+begin_src vimrc
 """"" UI """""
     " set relativenumber     " Show line numbers relative to cursor
@@ -508,7 +509,7 @@ endif
     set ruler
 
 #+end_src
-***** Search
+****** Search
 #+begin_src vimrc
 """"" Searching """""
     set incsearch          " Search as characters are entered
@@ -516,7 +517,7 @@ endif
     set dictionary=/usr/share/dict/words "dictionary for searching
 
 #+end_src
-***** Indentation
+****** Indentation
 #+begin_src vimrc
 """"" Folding """""
     set foldenable         " Enables code folding
@@ -558,7 +559,7 @@ endif
     set lazyredraw
 
 #+end_src
-*** Swapfiles
+**** Swapfiles
 #+begin_src vimrc
 """"" Meta changes """""
     silent! mkdir ~/.swap > /dev/null 2>&1
@@ -573,11 +574,11 @@ endif
 
 #+end_src
 
-*** File type specific settings
+**** File type specific settings
 #+begin_src vimrc
 """"" File Specific changes """""
 #+end_src
-**** Scratch buffer
+***** Scratch buffer
 #+begin_src vimrc
     " Makes command 'TurnOnScratchBuffer' force the current buffer to become a
     " scratch buffer.
@@ -585,7 +586,7 @@ endif
     command! -bar TurnOffScratchBuffer setlocal buftype= bufhidden= swapfile
     command! -bar NewScratch new | TurnOnScratchBuffer
 #+end_src
-***** Making automatic scratch buffers
+****** Making automatic scratch buffers
 #+begin_src vimrc
     augroup remove_quite_prompt
         autocmd!
@@ -603,7 +604,7 @@ endif
     augroup END
 
 #+end_src
-**** Folding
+***** Folding
 #+begin_src vimrc
     " augroup AutoSaveFolds
     "     autocmd!
@@ -612,7 +613,7 @@ endif
     " augroup END
 
 #+end_src
-**** Some file specific settings
+***** Some file specific settings
 #+begin_src vimrc
     augroup filetype_syntax_changes
         autocmd!
@@ -630,12 +631,121 @@ endif
 #+end_src
 
 * NeoVim
-Neovim is a branch of vim that has a lot of added features. However, for now I don't use neovim for anything so I'm just having it copy my vim settings.
-#+begin_src vimrc :tangle "../configs/.config/nvim/init.vim"
+Neovim is a branch of vim that has a lot of added features.
+** Copy Vim
+This config here will simply copy the settings I have in my vimrc. This is exported as a backup in case I need something simple in the future.
+#+begin_src vimrc :tangle "../configs/.config/nvim.bak/init.vim"
 " This file has been generated using org tangle. To modify, please see the org file.
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc
+#+end_src
+
+** Lazy Vim
+[[https://www.lazyvim.org/][LazyVim]] is a package manager for neovim and an initial framework somewhat similar to doom emacs. It makes neovim so pretty!
+#+begin_src lua :tangle "../configs/.config/nvim/init.lua"
+-- This file has been generated using org tangle. To modify, please see the master org file.
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
+#+end_src
+
+*** Config
+Files under config will be automatically loaded at the appropriate time. These modify the behavior of neovim
+**** Lazy
+This is the main file that bootstraps the rest of the config. It comes directly from the lazy install itself.
+#+begin_src lua :tangle "../configs/.config/nvim/lua/config/lazy.lua"
+-- This file has been generated using org tangle. To modify, please see the master org file.
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  -- bootstrap lazy.nvim
+  -- stylua: ignore
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+end
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+
+require("lazy").setup({
+  spec = {
+    -- add LazyVim and import its plugins
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- import any extras modules here
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- import/override with your plugins
+    { import = "plugins" },
+  },
+  defaults = {
+    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+    lazy = false,
+    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+    -- have outdated releases, which may break your Neovim install.
+    version = false, -- always use the latest git commit
+    -- version = "*", -- try installing the latest stable version for plugins that support semver
+  },
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  checker = { enabled = true }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      -- disable some rtp plugins
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+})
+
+#+end_src
+
+**** Autocmds
+Autocmds are automatically loaded on the VeryLazy event.
+Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua.
+Any changes to or additional autocmds should be added here.
+#+begin_src lua :tangle "../configs/.config/nvim/lua/config/autocmds.lua"
+-- This file has been generated using org tangle. To modify, please see the master org file.
+#+end_src
+
+**** Keymaps
+Keymaps are automatically loaded on the VeryLazy event.
+Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua.
+Add any additional keymaps should be added here.
+#+begin_src lua :tangle "../configs/.config/nvim/lua/config/keymaps.lua"
+-- This file has been generated using org tangle. To modify, please see the master org file.
+#+end_src
+
+***** Use jk as escape
+When in insert mode, hitting esc can be quite annoying so, just like with all my other configs, I'm going to use jk for the job.
+
+#+begin_src lua :tangle "../configs/.config/nvim/lua/config/keymaps.lua"
+vim.keymap.set("i", "jk", "<ESC>", { noremap = true, silent = true, desc = "<ESC>" })
+#+end_src
+
+**** Options
+Options are automatically loaded before lazy.nvim startup.
+Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua.
+Add any additional options should be added here.
+#+begin_src lua :tangle "../configs/.config/nvim/lua/config/options.lua"
+-- This file has been generated using org tangle. To modify, please see the master org file.
+#+end_src
+*** Plugins
+Plugins add new functionality to neovim. These plugins are lazy-loaded as needed too.
+
+**** UFO
+[[https://github.com/kevinhwang91/nvim-ufo][nvim-ufo]] is a package for good code folding.
+#+begin_src lua :tangle "../configs/.config/nvim/lua/plugins/nvim-ufo.lua"
+-- This file has been generated using org tangle. To modify, please see the master org file.
+
+{
+  "kevinhwang91/nvim-ufo"
+}
 #+end_src
 
 * Local Variables
