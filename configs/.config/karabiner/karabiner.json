@@ -8,6 +8,7 @@
     },
     "profiles": [
         {
+            "name": "Default profile",
             "complex_modifications": {
                 "parameters": {
                     "basic.simultaneous_threshold_milliseconds": 1000,
@@ -985,7 +986,6 @@
                     ]
                 }
             ],
-            "name": "Default profile",
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },
