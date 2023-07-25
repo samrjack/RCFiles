@@ -280,6 +280,8 @@ brew install editorconfig
 
 brew install direnv
 
+brew install hunspell
+
 brew install --cask android-studio
 
 brew install go
@@ -330,6 +332,7 @@ pip3 install nose3
 pip3 install pyright
 
 brew install ghc
+brew install ghcup
 brew install haskell-language-server
 brew install cabal-install
 brew install haskell-stack

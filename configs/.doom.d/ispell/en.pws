@@ -1,4 +1,4 @@
-personal_ws-1.1 en 120
+personal_ws-1.1 en 121
 SPC
 anil
 anki
@@ -96,6 +96,7 @@ subtree
 symlink
 systemd
 tabnine
+tangle
 team's
 terraform
 theming
