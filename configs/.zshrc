@@ -60,18 +60,38 @@ if [ -d "$ZSH" ]; then
     # Example format: plugins=(rails git textmate ruby lighthouse)
     # Add wisely, as too many plugins slow down shell startup.
     plugins=(
+      alias-finder
       cabal
+      colored-man-pages
+      colorize
       command-not-found
+      compleat
+      docker
+      docker-compose
+      emacs
+      emoji
+      emoji-clock
       extract
+      fancy-ctrl-z
       git
       git-extras
+      gnu-utils
+      golang
+      helm
+      httpie
+      kubectl
       npm
+      nvm
+      pass
       pip
       python
+      ripgrep
       sudo
       tmux
     )
 
+    # Turn on automatic alias finding for when I use commands that have aliases defined
+    ZSH_ALIAS_FINDER_AUTOMATIC=true
     ZSH_TMUX_AUTOSTART="false"
     ZSH_TMUX_FIXTERM="true"
 
