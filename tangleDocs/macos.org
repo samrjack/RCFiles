@@ -895,6 +895,12 @@ A spell checker utility.
 #+begin_src sh
 brew install hunspell
 #+end_src
+** Chroma
+Chroma can be used to colorize certain text in the terminal. Needed for oh-my-zshell colorize plugin.
+#+begin_src sh
+brew install chroma
+#+end_src
+
 ** Programming languages
 *** Android
 Sometimes being able to open up and work on android apps is useful. Here I'll install android studio so that it is available when needed.

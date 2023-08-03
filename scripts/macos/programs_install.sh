@@ -282,6 +282,8 @@ brew install direnv
 
 brew install hunspell
 
+brew install chroma
+
 brew install --cask android-studio
 
 brew install go

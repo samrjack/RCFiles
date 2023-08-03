@@ -1,4 +1,4 @@
-personal_ws-1.1 en 121
+personal_ws-1.1 en 122
 SPC
 anil
 anki
@@ -106,6 +106,7 @@ toolchain
 transpiles
 treemacs
 ui
+unassign
 unmarshal
 utils
 viktor
