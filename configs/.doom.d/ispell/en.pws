@@ -1,4 +1,4 @@
-personal_ws-1.1 en 122
+personal_ws-1.1 en 128
 SPC
 anil
 anki
@@ -50,11 +50,14 @@ guix
 hacky
 hoc
 https
+img
 impactful
 init
 ipsum
 jeel
+jq
 json
+jsons
 jvm
 karabiner
 keychain
@@ -82,6 +85,8 @@ pacmacs
 pandoc
 pomodoro
 pre
+programmatically
+promiseify
 prototyped
 provisionable
 py
@@ -90,6 +95,7 @@ rebase
 repo
 rust
 sed
+semver
 struct
 structs
 subtree

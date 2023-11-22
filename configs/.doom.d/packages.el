@@ -158,6 +158,8 @@
 
 (package! sed-mode)
 
+(package! jq-mode)
+
 (package! json-par)
 
 (package! graphviz-dot-mode)

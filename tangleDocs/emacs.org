@@ -199,6 +199,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#gitlab-ci][Gitlab CI]]
     - [[#vimrc][Vimrc]]
     - [[#sed][Sed]]
+    - [[#jq][jq]]
     - [[#json][Json]]
     - [[#graphviz][Graphviz]]
     - [[#systemd][Systemd]]
@@ -2902,6 +2903,17 @@ Then I just add it to my javascript mode.
 I don't work with sed scripts very often, but when I do it's best to have help.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! sed-mode)
+#+end_src
+
+*** jq
+jq is a command line tool for pulling apart and restructuring JSONs. jq mode is for editing jq scripts or and can also be used to interactively work with jq inside json files.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! jq-mode)
+#+end_src
+
+Add jq to org babel as a language it can use. Turned off to make sure it doesn't impact performance until I can test with it.
+#+begin_src emacs-lisp :tangle no
+(org-babel-do-load-languages 'org-babel-load-languages '((jq . t)))
 #+end_src
 
 *** Json
