@@ -228,7 +228,11 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#line-spacing-1][line-spacing]]
     - [[#pointer-position][Pointer position]]
     - [[#scratch-buffer-1][Scratch buffer]]
-    - [[#removing-overlays][Removing overlays]]
+    - [[#working-with-overlays][Working with overlays]]
+      - [[#an-actual-overlay-package][An actual overlay package]]
+      - [[#view-largest-overlay][View largest overlay]]
+      - [[#removing-overlays][Removing overlays]]
+      - [[#keymap][Keymap]]
     - [[#fill-column-1][Fill column]]
     - [[#call-indicator][Call indicator]]
 - [[#fixes][Fixes]]
@@ -3157,7 +3161,27 @@ Add to personal functions map.
       "s" #'local/scratch)
 #+end_src
 
-*** Removing overlays
+*** Working with overlays
+Overlays are used to alter the appearance of the buffer you're looking at without actually modifying the underlying text. They are really useful for ligatures and code folding, but for some reason they are a bit difficult to work with. Here I'll add some functions that are simply meant to improve the experience of working with overlays and debugging their appearance.
+
+**** TODO An actual overlay package
+So I have a lot of things I'd love to do with this functionality that could be a lot smoother. To that end, I'd like to make an overlay viewing package that has some of the following functionality:
+- Interactive overlay viewing
+- Interactive overlay deleting
+- Search overlays with keywords
+- Search overlays with ranges
+
+**** View largest overlay
+This function will check all the overlays in a given range or just under point and then return the overlay that covers the largest area.
+#+begin_src emacs-lisp :tangle no
+(defun local/get-largest-overlay (beg end)
+  "Search through all overlays in range and return biggest"
+  (let ((overlays (overlays-in beg end)))
+    ()))
+#+end_src
+
+
+**** Removing overlays
 Sometimes emacs gets into a state where there are code folds in place that won't undo themselves so I need to tell them to go away. Since code folding is done using overlays, I'm going to write a function that simply removes all overlays from a file so I can see the file as written.
 #+begin_src emacs-lisp
 (defun local/remove-all-overlays ()
@@ -3166,6 +3190,10 @@ Sometimes emacs gets into a state where there are code folds in place that won't
   (remove-overlays))
 #+end_src
 
+
+
+**** Keymap
+Now that these functions are defined, I'll add them to a convenient keymap for accessing.
 Add to personal functions map.
 #+begin_src emacs-lisp
 (map! :map personal-functions-map
