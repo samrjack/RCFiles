@@ -51,7 +51,9 @@ alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 alias gl="gl1"
 alias lg="gl"
 alias git-root='cd $(git rev-parse --show-toplevel)'
-alias gr="git-root"
+alias git-r='git rev-parse --show-toplevel'
+alias gr="git-r"
+alias cdgr="git-root"
 
 alias gitsum="onefetch"
 alias syssum="neofetch"
