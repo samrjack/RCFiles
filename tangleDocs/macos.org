@@ -349,6 +349,25 @@ iina is a great video player that will play all sorts of high res or other forma
 brew tap iina/homebrew-mpv-iina
 brew install mpv-iina
 #+end_src
+
+** OpenSCAD
+This program is for programmatically drawing 3d objects for printing.
+#+begin_src sh
+brew install --cask openscad
+#+end_src
+
+** QCAD
+QCAD is an open source program for working with 2d vector drawings
+#+begin_src sh
+brew install --cask qcad
+#+end_src
+
+** DrawIO
+DrawIO is an open source diagram drawing program that is usually used through its online interface. However, I like being able to sketch things locally.
+#+begin_src sh
+brew install --cask drawio
+#+end_src
+
 * CLI tools
 ** Shells
 Anything that deals with shells or working within the terminal.

@@ -88,6 +88,12 @@ brew install homebrew/cask-versions/virtualbox-beta
 brew tap iina/homebrew-mpv-iina
 brew install mpv-iina
 
+brew install --cask openscad
+
+brew install --cask qcad
+
+brew install --cask drawio
+
 brew install bash
 brew install bash-completion
 brew install bash-language-server
