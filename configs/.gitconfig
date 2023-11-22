@@ -22,6 +22,7 @@
   clear = "reset --hard HEAD"
 	ignore = "update-index --assume-unchanged"
 	track = "update-index --no-assume-unchanged"
+	argo = "rev-parse --short=8 HEAD"
 [diff]
 	tool = vimdiff2
 [merge]
