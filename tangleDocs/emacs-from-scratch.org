@@ -1,0 +1,3317 @@
+#+TITLE: Emacs from scratch config
+#+AUTHOR: Samuel Jackson
+#+DESCRIPTION: This is my attempt at creating my own emacs config from the ground up without doom or other starter kits.
+#+STARTUP: overview num hidestars indent
+#+PROPERTY: header-args :results silent :tangle "../configs/.scratch.d/config.el"
+
+Welcome to a semi-clean though certainly flawed emacs config. I hope you can find what you're looking for. Feel free to reach out if you have any questions or recommendations!
+
+Unlike other literate configs, this one is not meant to be compiled at start time. This gets tangled together whenever it is saved and then can be read into emacs by restarting emacs.
+
+* Table of contents                                         :quote:toc_9:
+#+BEGIN_QUOTE
+- [[#old-settings][Old settings]]
+  - [[#file-setup][File setup]]
+    - [[#initialization][Initialization]]
+    - [[#packages][Packages]]
+    - [[#configuration][Configuration]]
+      - [[#benchmarking][Benchmarking]]
+  - [[#doom-initialization][Doom Initialization]]
+    - [[#documentation][Documentation]]
+    - [[#start][Start]]
+    - [[#input][Input]]
+    - [[#completion][Completion]]
+    - [[#ui][UI]]
+    - [[#editor-tools][Editor tools]]
+    - [[#emacs][Emacs]]
+    - [[#terminals][Terminals]]
+    - [[#checkers][Checkers]]
+    - [[#tools][Tools]]
+    - [[#os][OS]]
+    - [[#programming-languages][Programming Languages]]
+    - [[#email][Email]]
+    - [[#app][App]]
+    - [[#config][Config]]
+    - [[#end-section][End section]]
+  - [[#configuration-1][Configuration]]
+    - [[#documentation-1][Documentation]]
+      - [[#macro-documentation][Macro documentation]]
+      - [[#packages-documentation][Packages documentation]]
+    - [[#basic-emacs-settings][Basic Emacs settings]]
+      - [[#personal-identification][Personal Identification]]
+      - [[#fonts-and-language][Fonts and language]]
+        - [[#chinese-support][Chinese support]]
+        - [[#fonts][Fonts]]
+          - [[#nerd-fonts][Nerd Fonts]]
+        - [[#text-properties][Text properties]]
+      - [[#custom-settings-file][Custom settings file]]
+      - [[#theming][Theming]]
+      - [[#debugging][Debugging]]
+      - [[#mode-line][Mode line]]
+        - [[#date-and-time][Date and time]]
+        - [[#battery][Battery]]
+        - [[#encoding-format][Encoding format]]
+      - [[#auth-settings][Auth settings]]
+    - [[#key-chord-setup][Key-chord setup]]
+      - [[#modifier-keys-mapping][Modifier keys mapping]]
+      - [[#key-discovery][Key discovery]]
+        - [[#which-key][Which key]]
+        - [[#embark][Embark]]
+      - [[#evil-mode][Evil mode]]
+        - [[#evil-settings][Evil settings]]
+        - [[#evil-snipe-mode][Evil snipe mode]]
+          - [[#snipe-mode-off-by-default][Snipe mode off by default]]
+          - [[#settings][Settings]]
+          - [[#new-keybinding][New keybinding]]
+    - [[#file-management-and-selection][File management and selection]]
+      - [[#file-tree-viewer][File tree viewer]]
+      - [[#treemacs][Treemacs]]
+      - [[#sidebar-file-explorer][Sidebar file explorer]]
+      - [[#scratch-buffer][Scratch buffer]]
+      - [[#directory-navigation][Directory navigation]]
+      - [[#vlf-very-large-files][VLF (Very Large Files)]]
+      - [[#file-info][File info]]
+    - [[#workspace-management][Workspace management]]
+      - [[#perspectives][Perspectives]]
+      - [[#tab-bar-mode][Tab bar mode]]
+      - [[#projectile][Projectile]]
+      - [[#project-other][Project (other)]]
+    - [[#windows][Windows]]
+      - [[#window-splitting][Window splitting]]
+      - [[#resizing-windows][Resizing windows]]
+      - [[#window-zooming][Window zooming]]
+    - [[#buffers][Buffers]]
+      - [[#buffer-display][Buffer display]]
+        - [[#line-numbering][Line numbering]]
+        - [[#whitespace-mode][Whitespace mode]]
+        - [[#line-spacing][Line spacing]]
+        - [[#tree-sitter-mode][Tree Sitter mode]]
+        - [[#code-folding][Code folding]]
+          - [[#ts-fold][TS-Fold]]
+            - [[#setup][Setup]]
+            - [[#go-folding][Go Folding]]
+            - [[#yaml-folding][Yaml Folding]]
+            - [[#js-folding][JS Folding]]
+            - [[#java-folding][Java Folding]]
+            - [[#shell-folding][Shell Folding]]
+            - [[#python-folding][Python Folding]]
+          - [[#origami-folding][Origami folding]]
+          - [[#fold-from-anywhere-on-line][Fold from anywhere on line]]
+          - [[#tab-as-fold-toggling][Tab as fold toggling]]
+        - [[#fill-column][Fill column]]
+        - [[#minimap][Minimap]]
+      - [[#working-within-a-buffer][Working within a buffer]]
+        - [[#undo][Undo]]
+        - [[#writing][Writing]]
+          - [[#dictionary][Dictionary]]
+          - [[#snippets][Snippets]]
+            - [[#academic-writing][Academic writing]]
+          - [[#text-filler][Text filler]]
+            - [[#lorem-ipsum][Lorem-ipsum]]
+          - [[#write-good-mode][Write good mode]]
+          - [[#flycheck-mode][Flycheck mode]]
+          - [[#clipboard][Clipboard]]
+        - [[#movement][Movement]]
+          - [[#sub-word-movement][Sub-word movement]]
+          - [[#scrolling][Scrolling]]
+          - [[#centered-cursor--typewriter-mode][Centered Cursor / Typewriter Mode]]
+          - [[#logos][Logos]]
+          - [[#returning-from-a-jump][Returning from a jump]]
+        - [[#encrypt-region][Encrypt region]]
+        - [[#searching][Searching]]
+          - [[#case-insensitive-search][Case insensitive search]]
+          - [[#rip-grep][Rip-grep]]
+          - [[#bang][Bang!]]
+        - [[#lsp-servers][LSP servers]]
+          - [[#lsp-settings][lsp settings]]
+          - [[#lsp-ui][LSP ui]]
+          - [[#lsp-peek][LSP peek]]
+          - [[#lsp-ui-docs][LSP ui docs]]
+          - [[#key-bindings][Key bindings]]
+          - [[#golang][Golang]]
+    - [[#independent-or-external-programs][Independent or external programs]]
+      - [[#version-control][Version control]]
+        - [[#inline-blame][Inline blame]]
+          - [[#styling-for-magit][Styling for magit]]
+        - [[#sideline-blame][Sideline blame]]
+        - [[#diff][Diff]]
+        - [[#gutter][Gutter]]
+      - [[#discord-integration][Discord integration]]
+      - [[#speed-reading][Speed reading]]
+      - [[#presentations][Presentations]]
+        - [[#key-cast][Key cast]]
+        - [[#gif-screenshot][Gif Screenshot]]
+        - [[#command-log-mode][Command log mode]]
+      - [[#kubernetes][Kubernetes]]
+        - [[#kubel][Kubel]]
+      - [[#bluetooth][Bluetooth]]
+      - [[#collaborative-editing][Collaborative editing]]
+      - [[#startup-profiling][Startup profiling]]
+    - [[#modepackage-settings][Mode/package settings]]
+      - [[#mode-minder][Mode Minder]]
+      - [[#elisp-shell][Elisp-shell]]
+        - [[#elisp-shell-aliases][Elisp shell aliases]]
+        - [[#eshell-functions][Eshell functions]]
+        - [[#prompt-as-page-delimiter][Prompt as page delimiter]]
+      - [[#org-mode][Org mode]]
+        - [[#org-add-on-packages][Org add-on packages]]
+        - [[#general-org-settings][General Org settings]]
+          - [[#standard-org-settings][Standard org settings]]
+          - [[#font-support][Font support]]
+          - [[#org-mode-keybindings][Org mode keybindings]]
+          - [[#shortcut-to-open-org-files][Shortcut to open org files]]
+          - [[#tags][Tags]]
+        - [[#babel][Babel]]
+          - [[#clojure][Clojure]]
+          - [[#http][HTTP]]
+        - [[#org-roam][Org Roam]]
+          - [[#ui-1][UI]]
+        - [[#timers-and-clock][Timers and clock]]
+        - [[#org-agenda][Org Agenda]]
+          - [[#agenda-files][Agenda files]]
+        - [[#pomodoro][Pomodoro]]
+          - [[#begin-after-org][Begin "after! org"]]
+          - [[#work-length][Work length]]
+          - [[#sounds-to-play][Sounds to play]]
+          - [[#sounds-to-use][Sounds to use]]
+          - [[#end-of-after-org][End of "after! org"]]
+        - [[#org-present][Org Present]]
+          - [[#supporting-packages][Supporting packages]]
+        - [[#org-capture][Org Capture]]
+          - [[#settings-1][Settings]]
+          - [[#org-template][Org template]]
+            - [[#example-template-code][Example template code]]
+        - [[#org-chef][Org Chef]]
+        - [[#org-graph][Org graph]]
+        - [[#org-gantt][Org Gantt]]
+        - [[#org-verb][Org verb]]
+      - [[#e-book-reader][E-book reader]]
+        - [[#packages-1][Packages]]
+        - [[#settings-2][Settings]]
+    - [[#programming-languages-1][Programming Languages]]
+      - [[#open-cad][Open CAD]]
+      - [[#go-mode][Go mode]]
+      - [[#python][Python]]
+      - [[#emacs-lisp][Emacs Lisp]]
+      - [[#scheme][Scheme]]
+      - [[#javascript][Javascript]]
+        - [[#eslint][Eslint]]
+        - [[#prettier][Prettier]]
+      - [[#gitlab-ci][Gitlab CI]]
+      - [[#vimrc][Vimrc]]
+      - [[#sed][Sed]]
+      - [[#jq][jq]]
+      - [[#json][Json]]
+      - [[#graphviz][Graphviz]]
+      - [[#systemd][Systemd]]
+      - [[#general-interpreter][General interpreter]]
+        - [[#tabnine][TabNine]]
+      - [[#web-mode][Web mode]]
+      - [[#r-data-frames][R data frames]]
+      - [[#guix][Guix]]
+    - [[#fun][Fun]]
+      - [[#xkcd][XKCD]]
+      - [[#typewriter][Typewriter]]
+      - [[#games][Games]]
+        - [[#steam][steam]]
+        - [[#2048-game][2048-game]]
+        - [[#mines][mines]]
+        - [[#minesweeper][minesweeper]]
+        - [[#sudoku][sudoku]]
+        - [[#threes][threes]]
+        - [[#pacmacs][Pacmacs]]
+        - [[#wordel][Wordel]]
+        - [[#gnu-go][GNU Go]]
+      - [[#fireplace][Fireplace]]
+      - [[#power-mode][Power mode!]]
+    - [[#experimental-personal-functions][Experimental personal functions]]
+      - [[#declare-personal-prefix][Declare personal prefix]]
+      - [[#line-spacing-1][line-spacing]]
+      - [[#pointer-position][Pointer position]]
+      - [[#scratch-buffer-1][Scratch buffer]]
+      - [[#working-with-overlays][Working with overlays]]
+        - [[#an-actual-overlay-package][An actual overlay package]]
+        - [[#view-largest-overlay][View largest overlay]]
+        - [[#removing-overlays][Removing overlays]]
+        - [[#keymap][Keymap]]
+      - [[#fill-column-1][Fill column]]
+      - [[#call-indicator][Call indicator]]
+  - [[#fixes][Fixes]]
+    - [[#too-many-open-files][Too many open files]]
+    - [[#dap-mode-overwriting-margin-clicks][Dap mode overwriting margin clicks]]
+    - [[#magit-error-message][Magit error message]]
+    - [[#cant-search-org-files-with-evil-search][Can't search org files with evil search]]
+    - [[#some-error-that-appeared-after-updating-doom][Some error that appeared after updating doom]]
+    - [[#double-percent-sign-in-modeline-battery-reporting][Double percent sign in modeline battery reporting]]
+    - [[#remove-cl-deprecation-warning-from-startup][Remove cl deprecation warning from startup]]
+    - [[#lsp-modes-breadcrumb-header-line-shows-the-current-file-on-all-windows][LSP mode's breadcrumb header line shows the current file on all windows]]
+- [[#auto-tangle][Auto Tangle]]
+#+END_QUOTE
+
+* Old settings
+** File setup                                              :init:
+This sets up all the files used for configuration with the appropriate elisp file headers.
+*** Initialization
+=init.el= is for anything that needs to be set up prior to emacs running. Generally only the doom module settings go in here.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+;;; init.el -*- lexical-binding: t; -*-
+#+end_src
+
+*** Packages
+=packages.el= is for any packages that need to be downloaded have to be declared in here. They are then downloaded or updated whenever ~doom sync~ is run.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+#+end_src
+
+*** Configuration
+=config.el= is the default file for stuff to be written to. this is where basically all emacs settings get put.
+#+begin_src emacs-lisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+#+end_src
+
+**** Benchmarking
+This needs to be at the top of the file so that it can profile the rest of the loading sequence. Only used when running in ~debug-init~ mode.
+#+begin_src emacs-lisp
+(when init-file-debug
+  (require 'benchmark-init)
+  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
+#+end_src
+
+To use it, start up emacs using ~emacs --debug-init~ and then view the results with ~M-x benchmark-init/show-durations-tabuled~ or ~M-x benchmark-init/show-durations-tree~.
+
+** Doom Initialization                                     :doom:
+*** Documentation
+This documentation came with the original doom init file. Keeping for reference. It has been slightly modified to use org markdown syntax.
+
+#+begin_quote
+This file controls what Doom modules are enabled and what order they load in. Remember to run ~doom sync~ after modifying it!
+
+*NOTE* Press ~SPC h d h~ (or ~C-h d h~ for non-vim users) to access Doom's documentation. There you'll find a "Module Index" link where you'll find a comprehensive list of Doom's modules and what flags they support.
+
+*NOTE* Move your cursor over a module's name (or its flags) and press ~K~ (or ~C-c c k~ for non-vim users) to view its documentation. This works on flags as well (those symbols that start with a plus).
+
+Alternatively, press ~gd~ (or ~C-c c d~) on a module to browse its directory (for easy access to its source code).
+#+end_quote
+
+I will note that when looking at this literate config within emacs, just pressing ~K~ over a module's name does not work. you have to go through doom's module help section ~SPC h d m~.
+
+*** Start
+This entire section needs to be wrapped in the ~doom!~ macro so the head is placed here so that the following sections can be more modular.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+(doom!
+;;; Modules to load
+#+end_src
+
+*** Input
+Modules in this category extend Emacs support for additional keyboard layouts and input methods for non-english languages.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :input
+       ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
+       ;;chinese           ; spend your 3 hours a week in Emacs
+       ;;japanese          ; ah, a man of culture
+       ;;layout            ; auie,ctsrnm is the superior home row
+#+end_src
+
+*** Completion
+These modules provide interfaces and frameworks completion, including code completion.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :completion
+       (company +childframe); the ultimate code completion backend
+       ;;helm              ; the *other* search engine for love and life
+       ;;ido               ; the other *other* search engine...
+       ivy               ; a search engine for love and life
+       ;;(vertico +icons   ; tomorrow's search engine
+       ;;         +childframe)
+#+end_src
+
+*** UI
+For modules concerned with changing Emacs' appearance or providing interfaces for its features, like sidebars, tabs, or fonts.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :ui
+       deft              ; notational velocity for Emacs
+       doom              ; what makes DOOM look the way it does
+       doom-dashboard    ; a nifty splash screen for Emacs
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       (emoji +ascii     ;💩 in the text
+              +github
+              +unicode)
+       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       ;;hydra             ; Discount modality for mythological beast hunters
+       indent-guides     ; highlighted indent columns
+       (ligatures        ; ligatures and symbols to make your code pretty again
+        +extra
+        +hasklig)
+       minimap           ; a map for lost programmers
+       modeline          ; snazzy, Atom-inspired modeline, plus API
+       nav-flash         ; blink cursor line after big motions
+       neotree           ; a project drawer, like NERDTree for vim
+       ophints           ; highlight the region an operation acts on
+       (popup            ; tame sudden yet inevitable temporary windows
+        +defaults)
+       ;;tabs              ; a tab bar for Emacs
+       (treemacs +lsp)   ; a project drawer, like neotree but cooler
+       unicode           ; extended unicode support for various languages
+       (vc-gutter +pretty); vcs diff in the fringe
+       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       window-select     ; visually switch windows
+       workspaces        ; tab emulation, persistence & separate workspaces
+       zen               ; distraction-free coding or writing
+#+end_src
+
+*** Editor tools
+For modules concerned with the insertion and editing of text. Amen.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :editor
+       (evil +everywhere); come to the dark side, we have cookies
+       file-templates    ; auto-snippets for empty files
+       ;;fold              ; (nigh) universal code folding
+       (format +onsave)  ; automated prettiness
+       ;;god               ; run Emacs commands without modifier keys
+       ;;lispy             ; vim for lisp, for people who don't like vim
+       multiple-cursors  ; editing in many places at once
+       ;;objed             ; text object editing for the innocent
+       ;;parinfer          ; turn lisp into python, sort of
+       rotate-text       ; cycle region at point between text candidates
+       snippets          ; my elves. They type so I don't have to
+       word-wrap         ; soft wrapping with language-aware indent
+#+end_src
+
+*** Emacs
+Modules in this category augment and extend the built-in features of Emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :emacs
+       (dired +icon)     ; making dired pretty [functional]
+       electric          ; smarter, keyword-based electric-indent
+       ibuffer           ; interactive buffer management
+       undo              ; persistent, smarter undo for your inevitable mistakes
+       vc                ; version-control and Emacs, sitting in a tree
+#+end_src
+
+*** Terminals
+What's an operating system without a terminal? The modules in this category bring varying degrees of terminal emulation into Emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :term
+       eshell            ; the elisp shell that works everywhere
+       shell             ; simple shell REPL for Emacs
+       term              ; basic terminal emulator for Emacs
+       vterm             ; the best terminal emulation in Emacs
+#+end_src
+
+*** Checkers
+For modules dedicated to linting plain text (primarily code and prose).
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :checkers
+       grammar           ; tasing grammar mistake every you make
+       (spell +aspell    ; tasing you for misspelling mispelling
+              +everywhere)
+       syntax            ; tasing you for every semicolon you forget
+#+end_src
+
+*** Tools
+Modules that integrate external tools into Emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :tools
+       ;;ansible           ; Allow silly people to focus on silly things
+       biblio            ; writes a PhD for you (citation needed)
+       (debugger +lsp)   ; stepping through code, to help you add bugs
+       direnv            ; integrates direnv into Emacs
+       (docker +lsp)     ; yo dawg, I heard you like OSes, so I...
+       editorconfig      ; let someone else argue about tabs vs spaces
+       ein               ; tame Jupyter notebooks with emacs
+       (eval +overlay)   ; run code, run (also, repls)
+       ;;gist              ; interacting with github gists
+       (lookup +offline  ; navigate your code and its documentation
+               +dictionary)
+       lsp               ; M-x vscode
+       magit             ; a git porcelain for Emacs
+       make              ; run make tasks from Emacs
+       pass              ; password manager for nerds
+       pdf               ; pdf enhancements
+       ;;prodigy           ; No sweatshop is complete without child processes
+       rgb               ; creating color strings
+       taskrunner        ; taskrunner for all your projects
+       terraform         ; infrastructure as code
+       tmux              ; an API for interacting with tmux
+       tree-sitter       ; syntax and parsing, sitting in a tree
+       upload            ; map local to remote projects via ssh/ftp
+#+end_src
+
+*** OS
+Modules in this category are designed to improve compatibility with certain operating systems or OS features (like the shell).
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :os
+       (:if IS-MAC macos)  ; improve compatibility with macOS
+       tty               ; improve the terminal Emacs experience
+#+end_src
+
+*** Programming Languages
+These modules specialize in integration particular languages and their ecosystems into (Doom) Emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :lang
+       ;;agda              ; types of types of types of types...
+       ;;beancount         ; mind the GAAP
+       (cc +lsp          ; C/C++/Obj-C madness
+           +tree-sitter)
+       (clojure +lsp)    ; java with a lisp
+       common-lisp       ; if you've seen one lisp, you've seen them all
+       ;;coq               ; proofs-as-programs
+       ;;crystal           ; ruby at the speed of c
+       ;;(csharp +lsp)     ; unity, .NET, and mono shenanigans
+       ;;(dart +flutter)   ; paint ui and not much else
+       data              ; config/data formats
+       ;;dhall             ; config as code
+       (elixir +lsp      ; erlang done right
+               +tree-sitter)
+       (elm +lsp         ; care for a cup of TEA?
+            +tree-sitter)
+       emacs-lisp        ; a parsel-tongue for the oldest serpent
+       (erlang +lsp)     ; an elegant language for a more civilized age
+       (ess +stan)       ; emacs speaks statistics
+       ;;factor
+       ;;faust             ; dsp, but you get to keep your soul
+       ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
+       ;;fsharp            ; ML stands for Microsoft's Language
+       ;;fstar             ; (dependent) types and (monadic) effects and Z3
+       ;;gdscript          ; the language you waited for
+       (go +lsp          ; the hipster dialect
+           +tree-sitter)
+       ;;graphql           ; give queries a REAT
+       (haskell +lsp)    ; a language that's lazier than I am
+       ;;hy                ; readability of scheme w/ speed of python
+       ;;idris             ; a language you can depend on
+       (java +lsp        ; the poster child for carpal tunnel syndrome
+             +tree-sitter)
+       (javascript +lsp  ; all(hope(abandon(ye(who(enter(here))))))
+                   +tree-sitter)
+       (json +lsp        ; At least it ain't XML
+             +tree-sitter)
+       ;;(julia +lsp)      ; a better, faster MATLAB
+       (kotlin +lsp)     ; a better, slicker Java(Script)
+       (latex +lsp       ; writing papers in Emacs has never been so fun
+              +latexmk
+              +cdlatex
+              +fold)
+       ;;lean              ; for folks with too much to prove
+       ledger            ; an accounting system in Emacs
+       (lua +lsp         ; one-based indices? one-based indices
+            +fennel
+            +moonscript)
+       (markdown +grip)  ; writing docs for people to ignore
+       ;;nim               ; python + lisp at the speed of c
+       ;;nix               ; I hereby declare "nix geht mehr!"
+       (ocaml +lsp       ; an objective camel
+              +tree-sitter)
+       (org +brain       ; organize your plain life in plain text
+            +dragndrop
+            +gnuplot
+            +ipython
+            +journal
+            +jupyter
+            +noter
+            +pandoc
+            +pomodoro
+            +present
+            +pretty
+            +roam2)
+       ;;php               ; perl's insecure younger brother
+       plantuml          ; diagrams for confusing people more
+       (purescript +lsp) ; javascript, but functional
+       (python +lsp      ; beautiful is better than ugly
+               +poetry
+               +pyenv
+               +pyright
+               +tree-sitter)
+       ;;qt                ; the 'cutest' gui framework ever
+       (racket +lsp      ; a DSL for DSLs
+               +xp)
+       ;;raku              ; the artist formerly known as perl6
+       (rest +jq)        ; Emacs as a REST client
+       rst               ; ReST in peace
+       (ruby +rails      ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+             +rvm
+             +rbenv
+             +lsp
+             +tree-sitter)
+       (rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (scala +lsp)      ; java, but good
+       scheme            ; a fully conniving family of lisps
+       (sh +lsp          ; she sells {ba,z,fi}sh shells on the C xor
+           +tree-sitter)
+       sml               ; Standard ML
+       ;;solidity          ; do you need a blockchain? No.
+       ;;(swift +lsp)      ; who asked for emoji variables?
+       ;;terra             ; Earth and Moon in alignment for performance.
+       (web +lsp         ; the tubes
+            +tree-sitter)
+       (yaml +lsp)       ; JSON, but readable
+       ;;(zig +lsp)        ; C, but simpler
+#+end_src
+
+*** Email
+Modules that turn Emacs in an email client.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :email
+       (mu4e +gmail)     ; the great filter Hanson hadn't anticipated
+       ;;notmuch           ; closest Emacs will ever be to multi-threaded
+       (wanderlust +gmail); to boldly go where no mail has gone before
+#+end_src
+
+*** App
+Application modules are complex and opinionated modules that transform Emacs
+toward a specific purpose. They may have additional dependencies and *should be
+loaded last* (but before [[doom-module:][:config]] modules).
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :app
+       calendar          ; Watch your missed deadlines in real time
+       ;;emms              ; a media player for music no one's heard of
+       ;;everywhere        ; leave Emacs!? You must be joking
+       irc               ; how neckbeards socialize
+       (rss +org)        ; emacs as an RSS reader
+       twitter           ; twitter client https://twitter.com/vnought
+#+end_src
+
+*** Config
+Modules in this category provide sane defaults or improve your ability to configure Emacs. It is best to load these last.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+       :config
+       (default +bindings; reasonable defaults for reasonable people
+                +smartparens)
+       ;;literate          ; Disguise your config as poor documentation
+#+end_src
+
+*** End section
+Closes the ~doom!~ macro block.
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+)
+#+end_src
+
+** Configuration                                           :config:
+*** Documentation
+This documentation came with the doom emacs original configs. I'm keeping it here for reference since I often run across it while searching my config.
+**** Macro documentation
+Here are some additional functions/macros that could help you configure Doom:
+
+- ~load!~ for loading external *.el files relative to this one
+- ~use-package!~ for configuring packages
+- ~after!~ for running code after a package has loaded
+- ~add-load-path!~ for adding directories to the ~load-path~, relative to
+  this file. Emacs searches the ~load-path~ when you load packages with
+  ~require~ or ~use-package~.
+- ~map!~ for binding new keys
+
+To get information about any of these functions/macros, move the cursor over
+the highlighted symbol at press ~K~ (non-evil users must press ~C-c c k~).
+This will open documentation for it, including demos of how they are used.
+
+You can also try ~gd~ (or ~C-c c d~) to jump to their definition and see how
+they are implemented.
+
+**** Packages documentation
+To install a package with Doom you must declare them here and run ~doom sync~
+on the command line, then restart Emacs for the changes to take effect -- or
+use ~M-x doom/reload~.
+
+To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+#+begin_src emacs-lisp :tangle no
+(package! some-package)
+#+end_src
+
+To install a package directly from a remote git repo, you must specify a
+~:recipe~. You'll find documentation on what ~:recipe~ accepts on the [[https://github.com/raxod502/straight.el#the-recipe-format][straight docs]].
+#+begin_src emacs-lisp :tangle no
+(package! another-package
+  :recipe (:host github :repo "username/repo"))
+#+end_src
+
+If the package you are trying to install does not contain a PACKAGENAME.el
+file, or is located in a sub-directory of the repo, you'll need to specify
+~:files~ in the ~:recipe~:
+#+begin_src emacs-lisp :tangle no
+(package! this-package
+  :recipe (:host github :repo "username/repo"
+           :files ("some-file.el" "src/lisp/*.el")))
+#+end_src
+
+If you'd like to disable a package included with Doom, you can do so here
+with the ~:disable~ property:
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :disable t)
+#+end_src
+
+You can override the recipe of a built in package without having to specify
+all the properties for ~:recipe~. These will inherit the rest of its recipe
+from Doom or MELPA/ELPA/Emacsmirror:
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :recipe (:nonrecursive t))
+(package! builtin-package-2 :recipe (:repo "myfork/package"))
+#+end_src
+
+Specify a ~:branch~ to install a package from a particular branch or tag.
+This is required for some packages whose default branch isn't =master= (which
+our package manager can't deal with; see raxod502/straight.el#279)
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :recipe (:branch "develop"))
+#+end_src
+
+Use ~:pin~ to specify a particular commit to install.
+#+begin_src emacs-lisp :tangle no
+(package! builtin-package :pin "1a2b3c4d5e")
+#+end_src
+
+Doom's packages are pinned to a specific commit and updated from release to
+release. The ~unpin!~ macro allows you to unpin single packages...
+#+begin_src emacs-lisp :tangle no
+(unpin! pinned-package)
+#+end_src
+
+...or multiple packages
+#+begin_src emacs-lisp :tangle no
+(unpin! pinned-package another-pinned-package)
+#+end_src
+
+...Or *all* packages (*NOT RECOMMENDED*; will likely break things)
+#+begin_src emacs-lisp :tangle no
+(unpin! t)
+#+end_src
+
+*** Basic Emacs settings
+Settings for the general emacs editor and experience. These packages don't affect anything that is package or use case dependent, but instead set up the emacs program as desired.
+**** Personal Identification
+Some functionality uses this to identify you, e.g. GPG configuration, email clients, file templates and snippets.
+#+begin_src emacs-lisp
+(setq user-full-name "Samuel Jackson"
+      user-mail-address (concat "dsiq3g" "@" "gmail.com"))
+#+end_src
+
+**** Fonts and language
+Having the correct fonts and language support is so important in emacs. This section provides control for it.
+***** Chinese support
+In order for Chinese text to be displayed correctly, some modes needs to be turned on to allow for the unique characteristics of the symbolic language.
+#+begin_src emacs-lisp
+(defun local/chinese-text-support ()
+  "Turn on modes to support chinese text in the buffer. May cause other text to change characteristics as well."
+  (interactive)
+  (variable-pitch-mode))
+#+end_src
+
+***** Fonts
+Doom exposes five (optional) variables for controlling fonts in Doom. Here are the three important ones:
+
++ ~doom-font~
++ ~doom-variable-pitch-font~
++ ~doom-big-font~ -- used for ~doom-big-font-mode~; use this for presentations or streaming.
+
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font string. You generally only need these two:
+#+begin_src emacs-lisp :tangle no
+(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+#+end_src
+****** Nerd Fonts
+Nerd font is an up and coming popular font pack that is helpful to have installed.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! nerd-icons)
+#+end_src
+
+
+***** Text properties
+Sometimes text properties can get in the way of debugging so this function makes it easy to remove it.
+#+begin_src emacs-lisp
+(defun local/remove-display-text-property (start end)
+  "Remote all text properties from START to END.
+This is useful when copying stuff with a display property set
+from elsewhere."
+  (interactive "r")
+  (set-text-properties start end nil))
+#+end_src
+
+**** Custom settings file
+When things are customized using the customize interface, they get saved to a customize file. I personally quite dislike this form of configuring since it is not clean and harder to trace down. However, some packages require it and sometimes it gets used anyways so I'm setting and loading the file to prevent unexpected issues regarding it.
+#+begin_src emacs-lisp
+(setq custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file) (load custom-file))
+#+end_src
+
+**** Theming
+Colors and themes are important.
+
+I like dracula for its consistency in all environments and programs but I don't think it has the best look. I'm going to add it here just in case it becomes necessary.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! dracula-theme)
+(package! theme-magic)
+#+end_src
+
+There are two ways to load a theme. Both assume the theme is installed and available. You can either set `doom-theme' or manually load a theme with the `load-theme' function.
+#+begin_src emacs-lisp
+(setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
+#+end_src
+
+**** Debugging
+I've found it necessary to access the debugger more often so here's an easy way to turn it on and off.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Debug on error"
+      "t d" #'toggle-debug-on-error
+      :desc "Debug on quit"
+      "t D" #'toggle-debug-on-quit
+      :desc "Debug on entry"
+      "t C-d" #'debug-on-entry
+      :desc "Cancel debug on entry"
+      "t M-d" #'cancel-debug-on-entry)
+#+end_src
+**** Mode line
+Adds details to the emacs mode line at the bottom of the page. Although several of the values can be referenced elsewhere on a given page, seeing them there is often just convenient and it uses space that would otherwise go unused.
+
+***** Date and time
+Add useful data to the mode line.
+#+begin_src emacs-lisp
+(setq display-time-day-and-date t)
+(display-time-mode 1)
+#+end_src
+
+***** Battery
+For the battery, I don't want it to appear in the the mode line if there is no battery present.
+
+Since the following functions require the battery package, I need to wrap it in ~use-package~ to make sure all the definitions are loaded.
+#+begin_src emacs-lisp
+(use-package! battery :config
+#+end_src
+
+Sadly, there are no default functions for finding if a battery is present so I'll start by writing my own based off of the ~battery~ function in [[https://github.com/emacs-mirror/emacs/blob/3af9e84ff59811734dcbb5d55e04e1fdb7051e77/lisp/battery.el#L219][battery.el]].
+#+begin_src emacs-lisp
+    (defun local/battery-p ()
+        "returns t if a battery is present for the system and nil if one is not."
+        (and battery-status-function
+             battery-echo-area-format
+             (string-match-p "^Power N/A"
+                             (battery-format
+                                     battery-echo-area-format
+                                     (funcall battery-status-function)))
+             t))
+#+end_src
+
+If a battery source is detected, then show the batter level in the mode bar.
+#+begin_src emacs-lisp
+    (unless (local/battery-p) (display-battery-mode 1))
+#+end_src
+
+Finally, close the battery package wrapper.
+#+begin_src emacs-lisp
+)
+#+end_src
+
+***** Encoding format
+#+begin_src emacs-lisp
+(defun local/doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8,
+so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (if (and
+                       ; Checking for UTF-8
+                       (memq
+                        (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                        '(coding-category-utf-8))
+                       ; Checking for LF line ending
+                       (not
+                        (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t nil)))
+(add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
+#+end_src
+
+**** Auth settings
+Auth is used for a couple of things. On MacOS, this can pull from the macos-keychain, but elsewhere I'd like the credentials to be default locations.
+#+begin_src emacs-lisp
+(push (file-name-concat "~" ".authinfo.gpg") auth-sources)
+(push (file-name-concat "~" ".gnupg" "authinfo.gpg") auth-sources)
+(setq auth-source-cache-expiry nil) ; default is 7200 (2h)
+#+end_src
+
+*** Key-chord setup
+Key-chords are so important in Emacs and many will be set through out the rest of this config. Here I am setting up key chords to function the way I want and initializing any key-chord related packages.
+**** Modifier keys mapping
+Emacs has 5 different modifier keys that it uses for key cords. Listed in order from least "powerful" to most "powerful", they are:
+- Shift
+- Control
+- Meta
+- Super
+- Hyper
+
+Usually, the super and hyper keys aren't mapped by default since many keyboards don't have those keys available anymore. This also has the implication that the entire key-space they allow for is mostly unused! However, they can be bound to [[http://xahlee.info/emacs/emacs/emacs_hyper_super_keys.html][system keys on the keyboard]], just be careful not to shadow functionality that you want from the system itself.
+
+For me personally, the "super" key should be bound to Windows' windows key and MacOS's command key. Then the hyper key should be bound to the FN key. Since I don't use Windows much, I'll just set the keys I need for MacOS for now.
+#+begin_src emacs-lisp
+(setq ns-function-modifier 'hyper)
+#+end_src
+
+**** Key discovery
+When working with key-chord shortcuts, discovery is super important. This section sets up the key-chord discovery packages to simplify the discovery process.
+***** Which key
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! discover-my-major)
+#+end_src
+
+#+begin_src emacs-lisp
+(map! :n "g /"   #'which-key-show-top-level
+      :n "g C-/" #'which-key-show-full-major-mode
+      :n "g ?"   #'which-key-show-full-major-mode
+      :n "g M-/" #'which-key-show-minor-mode-keymap)
+(setq which-key-idle-delay 0.5)
+#+end_src
+
+***** Embark
+Embark is a package that allows you to search through key bindings and is a good supplement to which-key.
+
+In order to use embark, we first need to add a dependency: marginalia.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! marginalia)
+#+end_src
+
+Then it just needs to be turned on. Since marginalia is fairly light, this (hopefully) shouldn't impact startup times.
+#+begin_src emacs-lisp
+(marginalia-mode)
+#+end_src
+
+Then for the main package itself, embark.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! embark)
+#+end_src
+
+Once embark is installed, there are some key-bindings that should be set. The first of which is replacing the describe bindings function because that one isn't the most helpful. However, I want to keep it around since once in a while it may prove useful.
+#+begin_src emacs-lisp
+(map! :map help-map
+      "b B" 'describe-bindings)
+#+end_src
+
+**** Evil mode
+I need those vim bindings... They're too strongly ingrained!
+***** Evil settings
+Make undo revert smaller sections of text instead of all text added while in insert mode.
+#+begin_src emacs-lisp
+(setq evil-want-fine-undo t)
+#+end_src
+
+Remove evil repeat key from ~M-.~.
+#+begin_src emacs-lisp
+(after! evil
+  (define-key evil-normal-state-map (kbd "M-.") nil))
+#+end_src
+
+***** Evil snipe mode
+****** Snipe mode off by default
+I get really annoyed by snipe mode since I often use 's' for deleting text. Therefore I use the workaround below to turn off evil snipe mode by default since I really don't want it.
+#+begin_src emacs-lisp
+; Remove default snipe mode
+(remove-hook! (doom-first-input) 'evil-snipe-mode)
+; There can be problems between snipe mode and magit mode.
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+#+end_src
+
+****** Settings
+Some settings for when snipe mode is on.
+#+begin_src emacs-lisp
+(setq evil-snipe-scope 'whole-visible
+      evil-snipe-repeat-scope 'whole-visible)
+#+end_src
+
+****** New keybinding
+This allows you to toggle evil snipe mode on and off (though it's still off by default)
+#+begin_src emacs-lisp
+(defun local/toggle-and-activate-evil-snipe-mode ()
+  "Toggles evil-snipe-mode on and off then activates the
+mode map since otherwise it requires forcing the normal mode state to be activated."
+  (interactive)
+  (evil-snipe-local-mode)
+  (evil-force-normal-state))
+
+(map! :leader
+      :desc "Evil snipe mode"
+      "t S" #'local/toggle-and-activate-evil-snipe-mode)
+#+end_src
+
+*** File management and selection
+When looking for files, these packages and settings help find what I'm looking for.
+**** File tree viewer
+This allows you to see all the recursive files in the current tree hierarchy (similar to the ~tree~ command).
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! dirtree)
+(package! ztree)
+(package! dir-treeview)
+#+end_src
+
+**** Treemacs
+Although treemacs can be set up as a module in doom, I find the default settings extremely annoying and would rather just set it up myself.
+
+Import a more up-to-date version of treemacs. This should have the persp changes I've worked on too!
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(unpin! treemacs)
+#+end_src
+
+Import other treemacs related packages. Most of these are in the parent treemacs package itself but having them separate like this makes sure they don't break long term.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! treemacs-tab-bar)
+(package! treemacs-persp)
+(package! treemacs-magit)
+(package! treemacs-evil)
+(package! treemacs-projectile)
+#+end_src
+
+And then add some treemacs themes too.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! treemacs-all-the-icons)
+(package! treemacs-nerd-icons)
+#+end_src
+
+When treemacs loads, register the new themes with it. Note that the last one will probably be the default theme so import them with that in mind.
+#+begin_src emacs-lisp
+(after! treemacs
+  (require 'treemacs-nerd-icons)
+  (require 'treemacs-all-the-icons))
+#+end_src
+
+First set up the package configuration so everything else becomes part of the config step.
+#+begin_src emacs-lisp
+(use-package! treemacs
+  :defer t
+  :config
+  (progn
+#+end_src
+
+So when working with treemacs in doom emacs, you need to set this value so that icons appear properly.
+#+begin_src emacs-lisp
+    (setq doom-themes-treemacs-theme "doom-colors")
+#+end_src
+
+
+When a directory contains nothing but a single other directory, this collapses them into a single action to open and close. In treemacs I'm not making new files very often so this option makes sense.
+The number represents the number of recursive layers it's allowed. Don't make it too big otherwise things could freeze up.
+#+begin_src emacs-lisp
+    (setq treemacs-collapse-dirs 7)
+#+end_src
+
+By default, when opening a file, default to opening it in the buffer that was last used. The normal default seems to be to open the file in the first buffer but that is quite annoying.
+#+begin_src emacs-lisp
+    (setq treemacs-default-visit-action #'treemacs-visit-node-in-most-recently-used-window)
+#+end_src
+
+
+When I do want to use treemacs, I don't want tons of projects to show since I really only care about the one I'm in.
+(actually, turning it off for now to see if it's fine not to use)
+#+begin_src emacs-lisp :tangle no
+    (treemacs-project-follow-mode 1)
+#+end_src
+
+When using LSP, it is important to let treemacs update as needed to reflect what I'm looking at and what is being processed by the LSP engine.
+#+begin_src emacs-lisp
+    (lsp-treemacs-sync-mode t)
+#+end_src
+
+Make treemacs pay attention to the directory structure to watch for new files/folders.
+#+begin_src emacs-lisp
+    (treemacs-filewatch-mode t)
+#+end_src
+
+
+Set treemacs to use the default theme since file icons provide a lot more visual information.
+#+begin_src emacs-lisp :tangle no
+    (treemacs-load-theme "Default")
+#+end_src
+
+Show how indented files are.
+#+begin_src emacs-lisp
+    (treemacs-indent-guide-mode t)
+#+end_src
+
+Should make cursor go to the current file when opened.
+#+begin_src emacs-lisp
+    (treemacs-follow-mode t)
+#+end_src
+
+Add git support.
+#+begin_src emacs-lisp
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+#+end_src
+
+Set width of sidebar.
+#+begin_src emacs-lisp
+    (setq treemacs-width 35)
+#+end_src
+
+Because sometimes when treemacs loads up in a new workspace, it doesn't have the correct project in place so I want a key to easily add it.
+#+begin_src emacs-lisp
+(map! :map 'treemacs-mode-map
+      :desc "Add project"
+      "a" #'treemacs-add-project-to-workspace)
+#+end_src
+
+And finally, close the config wrapping.
+#+begin_src emacs-lisp
+))
+#+end_src
+
+However, treemacs has an issue with macOS where the git status doesn't always get updated due to the file system. This workaround plus more info on the issue can be found [[https://github.com/Alexander-Miller/treemacs/issues/152][here]].
+#+begin_src emacs-lisp
+(after! treemacs
+  (defun local/treemacs-force-git-update-current-file ()
+    (let ((file (treemacs-canonical-path buffer-file-name)))
+      (treemacs-run-in-every-buffer
+       (when (treemacs-is-path file :in-workspace)
+         (treemacs-update-single-file-git-state file)))))
+  (when (eq system-type 'darwin) ;; Only need for MacOS
+    (add-hook 'after-save-hook #'local/treemacs-force-git-update-current-file)))
+#+end_src
+
+**** Sidebar file explorer
+Import a simpler sidebar package for when it's needed.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! dired-sidebar)
+#+end_src
+
+
+Both treemacs and dired have their uses. Dired is better when I'm exploring the broader file system and kind of know where I'm going. Treemacs is fantastic for looking at a single project or two.
+#+begin_src emacs-lisp
+(map! :n "C-n" #'dired-sidebar-toggle-sidebar)
+(map! :n "M-n" #'treemacs)
+#+end_src
+
+The packages can be swapped but I'm used to their current positions.
+#+begin_src emacs-lisp :tangle no
+(map! :n "C-n" #'treemacs)
+(map! :n "M-n" #'dired-sidebar-toggle-sidebar)
+#+end_src
+
+Make it so that treemacs closes itself when selected no matter which button I press.
+#+begin_src emacs-lisp
+(map! :map 'treemacs-mode-map
+      :ng "M-n" #'treemacs
+      :ng "C-n" #'treemacs)
+#+end_src
+
+**** Scratch buffer
+The scratch buffer is always present as an area to experiment or take a quick note without it needing to be a part of a file. In doom, this scratch buffer has a default mode of Fundamental which is both useless and not something I need for experimentation. In fact, I think it's meant for just writing text and notes. I want the scratch buffer to be a place to write some elisp code so I can set things on a whim while working in other non-elisp buffers.
+#+begin_src emacs-lisp
+(setq initial-major-mode #'lisp-interaction-mode)
+
+(setq initial-scratch-message "\
+;; Welcome to the scratch buffer.
+
+")
+#+end_src
+
+**** Directory navigation
+Dired has a lot of great functionality in it but a few extra packages to for support never hurt.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! dired-sidebar)
+(package! dired+)
+(package! dired-subtree)
+#+end_src
+
+Within dired, the file info is a much more than I really need most of the time. I'm going to turn it off by default and then I can always turn it back on later if needed.
+#+begin_src emacs-lisp
+(defun local/dired-turn-off-file-info ()
+  "Turns off the file info in dired mode"
+  (interactive)
+  (dired-hide-details-mode t))
+(add-hook! 'dired-mode-hook #'local/dired-turn-off-file-info)
+#+end_src
+
+Add tab as a toggle for showing subtree.
+#+begin_src emacs-lisp
+(map! :map dired-mode-map
+      :n [tab] #'dired-subtree-toggle)
+#+end_src
+
+
+For showing file info in dired mode, a different keybinding can be added. However, for now, I don't really need it since it's already bound to ~)~.
+#+begin_src emacs-lisp :tangle no
+(map! :map dired-mode-map
+      :leader
+      :desc "toggle dired file info"
+      :n "t d" #'dired-hide-details-mode)
+#+end_src
+
+**** VLF (Very Large Files)
+VLF if a package for lazy loading enormous files that would normally take forever to load. The package needs to be first added but disabled so that it doesn't hamper load times. This formula was pulled from [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][this]] legendary config.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el")))
+#+end_src
+
+Then setup the package later.
+#+begin_src emacs-lisp
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+#+end_src
+
+**** File info
+This little package displays info about a file in a clean usable way.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! file-info :recipe (:host github :repo "artawower/file-info.el"))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! file-info
+  :config
+  (setq hydra-hint-display-type 'posframe)
+  (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
+                                               :internal-border-width 2
+                                               :internal-border-color "#61AFEF"
+                                               :left-fringe 16
+                                               :right-fringe 16)))
+#+end_src
+
+*** Workspace management
+Workspaces control how buffers and windows get stored and grouped so that you can have several different setups all at once.
+**** Perspectives
+Currently doom emacs is using ~persp-mode~ which is a fork of ~perspective~. This section is for setting the variables that are related to those modes.
+
+#+begin_src emacs-lisp
+(setq persp-sort 'created)
+#+end_src
+
+**** Tab bar mode
+A tab bar for emacs. It works quite well except it reads from global buffers instead of perspective restricted buffers so I have it turned off for now.
+#+begin_src emacs-lisp no
+(setq tab-bar-show t)
+(setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
+(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
+(map! :n "M->" #'tab-next
+      :n "M-<" #'tab-previous)
+#+end_src
+
+Add the menu button to the tab bar so it can be accessed once in a while without taking up space.
+#+begin_src emacs-lisp
+(defun local/tab-bar-format-menu-bar-lambda ()
+  "Produce the Menu button for the tab bar that shows the menu bar."
+  '((menu-bar menu-item (propertize " λ" 'face 'doom-modeline-evil-emacs-state)
+     tab-bar-menu-bar :help "Menu Bar")))
+(add-to-list 'tab-bar-format #'local/tab-bar-format-menu-bar-lambda)
+#+end_src
+
+Add global keybinding labeling so tabs are easier to find
+#+begin_src emacs-lisp
+(which-key-add-key-based-replacements "C-x t" "tabs")
+#+end_src
+
+Make tab functions accessible from the doom-leader menu as well.
+#+begin_src emacs-lisp
+(map! :leader :desc "Tabs" "T" tab-prefix-map)
+#+end_src
+
+**** Projectile
+Projectile is used to organize and search files within a git (or other root indicator) directory.
+#+begin_src emacs-lisp
+(after! projectile
+  (setq projectile-track-known-projects-automatically nil))
+#+end_src
+
+**** Project (other)
+Project is the built in emacs project manager. Although I use projectile most of the time, I want project working well if ever I want to look into it more.
+
+The first thing to add is the ability to find the project root more easily. This is one of the best features of projectile.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! project-rootfile)
+#+end_src
+
+*** Windows
+This section is about how windows get moved around and resized.
+**** Window splitting
+When splitting a window, especially when specifying a file to split into, I want the new file to be on the right, not the left.
+#+begin_src emacs-lisp
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+#+end_src
+
+**** Resizing windows
+Resize all windows when a new one comes in so they have equal space.
+#+begin_src emacs-lisp
+(setq-default window-combination-resize t
+;; changes the cursor to be the size of a gliph in the buffer.
+              x-stretch-cursor t)
+
+;; (setq-default left-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
+#+end_src
+
+**** Window zooming
+One thing I really like about tmux is the ability to zoom in on windows without destroying my whole windowing setup. This package adds similar functionality to emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! zoom-window)
+#+end_src
+
+To get zoom window to work correctly, I need to set its settings then run the setup command so that they take effect properly.
+#+begin_src emacs-lisp
+(setq zoom-window-use-persp t)
+(setq zoom-window-mode-line-color "DarkGreen")
+(add-hook 'doom-load-theme-hook #'zoom-window-setup)
+(zoom-window-setup)
+#+end_src
+
+Then set a convenient key command to activate the zoom. Since tmux uses leader-z, I figured it would work well here too.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Zoom window"
+      "z" #'zoom-window-zoom)
+#+end_src
+
+*** Buffers
+Buffers are where the main action of emacs takes place. This section deals with everything that affects buffers and local values.
+**** Buffer display
+This section contains packages and settings that affect how the buffer is rendered and seen by the user. This includes syntax highlighting, spacing preferences, etc.
+***** Line numbering
+This determines the style of line numbers in effect. If set to `nil', line numbers are disabled. For relative line numbers, set this to `relative'.
+#+begin_src emacs-lisp
+(setq display-line-numbers-type t)
+#+end_src
+
+***** Whitespace mode
+Adds whitespace management and visualization.
+#+begin_src emacs-lisp
+(setq whitespace-style '(face
+                         tabs spaces trailing lines space-before-tab newline
+                         indentation empty space-after-tab
+                         space-mark tab-mark newline-mark
+                         missing-newline-at-eof))
+
+#+end_src
+
+***** Line spacing
+Spacing between lines in a buffer. I like a slight gap where the default emacs is too tight.
+#+begin_src emacs-lisp
+(setq-default line-spacing 0.15)
+#+end_src
+
+***** Tree Sitter mode
+Tree sitter is a program that parses code in a tree structure for better syntax highlighting and for querying code structure.
+Documentation found [[https://emacs-tree-sitter.github.io/syntax-highlighting/queries/][here]].
+
+First I want to set all the tree-sitter packages to use the master branch.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(unpin! tree-sitter-langs)
+#+end_src
+
+#+begin_src emacs-lisp
+(after! tree-sitter
+  (defvar local/tree-sitter-map (make-sparse-keymap))
+  (map! :map local/tree-sitter-map
+        :desc "Debug mode"
+        "d" #'tree-sitter-debug-mode
+        :desc "TS folding"
+        "f" #'ts-fold-mode
+        :desc "Folding indicators"
+        "i" #'ts-fold-indicators-mode
+        :desc "Query builder"
+        "q" #'tree-sitter-query-builder
+        :desc "Highlight mode"
+        "h" #'tree-sitter-hl-mode)
+
+  (map! :map doom-leader-code-map
+        :desc "Tree-sitter"
+        "T" local/tree-sitter-map))
+#+end_src
+
+Finally, enable global tree-sitter mode which will turn on tree-sitter whenever there's a grammar installed for the mode.
+#+begin_src emacs-lisp
+(global-tree-sitter-mode 1)
+#+end_src
+
+***** Code folding
+****** TS-Fold
+One of the biggest advantages of tree sitter mode is the ability to specify folding patterns.
+
+Lets make sure the ts-fold package is installed so that we can use folding. I'm going to use my fork for now since I've changed a few things.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! ts-fold :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+#+end_src
+
+******* Setup
+Since tree-sitter is great for folding when its available, I'm going to turn it on globally so that it's usable whenever possible. Loaded after tree-sitter though since that's when it's first viable to use anyways.
+#+begin_src emacs-lisp
+(after! tree-sitter (global-ts-fold-indicators-mode 1))
+#+end_src
+
+Enable folding for line comments.
+#+begin_src emacs-lisp
+(add-hook! 'ts-fold-mode-hook #'ts-fold-line-comment-mode)
+#+end_src
+
+Here we set up the functionality that is (currently) needed to load new definitions of folding patterns. This is a bit of a hack but the way this is designed is quite confusing from an extensibility perspective.
+#+begin_src emacs-lisp
+(after! ts-fold
+  (defun local/update-ts-fold-definitions (mode rules)
+    "Update the provided MODE with the new set of folding RULES.
+MODE should be a programming mode such as go-mode.
+RULES should be a list of folding rules in the format of (ts-element . folding-function)"
+    (setf (alist-get mode ts-fold-range-alist) rules)))
+#+end_src
+
+Here I want to define a folding function that will only fold if there's a newline character present in the node. That way I can add folding to things like long function parameter lists without it causing all function parameter lists to be condensed. This is in setup since it can be useful in all languages.
+#+begin_src emacs-lisp
+(defun local/ts-fold-range-multi-line-seq (node offset)
+  "Return the fold range in a sequence when the NODE exists over multiple lines."
+  (let ((beg (1+ (tsc-node-start-position node)))
+        (end (1- (tsc-node-end-position node))))
+    (if (< 1 (count-lines (1- beg) (1+ end)))
+        (ts-fold--cons-add (cons beg end) offset)
+      nil)))
+#+end_src
+
+******* Go Folding
+I have to use golang for work but the standard golang folding capabilities is quite bad. this adds just a few more folding definitions that make the code look SOO much prettier.
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-go-list
+      '((block . ts-fold-range-seq)
+        ;; (comment . local/ts-fold-range-multi-line-seq)
+        (comment . ts-fold-range-c-like-comment)
+        (import_spec_list . ts-fold-range-seq)
+        (field_declaration_list . ts-fold-range-seq)
+        (parameter_list . local/ts-fold-range-multi-line-seq)
+        (literal_value . local/ts-fold-range-multi-line-seq)
+        ;; (interface_type . (ts-fold-range-seq 10 0))
+        ;; (type_declaration . (lambda (node offset) (ts-fold-range-markers node offset "[{(]" "[})]")))
+        (interface_type . (lambda (node offset) (ts-fold-range-markers node offset "{" "}")))
+        (const_declaration . (lambda (node offset) (ts-fold-range-markers node offset "(" ")")))))
+        ;; (const_declaration . (local/ts-fold-range-multi-line-seq 6 0))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'go-mode local/ts-fold-parsers-go-list))
+#+end_src
+
+******* Yaml Folding
+Yaml is a format for config files such as k8s files or helm files. I have to use it a lot so good folding is important.
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-yaml-list
+      '((comment . (lambda (node offset) (ts-fold-range-line-comment node offset "#")))
+        (block_mapping_pair . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'yaml-mode local/ts-fold-parsers-yaml-list))
+#+end_src
+
+******* JS Folding
+Javascript folding already works pretty well but there are a few tweaks I'd like to make to get it to run a bit smoother.
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-javascript-list
+      '((object                   . ts-fold-range-seq)
+        (array                    . ts-fold-range-seq)
+        (export_clause            . ts-fold-range-seq)
+        (statement_block          . ts-fold-range-seq)
+        (formal_parameters        . local/ts-fold-range-multi-line-seq)
+        (arguments                . local/ts-fold-range-multi-line-seq)
+        (parenthesized_expression . local/ts-fold-range-multi-line-seq)
+        (comment                  . ts-fold-range-c-like-comment)))
+
+(after! ts-fold
+  (dolist (mode '(javascript-mode rjsx-mode js-mode js2-mode js3-mode))
+    (local/update-ts-fold-definitions mode local/ts-fold-parsers-javascript-list)))
+#+end_src
+
+******* Java Folding
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-java-list
+      '((block . ts-fold-range-seq)
+        (element_value_array_initializer . ts-fold-range-seq)
+        (module_body . ts-fold-range-seq)
+        (enum_body . ts-fold-range-seq)
+        (class_body . ts-fold-range-seq)
+        (constructor_body . ts-fold-range-seq)
+        (annotation_type_body . ts-fold-range-seq)
+        (interface_body . ts-fold-range-seq)
+        (array_initializer . ts-fold-range-seq)
+        (block_comment . (ts-fold-range-seq 1 -1))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'java-mode local/ts-fold-parsers-java-list))
+#+end_src
+
+******* Shell Folding
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-shell-list
+      '((do_group . (ts-fold-range-seq 1 -3))
+        (compound_statement . ts-fold-range-seq)
+        (if_statement . (lambda (node offset) (ts-fold-range-markers node offset "then" "fi")))
+        (comment
+         . (lambda (node offset)
+             (ts-fold-range-line-comment node offset "#")))))
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
+#+end_src
+
+******* Python Folding
+#+begin_src emacs-lisp
+(setq local/ts-fold-parsers-python-list
+      '((function_definition . ts-fold-range-python)
+        (class_definition    . ts-fold-range-python)
+        (list                . ts-fold-range-seq)
+        (dictionary          . ts-fold-range-seq)
+        (for_statement       . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (if_statement        . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (elif_clause         . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
+        (comment             . (lambda (node offset) (ts-fold-range-line-comment node offset "#")))))
+
+
+
+(after! ts-fold
+  (local/update-ts-fold-definitions 'python-mode local/ts-fold-parsers-python-list))
+#+end_src
+
+****** Origami folding
+Origami mode has pretty good default folding for normal code blocks. See ts-fold for a good, though more specific, alternative method.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! origami)
+#+end_src
+
+Set the ability to use it anywhere.
+#+begin_src emacs-lisp
+(global-origami-mode)
+#+end_src
+
+But disable in modes where it does an awful job.
+#+begin_src emacs-lisp
+(defun local/turn-off-origami ()
+  "Simple function meant for hooks in order to turn off
+origami mode in major modes where it gets annoying."
+  (origami-mode -1))
+
+(dolist (hook '(dired-mode-hook))
+  (add-hook hook #'local/turn-off-origami))
+#+end_src
+
+****** Fold from anywhere on line
+The standard folding capability of emacs only will fold the code at point. However, often times what is intended is to fold the code at the end of point.  Let's write that.
+
+The first thing I need to do to execute this is to be able to detect when a fold has successfully occurred. Folds are performed using overlays so I need to detect if a
+#+begin_src emacs-lisp
+(defun local/count-overlays-on-line ()
+  "Count the number of overlays that are present on the current line."
+  (length (overlays-in
+           (line-beginning-position)
+           (1+ (line-end-position))))) ;; Add one to line end position to make sure it includes the new line.
+#+end_src
+
+Then write a function that will first perform an action at point, but if no change to the number of overlays is detected, then perform the fold action again at the end of the line.
+This way, we can have both meanings available to us.
+#+begin_src emacs-lisp
+(defun local/execute-at-end-of-line (func)
+  "Takes in a function then executes it at the end of the current line."
+  (save-excursion (end-of-line) (funcall func)))
+
+(defun local/smart-fold (func)
+  "Performs a fold at point then at the end of the line if no new folds were detected. This way a greater number of folding situations will be detected."
+  (let ((initial-overlay-count (local/count-overlays-on-line))
+        (fold-result (funcall func)))
+    (if (= initial-overlay-count (local/count-overlays-on-line))
+        (local/execute-at-end-of-line func))
+    fold-result)) ;; If the fold succeeded, then pass the result forward
+#+end_src
+
+After the smart folding wrapper has been written, we can move on to wrapping up the current folding functions. There may be a way to more cleanly do this but just hard coding wrappers works plenty fine for now.
+#+begin_src emacs-lisp
+(defun local/evil-toggle-fold-smart ()
+  "Run evil-toggle-fold at the end of the line.
+
+It checks for folds in the following order:
+ - Open at point,
+ - Open at EOL
+ - Close at EOL
+ - Close at point
+I find this order matches how I want folds to work"
+  (interactive)
+  (let ((initial-overlay-count (local/count-overlays-on-line)))
+    (local/smart-fold #'evil-open-fold)
+    (when (= initial-overlay-count (local/count-overlays-on-line))
+      (local/execute-at-end-of-line #'evil-close-fold)
+      (when (= initial-overlay-count (local/count-overlays-on-line))
+          (evil-close-fold)))))
+
+(defun local/evil-open-fold-smart ()
+  "Run evil-open-fold at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-open-fold))
+
+(defun local/evil-open-fold-rec-smart ()
+  "Run evil-open-fold-rec at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-open-fold-rec))
+
+(defun local/evil-close-fold-smart ()
+  "Run evil-close-fold at the end of the line."
+  (interactive)
+  (local/smart-fold #'evil-close-fold))
+#+end_src
+
+Finally remap the evil fold keybindings that need to use the above function.
+#+begin_src emacs-lisp
+(map! :desc "toggle fold"
+      :nm "za" #'local/evil-toggle-fold-smart
+      :desc "close fold"
+      :nm "zc" #'local/evil-close-fold-smart
+      :desc "open fold"
+      :nm "zo" #'local/evil-open-fold-smart
+      :desc "open fold rec"
+      :nm "zO" #'local/evil-open-fold-rec-smart)
+#+end_src
+
+If something goes wrong with the new folding behavior, here's the standard definition. This can be turned on to get normal folding back.
+#+begin_src emacs-lisp tangle: no
+(map! :desc "toggle fold"
+      :nm "za" #'evil-toggle-fold
+      :desc "close fold"
+      :nm "zc" #'evil-close-fold
+      :desc "open fold"
+      :nm "zo" #'evil-open-fold
+      :desc "open fold rec"
+      :nm "zO" #'evil-open-fold-rec)
+#+end_src
+
+****** Tab as fold toggling
+When available, I really like to use tab as a quick way to toggle folds.
+#+begin_src emacs-lisp
+(map! :i [tab] (cmds! (and (modulep! :editor snippets)
+                            (yas-maybe-expand-abbrev-key-filter 'yas-expand))
+                       #'yas-expand
+                       (and (bound-and-true-p company-mode)
+                            (modulep! :completion company +tng))
+                       #'company-indent-or-complete-common)
+      :m [tab] (cmds! (and (modulep! :editor snippets)
+                           (evil-visual-state-p)
+                           (or (eq evil-visual-selection 'line)
+                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+                      #'yas-insert-snippet
+                      ;; Fixes #4548: without this, this tab keybind overrides
+                      ;; mode-local ones for modes that don't have an evil
+                      ;; keybinding scheme or users who don't have :editor (evil
+                      ;; +everywhere) enabled.
+                      (or (doom-lookup-key
+                           [tab]
+                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)
+                                 (current-local-map)))
+                          (doom-lookup-key
+                           (kbd "TAB")
+                           (list (evil-get-auxiliary-keymap (current-local-map) evil-state)))
+                          (doom-lookup-key (kbd "TAB") (list (current-local-map))))
+                      it
+                      #'local/evil-toggle-fold-smart)) ;; Uses the new smarter folding method
+#+end_src
+
+***** Fill column
+The fill column used for fill-column mode should be longer than the standard. I think setting it a bit over 100 is fine.
+#+begin_src emacs-lisp
+(setq fill-column 110)
+#+end_src
+
+***** Minimap
+Minimap is a nice way to visualize the structure of a long file.
+
+**** Working within a buffer
+This section relates to actually doing stuff within a buffer or buffers.
+***** Undo
+Increase the undo limit since there's no real space limitations on modern systems.
+#+begin_src emacs-lisp
+;; Let the undo buffer use up to 100Mb
+(setq undo-limit 100000000)
+#+end_src
+
+***** Writing
+These packages are for writing stuff and actually working with text of any sort.
+****** Dictionary
+Fix spell-fu not being on main branch by default.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(unpin! spell-fu)
+(package! spell-fu :recipe
+  (:host codeberg
+   :repo "ideasman42/emacs-spell-fu"
+   :branch "main"))
+#+end_src
+
+
+Set the correct dictionary for spell check.
+#+begin_src emacs-lisp
+(setq ispell-dictionary "en")
+#+end_src
+
+Setting my personal dictionary to add words to so that its within my own files.
+#+begin_src emacs-lisp :tangle no
+(setq ispell-personal-dictionary (file-name-concat "~" ".doom.d" "ispell" "en.pws"))
+#+end_src
+
+Register personal dictionary with ispell.
+#+begin_src emacs-lisp :tangle no
+(after! spell-fu
+  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "zh"))
+  (spell-fu-dictionary-add
+   (spell-fu-get-personal-dictionary "en-personal" (file-name-concat "~" ".doom.d" "ispell" "en.pws"))))
+#+end_src
+
+These are some help functions to work with spell-fu so that it's easier to debug and use.
+#+begin_src emacs-lisp
+(defun local/ispell-debug ()
+  "Toggle spell-fu debug and reset spell-fu mode"
+  (interactive)
+  (if spell-fu-debug
+      (setq spell-fu-debug nil)
+    (setq spell-fu-debug t))
+  (spell-fu-reset))
+#+end_src
+
+****** Snippets
+Yas-snippets are a nice package for inserting snippets into code.
+
+Turning off the trigger in field for now since it was giving me undesired behavior. Maybe when I learn to use it better then it will come back into the config.
+#+begin_src emacs-lisp :tangle no
+(setq yas-triggers-in-field t)
+#+end_src
+
+Adding my personal snippets directory.
+#+begin_src emacs-lisp
+(setq local/snippet-dir (concat doom-user-dir "snippets/"))
+(add-to-list 'yas-snippet-dirs 'local/snippet-dir)
+(yas-load-directory local/snippet-dir)
+#+end_src
+
+******* Academic writing
+This package provides snippets for making writing sound more academic which can be really useful when you're not sure how to make something sound professional.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! academic-phrases)
+#+end_src
+
+****** Text filler
+Sometimes when testing out settings and formats, having filler text is useful.
+
+******* Lorem-ipsum
+The most common filler text is lorem-ipsum.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! lorem-ipsum)
+#+end_src
+
+Set up a key map for lorem-ipsum and add it into the insert section.
+#+begin_src emacs-lisp
+(defvar local/lorem-ipsum-map (make-sparse-keymap))
+(map! :leader
+      :desc "lorem-ipsum"
+      "i l" local/lorem-ipsum-map)
+(map! :map local/lorem-ipsum-map
+      :desc "Paragraph"
+      "p" #'lorem-ipsum-insert-paragraphs
+      :desc "Sentence"
+      "s" #'lorem-ipsum-insert-sentences
+      :desc "List"
+      "l" #'lorem-ipsum-insert-list)
+#+end_src
+
+****** Write good mode
+#+begin_src emacs-lisp
+(remove-hook! (org-mode markdown-mode rst-mode asciidoc-mode latex-mode) #'writegood-mode)
+(add-hook 'writegood-mode-hook 'writegood-passive-voice-turn-off)
+(map! :leader
+      :desc "Write good mode"
+      "t W" #'writegood-mode)
+#+end_src
+
+****** Flycheck mode
+Disable flycheck mode on load. Can be re-enabled in a buffer with SPC t f
+#+begin_src emacs-lisp
+(remove-hook! (doom-first-buffer) #'global-flycheck-mode)
+#+end_src
+
+****** Clipboard
+Prevents system clipboard from being accidentally overwritten. Must now write to register "+ to write to system clipboard.
+#+begin_src emacs-lisp
+;; Some paste related settings.
+(setq save-interprogram-paste-before-kill t
+      select-enable-clipboard nil)
+#+end_src
+
+In order to provide copy and paste functionality directly from the keyboard, I need to capture the inputs and make functions that force the register that corresponds with the clipboard to be used (the + register).
+
+First, I need to set up the wrapper functions. The thing to note is that these are just copies of the underlying function's header but they pass in the register's ascii number. In order to get the ascii number of a character, we simply need to put a '?' before it.
+#+begin_src emacs-lisp
+(evil-define-operator evil-copy-to-clipboard (beg end &optional type _ handler)
+  "Saves the characters in motion into they system clipboard through the '+' register"
+  :move-point nil
+  :repeat nil
+  (interactive "<R><x><y>")
+  (evil-yank beg end type ?+ handler))
+#+end_src
+
+And here is the paste function.
+#+begin_src emacs-lisp
+(evil-define-command evil-paste-from-clipboard
+  (count &optional _ handler)
+  "Pastes the latest yanked text behind point.
+The return value is the yanked text."
+  :suppress-operator t
+  (interactive "*P<x>")
+  (evil-paste-before count ?+ handler))
+#+end_src
+
+Finally we need to create universal keybindings to these functions so they can be called from anywhere.
+#+begin_src emacs-lisp
+(map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
+      :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
+#+end_src
+
+***** Movement
+Moving around is vital. These settings affect how that works
+****** Sub-word movement
+#+begin_src emacs-lisp
+;; Makes it so movement keys stop at camlecase sub words.
+(global-subword-mode 1)
+#+end_src
+
+****** Scrolling
+Leave some space at the bottom while scrolling down so the cursor isn't hugging the bottom edge.
+#+begin_src emacs-lisp
+(setq scroll-margin 2)
+#+end_src
+
+****** Centered Cursor / Typewriter Mode
+When writing or coding, sometimes it's nice to just see everything around the cursor by keeping the cursor in the middle of the screen. This mode does just that.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! centered-cursor-mode)
+#+end_src
+
+It can be turned on using a toggle option.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Centered cursor"
+      "t C" #'centered-cursor-mode)
+#+end_src
+
+****** Logos
+Logos is a package for working with pages within emacs. Pages can be set with the page character.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! logos)
+#+end_src
+
+****** TODO Returning from a jump
+After jumping to a different spot like with a search or a definition look up, I want to be able to return to where I was more easily.
+Recommend using ~C-o~ / ~M-,~ which are faster.
+
+TODO - Make this more efficient
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Previous mark location"
+      :n "P" #'better-jumper-jump-backwards)
+#+end_src
+
+***** Encrypt region
+Some files contain details that should be encrypted or scrambled before being published.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! encrypt-region)
+#+end_src
+
+***** Searching
+These settings and packages are for searching around, across, and outside of buffers. Need to find the information somewhere!
+****** Case insensitive search
+=case-fold-search= is a variable that turns case sensitivity on and off. It is set per buffer. Since I like case sensitivity, I'm setting the default value so that new buffers use case sensitive searches.
+#+begin_src emacs-lisp
+;; Make searches case sensitive
+(setq-default case-fold-search nil)
+#+end_src
+
+****** Rip-grep
+Rip grep is a package for quickly finding a search query within a directory.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! rg)
+#+end_src
+
+This little piece of code switches to the results buffer once the search has concluded. It is annoying to have to add ~advice~, but getting this to work as expected is better than nothing.
+*Note:* Pulled from [[https://github.com/dajva/rg.el/issues/142][here]].
+#+begin_src emacs-lisp
+(with-eval-after-load 'rg
+  (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
+#+end_src
+
+****** Bang!
+Adds DuckDuckGo style bangs to emacs. See [[https://github.com/Arian-D/bang.el][github]] for more info.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! bang :recipe (:host github :repo "Arian-D/bang.el"))
+#+end_src
+
+***** LSP servers
+[[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][LSP mode]] is used to interact with LSP servers.
+
+Turn on logging.
+#+begin_src emacs-lisp
+(setq lsp-log-io t)
+#+end_src
+
+****** lsp settings
+Here are some settings to configure LSP mode.
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (setq lsp-headerline-breadcrumb-enable t
+        lsp-lens-enable t
+        lsp-use-lsp-ui t))
+#+end_src
+
+****** LSP ui
+Activate ~lsp-ui-mode~.
+#+begin_src emacs-lisp
+(add-hook! 'lsp-mode-hook #'lsp-ui-mode)
+(after! lsp-ui
+  (setq lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-delay 0.7
+        lsp-ui-sideline-update-mode 'point))
+#+end_src
+
+****** LSP peek
+Make it so that checking sources using LSP only shows a small context instead of jumping to the file right away.
+#+begin_src emacs-lisp
+(setq lsp-ui-peek-enable t)
+#+end_src
+
+#+begin_src emacs-lisp
+(after! lsp-ui
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+#+end_src
+
+****** LSP ui docs
+Show docs for items.
+#+begin_src emacs-lisp
+(after! lsp-ui
+  (setq lsp-ui-doc-enable 't
+        lsp-ui-doc-position 'at-point
+        ;; disabled showing with cursor since the doc gets very annoying to have pop up all the time
+        lsp-ui-doc-show-with-cursor nil
+        lsp-ui-doc-show-with-mouse 't))
+#+end_src
+
+****** Key bindings
+By default there's no keybindings associated with the LSP functions so I want to create my own keymap to use when it's been activated. Although this functionality is also available in ~SPC-c~, I want to also have access to to direct implementations when desired.
+
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (defvar local/lsp-mode-keymap (make-sparse-keymap))
+  (map! :map local/lsp-mode-keymap
+        "d" #'lsp-find-definition
+        "i" #'lsp-find-implementation
+        "r" #'lsp-find-references
+        "m" #'lsp-ui-imenu
+        "R" #'lsp-rename
+        "t" #'lsp-find-type-definition)
+
+  (defun local/add-lsp-keymaps ()
+    "Adds prefix keybindings for lsp keymaps."
+    (interactive)
+    (map! :leader
+          :desc "LSP"
+          "l" local/lsp-mode-keymap
+          :desc "LSP Official"
+          "L" lsp-mode-map))
+
+  (add-hook! 'lsp-mode-hook #'local/add-lsp-keymaps))
+#+end_src
+
+Some lsp servers need extra settings in place so those will be added here.
+****** Golang
+In golang, a lot of the tests that get written are integration tests. When using gopls, the integration tag needs to be specified so that those files are handled correctly.
+#+begin_src emacs-lisp
+(setq lsp-go-build-flags ["-tags=integration,e2e"])
+#+end_src
+
+*** Independent or external programs
+These are modes that provide some sort of specialized experience outside of the normal writing flow of emacs.
+**** Version control
+The only VC system I use right now is git, but others may come in the future. There are lots of nice functionality here for seeing what has changed in a file.
+***** Inline blame
+This module adds git commit information in line with code when turned on which can be nice when working through a code base.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! blamer)
+#+end_src
+
+This configures it to be a bit prettier.
+#+begin_src emacs-lisp
+(use-package blamer
+  :defer 20
+  :custom
+  (blamer-idle-time 0)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 120
+                   :italic t))))
+#+end_src
+
+I'm going to put the map in two places. The first is in the toggle menu and the second is in the git menu. That way I have multiple ways to stumble across this when I need it.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Git blamer"
+      "t B" #'blamer-mode
+      :desc "Git blamer"
+      "g C-b" #'blamer-mode)
+#+end_src
+
+
+****** Styling for magit
+I may be able to format the magit blame in a useful way: [[https://www.reddit.com/r/emacs/comments/tunyg3/comment/i38iknd/][link]]
+summary:
+#+begin_src elisp :tangle no
+(setq local/margin-blame-style
+      '(margin
+        (margin-width . 32)
+        (margin-format . ("%A %a %f"))
+        (margin-face . magit-blame-margin)
+        (margin-body-face . magit-blame-dimmed)
+        (show-message . t)))
+
+(add-to-list 'magit-blame-styles 'local/margin-blame-style)
+#+end_src
+***** Sideline blame
+Packages for performing blame in the sideline of the buffer.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! sideline
+  :recipe (:host github :repo "emacs-sideline/sideline"))
+(package! sideline-blame
+  :recipe (:host github :repo "emacs-sideline/sideline-blame"))
+#+end_src
+
+Leaving off for now. Package still seems to be under development.
+#+begin_src emacs-lisp :tangle no
+(use-package sideline-blame
+  :init
+  (setq sideline-backends-left '((sideline-blame . down))))
+#+end_src
+
+***** Diff
+This is a nice package for visualizing git diffs in a more standard unix way than magit.
+#+begin_src elisp :tangle ../.scratch.d/packages.el
+(package! diff-ansi)
+#+end_src
+
+***** Gutter
+Having git information in the gutter of emacs is great for keeping track of what I've changed. First lets activate it everywhere!
+#+begin_src emacs-lisp
+(global-git-gutter-mode)
+#+end_src
+
+But using the gutter for git presents a challenge since other things may also be in the gutter section. For example, fold indicators. For that reason, I'm going to try to experiment with the git gutter on the right hand side. I think it'll still be helpful for showing what changed but seeing the exact line isn't vital.
+#+begin_src emacs-lisp
+(setq git-gutter-fr:side 'right-fringe)
+#+end_src
+
+**** Discord integration
+Supposedly this can be used to connect with discord from emacs. Actual use is TBD.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! elcord)
+#+end_src
+
+**** Speed reading
+Spray is a tool that flashes words on the screen in rapid succession to simulate speed reading. Sometimes useful to prevent yourself from re-reading over and over again.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! spray :recipe (:host github :repo "emacsmirror/spray"))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! spray
+  :commands spray-mode
+  :config
+  (setq spray-wpm 600
+        spray-height 800)
+  (defun local/spray-mode-hide-cursor()
+    "Hide or unhide the cursor as is appropriate."
+    (if spray-mode
+        (setq-local spray--last-evil-cursor-state evil-normal-state-cursor
+                    evil-normal-state-cursor '(nil))
+      (setq-local evil-normal-state-cursor spray--last-evil-cursor-state)))
+  (add-hook 'spray-mode-hook #'local/spray-mode-hode-cursor)
+  (map! :map spray-mode-map
+        "<return>" #'spray-start/stop
+        "f" #'spray-faster
+        "s" #'spray-slower
+        "t" #'spray-time
+        "<right>" #'spray-forward-word
+        "h" #'spray-forward-word
+        "<left>" #'spray-backward-word
+        "l" #'spray-backward-word
+        "q" #'spray-quit))
+#+end_src
+
+**** Presentations
+Emacs can in theory be a great way to give presentations. Even about things other than emacs!
+***** Key cast
+Key cast mode shows what keys are being pressed so that someone watching a recording can (in theory) keep up.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! keycast)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! keycast
+  :commands keycast-mode
+  :config
+  (define-minor-mode keycast-mode
+    "Show current command and its key bining in the mode line."
+    :global t
+    (if keycast-mode
+        (progn
+          (add-hook 'pre-command-hook 'keycast--update t)
+          (add-to-list 'global-mode-string '("" mode-line-keycast " ")))
+      (remove-hook 'pre-command-hook 'keycast--update)
+      (setq global-mode-string (remove '("" mode-line-keycast " ") global-mode-string))))
+  (custom-set-faces!
+    ('keycast-command :inherit doom-modeline-debug :height 0.9)
+    ('keycast-key :inherit custom-modified :height 1.1 :weight bold)))
+#+end_src
+
+***** Gif Screenshot
+Is supposed to record a screen recording of emacs. Haven't gotten it to work very well yet though.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! gif-screencast)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! gif-screencast
+  :commands gif-screencast-mode
+  :config
+  (map! :map gif-screencast-mode-map
+        :g "<f8>" #'gif-screencast-toggle-pause
+        :g "<f9>" #'gif-screencast-stop)
+  (setq gif-screencast-program "maim"
+        gif-screencast-args '("--quality" "3" "-1" ,(string-trim-right (shell-command-to-string "xdotool getactivewindow")))
+        gif-screencast-optimize-args '("--batch" "--optimize=3" "--usecolormap=/tmp/doom-color-theme"))
+  (defun local/gif-screencast-write-colormap ()
+    (f-write-text
+     (replace-regexp-in-string "\n+" "\n"
+                               (mapconcat (lambda (c) (if (listp (cdr c))) (cadr c)))
+                               'utf-8
+                               "/tmp/doom-color-theme")))
+  (gif-screencast-write-colormap)
+  (add-hook 'doom-load-theme-hook #'local/gif-screencast-write-colormap))
+#+end_src
+
+***** Command log mode
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! command-log-mode)
+#+end_src
+
+**** Kubernetes
+Kubernetes is a container program that is useful for managing container networks.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! kubernetes)
+(package! kubernetes-evil)
+#+end_src
+
+This is for working with kubernetes config files.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! k8s-mode)
+#+end_src
+
+And being able to work with helm is a must for kubernetes.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! kubernetes-helm)
+#+end_src
+
+***** Kubel
+Another package that looks interesting is kubel. Seems to be approaching k9s.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! kubel)
+#+end_src
+may want to compile vterm before using it. Check documentation for more info.
+**** Bluetooth
+This little [[https://github.com/emacsmirror/bluetooth][package]] is for managing bluetooth devices directly from within emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! bluetooth)
+#+end_src
+
+**** Collaborative editing
+This package allows sharing buffers with other users. Documentation can be found on the [[https://elpa.gnu.org/packages/crdt.html][ELPA page]].
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! crdt)
+#+end_src
+
+After crdt is enabled, there are a couple of useful extras to enable.
+
+#+begin_src emacs-lisp
+(defun local/crdt-enable-extras ()
+  "Enable the nice extras when crdt is enabled and
+turn them off when disabled."
+  (if crdt-mode
+      (progn
+        (crdt-visualize-author-mode 1)
+        (crdt-org-sync-overlay-mode 1))
+    (crdt-visualize-author-mode -1)
+    (crdt-org-sync-overlay-mode -1)))
+
+(add-hook! 'crdt-mode-hook #'local/crdt-enable-extras)
+#+end_src
+
+**** Startup profiling
+This is the directions for benchmarking doom's startup process.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! benchmark-init)
+#+end_src
+
+The main code for this package is in the file initialization section since it needs to be at the very top of the file.
+
+*** Mode/package settings
+**** Mode Minder
+Although it's not really an important mode in and of itself, mode minder lets you look at all the major modes that are installed which can be quite helpful.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
+#+end_src
+
+And then this package needs to be loaded to work properly for some reason. Not needed if using my own fork.
+#+begin_src emacs-lisp :tangle no
+(require 'mode-minder nil 'noerror)
+#+end_src
+
+**** Elisp-shell
+Eshell is a really nice shell emulator that still provides the power of emacs lisp. Still need to find some better aliases for it though.
+#+begin_src emacs-lisp
+(setq eshell-aliases-file "~/.doom.d/eshell/eshell-aliases")
+#+end_src
+
+***** Elisp shell aliases
+Start with the simple ls alias that is seen everywhere.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/eshell/eshell-aliases
+alias ll 'ls -lh $*'
+#+end_src
+
+Add in a couple of aliases for ~view-file~ since it's so useful in shell mode.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/eshell/eshell-aliases
+alias vf 'view-file $1'
+alias emacs 'view-file $1'
+#+end_src
+
+***** Eshell functions
+Make the clear function fully clear the screen.
+#+begin_src emacs-lisp
+(defun eshell/clear ()
+  "Clear the eshell buffer."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+#+end_src
+
+***** Prompt as page delimiter
+#+begin_src emacs-lisp
+(defun local/set-prompt-as-page-delimiter ()
+  "Sets the prompt of eshell as the page delimiter sequence so that each call
+can be seen as seprate pages and consequently can use paging functions such
+as `narrow-to-page' or a package like logos to see paged results."
+  (setq-local page-delimiter eshell-prompt-regexp))
+(add-hook 'eshell-mode-hook #'local/set-prompt-as-page-delimiter)
+#+end_src
+
+**** Org mode
+Org mode is THE package in emacs. Lots of settings, lots of organization.
+***** Org add-on packages
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! org-reverse-datetree)
+;(package! ox-gfm) ; Causing problems with pandoc at the moment.
+(package! org-ref)
+(package! org-chef)
+(package! org-super-agenda)
+(package! org-fragtog)
+(package! org-pretty-tags)
+#+end_src
+
+***** General Org settings
+These settings are for org in general but aren't an extension or certain parts of org.
+****** Standard org settings
+These settings change the default values available in org mode.
+
+If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
+#+begin_src emacs-lisp
+(setq org-directory (file-name-concat "~" "org"))
+;; (setq org-work-directory "~/work-org")
+(setq org-work-directory (file-name-concat org-directory "work"))
+(setq org-archive-location (file-name-concat "archive" "%s_archive::"))
+#+end_src
+
+****** Font support
+In org mode I like to be able to write in different fonts and languages (such as chinese) so I'm turning on variable pitch font support. Without it, lots of text starts to overlap.
+#+begin_src emacs-lisp :tangle no
+(add-hook 'org-mode-hook #'local/chinese-text-support)
+#+end_src
+
+****** Org mode keybindings
+#+begin_src emacs-lisp
+;; Use keybinding g b to "go back" to previous location when a link is followed.
+;; Use keybinding g m to "go mark" the current location so it can be returned to later.
+(map! :after org
+    :map org-mode-map
+    :n  "g m" #'org-mark-ring-push
+    :n  "g b" #'org-mark-ring-goto
+    :nv "g j" #'evil-next-visual-line
+    :nv "g k" #'evil-previous-visual-line
+    :nv "g J" #'org-forward-element
+    :nv "g K" #'org-backward-element)
+#+end_src
+
+Some keybindings for making it easier to navigate around org structs.
+#+begin_src emacs-lisp
+(map! :map evil-org-mode-map
+      :after evil-org
+      :n "g <up>"    #'org-backward-heading-same-level
+      :n "g <down>"  #'org-forward-heading-same-level
+      :n "g <left>"  #'org-up-element
+      :n "g <right>" #'org-down-element)
+#+end_src
+
+****** Shortcut to open org files
+This shortcut opens the org directory and allows a user to select a file. If the file doesn't yet exist then it is created. This is useful when I want to open some information on something that I've been tracking but don't have another shortcut to it saved somewhere.
+
+This first function opens up the a file with all the complications that come with opening the file including setting a correct extension if needed.
+#+begin_src emacs-lisp
+(setq org-default-extension ".org")
+(defun local/org-open-org-file (file)
+  "Opens an org file in the default org folder.
+if no org extension is given then it will be automatically appended."
+  (interactive
+   (list (directory-file-name
+          (read-file-name "Choose org file:" org-directory))))
+
+  ; Check for if the file:
+  ; * Already exists (and is not a directory)
+  ; * Has an org extension
+  ; If neither of these cases is valid then automatically append an org extension
+  ; to the provided file name.
+  (let ((input-file-extension (concat "." (file-name-extension file)))
+        (valid-org-extension-regex-list
+         (mapcar 'car
+                 (seq-filter
+                  (lambda (mode-pairs) (eq 'org-mode (cdr mode-pairs)))
+                  auto-mode-alist))))
+    (unless
+        (or (and (file-exists-p file)
+                 (not (file-directory-p file)))
+            (and input-file-extension
+                 ; check the input
+                 (eval (cons 'or (mapcar (lambda (extension-regex)
+                                           (string-match-p extension-regex input-file-extension))
+                                         valid-org-extension-regex-list)))))
+      (setq file (concat file org-default-extension)))) ; Otherwise set file to have an org extension
+
+  ; If, after the above checks, the file name still points to a directory, then
+  ; throw an error since it can't be opened at that point.
+  (if (file-directory-p file)
+      (error "The provided file is a directory %s" file)
+    (find-file file)
+    (org-mode)))
+#+end_src
+
+This helper function contains the shared code for prompting for a file.
+#+begin_src emacs-lisp
+(defun local/prompt-org-file (&optional dir default-name)
+  "Prompts the user for a file inside the specified directory. Uses defualt name when no entry is given if the name is provided."
+  (unless dir (setq dir org-directory))
+  (directory-file-name (read-file-name "Choose org file: " dir default-name)))
+#+end_src
+
+Next here are some helper functions that open are more generic for finding and opening work org files.
+#+begin_src emacs-lisp
+(defun local/org-open-file ()
+  "Prompts and opens a file in the default org directory."
+  (interactive)
+  (local/org-open-org-file (local/prompt-org-file org-directory "notes.org")))
+
+(defun local/open-work-org-file (directory default-file)
+  "A condensing function for opening an org directory for work purposes"
+  ; Define the destination directory. Currently is hardcoded to the work dir in the org dir.
+  (let ((dest-dir (file-name-concat org-work-directory directory)))
+    ; First create the directory if it doesn't already exist
+    (unless (file-directory-p dest-dir)
+      (if (y-or-n-p (concat "directory '" dest-dir "' is not found. Create? "))
+          (make-directory dest-dir 'parents)
+        (message "No directory created")))
+    ; Only prompt for file if the directory exists
+    (when (file-directory-p dest-dir)
+        (local/org-open-org-file (local/prompt-org-file dest-dir default-file)))))
+#+end_src
+
+Then use the helper functions to create a set of convenience functions to open the specific structure I'm looking for.
+#+begin_src emacs-lisp
+(defun local/org-open-work-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
+  (local/open-work-org-file "notes" "notes.org"))
+
+(defun local/org-open-work-meeting ()
+  "Prompts and opens a file in the org work meeting directory."
+  (interactive)
+  (local/open-work-org-file "meetings" "meeting.org"))
+
+(defun local/org-open-project-note ()
+  "Prompts and opens a file in the org work notes directory."
+  (interactive)
+  (local/open-work-org-file "projects" "project.org"))
+
+(defun local/org-open-work-task ()
+  "Opens the todo task file."
+  (interactive)
+  (let ((todo-file-name (file-name-concat org-work-directory "todo.org")))
+    (local/org-open-org-file todo-file-name)))
+
+(defun local/org-open-work-unfiled-notes ()
+  "Opens the todo task file."
+  (interactive)
+  (let ((note-file-name (file-name-concat org-work-directory "notes.org")))
+    (local/org-open-org-file note-file-name)))
+
+(defun local/org-open-work-wiki ()
+  "Prompts and opens a file in the org wiki tasks directory."
+  (interactive)
+  (local/open-work-org-file "wiki" "toSort.org"))
+#+end_src
+
+Finally, add all the functions to a key map.
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("f o" . "Org files")
+       :desc "Org file" "o" #'local/org-open-file
+       (:prefix ("w" . "Work")
+        :desc "Meetings" "m" #'local/org-open-work-meeting
+        :desc "Notes" "n" #'local/org-open-work-note
+        :desc "Projects" "p" #'local/org-open-project-note
+        :desc "Tasks" "t" #'local/org-open-work-task
+        :desc "Unfiled Notes" "u" #'local/org-open-work-unfiled-notes
+        :desc "Wiki" "w" #'local/org-open-work-wiki)))
+#+end_src
+
+****** Tags
+Tags are useful for marking particular sub-trees.
+#+begin_src emacs-lisp
+(after! org
+  (setq org-tags-column 60))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun local/org-align-all-tags ()
+  "Just align all the tags please."
+  (interactive)
+  (org-align-tags t))
+#+end_src
+
+***** Babel
+Several languages require LSPs or other back end code to be configured for babel to use them so they are configured here.
+****** Clojure
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+;; Clojure related packages
+(package! clojure-mode)
+(package! clojure-mode-extra-font-locking)
+(package! clj-refactor)
+(package! cider)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq org-bable-clojure-backend 'cider)
+#+end_src
+
+****** HTTP
+This lets me make http calls from within org mode.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! ob-http)
+#+end_src
+
+***** Org Roam
+Unpin org roam so that it stays recent.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(unpin! org-roam)
+#+end_src
+
+Set org roam up to use the roam directory and acknowledge that I want v2 instead of v1.
+#+begin_src emacs-lisp
+(setq org-roam-directory "~/roam")
+(setq org-roam-v2-ack t)
+#+end_src
+
+****** UI
+Add org roam UI so that I can visualize an org roam graph.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! org-roam-ui)
+#+end_src
+
+Then set the dependencies to load after org roam to reduce start up time.
+#+begin_src emacs-lisp
+(use-package! websocket
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+#+end_src
+
+And then add a function that shows the org-roam-ui in an x-widget.
+#+begin_src emacs-lisp
+(defun local/org-roam-toggle-ui-xwidget ()
+  "Shows the org roam ui using emacs x-widgets so you may view it in emacs instead of needing an external browser."
+  (interactive)
+  (let* ((host (concat "localhost:" (number-to-string org-roam-ui-port)))
+         (url (concat "http://" host))
+         (buf (or (xwidget-webkit-get-url-buffer host)
+                  (xwidget-webkit-url-get-create url "*org-roam-ui*"))))
+    (if-let ((window (get-buffer-window buf)))
+        (delete-window window)
+      (switch-to-buffer-other-window buf))))
+#+end_src
+
+***** Timers and clock
+Cause timers to be saved and continue running even when emacs itself isn't running.
+#+begin_src emacs-lisp
+(setq org-clock-persist t)
+(after! org-mode (org-clock-persistence-insinuate))
+#+end_src
+
+Make timers easier to access in org mode.
+#+begin_src emacs-lisp
+(defvar local/org-time-map (make-sparse-keymap))
+;; C-t normally creates new workspaces. I'd perfer immediate access to timers.
+(map! :desc "timers/clocks"
+      :n "C-t" local/org-time-map)
+
+(map! :map local/org-time-map
+      ;; Clock commands
+      :desc "Check-in clock"           "i" #'org-clock-in
+      :desc "Check-out clock"          "o" #'org-clock-out
+      :desc "Quit clock"               "q" #'org-clock-cancel
+      :desc "Goto clock item"          "g" #'org-clock-goto
+      :desc "Effort estimate"          "E" #'org-clock-modify-effort-estimate
+      :desc "Effort estimate at point" "e" #'org-set-effort
+      :desc "Display clock"            "d" #'org-clock-display
+
+      ;; timer commands
+      :desc "Start timer"            "s" #'org-timer-start
+      :desc "Start timer"            "0" #'org-timer-start
+
+      :desc "Pause/Play timer"       "p" #'org-timer-pause-or-continue
+      :desc "Pause/Play timer"       "," #'org-timer-pause-or-continue
+
+      :desc "Stop timer"             "x" #'org-timer-stop
+      :desc "Stop timer"             "_" #'org-timer-stop
+
+      :desc "Countdown timer"        ";" #'org-timer-set-timer
+      :desc "Insert timer timestamp" "." #'org-timer
+      :desc "Insert timer list item" "-" #'org-timer-item
+)
+
+#+end_src
+
+***** Org Agenda
+****** Agenda files
+To set specific files or directories as being "agenda" files, you can use =org-agenda-files=. By setting it here, Agenda will read from all these spots when constructing it's agenda view.
+#+begin_src emacs-lisp
+(setq org-agenda-files (list org-directory
+                             org-work-directory
+                             (file-name-concat org-work-directory "meetings")
+                             (file-name-concat org-work-directory "notes")
+                             (file-name-concat org-work-directory "projects")
+                             (file-name-concat org-work-directory "retros")
+                             (file-name-concat org-work-directory "retros")
+))
+#+end_src
+
+***** Pomodoro
+****** Begin "after! org"
+All these settings have to be made after org loads so they're wrapped in an =(after! org ...)= macro.
+#+begin_src emacs-lisp
+(after! org
+#+end_src
+
+****** Work length
+#+begin_src emacs-lisp
+(setq org-pomodoro-length 25
+    org-pomodoro-short-break-length 5
+    org-pomodoro-long-break-length 15)
+#+end_src
+
+****** Sounds to play
+#+begin_src emacs-lisp
+(setq org-pomodoro-play-sounds t
+    ;; org-pomodoro-start-sound-p f
+    ;; org-pomodoro-ticking-sound-p f
+    org-pomodoro-killed-sound-p t
+    org-pomodoro-finished-sound-p t
+    org-pomodoro-short-break-sound-p t
+    org-pomodoro-long-break-sound-p t)
+#+end_src
+
+****** Sounds to use
+If I decide to find sound files I like more than the defaults, then I can put them here.
+#+begin_src emacs-lisp :tangle no
+(setq ;org-pomodoro-start-sound ()
+      ;org-pomodoro-ticking-sound ()
+      org-pomodoro-killed-sound ()
+      org-pomodoro-finished-sound ()
+      org-pomodoro-short-break-sound ()
+      org-pomodoro-long-break-sound ())
+#+end_src
+
+****** End of "after! org"
+#+begin_src emacs-lisp
+)
+#+end_src
+***** Org Present
+A package and settings for using org mode for presentations.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! org-present)
+#+end_src
+
+And then add some settings and hooks so that the presentation looks a lot cleaner then the default would provide.
+#+begin_src emacs-lisp
+(defun local/org-present-start ()
+  "Turns on settings I use during an org presentation"
+  ;; Tweak font sizes
+  (setq-local local/pre-org-present-face-alist face-remapping-alist)
+  (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                     (header-line (:height 4.0) variable-pitch)
+                                     (org-document-title (:height 1.75) org-document-title)
+                                     (org-code (:height 1.55) org-code)
+                                     (org-verbatim (:height 1.55) org-verbatim)
+                                     (org-block (:height 1.25) org-block)
+                                     (org-block-begin-line (:height 0.7) org-block)))
+
+  ;; Center the presentation and have line wraps
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1)
+)
+
+(defun local/org-present-end ()
+  "Turns off settings I use during an org presentation"
+  ;; Reset font mapping to normal level.
+  ;; (setq-local face-remapping-alist '((default variable-pitch default)))
+  (setq-local face-remapping-alist local/pre-org-present-face-alist)
+
+  ;; Stop centering and wrapping the text
+  (visual-fill-column-mode 0)
+  (visual-line-mode 0)
+)
+
+(add-hook! 'org-present-mode-hook #'local/org-present-start)
+(add-hook! 'org-present-mode-quit-hook #'local/org-present-end)
+#+end_src
+
+****** Supporting packages
+
+And then these are some packages that support the org-presentation package with a cleaner look.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! visual-fill-column :recipe (:host nil :repo "https://codeberg.org/joostkremers/visual-fill-column"))
+#+end_src
+
+Then lets configure them.
+#+begin_src emacs-lisp
+(setq visual-fill-column-width 110)
+(setq visual-fill-column-center-text t)
+#+end_src
+
+***** Org Capture
+****** Settings
+#+begin_src emacs-lisp
+; Set default file for newly captured notes
+(after! org (setq org-default-notes-file (concat org-directory "/inbox.org")))
+#+end_src
+
+****** Org template
+All of my org templates are in a separate folder in my org files repo. This is so that templates are both private from public eyes and also travel with their partnered org files. I'll probably make a separate git repo for them just so they're recorded but that's a lower priority.
+
+Load templates from org directory.
+#+begin_src emacs-lisp
+(defun local/load-directory (dir)
+  "Loads all .el files from a provided directory. If the directory doesn't exist, the function loads nothing."
+  (interactive)
+  (if (not (file-directory-p dir))
+      (message "No directory named %s, no scripts loaded." dir)
+    (let* ((load-it (lambda (f)
+                      (load-file (concat (file-name-as-directory dir) f)))
+                    ))
+      (mapc load-it (directory-files dir nil "\\.el$")))))
+
+(local/load-directory (concat (file-name-as-directory org-directory) "capture-templates"))
+#+end_src
+
+******* Example template code
+Example of org capture templates and how everything is setup.
+pulled from https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el.
+This block isn't tangled and isn't at all guaranteed to work even if it was so use it only as an example.
+#+begin_src emacs-lisp :tangle no
+(after! org
+  (setq org-capture-templates '(
+    ("t" "Todo" entry () "" :prepend t)
+    ("k" "Kudos" entry () "" :prepend t)
+    ("f" "Followup" entry () "" :prepend t)
+    ("p" "Personal" entry () "" :prepend t)
+    ("P" "Project" entry () "" :prepend t)
+    ("j" "Journal" entry () "" :prepend t)
+  )))
+'(
+  ("t" "Personal todo" entry (file+headline +org-capture-todo-file "Inbox") "* [ ] %?\n%i\n%a" :prepend t)
+          ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
+          ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file)
+           "* %U %?\n%i\n%a" :prepend t)
+
+          ;; Will use {project-root}/{todo,notes,changelog}.org, unless a
+          ;; {todo,notes,changelog}.org file is found in a parent directory.
+          ;; Uses the basename from `+org-capture-todo-file',
+          ;; `+org-capture-changelog-file' and `+org-capture-notes-file'.
+          ("p" "Templates for projects")
+          ("pt" "Project-local todo" entry  ; {project-root}/todo.org
+           (file+headline +org-capture-project-todo-file "Inbox")
+           "* TODO %?\n%i\n%a" :prepend t)
+          ("pn" "Project-local notes" entry  ; {project-root}/notes.org
+           (file+headline +org-capture-project-notes-file "Inbox")
+           "* %U %?\n%i\n%a" :prepend t)
+          ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
+           (file+headline +org-capture-project-changelog-file "Unreleased")
+           "* %U %?\n%i\n%a" :prepend t)
+
+          ;; Will use {org-directory}/{+org-capture-projects-file} and store
+          ;; these under {ProjectName}/{Tasks,Notes,Changelog} headings. They
+          ;; support `:parents' to specify what headings to put them under, e.g.
+          ;; :parents ("Projects")
+          ("o" "Centralized templates for projects")
+          ("ot" "Project todo" entry
+           (function +org-capture-central-project-todo-file)
+           "* TODO %?\n %i\n %a"
+           :heading "Tasks"
+           :prepend nil)
+          ("on" "Project notes" entry
+           (function +org-capture-central-project-notes-file)
+           "* %U %?\n %i\n %a"
+           :heading "Notes"
+           :prepend t)
+          ("oc" "Project changelog" entry
+           (function +org-capture-central-project-changelog-file)
+           "* %U %?\n %i\n %a"
+           :heading "Changelog"
+           :prepend t))
+#+end_src
+
+***** Org Chef
+Org chef is a package for saving cooking recipes from sites like [[https://www.allrecipes.com][allrecipies]] in org mode for future reference and use.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! org-chef)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! org-chef
+  :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
+#+end_src
+
+***** Org graph
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+#+end_src
+
+***** Org Gantt
+[[https://github.com/swillner/org-gantt/][Here's]] a package that allows gantt charts to be produced from org files. Read the PDF for details.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! org-gantt :recipe (:host github :repo "swillner/org-gantt"))
+#+end_src
+
+***** Org verb
+This package is specifically about using org mode to structure large numbers of HTTP requests in headings.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! verb)
+#+end_src
+
+Then add the verb command map to the org map.
+#+begin_src emacs-lisp
+(map! :map org-mode-map
+      :localleader
+      :desc "verb requests"
+      "v" verb-command-map)
+#+end_src
+
+
+**** E-book reader
+***** Packages
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+;; e-reader
+(package! calibredb)
+(package! nov)
+#+end_src
+
+***** Settings
+#+begin_src emacs-lisp
+(use-package! nov ; Novel reading
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (map! :map nov-mode-map
+        :n "RET" #'nov-scroll-up)
+  (defun local/doom-modeline-segment--nov-info ()
+    (concat
+     " " (propertize
+          (cdr (assoc 'creator nov-metadata))
+          'face
+          'doom-modeline-project-parent-dir)
+     " " (cdr (assoc 'title nov-metadata))
+     " " (propertize
+          (format "%d/%d" (1+ nov-documents-index) (length nov-documents))
+          'face
+          'doom-modeline-info)))
+  (advice-add 'nov-render-title :override #'ignore)
+  (defun local/+nov-mode-setup ()
+    (require 'visual-fill-column nil t)
+    (setq-local visual-fill-column-center-text t
+                visual-fill-column-width 80
+                nov-text-width 80)
+    (visual-fill-column-mode 1)
+    (hl-line-mode -1)
+    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
+
+    (setq-local mode-line-format
+                `((:eval (doom-modeline-segment--workspace-name))
+                  (:eval (doom-modeline-segment--window-number))
+                  (:eval (local/doom-modeline-segment--nov-info))
+                  ,(propertize " "
+                               'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
+                               'display `((space :align-to
+                                                 (-
+                                                  (+ right right-fringe right-margin)
+                                                  ,(* (let ((width (doom-modeline --font-width)))
+                                                        (or (and (= width 1) 1)
+                                                            (/ width (frame-char-width) 1.0)))
+                                                      (string-width
+                                                       (format-mode-line
+                                                        (cons ""
+                                                              '(:eval (doom-modeline-segment--major-mode))))))))))
+                  (:eval (doom-modeline-segment--major-mode)))))
+
+  (add-hook 'nov-mode-hook #'local/+nov-mode-setup))
+#+end_src
+
+*** Programming Languages                                  :programming:
+Since I'm a programmer, I mostly use emacs for programming tasks. This section is all the extra settings I need to add to make that work properly.
+**** Open CAD
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! scad-mode)
+#+end_src
+
+**** Go mode
+Go mode is a mode for writing golang code. In order to get the mode to work properly, it requires some configuration. I found instructions for setting stuff on [[https://wmanger.com/articles/go-on-doom-emacs/][this]] blog and then adding ~gopls~ and ~golangci-lint~.
+
+Also when in go-mode, I want to ~gofmt~ to be run whenever a save occurs.
+#+begin_src emacs-lisp
+(after! go-mode
+  (add-hook 'before-save-hook #'gofmt-before-save))
+#+end_src
+
+**** Python
+Python is a popular programming language with some annoying setup requirements.
+
+First we want this ~with-env~ package for working with python's environment system.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! with-venv)
+#+end_src
+
+And then we'll want to set up ~dap~ for debugging.
+#+begin_src emacs-lisp
+(setq dap-python-debugger 'debugpy)
+(defun dap-python--pyenv-executable-find (command)
+  (with-venv (executable-find "python")))
+
+(defun local/setup-dap-for-python ()
+  "sets up all the dap settings for use with python."
+  (require 'dap-python))
+
+(use-package! dap-mode
+  :after lsp-mode
+  :commands dap-debug
+  :hook ((python-mode . dap-ui-mode) (python-mode . dap-mode) (python-mode . local/setup-dap-for-python)))
+#+end_src
+
+**** Emacs Lisp
+So far, I've found that hide-show minor mode is the only good way to fold elisp code.
+#+begin_src emacs-lisp
+(add-hook! 'emacs-lisp-mode-hook #'hs-minor-mode)
+#+end_src
+
+Also want to have lispy available.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! lispy)
+#+end_src
+
+**** Scheme
+Scheme is a pretty nice lisp implementation. These packages make it even easier to work with.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! geiser)
+(package! geiser-guile)
+(package! geiser-mit)
+(package! geiser-racket)
+#+end_src
+
+**** Javascript
+When working with Javascript, I want to make sure that files fit the standard that I'm working with when I save them so I want to run eslint and/or prettier.
+
+***** Eslint
+Luckily eslint is can be used through LSP mode so for now the stuff below is unneeded.
+
+First I need to be able to run eslint from Emacs.
+#+begin_src elisp :tangle no
+(defun local/eslint-fix-file (&optional filename)
+  "Run eslint --fix on FILENAME"
+  (if (executable-find "eslint")
+      (progn
+        (unless filename (setq filename (buffer-file-name)))
+        (call-process-shell-command
+         (concat "eslint --fix " filename)
+         nil
+         "*Shell Command Output*"
+         t))))
+#+end_src
+
+Then I need to be able to reload my current file after eslint has run on it.
+#+begin_src elisp :tangle no
+(defun local/eslint-current-file ()
+  "Run eslint on the current file and load the result"
+  (interactive)
+  (if (executable-find "eslint")
+      (progn
+        (message "Running eslint on " (buffer-file-name))
+        (local/eslint-fix-file (buffer-file-name))
+        (revert-buffer t t))))
+#+end_src
+
+Finally I need to be able to insert that into the save hook when the javascript mode is loaded.
+#+begin_src elisp :tangle no
+(defun local/run-eslint-on-save ()
+  "Adds hook to run eslint on save"
+  (interactive)
+  (add-hook 'after-save-hook #'local/eslint-current-file))
+
+(add-hook 'js2-mode-hook #'local/run-eslint-on-save)
+#+end_src
+
+***** Prettier
+First I need to add prettier mode so that I don't need to write it myself.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! prettier-js)
+#+end_src
+
+Then I just add it to my javascript mode.
+#+begin_src elisp :tangle no
+(add-hook 'js2-mode-hook #'prettier-js-mode)
+#+end_src
+
+**** Gitlab CI
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! gitlab-ci-mode)
+#+end_src
+
+**** Vimrc
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! vimrc-mode)
+#+end_src
+
+**** Sed
+I don't work with sed scripts very often, but when I do it's best to have help.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! sed-mode)
+#+end_src
+
+**** jq
+jq is a command line tool for pulling apart and restructuring JSONs. jq mode is for editing jq scripts or and can also be used to interactively work with jq inside json files.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! jq-mode)
+#+end_src
+
+Add jq to org babel as a language it can use. Turned off to make sure it doesn't impact performance until I can test with it.
+#+begin_src emacs-lisp :tangle no
+(org-babel-do-load-languages 'org-babel-load-languages '((jq . t)))
+#+end_src
+
+**** Json
+This is a good lispy-like json editor.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! json-par)
+#+end_src
+
+And turn it on for json mode.
+#+begin_src emacs-lisp
+(add-hook 'json-mode-hook (lambda () (json-par-mode 1)))
+#+end_src
+
+**** Graphviz
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! graphviz-dot-mode)
+#+end_src
+
+**** Systemd
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! systemd)
+#+end_src
+
+**** General interpreter
+***** TabNine
+TabNine is a general purpose auto-completer. It uses Machine learning to find what's suggested to write next.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! company-tabnine)
+#+end_src
+
+**** Web mode
+#+begin_src emacs-lisp
+(setq web-mode-script-padding standard-indent)
+(setq web-mode-style-padding standard-indent)
+(setq web-mode-block-padding standard-indent)
+(setq web-mode-part-padding standard-indent)
+#+end_src
+
+**** R data frames
+This allows emacs to handle R style data frames. This makes some data handling easier in various files.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! ess-view)
+#+end_src
+
+**** Guix
+Guix is a more open source version of NIX. I don't use it much but hopefully some day I can dive into it.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! guix)
+#+end_src
+
+*** Fun
+Everyone needs some fun. These packages aren't super practical on their own, but can be enjoyable to turn on once in a while.
+**** XKCD
+XKCD is a fun comic to read once in a while. This lets me read it from within emacs itself.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! xkcd)
+#+end_src
+
+Once I'm in xkcd mode, these are the controls I can use.
+#+begin_src emacs-lisp
+(map! :mode 'xkcd-mode
+      :n "h" #'xkcd-prev
+      :n "l" #'xkcd-next
+      :n "r" #'xkcd-rand)
+#+end_src
+
+**** Typewriter
+Makes emacs sound like a typewriter.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! selectric-mode)
+#+end_src
+
+**** Games
+***** steam
+A package for accessing and organizing your steam library from within emacs
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! steam)
+#+end_src
+
+***** 2048-game
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! 2048-game)
+#+end_src
+
+***** mines
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! mines)
+#+end_src
+
+***** minesweeper
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! minesweeper)
+#+end_src
+
+***** sudoku
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! sudoku)
+#+end_src
+
+***** threes
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! threes)
+#+end_src
+
+***** Pacmacs
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! pacmacs)
+#+end_src
+
+***** Wordel
+Wordel is a new little game that's a fun distraction.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! wordel :recipe (:host github :repo "progfolio/wordel"))
+#+end_src
+
+***** GNU Go
+Have fun playing some weiqi in emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! gnugo)
+#+end_src
+
+**** Fireplace
+
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! fireplace)
+#+end_src
+
+**** Power mode!
+Power mode causes the screen to shake and dust to fly with each key that's typed. A cool effect for when you're hammering out a sarcastic reply.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))
+#+end_src
+
+*** Experimental personal functions
+All my hacky functions! Most of them just let me do some modifications that only I could really love.
+**** Declare personal prefix
+First I want to declare my personal prefix map
+#+begin_src elisp
+(defvar personal-functions-map (make-sparse-keymap))
+#+end_src
+
+Then assign it to a key in the leader map.
+#+begin_src elisp
+(map!
+  :leader
+  :desc "Additional"
+  "A" personal-functions-map)
+#+end_src
+
+**** line-spacing
+#+begin_src emacs-lisp
+(defun local/toggle-line-spacing ()
+  "Togges between no line spacing and reasonable line spacing"
+  (interactive)
+  (if (null line-spacing)
+      (setq line-spacing 0.15)
+    (setq line-spacing nil))
+  (redraw-frame (selected-frame)))
+
+(defun local/change-line-spacing (SPACING)
+  "Change the vertical spacing between lines to give more room for eyes to read"
+  (interactive "NRequested spacing? ") ; 'N' uses the prefix argument if present and otherwise prompts
+  (if (not SPACING)
+      (local/toggle-line-spacing)
+    (setq line-spacing SPACING))
+  (redraw-frame (selected-frame)))
+#+end_src
+
+Then add the bindings to their proper spots.
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Toggle line spacing"
+      "t L" #'local/toggle-line-spacing)
+
+(map! :map personal-functions-map
+      :desc "Change line spacing"
+      "l" #'local/change-line-spacing)
+#+end_src
+
+**** Pointer position
+#+begin_src emacs-lisp
+(defun local/print-point-position ()
+  "Print the position of point to the message console."
+  (interactive)
+  (message (number-to-string (point))))
+#+end_src
+
+Add to personal function map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "Point's position"
+      "p" #'local/print-point-position)
+;;        (:prefix-map ("a" . "test2")
+;;         (:prefix ("a" . "test")
+;;          :desc "a test function to see if this works" "j" #'org-journal-new-entry
+         ;; :desc "Search journal entry" "s" #'org-journal-search))))
+;;
+#+end_src
+
+**** Scratch buffer
+TODO - make this able to use a temp file
+I like being able to make new scratch buffers to test things out in or take quick notes.
+#+begin_src emacs-lisp
+(defun local/scratch (&optional BUFNUM)
+  "Switches to (and creates if necessary) the scratch buffer corresponding to the provided scratch buffer number. If no number was given, then it creates a new sratch buffer at the next avaliable position.
+Buffer numbers start at 1 to make accessing the default buffer easier.
+
+Buffers are labled as *scratch* through *scratchX*."
+  (interactive "P")
+  (let ((create-buffer-name (lambda (num)
+                              (concat "*scratch"
+                                      (if (= num 1)
+                                          ""
+                                        (int-to-string num))
+                                      "*")))
+        (already-open nil)
+        (n 1)
+        buffer-name)
+    (if BUFNUM
+        (setq buffer-name (funcall create-buffer-name BUFNUM))
+      ;; Loops through possible buffer names until it finds one
+      ;; that doesn't exist
+      (while (progn
+               (setq buffer-name (funcall create-buffer-name n))
+               (setq n (1+ n))
+               (message buffer-name)
+               (get-buffer buffer-name))))
+
+      ;; Check if the buffer already exists before switching so the
+      ;; major mode doesn't get forcibly changed.
+      (setq already-open (get-buffer buffer-name))
+      (switch-to-buffer (get-buffer-create buffer-name))
+      (unless already-open (funcall initial-major-mode)
+                           (insert initial-scratch-message))))
+#+end_src
+
+Add to personal functions map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "scratch buffer"
+      "s" #'local/scratch)
+#+end_src
+
+**** Working with overlays
+Overlays are used to alter the appearance of the buffer you're looking at without actually modifying the underlying text. They are really useful for ligatures and code folding, but for some reason they are a bit difficult to work with. Here I'll add some functions that are simply meant to improve the experience of working with overlays and debugging their appearance.
+
+***** TODO An actual overlay package
+So I have a lot of things I'd love to do with this functionality that could be a lot smoother. To that end, I'd like to make an overlay viewing package that has some of the following functionality:
+- Interactive overlay viewing
+- Interactive overlay deleting
+- Search overlays with keywords
+- Search overlays with ranges
+
+***** View largest overlay
+This function will check all the overlays in a given range or just under point and then return the overlay that covers the largest area.
+#+begin_src emacs-lisp :tangle no
+(defun local/get-largest-overlay (beg end)
+  "Search through all overlays in range and return biggest"
+  (let ((overlays (overlays-in beg end)))
+    ()))
+#+end_src
+
+
+***** Removing overlays
+Sometimes emacs gets into a state where there are code folds in place that won't undo themselves so I need to tell them to go away. Since code folding is done using overlays, I'm going to write a function that simply removes all overlays from a file so I can see the file as written.
+#+begin_src emacs-lisp
+(defun local/remove-all-overlays ()
+  "Removes all overlays in the file."
+  (interactive)
+  (remove-overlays))
+#+end_src
+
+
+
+***** Keymap
+Now that these functions are defined, I'll add them to a convenient keymap for accessing.
+Add to personal functions map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "Remove overlays"
+      "O" #'local/remove-all-overlays)
+#+end_src
+
+**** Fill column
+Although I like the fill column as a guide, it's nice to be able to move it around as desired so it can show me whatever needs to be shown.
+#+begin_src emacs-lisp
+(defun local/set-fill-column-val (col)
+  "Set the fill-column value to COL"
+  ;; (interactive (concat"nNew fill-column value (" (number-to-string fill-column) "): "))
+  (interactive "nNew fill-column value: ")
+  (setq fill-column col))
+#+end_src
+
+And then of course, add it to the personal map.
+#+begin_src emacs-lisp
+(map! :map personal-functions-map
+      :desc "set fill-column"
+      "c" #'local/set-fill-column-val)
+#+end_src
+
+**** Call indicator
+This is a function I've written to see when hooks or other linked functions get called.
+#+begin_src emacs-lisp
+(defun local/hello (&optional var)
+  "Just print hello in the message area"
+  (interactive)
+  (message "Hello")
+  (if var
+      (message "TEST yes")
+    (message "TEST no")))
+#+end_src
+
+Here's an example of using it to see when the ~tree-sitter-mode-hook~ gets called.
+#+begin_src emacs-lisp :tangle no
+(add-hook! 'tree-sitter-mode-hook (lambda () (local/hello tree-sitter-mode)))
+#+end_src
+
+** Fixes                                                   :fix:issues:patch:
+Here are some config fixes for issues I'm running into.
+
+Start by unpinning straight so it stays up to date.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(unpin! straight)
+#+end_src
+
+*** Too many open files
+On MacOS, I'm often running into an issue where emacs is showing an error =Too many open files= when trying to open files in treemacs. I found [[https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html][this]] article with helpful information about this. It's supposedly because treemacs and lsp both watch lots of files which greatly inflates the number of "open files" emacs has. To clear this, a function is provided to clean it up a bit at least. I don't know if this is the best long term solution but for now it'll keep emacs usable.
+#+begin_src emacs-lisp
+(defun local/file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+#+end_src
+
+*** Dap mode overwriting margin clicks
+When working with LSPs, the DAP keybindings on the side margins get super annoying since they're intended to set break points but I don't USE it. This turns that off for now so that other margin stuff can receive click events.
+#+begin_src emacs-lisp
+(after! dap-mode
+  (define-key dap-mode-map [left-margin mouse-1]
+    nil)
+  (define-key dap-mode-map [left-fringe mouse-1]
+    nil))
+
+#+end_src
+
+*** Magit error message
+This issue is with some hook that is causing all my actions to fail its getting really annoying. I couldn't even use magit. Well now you're gone little guy, hope you're happy.
+#+begin_src emacs-lisp
+(remove-hook! '(magit-mode-hook find-file-hook) #'forge-bug-reference-setup)
+#+end_src
+
+*** Can't search org files with evil search
+There is an issue where evil search isn't looking in folded code. See [[https://github.com/doomemacs/doomemacs/issues/6478][issue]]. This is a provided work around until issue is fixed.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+;; This is supposed to fix the issue but doesn't seem to work on macOS. Not sure why.
+;; (package! org-mode :pin "971eb6885ec996c923e955730df3bafbdc244e54")
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+(after! evil (evil-select-search-module 'evil-search-module 'isearch))
+#+end_src
+
+*** Some error that appeared after updating doom
+Fix ~global-git-commit-mode~ issue.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
+(package! with-editor :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab")
+#+end_src
+
+*** Double percent sign in modeline battery reporting
+Fix double percent sign.
+Pinned at a version just before the mode line transitioned to nerd fonts since nerd fonts don't seem to work well and don't seem to be generally integrated with doom emacs.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(package! doom-modeline :pin "918730eff72e155cfb31b012493a7f425bc48ff8")
+#+end_src
+
+*** Remove cl deprecation warning from startup
+#+begin_src emacs-lisp :tangle ../.scratch.d/init.el
+(setq byte-compile-warnings '(cl-functions))
+#+end_src
+
+*** LSP mode's breadcrumb header line shows the current file on all windows
+This is caused by a bug in LSP mode. I'm unpinning it for now to get LSP fully updated since I use it so much.
+#+begin_src emacs-lisp :tangle ../.scratch.d/packages.el
+(unpin! lsp-mode)
+#+end_src
+
+* Auto Tangle                                               :tangle:
+The below allows this file to tangle and produce the output configuration files whenever the document is saved.
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)))
+;; End:
