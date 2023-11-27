@@ -94,6 +94,8 @@ brew install --cask qcad
 
 brew install --cask drawio
 
+brew install --cask balenaetcher
+
 brew install bash
 brew install bash-completion
 brew install bash-language-server

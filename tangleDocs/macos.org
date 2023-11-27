@@ -368,6 +368,12 @@ DrawIO is an open source diagram drawing program that is usually used through it
 brew install --cask drawio
 #+end_src
 
+** Etcher
+Etcher is a tool for flashing ISOs to usb sticks.
+#+begin_src sh
+brew install --cask balenaetcher
+#+end_src
+
 * CLI tools
 ** Shells
 Anything that deals with shells or working within the terminal.
