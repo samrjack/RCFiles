@@ -110,3 +110,13 @@ function hibernate () {
         echo "sorry, don't know how yet.";
     fi
 }
+
+# Update all systems based on the package managers installed
+function update () {
+    if command -v apt; then
+        sudo apt update && sudo apt upgrade -y
+    fi
+    if command -v brew; then
+        brew update && brew upgrade
+    fi
+}
