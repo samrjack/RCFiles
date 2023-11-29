@@ -16,7 +16,6 @@ export PATH="${HOME}/Android/Sdk/tools/bin:${PATH}"
 export PATH="${HOME}/Android/Sdk/platform-tools:${PATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
 
-
 # Go
 export PATH="${HOME}/go/bin:${PATH}"
 
@@ -29,6 +28,7 @@ export PATH="${HOME}/.cargo/bin:${PATH}"
 
 # Haskell
 export PATH="${HOME}/.cabal/bin:${PATH}"
+export PATH="${HOME}/.ghcup/bin:${PATH}"
 
 # Brew package manager for macos
 export PATH="/opt/homebrew/bin:${PATH}"
