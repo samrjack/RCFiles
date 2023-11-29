@@ -119,4 +119,7 @@ function update () {
     if command -v brew; then
         brew update && brew upgrade
     fi
+    if command -v flatpak; then
+        flatpak update
+    fi
 }
