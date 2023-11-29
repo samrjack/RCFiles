@@ -4,6 +4,9 @@ export EDITOR='vim'
 # ssh
 export SSH_KEY_PATH="${HOME}/.ssh/rsa_id"
 
+# Rust
+export RUST_SRC_PATH="~/.cargo/bin/"
+
 # path to man pages
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
