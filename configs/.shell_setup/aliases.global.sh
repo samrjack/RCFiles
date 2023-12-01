@@ -12,6 +12,8 @@ alias locst="localstack"
 alias gitsum="onefetch"
 alias syssum="neofetch"
 
+alias got='git'
+
 ## Standard library shadowing
 alias cp='cp -i'
 alias mv='mv -i'
