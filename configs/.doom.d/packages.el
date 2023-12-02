@@ -232,3 +232,7 @@
 (package! mode-minder :recipe
   (:host github
    :repo "samrjack/mode-minder"))
+
+(package! 2048-game :recipe
+  (:host github
+   :repo "samrjack/2048-game"))
