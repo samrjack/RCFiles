@@ -1,0 +1,10 @@
+Emacs packages that I want to get to work together:
+Eglot
+vertigo-embark-consult-orderless-marginalia (https://www.reddit.com/r/emacs/comments/x7ahgz/how_many_of_you_switched_from_ivycounsel_or_helm/)
+projectile/project.el/https://github.com/mclear-tools/tabspaces/tab-bar-mode
+magit
+dired sidebar/treemacs/ranger
+org & babel
+eshell
+spell-fu
+evil
