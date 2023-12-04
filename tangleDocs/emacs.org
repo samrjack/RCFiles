@@ -712,7 +712,6 @@ Nerd font is an up and coming popular font pack that is helpful to have installe
 (package! nerd-icons)
 #+end_src
 
-
 **** Text properties
 Sometimes text properties can get in the way of debugging so this function makes it easy to remove it.
 #+begin_src emacs-lisp
@@ -3000,6 +2999,10 @@ A package for accessing and organizing your steam library from within emacs
 **** 2048-game
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! 2048-game)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq *2048-history-file* (file-name-concat doom-private-dir "games" "2048" "saves.data"))
 #+end_src
 
 **** mines

@@ -1048,6 +1048,8 @@ if no org extension is given then it will be automatically appended."
       :n "l" #'xkcd-next
       :n "r" #'xkcd-rand)
 
+(setq *2048-history-file* (file-name-concat doom-private-dir "games" "2048" "saves.data"))
+
 (defvar personal-functions-map (make-sparse-keymap))
 
 (map!
