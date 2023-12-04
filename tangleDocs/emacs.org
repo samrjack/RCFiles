@@ -241,7 +241,6 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
   - [[#magit-error-message][Magit error message]]
   - [[#cant-search-org-files-with-evil-search][Can't search org files with evil search]]
   - [[#some-error-that-appeared-after-updating-doom][Some error that appeared after updating doom]]
-  - [[#double-percent-sign-in-modeline-battery-reporting][Double percent sign in modeline battery reporting]]
   - [[#remove-cl-deprecation-warning-from-startup][Remove cl deprecation warning from startup]]
   - [[#lsp-modes-breadcrumb-header-line-shows-the-current-file-on-all-windows][LSP mode's breadcrumb header line shows the current file on all windows]]
 - [[#shadowed-packages][Shadowed packages]]
@@ -3246,6 +3245,11 @@ Start by unpinning straight so it stays up to date.
 (unpin! straight)
 #+end_src
 
+Unpin doom modeline so I get a more recent version.
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(unpin! doom-modeline)
+#+end_src
+
 ** Too many open files
 On MacOS, I'm often running into an issue where emacs is showing an error =Too many open files= when trying to open files in treemacs. I found [[https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html][this]] article with helpful information about this. It's supposedly because treemacs and lsp both watch lots of files which greatly inflates the number of "open files" emacs has. To clear this, a function is provided to clean it up a bit at least. I don't know if this is the best long term solution but for now it'll keep emacs usable.
 #+begin_src emacs-lisp
@@ -3291,13 +3295,6 @@ Fix ~global-git-commit-mode~ issue.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
 (package! with-editor :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab")
-#+end_src
-
-** Double percent sign in modeline battery reporting
-Fix double percent sign.
-Pinned at a version just before the mode line transitioned to nerd fonts since nerd fonts don't seem to work well and don't seem to be generally integrated with doom emacs.
-#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
-(package! doom-modeline :pin "918730eff72e155cfb31b012493a7f425bc48ff8")
 #+end_src
 
 ** Remove cl deprecation warning from startup
