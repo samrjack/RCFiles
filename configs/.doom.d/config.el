@@ -471,6 +471,8 @@ I find this order matches how I want folds to work"
 
 (setq ispell-dictionary "en")
 
+(setq ispell-personal-dictionary (file-name-concat "~" ".doom.d" "ispell" "en.pws"))
+
 (defun local/ispell-debug ()
   "Toggle spell-fu debug and reset spell-fu mode"
   (interactive)
