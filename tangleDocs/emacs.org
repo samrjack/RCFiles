@@ -79,6 +79,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#window-splitting][Window splitting]]
     - [[#resizing-windows][Resizing windows]]
     - [[#window-zooming][Window zooming]]
+    - [[#window-switching][Window switching]]
   - [[#buffers][Buffers]]
     - [[#buffer-display][Buffer display]]
       - [[#line-numbering][Line numbering]]
@@ -1259,6 +1260,17 @@ Then set a convenient key command to activate the zoom. Since tmux uses leader-z
 (map! :leader
       :desc "Zoom window"
       "z" #'zoom-window-zoom)
+#+end_src
+
+*** Window switching
+When moving between windows, doom uses ace-windows to give windows unique identifiers to move to. However sometimes the identifiers are hard to see in their default position. This enables all identifiers to be put in the middle of their respective windows.
+#+begin_src emacs-lisp
+(ace-window-posframe-mode)
+#+end_src
+
+Another way to easily move windows is to use the wind move built in package. This allows me to use S-<direction key> to move point in a given direction.
+#+begin_src emacs-lisp
+(windmove-default-keybindings)
 #+end_src
 
 ** Buffers

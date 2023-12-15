@@ -232,6 +232,10 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Zoom window"
       "z" #'zoom-window-zoom)
 
+(ace-window-posframe-mode)
+
+(windmove-default-keybindings)
+
 (setq display-line-numbers-type t)
 
 (setq whitespace-style '(face
