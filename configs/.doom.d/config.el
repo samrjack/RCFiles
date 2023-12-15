@@ -549,6 +549,8 @@ The return value is the yanked text."
 (with-eval-after-load 'rg
   (advice-add 'rg-run :after (lambda (_pattern _files _dir &optional _literal _confirm _flags) (pop-to-buffer (rg-buffer-name)))))
 
+(map! :g "M-i" #'imenu)
+
 (setq lsp-log-io t)
 
 (after! lsp-mode
