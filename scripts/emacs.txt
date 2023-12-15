@@ -9,5 +9,6 @@ eshell
 spell-fu
 evil
 tabspaces https://github.com/mclear-tools/tabspaces
+undo-tree
 
 From scratch article: https://medium.com/helpshift-engineering/configuring-emacs-from-scratch-intro-3157bed9d040
