@@ -111,6 +111,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#flycheck-mode][Flycheck mode]]
         - [[#clipboard][Clipboard]]
       - [[#movement][Movement]]
+        - [[#logical-lines][Logical lines]]
         - [[#sub-word-movement][Sub-word movement]]
         - [[#scrolling][Scrolling]]
         - [[#centered-cursor--typewriter-mode][Centered Cursor / Typewriter Mode]]
@@ -1264,7 +1265,6 @@ This determines the style of line numbers in effect. If set to `nil', line numbe
 #+begin_src emacs-lisp
 (setq display-line-numbers-type t)
 #+end_src
-
 **** Whitespace mode
 Adds whitespace management and visualization.
 #+begin_src emacs-lisp
@@ -1755,6 +1755,12 @@ Finally we need to create universal keybindings to these functions so they can b
 
 **** Movement
 Moving around is vital. These settings affect how that works
+***** Logical lines
+Normal emacs movement moves point by visual lines but sometimes you want to move up and down by actual file lines. These commands can be bound to the ~M-~ movement keys for consistency but also to let those be overridden by other keymaps.
+#+begin_src emacs-lisp
+(map! :g "M-n" #'next-logical-line
+      :g "M-p" #'previous-logical-line)
+#+end_src
 ***** Sub-word movement
 #+begin_src emacs-lisp
 ;; Makes it so movement keys stop at camlecase sub words.

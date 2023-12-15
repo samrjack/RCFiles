@@ -1,4 +1,4 @@
-personal_ws-1.1 en 128
+personal_ws-1.1 en 130
 SPC
 anil
 anki
@@ -50,6 +50,7 @@ guix
 hacky
 hoc
 https
+ido
 img
 impactful
 init
@@ -115,6 +116,7 @@ ui
 unassign
 unmarshal
 utils
+vertico
 viktor
 vimrc
 vterm

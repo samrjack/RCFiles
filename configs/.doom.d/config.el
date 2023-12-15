@@ -527,6 +527,9 @@ The return value is the yanked text."
 (map! :desc "Paste from clipboard" :nvieomg "s-v" #'evil-paste-from-clipboard
       :desc "Copy to clipboard"    :nvieomg "s-c" #'evil-copy-to-clipboard)
 
+(map! :g "M-n" #'next-logical-line
+      :g "M-p" #'previous-logical-line)
+
 ;; Makes it so movement keys stop at camlecase sub words.
 (global-subword-mode 1)
 
