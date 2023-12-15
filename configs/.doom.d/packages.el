@@ -198,6 +198,12 @@
 
 (package! power-mode :recipe (:host github :repo "elizagamedev/power-mode.el"))
 
+(package! helm)
+
+(package! vertico)
+
+(package! ido)
+
 (unpin! straight)
 
 (unpin! doom-modeline)

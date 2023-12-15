@@ -236,6 +236,10 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
       - [[#keymap][Keymap]]
     - [[#fill-column-1][Fill column]]
     - [[#call-indicator][Call indicator]]
+- [[#experimental-packages][Experimental packages]]
+  - [[#helm][helm]]
+  - [[#vertico][Vertico]]
+  - [[#ido][Ido]]
 - [[#fixes][Fixes]]
   - [[#too-many-open-files][Too many open files]]
   - [[#dap-mode-overwriting-margin-clicks][Dap mode overwriting margin clicks]]
@@ -3241,6 +3245,22 @@ This is a function I've written to see when hooks or other linked functions get 
 Here's an example of using it to see when the ~tree-sitter-mode-hook~ gets called.
 #+begin_src emacs-lisp :tangle no
 (add-hook! 'tree-sitter-mode-hook (lambda () (local/hello tree-sitter-mode)))
+#+end_src
+
+* Experimental packages
+These packages are things that I want to play around with but don't know if I want to keep long term.  If I decide to keep them, they must be sorted into the configuration section above.
+** helm
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! helm)
+#+end_src
+** Vertico
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! vertico)
+#+end_src
+
+** Ido
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! ido)
 #+end_src
 
 * Fixes                                                     :fix:issues:patch:
