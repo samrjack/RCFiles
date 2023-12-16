@@ -103,7 +103,8 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#working-within-a-buffer][Working within a buffer]]
       - [[#undo][Undo]]
       - [[#writing][Writing]]
-        - [[#dictionary][Dictionary]]
+        - [[#spell-fu][Spell-fu]]
+        - [[#abbreviations][Abbreviations]]
         - [[#snippets][Snippets]]
           - [[#academic-writing][Academic writing]]
         - [[#text-filler][Text filler]]
@@ -1633,7 +1634,7 @@ Increase the undo limit since there's no real space limitations on modern system
 
 **** Writing
 These packages are for writing stuff and actually working with text of any sort.
-***** Dictionary
+***** Spell-fu
 Fix spell-fu not being on main branch by default.
 #+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
 (unpin! spell-fu)
@@ -1671,6 +1672,17 @@ These are some help functions to work with spell-fu so that it's easier to debug
       (setq spell-fu-debug nil)
     (setq spell-fu-debug t))
   (spell-fu-reset))
+#+end_src
+
+***** Abbreviations
+Set the abbrev file so that it can be saved in the RC files.
+#+begin_src emacs-lisp
+(setq abbrev-file-name (file-name-concat doom-user-dir "abbrev_devs"))
+#+end_src
+
+Overwrite the default ~dabbrev-expand~ with the hippie version that works loads better!
+#+begin_src emacs-lisp
+(map! :g "M-/" #'hippie-expand)
 #+end_src
 
 ***** Snippets

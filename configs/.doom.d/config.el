@@ -485,6 +485,10 @@ I find this order matches how I want folds to work"
     (setq spell-fu-debug t))
   (spell-fu-reset))
 
+(setq abbrev-file-name (file-name-concat doom-user-dir "abbrev_devs"))
+
+(map! :g "M-/" #'hippie-expand)
+
 (setq local/snippet-dir (concat doom-user-dir "snippets/"))
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
 (yas-load-directory local/snippet-dir)
