@@ -70,6 +70,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
     - [[#directory-navigation][Directory navigation]]
     - [[#vlf-very-large-files][VLF (Very Large Files)]]
     - [[#file-info][File info]]
+    - [[#open-file-as-sudo][Open file as sudo]]
   - [[#workspace-management][Workspace management]]
     - [[#perspectives][Perspectives]]
     - [[#tab-bar-mode][Tab bar mode]]
@@ -1178,6 +1179,16 @@ This little package displays info about a file in a clean usable way.
                                                :internal-border-color "#61AFEF"
                                                :left-fringe 16
                                                :right-fringe 16)))
+#+end_src
+*** Open file as sudo
+Sometimes when editing files, you'll find that you need to open the file as sudo user. This function will reopen the buffer using sudo permissions.
+#+begin_src emacs-lisp
+(defun sudo ()
+  "Use tramp to `sudo' the current buffer."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:" buffer-file-name))))
 #+end_src
 
 ** Workspace management

@@ -206,6 +206,13 @@ mode map since otherwise it requires forcing the normal mode state to be activat
                                                :left-fringe 16
                                                :right-fringe 16)))
 
+(defun sudo ()
+  "Use tramp to `sudo' the current buffer."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:" buffer-file-name))))
+
 (setq persp-sort 'created)
 
 (setq tab-bar-show t)
