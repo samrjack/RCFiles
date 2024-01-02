@@ -759,9 +759,31 @@ I like dracula for its consistency in all environments and programs but I don't 
 (package! theme-magic)
 #+end_src
 
-There are two ways to load a theme. Both assume the theme is installed and available. You can either set `doom-theme' or manually load a theme with the `load-theme' function.
+Set preferred themes for different environments. A lot of themes that look good in a gui show up horribly in the terminal so I have separate themes settings for each.
 #+begin_src emacs-lisp
-(setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
+(setq local/preferred-dark-theme 'doom-one)
+(setq local/terminal-dark-theme 'doom-dracula)
+(setq local/preferred-light-theme 'doom-gruvbox-light)
+(setq local/terminal-light-theme 'doom-gruvbox-light)
+#+end_src
+
+Also add some functions to load these themes more conveniently. This sets the doom theme variable in case it's needed when loading fonts and other things.
+There are two ways to load a theme. Both assume the theme is installed and available. You can either set `doom-theme' or manually load a theme with the `load-theme' function. These functions use `load-theme' since `doom-theme' is used to set the theme at startup but `load-theme' can be used any time to change the theme.
+#+begin_src emacs-lisp
+(defun local/set-dark-theme ()
+  "Set emacs to use a dark theme and load it."
+  (interactive)
+  (load-theme (if (display-graphic-p) 'doom-one 'doom-dracula) t))
+
+(defun local/set-light-theme ()
+  "Set emacs to use a dark theme and load it."
+  (interactive)
+  (load-theme (if (display-graphic-p)'doom-gruvbox-light 'doom-gruvbox-light) t))
+#+end_src
+
+Finally set the startup theme type.
+#+begin_src emacs-lisp
+(local/set-light-theme)
 #+end_src
 
 *** Debugging

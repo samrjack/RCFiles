@@ -37,7 +37,22 @@ from elsewhere."
 (setq custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file) (load custom-file))
 
-(setq doom-theme (if (display-graphic-p)'doom-one 'doom-dracula))
+(setq local/preferred-dark-theme 'doom-one)
+(setq local/terminal-dark-theme 'doom-dracula)
+(setq local/preferred-light-theme 'doom-gruvbox-light)
+(setq local/terminal-light-theme 'doom-gruvbox-light)
+
+(defun local/set-dark-theme ()
+  "Set emacs to use a dark theme and load it."
+  (interactive)
+  (load-theme (if (display-graphic-p) 'doom-one 'doom-dracula) t))
+
+(defun local/set-light-theme ()
+  "Set emacs to use a dark theme and load it."
+  (interactive)
+  (load-theme (if (display-graphic-p)'doom-gruvbox-light 'doom-gruvbox-light) t))
+
+(local/set-light-theme)
 
 (map! :leader
       :desc "Debug on error"
