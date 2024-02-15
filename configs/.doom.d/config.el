@@ -350,8 +350,8 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
   (local/update-ts-fold-definitions 'sh-mode local/ts-fold-parsers-shell-list))
 
 (setq local/ts-fold-parsers-python-list
-      '((function_definition . ts-fold-range-python)
-        (class_definition    . ts-fold-range-python)
+      '((function_definition . ts-fold-range-python-def)
+        (class_definition    . ts-fold-range-python-def)
         (list                . ts-fold-range-seq)
         (dictionary          . ts-fold-range-seq)
         (for_statement       . ((lambda (node offset) (ts-fold-range-markers node offset ":")) 0 1))
