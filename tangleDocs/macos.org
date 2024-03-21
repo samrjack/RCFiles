@@ -374,6 +374,11 @@ Etcher is a tool for flashing ISOs to usb sticks.
 brew install --cask balenaetcher
 #+end_src
 
+** Bambu Studio
+Bambu Studio is a slicer for 3d printing and works really well with bambu 3d printers.
+#+begin_src sh
+brew install --cask bambu-studio
+#+end_src
 * CLI tools
 ** Shells
 Anything that deals with shells or working within the terminal.
