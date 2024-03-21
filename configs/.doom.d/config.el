@@ -232,7 +232,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
       :desc "Zoom window"
       "z" #'zoom-window-zoom)
 
-(ace-window-posframe-mode)
+(if (display-graphic-p) (ace-window-posframe-mode))
 
 (windmove-default-keybindings)
 
@@ -491,7 +491,7 @@ I find this order matches how I want folds to work"
 
 (setq local/snippet-dir (concat doom-user-dir "snippets/"))
 (add-to-list 'yas-snippet-dirs 'local/snippet-dir)
-(yas-load-directory local/snippet-dir)
+(if (display-graphic-p) (yas-load-directory local/snippet-dir))
 
 (defvar local/lorem-ipsum-map (make-sparse-keymap))
 (map! :leader
