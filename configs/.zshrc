@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -81,7 +83,7 @@ if [ -d "$ZSH" ]; then
       httpie
       kubectl
       npm
-      nvm
+      # nvm
       pass
       pip
       python
@@ -186,3 +188,4 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# zprof
