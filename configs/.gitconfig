@@ -19,7 +19,7 @@
   nlog = "log --numstat"
   authors = "shortlog -s"
   count = "rev-list --count"
-  clear = "reset --hard HEAD"
+  clear = "!f() { git reset --hard HEAD && git clean -f -d; }; f"
 	ignore = "update-index --assume-unchanged"
 	track = "update-index --no-assume-unchanged"
 	argo = "rev-parse --short=8 HEAD"
