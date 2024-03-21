@@ -362,10 +362,20 @@ QCAD is an open source program for working with 2d vector drawings
 brew install --cask qcad
 #+end_src
 
+** FreeCAD
+#+begin_src sh
+brew install --cask freecad
+#+end_src
 ** DrawIO
 DrawIO is an open source diagram drawing program that is usually used through its online interface. However, I like being able to sketch things locally.
 #+begin_src sh
 brew install --cask drawio
+#+end_src
+
+** Sweet Home 3D
+Sweet home 3D is a program for drawing house blueprints and planning furniture layouts.
+#+begin_src sh
+brew install --cask sweet-home3d
 #+end_src
 
 ** Etcher

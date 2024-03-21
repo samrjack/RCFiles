@@ -92,7 +92,11 @@ brew install --cask openscad
 
 brew install --cask qcad
 
+brew install --cask freecad
+
 brew install --cask drawio
+
+brew install --cask sweet-home3d
 
 brew install --cask balenaetcher
 
