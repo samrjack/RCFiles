@@ -23,7 +23,8 @@
 	damb = "!f() { curBranch=$(git branch --show-current); target=${1:-$curBranch}; echo \"=== Deleting all branches merged into $target ===\"; sleep 3; git checkout $target --quiet; git branch --merged | grep -E -v \"(main|develop|dev|staging|master|${curBranch}|${target})\" | xargs git branch -d; git checkout $curBranch --quiet; echo \"=== All merged branches deleted ===\"; }; f"
 	ignore = "update-index --assume-unchanged"
 	track = "update-index --no-assume-unchanged"
-	argo = "rev-parse --short=8 HEAD"
+	argoID = "rev-parse --short=8 HEAD"
+	argo = "!f() { echo \"$(git branch --show-current | tr -d '\n' | tr -C \"[:alnum:]\" \"-\" | tr '[:upper:]' '[:lower:]')-$(git rev-parse --short=8 HEAD)\\c\"; }; f"
 [diff]
 	tool = vimdiff2
 [merge]
