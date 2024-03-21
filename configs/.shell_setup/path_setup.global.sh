@@ -8,6 +8,7 @@ export PATH="/sbin:${PATH}"
 
 # Doom emacs
 export PATH="${HOME}/.emacs.d/bin:${PATH}"
+export PATH="${HOME}/.config/emacs/bin:${PATH}"
 
 # Android development
 export PATH="/usr/local/android-studio/bin:${PATH}"
