@@ -25,6 +25,7 @@
 	track = "update-index --no-assume-unchanged"
 	argoID = "rev-parse --short=8 HEAD"
 	argo = "!f() { echo \"$(git branch --show-current | tr -d '\n' | tr -C \"[:alnum:]\" \"-\" | tr '[:upper:]' '[:lower:]')-$(git rev-parse --short=8 HEAD)\\c\"; }; f"
+	remote-update = remote update --prune
 [diff]
 	tool = vimdiff2
 [merge]
