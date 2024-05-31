@@ -225,6 +225,8 @@ brew install asciidoc
 
 brew install sops
 
+brew install rar
+
 brew install postgresql
 brew install golang-migrate
 brew install sql-language-server

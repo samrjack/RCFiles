@@ -1,4 +1,4 @@
-personal_ws-1.1 en 131
+personal_ws-1.1 en 133
 SPC
 anil
 anki
@@ -93,6 +93,7 @@ prototyped
 provisionable
 py
 racket
+rar
 rebase
 repo
 rust
@@ -115,6 +116,7 @@ transpiles
 treemacs
 ui
 unassign
+uncompressing
 unmarshal
 utils
 vertico

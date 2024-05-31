@@ -736,6 +736,11 @@ Tool for working with encrypted files and secrets.
 #+begin_src sh
 brew install sops
 #+end_src
+*** Rar
+Rar is a common compression format and this package makes uncompressing them easier.
+#+begin_src sh
+brew install rar
+#+end_src
 
 * Utilities
 ** Postgresql
