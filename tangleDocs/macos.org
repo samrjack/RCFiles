@@ -1245,7 +1245,9 @@ brew tap homebrew/cask-fonts
 *** Standard fonts
 Here are some standard fonts that I'll want to bring around with me.
 #+begin_src sh
-brew install --cask font-jetbrains-mono
+brew install --cask font-jetbrains-eono
+brew install --cask font-fira-code
+brew install --cask font-0xproto
 #+end_src
 
 *** Nerd Fonts

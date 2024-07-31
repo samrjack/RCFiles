@@ -424,7 +424,9 @@ brew install yaml-language-server
 
 brew tap homebrew/cask-fonts
 
-brew install --cask font-jetbrains-mono
+brew install --cask font-jetbrains-eono
+brew install --cask font-fira-code
+brew install --cask font-0xproto
 
 brew install --cask font-3270-nerd-font
 brew install --cask font-space-mono-nerd-font
