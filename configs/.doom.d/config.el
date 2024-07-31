@@ -12,6 +12,21 @@
   (interactive)
   (variable-pitch-mode))
 
+(setq doom-big-font nil) ; When nil, doom-big-font uses the font defined in doom-font
+(setq doom-font
+      (cl-find-if #'doom-font-exists-p
+                  (list
+                   (font-spec :family "0xProto" :size 12)
+                   (font-spec :family "Fira Code" :size 12)
+                   (font-spec :family "JetBrains Mono" :size 12)
+                   (font-spec :family "monospace" :size 12 :weight 'semi-light)
+                   )))
+(setq doom-variable-pitch-font
+      (cl-find-if #'doom-font-exists-p
+                  (list
+                   (font-spec :family "sans" :size 13)
+                   )))
+
 (defun local/remove-display-text-property (start end)
   "Remote all text properties from START to END.
 This is useful when copying stuff with a display property set
