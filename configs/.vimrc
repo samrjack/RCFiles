@@ -339,9 +339,9 @@ endif
 
 """"" Indentation """""
     set smarttab           " Indents to the correct spot first time
-    " set shiftwidth=4       " Code defaults to 4 space indents
-    " set tabstop=4          " Number of visual spaces per TAB
-    " set softtabstop=4      " Number of spaces in a tab when editing
+    set shiftwidth=4       " Code defaults to 4 space indents
+    set tabstop=4          " Number of visual spaces per TAB
+    set softtabstop=4      " Number of spaces in a tab when editing
     set autoindent         " Automatically indents when enter is pressed
     set expandtab          " Makes all tabs into spaces
 
