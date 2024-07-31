@@ -126,7 +126,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
         - [[#bang][Bang!]]
         - [[#imenu][Imenu]]
       - [[#lsp-servers][LSP servers]]
-        - [[#lsp-settings][lsp settings]]
+        - [[#lsp-settings][LSP settings]]
         - [[#lsp-ui][LSP ui]]
         - [[#lsp-peek][LSP peek]]
         - [[#lsp-ui-docs][LSP ui docs]]
@@ -1879,7 +1879,7 @@ Turn on logging.
 (setq lsp-log-io t)
 #+end_src
 
-***** lsp settings
+***** LSP settings
 Here are some settings to configure LSP mode.
 #+begin_src emacs-lisp
 (after! lsp-mode
@@ -1911,6 +1911,11 @@ Make it so that checking sources using LSP only shows a small context instead of
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 #+end_src
+
+#+begin_src emacs-lisp
+(setq lsp-headerline-arrow ">")
+#+end_src
+
 
 ***** LSP ui docs
 Show docs for items.
