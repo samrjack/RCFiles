@@ -1342,8 +1342,9 @@ First I want to set all the tree-sitter packages to use the master branch.
 #+end_src
 
 Finally, enable global tree-sitter mode which will turn on tree-sitter whenever there's a grammar installed for the mode.
+TODO Actually it doesn't do that now. It just crashes when there's no grammar installed which is incredibly annoying. Perhaps this will need [[https://robbmann.io/posts/emacs-treesit-auto/][treesit auto]] as a replacement?
 #+begin_src emacs-lisp
-(global-tree-sitter-mode 1)
+;; (global-tree-sitter-mode 1)
 #+end_src
 
 **** Code folding
@@ -2043,10 +2044,10 @@ This is a nice package for visualizing git diffs in a more standard unix way tha
 (package! diff-ansi)
 #+end_src
 
-**** Gutter
+**** TODO Gutter
 Having git information in the gutter of emacs is great for keeping track of what I've changed. First lets activate it everywhere!
 #+begin_src emacs-lisp
-(global-git-gutter-mode)
+;; (global-git-gutter-mode)
 #+end_src
 
 But using the gutter for git presents a challenge since other things may also be in the gutter section. For example, fold indicators. For that reason, I'm going to try to experiment with the git gutter on the right hand side. I think it'll still be helpful for showing what changed but seeing the exact line isn't vital.

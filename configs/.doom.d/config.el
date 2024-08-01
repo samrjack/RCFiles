@@ -279,7 +279,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
         :desc "Tree-sitter"
         "T" local/tree-sitter-map))
 
-(global-tree-sitter-mode 1)
+;; (global-tree-sitter-mode 1)
 
 (after! tree-sitter (global-ts-fold-indicators-mode 1))
 
@@ -644,7 +644,7 @@ The return value is the yanked text."
       :desc "Git blamer"
       "g C-b" #'blamer-mode)
 
-(global-git-gutter-mode)
+;; (global-git-gutter-mode)
 
 (setq git-gutter-fr:side 'right-fringe)
 
