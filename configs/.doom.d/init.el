@@ -11,6 +11,7 @@
 
        :completion
        (company +childframe); the ultimate code completion backend
+       ;;corfu             ; complete with cap(f), cape and a flying feather
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
@@ -83,13 +84,13 @@
        :tools
        ;;ansible           ; Allow silly people to focus on silly things
        biblio            ; writes a PhD for you (citation needed)
+       collab            ; collaborative editing
        (debugger +lsp)   ; stepping through code, to help you add bugs
        direnv            ; integrates direnv into Emacs
        (docker +lsp)     ; yo dawg, I heard you like OSes, so I...
        editorconfig      ; let someone else argue about tabs vs spaces
        ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)   ; run code, run (also, repls)
-       ;;gist              ; interacting with github gists
        (lookup +offline  ; navigate your code and its documentation
                +dictionary)
        (lsp +peek)       ; M-x vscode
@@ -99,7 +100,6 @@
        pdf               ; pdf enhancements
        ;;prodigy           ; No sweatshop is complete without child processes
        rgb               ; creating color strings
-       taskrunner        ; taskrunner for all your projects
        terraform         ; infrastructure as code
        tmux              ; an API for interacting with tmux
        tree-sitter       ; syntax and parsing, sitting in a tree
@@ -219,13 +219,11 @@
        ;;everywhere        ; leave Emacs!? You must be joking
        irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
-       twitter           ; twitter client https://twitter.com/vnought
 
        :config
        (default +bindings; reasonable defaults for reasonable people
                 +smartparens)
        ;;literate          ; Disguise your config as poor documentation
+       ;;use-package       ; the former default
 
 )
-
-(setq byte-compile-warnings '(cl-functions))
