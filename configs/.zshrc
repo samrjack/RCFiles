@@ -87,7 +87,6 @@ if [ -d "$ZSH" ]; then
       pass
       pip
       python
-      ripgrep
       sudo
       tmux
     )
