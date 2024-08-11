@@ -5,7 +5,8 @@ alias clc='clear'
 alias :q="exit"
 alias logout='exit'
 
-alias open="xdg-open"
+# Don't alias over open on MacOS since it already exists and works well
+if ! command -v open; then alias open="xdg-open"; fi
 
 alias locst="localstack"
 
