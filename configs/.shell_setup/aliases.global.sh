@@ -6,7 +6,7 @@ alias :q="exit"
 alias logout='exit'
 
 # Don't alias over open on MacOS since it already exists and works well
-if ! command -v open; then alias open="xdg-open"; fi
+if (! command -v open > /dev/null); then alias open="xdg-open"; fi
 
 alias locst="localstack"
 
