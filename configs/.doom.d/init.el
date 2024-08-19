@@ -99,7 +99,6 @@
        pass              ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; No sweatshop is complete without child processes
-       rgb               ; creating color strings
        terraform         ; infrastructure as code
        tmux              ; an API for interacting with tmux
        tree-sitter       ; syntax and parsing, sitting in a tree
@@ -227,3 +226,5 @@
        ;;use-package       ; the former default
 
 )
+
+(setq byte-compile-warnings '(cl-functions))
