@@ -782,7 +782,7 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 
 Finally set the startup theme type.
 #+begin_src emacs-lisp
-(local/set-light-theme)
+(local/set-dark-theme)
 #+end_src
 
 *** Debugging

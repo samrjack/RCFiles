@@ -52,7 +52,7 @@ from elsewhere."
   (interactive)
   (load-theme (if (display-graphic-p)'doom-gruvbox-light 'doom-gruvbox-light) t))
 
-(local/set-light-theme)
+(local/set-dark-theme)
 
 (map! :leader
       :desc "Debug on error"
