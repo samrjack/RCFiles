@@ -33,7 +33,7 @@
 [pull]
 	rebase = true
 [rerere]
-	enabled = true
+	enable = true
 [include]
 	path = ~/.gitconfig.local
 [init]
