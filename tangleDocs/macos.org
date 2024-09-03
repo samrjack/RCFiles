@@ -660,6 +660,11 @@ This program helps to download youtube videos from the command line.
 #+begin_src sh
 brew install youtube-dl
 #+end_src
+*** NeoVim
+Newer vim; enough said.
+#+begin_src sh
+brew install neovim
+#+end_src
 ** info dumpers
 These help provide info about the system they're running on.
 *** onefetch

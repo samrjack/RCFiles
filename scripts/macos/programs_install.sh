@@ -197,6 +197,8 @@ brew install speedtest_cli
 
 brew install youtube-dl
 
+brew install neovim
+
 brew install onefetch
 
 brew install neofetch
