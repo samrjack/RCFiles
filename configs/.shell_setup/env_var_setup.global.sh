@@ -13,7 +13,7 @@ export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 
 # Configuration variable
-export XDG_CONFIG_HOME="~/.config"
+export XDG_CONFIG_HOME="${HOME}/.config"
 
 # Homebrew variables
 if test -d "/home/linuxbrew"; then
