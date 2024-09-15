@@ -17,7 +17,7 @@
   fix = "!f() { $EDITOR -p `git diff --name-only --diff-filter=U`; }; f"
   root = "rev-parse --show-toplevel"
   nlog = "log --numstat"
-  authors = "shortlog -s"
+  authors = "shortlog -sn"
   count = "rev-list --count"
   clear = "!f() { git reset --hard HEAD && git clean -f -d; }; f"
 	damb = "!f() { curBranch=$(git branch --show-current); target=${1:-$curBranch}; echo \"=== Deleting all branches merged into $target ===\"; sleep 3; git checkout $target --quiet; git branch --merged | grep -E -v \"(main|develop|dev|staging|master|${curBranch}|${target})\" | xargs git branch -d; git checkout $curBranch --quiet; echo \"=== All merged branches deleted ===\"; }; f"
