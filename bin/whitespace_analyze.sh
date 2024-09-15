@@ -1,5 +1,25 @@
 #!/bin/bash
 
+positional_args=()
+# show_hidden=1
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+	-H | --hidden)
+		show_hidden=true
+		shift
+		;;
+	-*)
+		echo "Unknown option $1"
+		exit 1
+		;;
+	*)
+		positional_args+=("$1")
+		shift
+		;;
+	esac
+done
+
 function processFile {
 	local file="$1"
 	tmpFile=$(grep -v "^[[:space:]]*$" "$file")
@@ -14,10 +34,22 @@ function processFile {
 
 echo "FileName,NumberOfLines,NumberOfTabs,NumberOfSpaces,NumberOfWhitespace,AvgWhitespacePerLine"
 
-if [[ "$#" -lt 1 ]]; then
-	find . -type f -not -path '*/.*' -print0 | while IFS= read -r -d '' file; do
-		processFile "$file"
-	done
-else
-	processFile "$1"
+# If no paths are specified, then just default to the current directory
+if [[ ${#positional_args[@]} -eq 0 ]]; then
+	positional_args+=(".")
 fi
+
+for location in "${positional_args[@]}"; do
+	if [[ -f "$location" ]]; then
+		processFile "$location"
+	elif [[ -d "$location" ]]; then
+		if [[ $show_hidden ]]; then find "$location" -type f -print0; else find "$location" -type f -not -path '*/.*' -print0; fi |
+			while IFS= read -r -d '' file; do
+				processFile "$file"
+			done
+	elif [[ -e "$location" ]]; then
+		>&2 echo "issue detected, $location is not a file or directory"
+	else
+		>&2 echo "file not found: $location"
+	fi
+done
