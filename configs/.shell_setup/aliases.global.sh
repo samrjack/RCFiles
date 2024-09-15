@@ -41,6 +41,7 @@ alias gcc='gcc -Wall -Werror'
 alias vim="nvim"
 alias tmuxrc="nvim ~/.tmux.conf"
 alias vimrc="nvim ~/.config/nvim/init.lua"
+alias csv='nvim -c "setlocal filetype=csv buftype=nofile bufhidden=hide" -'
 
 ## Emacs shortcuts
 alias tmacs="emacs -nw"
