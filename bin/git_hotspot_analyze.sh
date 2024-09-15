@@ -14,6 +14,10 @@ while [[ $# -gt 0 ]]; do
 		shift # past argument
 		shift # past value
 		;;
+	-H | --hidden)
+		show_hidden=true
+		shift
+		;;
 	-*)
 		echo "Unknown option $1"
 		exit 1
@@ -38,11 +42,20 @@ function processFile {
 echo "filename,codeLines,totalCommits,numAuthors,authorRatio"
 
 if [[ ${#positional_args[@]} -eq 0 ]]; then
-	find . -not -path '*/.*' -print0 | while IFS= read -r -d '' file; do
-		processFile "$file"
-	done
-else
-	for file in "${positional_args[@]}"; do
-		processFile "$file"
-	done
+	positional_args+=(".")
 fi
+
+for location in "${positional_args[@]}"; do
+	if [[ -f "$location" ]]; then
+		processFile "$location"
+	elif [[ -d "$location" ]]; then
+		if [[ $show_hidden ]]; then find "$location" -type f -print0; else find "$location" -type f -not -path '*/.*' -print0; fi |
+			while IFS= read -r -d '' file; do
+				processFile "$file"
+			done
+	elif [[ -e "$location" ]]; then
+		>&2 echo "issue detected, $location is not a file or directory"
+	else
+		>&2 echo "file not found: $location"
+	fi
+done
