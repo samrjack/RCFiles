@@ -642,6 +642,11 @@ Then install git-sim through pip.
 #+begin_src sh
 pip3 install git-sim
 #+end_src
+*** Git Query Language
+An SQL like language for searching through git history.
+#+begin_src sh
+brew install gql
+#+end_src
 
 *** Difftastic
 A tool for viewing syntax-aware diffs.
@@ -679,10 +684,11 @@ Neofetch is a tool that summarizes a system's resources in a nice little print o
 brew install neofetch
 #+end_src
 
-*** Cloc
-Cloc is a program that counts lines of code in files.
+*** Loc
+Loc and Cloc is a program that counts lines of code in files.
 #+begin_src sh
 brew install cloc
+brew install loc
 #+end_src
 
 ** Converters
@@ -736,6 +742,11 @@ Converts asciidoc files into DocBook or HTML.
 brew install asciidoc
 #+end_src
 
+*** pngpaste
+Another tool primarily for org mode.
+#+begin_src sh
+brew install pngpaste
+#+end_src
 *** Sops
 Tool for working with encrypted files and secrets.
 #+begin_src sh
@@ -934,6 +945,14 @@ Another package for Emacs.
 #+begin_src sh
 brew install editorconfig
 #+end_src
+
+** Mail
+To fetch mail from from a CLI tool, one of these two works best.
+#+begin_src sh
+    brew install mbsync
+    brew install offlineimap
+#+end_src
+
 ** Direnv tool
 Load/unload environment variables based on $PWD.
 #+begin_src sh
@@ -980,7 +999,7 @@ brew install gcc
 brew install ccls
 #+end_src
 *** Java
-Installing java to for industrial purposes.
+Installing java too for industrial purposes.
 #+begin_src sh
 brew install java
 brew install jdtls
@@ -989,6 +1008,11 @@ brew install jdtls
 For formatting java code in editors.
 #+begin_src sh
 brew install clang-format
+#+end_src
+
+For the Java LSP
+#+begin_src sh
+brew install maven
 #+end_src
 
 *** Kotlin
@@ -1128,6 +1152,11 @@ And then finally an analyzer to measure code performance.
 brew install rust-analyzer
 #+end_src
 
+We also want a rust formatter.
+#+begin_src sh
+brew install rustfmt
+#+end_src
+
 *** Erlang
 #+begin_src sh
 brew install erlang
@@ -1157,6 +1186,13 @@ opam install -y merlin # Ocaml completion engine
 opam install -y ocaml-lsp-server # Ocaml lsp server
 opam install -y ocamlformat # Code auto-formatter
 #+end_src
+*** OpenGL
+Open GL is an a standard for writing graphical programs.
+This will get the LSP for it.
+#+begin_src sh
+brew install glslang
+#+end_src
+
 *** Html
 Great set of HTML tools.
 #+begin_src sh
@@ -1169,11 +1205,21 @@ The whole latex environment. It's a big package but there should be enough space
 brew install texlive
 #+end_src
 
+*** Lua
+#+begin_src sh
+brew install luarocks
+#+end_src
 *** Shell
 Various tools for making shell scripts.
 #+begin_src sh
 brew install shfmt
 brew install shellcheck
+#+end_src
+
+*** StandardML
+Here's an LSP for standard ML even though I doubt I'll use it.
+#+begin_src sh
+brew install smlfmt
 #+end_src
 
 *** Markdown
@@ -1267,6 +1313,8 @@ brew install --cask font-symbols-nerd-font
 brew install --cask font-symbols-only-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
 brew install --cask font-daddy-time-mono-nerd-font
+brew install --cask font-droid-sans-mono-nerd-font
+brew install --cask font-fira-code-nerd-font
 #+end_src
 
 * Full system install script

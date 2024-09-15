@@ -191,6 +191,8 @@ pip3 install manim
 
 pip3 install git-sim
 
+brew install gql
+
 brew install difftastic
 
 brew install speedtest_cli
@@ -204,6 +206,7 @@ brew install onefetch
 brew install neofetch
 
 brew install cloc
+brew install loc
 
 brew install pdftk-java
 
@@ -224,6 +227,8 @@ brew install homebrew-ffmpeg/ffmpeg/ffmpeg $(brew options homebrew-ffmpeg/ffmpeg
 brew install pandoc
 
 brew install asciidoc
+
+brew install pngpaste
 
 brew install sops
 
@@ -296,6 +301,9 @@ brew install lsusb
 
 brew install editorconfig
 
+    brew install mbsync
+    brew install offlineimap
+
 brew install direnv
 
 brew install hunspell
@@ -317,6 +325,8 @@ brew install java
 brew install jdtls
 
 brew install clang-format
+
+brew install maven
 
 brew install kotlin
 
@@ -374,6 +384,8 @@ brew install rustup-init
 
 brew install rust-analyzer
 
+brew install rustfmt
+
 brew install erlang
 brew install wrangler
 
@@ -391,12 +403,18 @@ opam install -y merlin # Ocaml completion engine
 opam install -y ocaml-lsp-server # Ocaml lsp server
 opam install -y ocamlformat # Code auto-formatter
 
+brew install glslang
+
 brew install tidy-html5
 
 brew install texlive
 
+brew install luarocks
+
 brew install shfmt
 brew install shellcheck
+
+brew install smlfmt
 
 brew install grip
 
@@ -439,3 +457,5 @@ brew install --cask font-symbols-nerd-font
 brew install --cask font-symbols-only-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
 brew install --cask font-daddy-time-mono-nerd-font
+brew install --cask font-droid-sans-mono-nerd-font
+brew install --cask font-fira-code-nerd-font
