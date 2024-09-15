@@ -1,5 +1,33 @@
+#!/bin/bash
+
+positional_args=()
+git_options=""
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+	-g=* | --git-options=*)
+		git_options="${1#*=}"
+		shift
+		;;
+	-g | --git-options)
+		git_options="$2"
+		shift # past argument
+		shift # past value
+		;;
+	-*)
+		echo "Unknown option $1"
+		exit 1
+		;;
+	*)
+		positional_args+=("$1") # save positional arg
+		shift                   # past argument
+		;;
+	esac
+done
+
 echo "count,file1,file1TotalCommits,file1CommitPecentage,file2,file2TotalCommits,file2CommitPercentage"
-git log --format=format:"" --name-only |
+
+eval "git log ${git_options} --format=format:"" --name-only -- ${positional_args[*]@Q}" |
 	awk '
 	BEGIN {
 		filenum = 0

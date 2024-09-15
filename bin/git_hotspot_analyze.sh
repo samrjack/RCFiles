@@ -28,8 +28,8 @@ done
 function processFile {
 	local file=$1
 	codeLines=$(cloc --sum-one "$file" | awk '/^SUM/{print $NF}')
-	commitCount=$(eval "git rev-list ${git_options} --count HEAD \"$file\"")
-	authors=$(if [[ -d "$file" ]]; then eval "git shortlog -ns ${git_options} HEAD \"$file\""; else eval "git shortlog --follow -ns ${git_options} HEAD \"$file\""; fi)
+	commitCount=$(eval "git rev-list ${git_options} --count HEAD -- \"$file\"")
+	authors=$(if [[ -d "$file" ]]; then eval "git shortlog -ns ${git_options} HEAD -- \"$file\""; else eval "git shortlog --follow -ns ${git_options} HEAD -- \"$file\""; fi)
 	authorCount=$(echo "$authors" | wc -l)
 	mainRatio=$(echo "$authors" | awk 'BEGIN { otherContribs = 0 } NR == 1 { mainContrib = $1 } NR > 1 {otherContribs += $1} END { if (mainContrib > 0) printf("%5.2f%%", (100 * mainContrib / (mainContrib + otherContribs))) }')
 	echo "${file},${codeLines},${commitCount},${authorCount},${mainRatio}"

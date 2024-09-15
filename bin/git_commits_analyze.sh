@@ -27,7 +27,7 @@ done
 
 echo "word,count"
 
-eval "git log ${git_options} --format=format:%B ${positional_args[*]@Q}" |
+eval "git log ${git_options} --format=format:%B -- ${positional_args[*]@Q}" |
 	# Turn all spaces into newlines so words can be easily disected
 	sed 's;[[:space:]]\{1,\};\n;g' |
 	# Remove all surrounding punctuation and empty lines
