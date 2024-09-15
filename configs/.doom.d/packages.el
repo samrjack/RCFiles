@@ -1,3 +1,5 @@
+(package! benchmark-init)
+
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
@@ -98,8 +100,6 @@
 (package! bluetooth)
 
 (package! crdt)
-
-(package! benchmark-init)
 
 (package! mode-minder :recipe (:host github :repo "jdtsmith/mode-minder"))
 

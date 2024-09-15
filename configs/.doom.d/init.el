@@ -1,5 +1,9 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+(when init-file-debug
+  (require 'benchmark-init "~/.config/emacs/.local/straight/repos/benchmark-init-el/benchmark-init.el")
+  (add-hook 'doom-first-input-hook #'benchmark-init/deactivate))
+
 (doom!
 ;;; Modules to load
 
