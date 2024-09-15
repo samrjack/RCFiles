@@ -1,5 +1,5 @@
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # ssh
 export SSH_KEY_PATH="${HOME}/.ssh/rsa_id"

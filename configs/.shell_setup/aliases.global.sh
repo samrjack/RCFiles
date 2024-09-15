@@ -38,10 +38,9 @@ alias gccp='gcc -lpthread -Wall -Werror'
 alias gcc='gcc -Wall -Werror'
 
 ## vim shortcuts
-alias tmuxrc="vim ~/.tmux.conf"
-alias vimrc="vim ~/.vimrc"
-# An alias to read from stdin without requiring the output to be saved
-alias v='vim -c "setlocal buftype=nofile bufhidden=hide noswapfile" -'
+alias vim="nvim"
+alias tmuxrc="nvim ~/.tmux.conf"
+alias vimrc="nvim ~/.config/nvim/init.lua"
 
 ## Emacs shortcuts
 alias tmacs="emacs -nw"
@@ -63,14 +62,13 @@ alias git-r='git rev-parse --show-toplevel'
 alias gr="git-r"
 alias cdgr="git-root"
 
-
-
 ## Docker aliases
 alias dockerc="docker-compose"
 alias dcu="docker-compose up"
 alias dcub="docker-compose up --build"
 
 ## Convenient shortcut behavior
+
 # Add a stream of numbers
 alias add="awk '{ sum += \$1 } END { print sum }'"
 # Start a python server so other local devices can access files
