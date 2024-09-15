@@ -37,20 +37,20 @@ export PATH="/opt/homebrew/opt/openjdk/bin:${PATH}"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
 
 # Brew package manager for linux
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}";
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
 # Source a GUIX environment if present
 export GUIX_PROFILE="${HOME}/.guix-profile"
 export GUIX_PROFILE_SCRIPT="${GUIX_PROFILE}/etc/profile"
-if [ -e ${GUIX_PROFILE_SCRIPT} ]; then
-   . ${GUIX_PROFILE_SCRIPT}
+if [ -e "${GUIX_PROFILE_SCRIPT}" ]; then
+	. "${GUIX_PROFILE_SCRIPT}"
 
-   # If guix is updated, it needs to source its new location too. However,
-   # if it's not updated, then we should overwrite the above variables.
-   NEW_GUIX_PROFILE="${HOME}/.config/guix/current"
-   NEW_GUIX_PROFILE_SCRIPT="${NEW_GUIX_PROFILE}/etc/profile"
-   if [ -e ${NEW_GUIX_PROFILE_SCRIPT} ]; then
-       export GUIX_PROFILE=${NEW_GUIX_PROFILE}
-       . ${NEW_GUIX_PROFILE_SCRIPT}
-   fi
+	# If guix is updated, it needs to source its new location too. However,
+	# if it's not updated, then we should overwrite the above variables.
+	NEW_GUIX_PROFILE="${HOME}/.config/guix/current"
+	NEW_GUIX_PROFILE_SCRIPT="${NEW_GUIX_PROFILE}/etc/profile"
+	if [ -e "${NEW_GUIX_PROFILE_SCRIPT}" ]; then
+		export GUIX_PROFILE=${NEW_GUIX_PROFILE}
+		. "${NEW_GUIX_PROFILE_SCRIPT}"
+	fi
 fi

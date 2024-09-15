@@ -99,7 +99,7 @@ if [ -d "$ZSH" ]; then
     source $ZSH/oh-my-zsh.sh
 else
     # Backup prompt incase oh-my-zsh isn't installed
-    RPROMPT='[%F{yellow}%?%f]' 
+    RPROMPT='[%F{yellow}%?%f]'
     PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f %# '
 fi
 
