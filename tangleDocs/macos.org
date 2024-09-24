@@ -670,6 +670,11 @@ Newer vim; enough said.
 #+begin_src sh
 brew install neovim
 #+end_src
+*** Tre
+A better tree command for viewing directory structure.
+#+begin_src sh
+brew install tre-command
+#+end_src
 ** info dumpers
 These help provide info about the system they're running on.
 *** onefetch

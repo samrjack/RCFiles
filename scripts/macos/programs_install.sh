@@ -201,6 +201,8 @@ brew install youtube-dl
 
 brew install neovim
 
+brew install tre-command
+
 brew install onefetch
 
 brew install neofetch

@@ -86,6 +86,8 @@ alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
 #### Useful functions
 
+tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
+
 # Open instance of magit in repo
 function magit() {
 	git_root=$(git rev-parse --show-toplevel)
