@@ -548,6 +548,11 @@ A smart ~cd~.
 #+begin_src sh
 brew install z
 #+end_src
+*** Progress Line
+Progress line is a utility for consolidating lots of line of output into one line
+#+begin_src sh
+brew install progressline
+#+end_src
 
 ** CLI programs
 These are full on programs in the CLI that aren't meant to be paired with other tools in a chain.

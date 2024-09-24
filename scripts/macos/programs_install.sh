@@ -160,6 +160,8 @@ brew install xdg-ninja
 
 brew install z
 
+brew install progressline
+
 brew install sl
 
 brew install ranger
