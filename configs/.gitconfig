@@ -44,3 +44,5 @@
 	ui = auto
 [branch]
 	sort = -committerdate
+[rebase]
+	autosquash = true
