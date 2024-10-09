@@ -40,3 +40,7 @@
 	defaultBranch = main
 [fetch]
 	prune = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
