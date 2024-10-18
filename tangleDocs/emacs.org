@@ -1532,7 +1532,7 @@ Origami mode has pretty good default folding for normal code blocks. See ts-fold
 
 Set the ability to use it anywhere.
 #+begin_src emacs-lisp
-(global-origami-mode)
+;; (global-origami-mode)
 #+end_src
 
 But disable in modes where it does an awful job.
@@ -2077,7 +2077,7 @@ Leaving off for now. Package still seems to be under development.
 **** Diff
 This is a nice package for visualizing git diffs in a more standard unix way than magit.
 #+begin_src elisp :tangle ../configs/.doom.d/packages.el
-(package! diff-ansi)
+;; (package! diff-ansi)
 #+end_src
 
 **** TODO Gutter

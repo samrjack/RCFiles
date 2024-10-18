@@ -397,7 +397,7 @@ RULES should be a list of folding rules in the format of (ts-element . folding-f
 (after! ts-fold
   (local/update-ts-fold-definitions 'python-mode local/ts-fold-parsers-python-list))
 
-;;(global-origami-mode)
+;; (global-origami-mode)
 
 (defun local/turn-off-origami ()
   "Simple function meant for hooks in order to turn off
