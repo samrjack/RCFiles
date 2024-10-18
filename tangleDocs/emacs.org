@@ -188,6 +188,7 @@ Unlike other literate configs, this one is not meant to be compiled at start tim
       - [[#org-graph][Org graph]]
       - [[#org-gantt][Org Gantt]]
       - [[#org-verb][Org verb]]
+      - [[#drawings][Drawings]]
     - [[#e-book-reader][E-book reader]]
       - [[#packages-1][Packages]]
       - [[#settings-2][Settings]]
@@ -2804,6 +2805,17 @@ Then add the verb command map to the org map.
       :localleader
       :desc "verb requests"
       "v" verb-command-map)
+#+end_src
+
+**** Drawings
+#+begin_src emacs-lisp :tangle ../configs/.doom.d/packages.el
+(package! el-easydraw :recipe (:host github :repo "misohena/el-easydraw"))
+#+end_src
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'org
+  (require 'edraw-org)
+  (edraw-org-setup-default))
 #+end_src
 
 

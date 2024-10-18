@@ -1022,6 +1022,10 @@ if no org extension is given then it will be automatically appended."
       :desc "verb requests"
       "v" verb-command-map)
 
+(with-eval-after-load 'org
+  (require 'edraw-org)
+  (edraw-org-setup-default))
+
 (use-package! nov ; Novel reading
   :mode ("\\.epub\\'" . nov-mode)
   :config

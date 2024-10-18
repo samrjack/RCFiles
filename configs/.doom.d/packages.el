@@ -135,6 +135,8 @@
 
 (package! verb)
 
+(package! el-easydraw :recipe (:host github :repo "misohena/el-easydraw"))
+
 ;; e-reader
 (package! calibredb)
 (package! nov)
