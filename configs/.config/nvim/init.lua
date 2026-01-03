@@ -1,3 +1,9 @@
--- This file has been generated using org tangle. To modify, please see the master org file.
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+require('files')
+require('folding')
+require('keys')
+require('scratch')
+require('spelling')
+require('ui')
+
+-- Comes last so all other general configuration can be completed and built upon in the plugins
+require('lazy.lazy_setup')
