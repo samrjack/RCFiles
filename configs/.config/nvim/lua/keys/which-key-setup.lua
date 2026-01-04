@@ -22,6 +22,7 @@ M.defined_n_operators = {
     { '<leader>h', group = 'Help' },
     { '<leader>s', group = 'Search/Replace' },
     { '<leader>t', group = 'Toggle' },
+    { '<leader>x', group = 'Diagnostics' },
     { 'gp', group = 'Preview' },
 }
 
