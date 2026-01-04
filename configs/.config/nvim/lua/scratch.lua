@@ -26,7 +26,13 @@ function NewScratchBuffer()
     TurnOnScratchBuffer()
 end
 
+function NewScratchWindow()
+    vim.cmd.enew()
+    TurnOnScratchBuffer()
+end
+
 vim.api.nvim_create_user_command('NewScratchBuffer', NewScratchBuffer, {})
+vim.api.nvim_create_user_command('NewScratchWindow', NewScratchWindow, {})
 
 -- Automate the scratch buffer in certain cases
 
