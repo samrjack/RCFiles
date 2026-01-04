@@ -1,3 +1,3 @@
 -- Easily escape from different modes
 
-vim.keymap.set({'!'}, 'jk', '<esc>')
+vim.keymap.set({ '!' }, 'jk', '<esc>')

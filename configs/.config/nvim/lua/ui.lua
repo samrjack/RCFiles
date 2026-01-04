@@ -1,13 +1,13 @@
 -- Options that change the basic underlying vim UI settings
 
-vim.opt.number = true        -- Turn on line numbers
-vim.opt.smartindent = true   -- Automatically indent new lines
+vim.opt.number = true -- Turn on line numbers
+vim.opt.smartindent = true -- Automatically indent new lines
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors
 
 -- indentation
-vim.opt.tabstop = 4      -- Number of spaces a tab represents
-vim.opt.shiftwidth = 4   -- Number of visual spces per tab
-vim.opt.softtabstop = 4  -- number of spaces in a tab when editing
+vim.opt.tabstop = 4 -- Number of spaces a tab represents
+vim.opt.shiftwidth = 4 -- Number of visual spces per tab
+vim.opt.softtabstop = 4 -- number of spaces in a tab when editing
 vim.opt.expandtab = true -- Use spaces instead of tabs
 
 -- wraping lines when they're too long to view

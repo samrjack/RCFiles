@@ -43,7 +43,6 @@ return {
                 'jq',
                 'json',
                 'kotlin',
-                'kotlin',
                 'lua',
                 'markdown_inline',
                 'markdown',
@@ -91,7 +90,9 @@ return {
             {
                 'af',
                 function()
-                    require('nvim-treesitter-textobjects.select').select_textobject('@function.outer')
+                    require('nvim-treesitter-textobjects.select').select_textobject(
+                        '@function.outer'
+                    )
                 end,
                 desc = 'Function',
                 mode = { 'x', 'o' },
@@ -99,7 +100,9 @@ return {
             {
                 'C',
                 function()
-                    require('nvim-treesitter-textobjects.select').select_textobject('@conditional.inner')
+                    require('nvim-treesitter-textobjects.select').select_textobject(
+                        '@conditional.inner'
+                    )
                 end,
                 desc = 'Conditional',
                 mode = { 'x', 'o' },
@@ -115,7 +118,9 @@ return {
             {
                 'if',
                 function()
-                    require('nvim-treesitter-textobjects.select').select_textobject('@function.inner')
+                    require('nvim-treesitter-textobjects.select').select_textobject(
+                        '@function.inner'
+                    )
                 end,
                 desc = 'Function',
                 mode = { 'x', 'o' },
@@ -133,7 +138,7 @@ return {
                 function()
                     require('nvim-treesitter-textobjects.swap').swap_previous('@parameter.inner')
                 end,
-                desc = 'Swap pervious',
+                desc = 'Swap previous',
             },
             -- Move keymaps
             {
@@ -163,7 +168,7 @@ return {
             {
                 ']c',
                 function()
-                    require('nvim-treesitter-textobjects.move').goto_prev_start('@class')
+                    require('nvim-treesitter-textobjects.move').goto_next_start('@class')
                 end,
                 desc = 'Class',
                 mode = { 'x', 'o' },
@@ -178,7 +183,7 @@ return {
             {
                 ']C',
                 function()
-                    require('nvim-treesitter-textobjects.move').goto_prev_start('@conditional')
+                    require('nvim-treesitter-textobjects.move').goto_next_start('@conditional')
                 end,
                 desc = 'Conditional',
             },
@@ -198,7 +203,7 @@ return {
             mode = 'topline', -- Options of 'cursor' for current line or 'topline'
             separator = nil,
             zindex = 20,
-            on_atach = nil,
+            on_attach = nil,
         },
         keys = {
             {

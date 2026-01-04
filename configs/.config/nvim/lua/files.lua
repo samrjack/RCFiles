@@ -5,6 +5,6 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 -- Undo info
-vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+vim.opt.undodir = vim.fn.stdpath('data') .. '/undodir'
 vim.opt.undofile = true
 vim.opt.undolevels = 10000

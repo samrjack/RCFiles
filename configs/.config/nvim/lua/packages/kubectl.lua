@@ -1,7 +1,7 @@
 return {
-	{
-		'ramilito/kubectl.nvim',
-		lazy = true,
-		opts = {},
-	},
+    {
+        'ramilito/kubectl.nvim',
+        lazy = true,
+        opts = {},
+    },
 }

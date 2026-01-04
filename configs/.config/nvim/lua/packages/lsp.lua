@@ -67,27 +67,31 @@ return {
                         local path = client.workspace_folders[1].name
                         if
                             path ~= vim.fn.stdpath('config')
-                            and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+                            and (
+                                vim.uv.fs_stat(path .. '/.luarc.json')
+                                or vim.uv.fs_stat(path .. '/.luarc.jsonc')
+                            )
                         then
                             return
                         end
                     end
 
-                    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-                        runtime = {
-                            version = 'LuaJIT',
-                            path = {
-                                'lua/?.lua',
-                                'lua/?/init.lua',
+                    client.config.settings.Lua =
+                        vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                            runtime = {
+                                version = 'LuaJIT',
+                                path = {
+                                    'lua/?.lua',
+                                    'lua/?/init.lua',
+                                },
                             },
-                        },
-                        workspace = {
-                            checkThirdParty = false,
-                            library = {
-                                vim.api.nvim_get_runtime_file('', true),
+                            workspace = {
+                                checkThirdParty = false,
+                                library = {
+                                    vim.api.nvim_get_runtime_file('', true),
+                                },
                             },
-                        },
-                    })
+                        })
                 end,
             })
 
@@ -102,7 +106,10 @@ return {
                 },
                 on_new_config = function(new_config)
                     new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-                    vim.list_extend(new_config.settings.json.schemas, require('schemastore').json.schemas())
+                    vim.list_extend(
+                        new_config.settings.json.schemas,
+                        require('schemastore').json.schemas()
+                    )
                 end,
             })
 
@@ -118,7 +125,10 @@ return {
                 },
                 on_new_config = function(new_config)
                     new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-                    vim.list_extend(new_config.settings.json.schemas, require('schemastore').json.schemas())
+                    vim.list_extend(
+                        new_config.settings.json.schemas,
+                        require('schemastore').json.schemas()
+                    )
                 end,
             })
         end,
