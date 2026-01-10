@@ -8,19 +8,28 @@ return {
             'nvim-lua/plenary.nvim',
         },
         config = function()
+            local dashboard = require('alpha.themes.dashboard')
             local configuration = require('alpha.themes.theta')
             configuration.file_icons.provider = 'devicons'
 
-            -- Find and override button by shortcut key
-            local function find_button(shortcut)
-                for _, button in ipairs(configuration.buttons.val) do
-                    if button.opts and button.opts.shortcut == shortcut then
-                        return button
-                    end
-                end
-            end
-
-            find_button('e').opts.keymap[3] = '<cmd>NewScratchWindow<CR>' -- keymap[3] is the command
+            configuration.config.layout[#configuration.config.layout].val = {
+                {
+                    type = 'text',
+                    val = 'Quick links',
+                    opts = { hl = 'SpecialComment', position = 'center' },
+                },
+                { type = 'padding', val = 1 },
+                dashboard.button('e', '  New file', '<cmd>ene<CR>'),
+                dashboard.button('SPC f f', '󰈞  Find file'),
+                dashboard.button('SPC f g', '󰊄  Live grep'),
+                dashboard.button('t', '  Terminal', vim.cmd.term),
+                dashboard.button('c', '  Configuration', function()
+                    vim.fn.chdir(vim.fn.stdpath('config'))
+                    vim.cmd.e('.')
+                end),
+                dashboard.button('u', '  Update plugins', '<cmd>Lazy sync<CR>'),
+                dashboard.button('q', '󰅚  Quit', '<cmd>qa<CR>'),
+            }
 
             require('alpha').setup(configuration.config)
 
