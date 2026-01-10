@@ -45,6 +45,9 @@ return {
         lazy = true,
         event = 'VimEnter',
         opts = {
+            options = {
+                globalstatus = true,
+            },
             tabline = {
                 lualine_a = { 'buffers' },
                 lualine_b = { '' },
