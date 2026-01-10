@@ -28,6 +28,14 @@ return {
                     hide_gitignored = false,
                 },
             },
+            filesystem = {
+                window = {
+                    mappings = {
+                        ['/'] = '',
+                        ['F'] = 'fuzzy_finder',
+                    },
+                },
+            },
         },
         keys = {
             { '<C-n>', ':Neotree left reveal toggle<cr>', desc = 'File tree' },
