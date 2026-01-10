@@ -32,6 +32,13 @@ return {
             desc = 'Buffer',
         },
         {
+            '<leaderfc',
+            function()
+                require('telescope.builtin').colorscheme({ enable_preview = true })
+            end,
+            desc = 'Colorscheme',
+        },
+        {
             '<leader>ff',
             function()
                 require('telescope.builtin').find_files()

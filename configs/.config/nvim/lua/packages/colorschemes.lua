@@ -8,6 +8,7 @@ return {
         -- the system has a theme ASAP. We can then set further theme settings
         -- in the colors config.
         config = function()
+            vim.g.everforest_enable_italic = true
             vim.cmd([[colorscheme everforest]])
         end,
     },
@@ -23,6 +24,11 @@ return {
     },
     {
         'folke/tokyonight.nvim',
+        lazy = true,
+        config = true,
+    },
+    {
+        'sainnhe/edge',
         lazy = true,
         config = true,
     },
