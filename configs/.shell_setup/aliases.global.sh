@@ -44,6 +44,7 @@ alias vimrc="nvim ~/.config/nvim/init.lua"
 alias csv='nvim -c "setlocal filetype=csv buftype=nofile bufhidden=hide" -'
 
 ## Emacs shortcuts
+alias vmacs="emacs --init-directory ~/.config/emacs-v"
 alias tmacs="emacs -nw"
 alias temacs="tmacs"
 alias emacsc="emacsclient -c -n"
