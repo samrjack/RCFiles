@@ -54,7 +54,15 @@ return {
             'nvim-telescope/telescope.nvim',
         },
         lazy = true,
-        config = true,
+        opts = {
+            mappings = {
+                popup = {
+                    ['F'] = 'PullPopup',
+                    ['p'] = 'PushPopup',
+                    ['P'] = 'PushPopup',
+                },
+            },
+        },
         keys = {
             {
                 '<leader>gg',
@@ -75,6 +83,23 @@ return {
         end,
         keys = {
             { '<leader>gm', vim.cmd.GitMessenger, desc = 'View git commit message' },
+        },
+    },
+    {
+        'chrishrb/gx.nvim',
+        lazy = true,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        init = function()
+            vim.g.netrw_nogx = 1
+        end,
+        opts = {},
+        submodules = false,
+        cmd = { 'Browse' },
+        keys = {
+            { 'gx', '<cmd>Browse<cr>', desc = 'Open in browser' },
+            { '<leader>gx', '<cmd>Browse<cr>', desc = 'Open in browser' },
         },
     },
 }
