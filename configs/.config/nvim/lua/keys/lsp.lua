@@ -56,6 +56,7 @@ local function setup_lsp_keymaps(buf)
         { buffer = buf, desc = 'Signature help' }
     )
     vim.keymap.set('n', '<leader>cL?', show_lsp, { buffer = buf, desc = 'Signature help' })
+    vim.keymap.set('n', '<leader>cLr', ':LspRestart<CR>', { buffer = buf, desc = 'Restart' })
     vim.keymap.set(
         'i',
         '<A-h>',
