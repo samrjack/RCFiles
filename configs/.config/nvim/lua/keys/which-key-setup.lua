@@ -8,8 +8,8 @@ M.defined_n_x_operators = {
     { '<leader>w', group = 'Windows', proxy = '<C-w>' },
 }
 
-M.defined_n_operators = {
-    mode = { 'n' },
+M.defined_n_v_operators = {
+    mode = { 'n', 'v' },
     { '<leader><Enter>', group = 'Bookmarks' },
     { '<leader>a', group = 'AI' },
     { '<leader>c', group = 'Code' },
@@ -19,6 +19,7 @@ M.defined_n_operators = {
     { '<leader>cm', group = 'Markdown settings' },
     { '<leader>f', group = 'File' },
     { '<leader>g', group = 'Git' },
+    { '<leader>gh', group = 'Hunks' },
     { '<leader>h', group = 'Help' },
     { '<leader>s', group = 'Search/Replace' },
     { '<leader>t', group = 'Toggle' },
@@ -29,7 +30,7 @@ M.defined_n_operators = {
 function M.defined()
     local wk = require('which-key')
     wk.add(M.defined_n_x_operators)
-    wk.add(M.defined_n_operators)
+    wk.add(M.defined_n_v_operators)
 end
 
 M.preset_operators = {

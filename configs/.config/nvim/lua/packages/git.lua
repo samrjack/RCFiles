@@ -44,6 +44,62 @@ return {
                 end,
                 desc = 'Toggle deleted',
             },
+            {
+                '<leader>gs',
+                function()
+                    require('gitsigns').stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                end,
+                mode = { 'v', 'n' },
+                desc = 'Stage selection',
+            },
+            {
+                '<leader>gS',
+                function()
+                    require('gitsigns').stage_buffer()
+                end,
+                mode = { 'n' },
+                desc = 'Stage buffer',
+            },
+            {
+                '<leader>gr',
+                function()
+                    require('gitsigns').reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                end,
+                mode = { 'v', 'n' },
+                desc = 'Reset selection',
+            },
+            {
+                '<leader>gR',
+                function()
+                    require('gitsigns').reset_buffer()
+                end,
+                mode = { 'n' },
+                desc = 'Stage buffer',
+            },
+            {
+                '<leader>ghp',
+                function()
+                    require('gitsigns').preview_hunk()
+                end,
+                mode = { 'n' },
+                desc = 'preview',
+            },
+            {
+                '<leader>ghs',
+                function()
+                    require('gitsigns').stage_hunk()
+                end,
+                mode = { 'n' },
+                desc = 'preview',
+            },
+            {
+                '<leader>ghr',
+                function()
+                    require('gitsigns').reset_hunk()
+                end,
+                mode = { 'n' },
+                desc = 'preview',
+            },
         },
     },
     {
