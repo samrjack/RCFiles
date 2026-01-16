@@ -85,45 +85,54 @@ alias xrs='set -o noglob; eval `resize`; unset noglob'
 # Restart yabai which is a tiling window manager for mac
 alias yabai-restart='launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
+# Lauch lazyvim distro in a docker container for testing its defaults
+function lazyvim() {
+    docker run -w /root -it --rm alpine:edge sh -uelic '
+    apk add git lazygit neovim ripgrep alpine-sdk --update
+    git clone https://github.com/LazyVim/starter ~/.config/nvim
+    cd ~/.config/nvim
+    nvim'
+}
+
 #### Useful functions
 
 tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
 
 # Open instance of magit in repo
 function magit() {
-	git_root=$(git rev-parse --show-toplevel)
-	# magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
-	magitExecute="(magit-status)"
-	echo "executing: ${magitExecute}"
-	if [ $? -eq 0 ]; then
-		if ! emacsclient -e 0 >&/dev/null; then
-			echo "in new emacs instance"
-			emacs -nw -n --eval=${magitExecute}
-		else
-			echo "in emacsclient"
-			emacsclient -nw -e ${magitExecute}
-		fi
-	fi
+    git_root=$(git rev-parse --show-toplevel)
+    # magitExecute="(let ((display-buffer-alist \`((\"^\\*magit: \" display-buffer-same-window) ,display-buffer-alist))) (magit-status \"${git_root}\"))"
+    magitExecute="(magit-status)"
+    echo "executing: ${magitExecute}"
+    if [ $? -eq 0 ]; then
+        if ! emacsclient -e 0 >&/dev/null; then
+            echo "in new emacs instance"
+            emacs -nw -n --eval=${magitExecute}
+        else
+            echo "in emacsclient"
+            emacsclient -nw -e ${magitExecute}
+        fi
+    fi
 }
 
 # Suspend the computer
 function hibernate() {
-	if [[ $(which systemctl) ]]; then
-		systemctl suspend
-	else
-		echo "sorry, don't know how yet."
-	fi
+    if [[ $(which systemctl) ]]; then
+        systemctl suspend
+    else
+        echo "sorry, don't know how yet."
+    fi
 }
 
 # Update all systems based on the package managers installed
 function update() {
-	if command -v apt; then
-		sudo apt update && sudo apt upgrade -y
-	fi
-	if command -v brew; then
-		brew update && brew upgrade
-	fi
-	if command -v flatpak; then
-		flatpak update
-	fi
+    if command -v apt; then
+        sudo apt update && sudo apt upgrade -y
+    fi
+    if command -v brew; then
+        brew update && brew upgrade
+    fi
+    if command -v flatpak; then
+        flatpak update
+    fi
 }
