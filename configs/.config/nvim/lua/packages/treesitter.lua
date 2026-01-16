@@ -63,6 +63,9 @@ return {
                 'zsh',
             })
         end,
+        keys = {
+            { '<leader>cTI', ':checkhealth nvim-treesitter<CR>', desc = 'Info' },
+        },
     },
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
