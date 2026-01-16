@@ -68,9 +68,9 @@ if [ -d "$ZSH" ]; then
       colorize
       command-not-found
       compleat
-      docker
-      docker-compose
-      emacs
+      # docker
+      # docker-compose
+      # emacs
       emoji
       emoji-clock
       extract
@@ -79,7 +79,7 @@ if [ -d "$ZSH" ]; then
       git-extras
       gnu-utils
       golang
-      helm
+      # helm
       httpie
       kubectl
       npm
