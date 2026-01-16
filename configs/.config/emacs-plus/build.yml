@@ -1,4 +1,2 @@
 icon: liquid-glass
-patches:
-  # - fix-window-role # Emacs 30
 native_comp_env: true
