@@ -27,7 +27,10 @@ return {
                             local commands = require('neo-tree.sources.filesystem.commands')
                             local renderer = require('neo-tree.ui.renderer')
 
-                            if node.type == 'directory' then
+                            if node.type == 'message' and node:get_id():match('hidden') then
+                                -- Hidden items node - toggle hidden visibility
+                                commands.toggle_hidden(state)
+                            elseif node.type == 'directory' then
                                 if not node:is_expanded() then
                                     -- Expanding - check if we should return to previous file
                                     commands.toggle_node(state)
