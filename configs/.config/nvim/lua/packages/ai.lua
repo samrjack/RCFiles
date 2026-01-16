@@ -1,3 +1,5 @@
+DescribeKeys({ '<leader>a', group = 'AI' }, { 'n', 'v' })
+
 return {
     {
         'coder/claudecode.nvim',

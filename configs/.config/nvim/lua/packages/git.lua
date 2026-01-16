@@ -1,5 +1,10 @@
 -- Plugins for working with git
 
+DescribeKeys({
+    { '<leader>g', group = 'Git' },
+    { '<leader>gh', group = 'Hunks' },
+}, { 'n', 'v' })
+
 return {
     {
         'tpope/vim-fugitive',

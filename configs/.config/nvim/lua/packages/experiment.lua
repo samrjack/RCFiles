@@ -15,6 +15,9 @@ return {
         'rmagatti/goto-preview',
         lazy = true,
         opts = {},
+        init = function()
+            DescribeKeys({ 'gp', group = 'Preview' })
+        end,
         keys = {
             {
                 'gpd',

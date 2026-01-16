@@ -1,3 +1,8 @@
+DescribeKeys({
+    { '<leader>cL', group = 'LSP settings' },
+    { 'gr', group = 'LSP' },
+})
+
 return {
     {
         'williamboman/mason.nvim',

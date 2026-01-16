@@ -10,6 +10,11 @@ local function check_treesitter()
     return false
 end
 
+DescribeKeys({
+    { '<leader>cT', group = 'Treesitter' },
+    { '<leader>cTc', group = 'Treesitter context' },
+})
+
 return {
     {
         'nvim-treesitter/nvim-treesitter',

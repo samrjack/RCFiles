@@ -1,3 +1,11 @@
+DescribeKeys({
+    '<leader>cm',
+    cond = function()
+        return vim.bo.filetype == 'markdown'
+    end,
+    group = 'Markdown settings',
+})
+
 return {
     {
         'OXY2DEV/markview.nvim',

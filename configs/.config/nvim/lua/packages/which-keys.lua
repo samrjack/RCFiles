@@ -21,8 +21,7 @@ return {
     },
     config = function(_, opts)
         require('which-key').setup(opts)
-        require('keys.which-key-setup').presets()
-        require('keys.which-key-setup').defined()
+        ApplyKeyDescriptions()
     end,
     keys = {
         {
