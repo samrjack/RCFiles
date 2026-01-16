@@ -21,7 +21,22 @@ return {
                         'toggle_preview',
                         config = { use_float = true, use_image_nvim = false },
                     },
-                    ['<Tab>'] = { 'toggle_node' },
+                    ['<Tab>'] = {
+                        function(state)
+                            local node = state.tree:get_node()
+                            local commands = require('neo-tree.sources.filesystem.commands')
+                            if node.type == 'directory' then
+                                commands.toggle_node(state)
+                            else
+                                local parent_id = node:get_parent_id()
+                                if parent_id then
+                                    require('neo-tree.ui.renderer').focus_node(state, parent_id)
+                                    commands.toggle_node(state)
+                                end
+                            end
+                        end,
+                        desc = 'Toggle dir',
+                    },
                 },
                 filtered_items = {
                     hide_dotfiles = false,
