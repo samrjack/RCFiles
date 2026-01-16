@@ -851,6 +851,16 @@ A tool for window snap management.
 #+begin_src sh
 brew install --cask spectacle
 #+end_src
+** PDF
+This tools lets me combine PDFs into a single file.
+#+begin_src sh
+brew install poppler
+#+end_src
+
+It can be used like the following:
+#+begin_src sh :tangle no
+pdfunite 1.pdf 2.pdf 3.pdf combined_pdf.pdf
+#+end_src
 ** VPN
 *** TunnelBlick
 Tunnel blick is a free OpenVPN client for MacOS. [[https://www.tunnelblick.net][homepage]].

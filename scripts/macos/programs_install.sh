@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if ! command -v brew &> /dev/null
-then
+if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     export PATH="/opt/homebrew/bin:${PATH}"
 fi
@@ -39,7 +38,7 @@ brew install tree-sitter
 
 brew tap d12frosted/emacs-plus
 brew update
-brew install emacs-plus@28 --with-imagemagick --with-native-comp --with-dbus --with-modern-cg433n-icon --with-mailutils --with-ctags --with-xwidgets
+brew install emacs-plus --with-imagemagick --with-native-comp --with-dbus --with-modern-cg433n-icon --with-mailutils --with-ctags --with-xwidgets
 
 brew install sublime-text
 
@@ -269,6 +268,8 @@ brew install --cask go2shell
 
 brew install --cask spectacle
 
+brew install poppler
+
 brew install --cask tunnelblick
 
 brew install --cask --cask aws-vpn-client
@@ -305,8 +306,8 @@ brew install lsusb
 
 brew install editorconfig
 
-    brew install mbsync
-    brew install offlineimap
+brew install mbsync
+brew install offlineimap
 
 brew install direnv
 
@@ -339,7 +340,7 @@ brew install kotlin-language-server
 brew install ktlint
 
 brew install scala
-brew install metals # Scala LSP
+brew install metals   # Scala LSP
 brew install coursier # Scala artifact fetcher
 
 brew install clojure
@@ -400,12 +401,12 @@ brew install ocaml
 
 brew install opam # Ocaml package manager
 [[ -d "${HOME}/.opam" ]] || opam init
-opam install -y dune # Ocaml build system
-opam install -y utop # Ocaml repl
-opam install -y ocp-indent # Ocaml auto indent
-opam install -y merlin # Ocaml completion engine
+opam install -y dune             # Ocaml build system
+opam install -y utop             # Ocaml repl
+opam install -y ocp-indent       # Ocaml auto indent
+opam install -y merlin           # Ocaml completion engine
 opam install -y ocaml-lsp-server # Ocaml lsp server
-opam install -y ocamlformat # Code auto-formatter
+opam install -y ocamlformat      # Code auto-formatter
 
 brew install glslang
 

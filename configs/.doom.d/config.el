@@ -94,9 +94,9 @@ so only show the modeline when this is not the case"
                 t nil)))
 (add-hook 'after-change-major-mode-hook #'local/doom-modeline-conditional-buffer-encoding)
 
-(push (file-name-concat "~" ".authinfo.gpg") auth-sources)
-(push (file-name-concat "~" ".gnupg" "authinfo.gpg") auth-sources)
-(setq auth-source-cache-expiry nil) ; default is 7200 (2h)
+; (push (file-name-concat "~" ".authinfo.gpg") auth-sources)
+; (push (file-name-concat "~" ".gnupg" "authinfo.gpg") auth-sources)
+; (setq auth-source-cache-expiry nil) ; default is 7200 (2h)
 
 (setq ns-function-modifier 'hyper)
 
@@ -229,7 +229,7 @@ mode map since otherwise it requires forcing the normal mode state to be activat
 (setq tab-bar-show t)
 (setq tab-bar-tab-name-function #'tab-bar-tab-name-current)
 (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
-(set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
+; (set-face-attribute 'tab-bar nil :inherit 'tab-bar-tab :foreground nil :background nil)
 (map! :n "M->" #'tab-next
       :n "M-<" #'tab-previous)
 
