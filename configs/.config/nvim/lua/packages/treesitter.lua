@@ -67,6 +67,19 @@ return {
                 'yaml',
                 'zsh',
             })
+
+            vim.api.nvim_create_augroup('treesitter', {
+                clear = false,
+            })
+            vim.api.nvim_create_autocmd('FileType', {
+                group = 'treesitter',
+                callback = function(args)
+                    local lang = vim.treesitter.language.get_lang(args.match)
+                    if vim.treesitter.language.add(lang) then
+                        vim.treesitter.start(args.buf, lang)
+                    end
+                end,
+            })
         end,
         keys = {
             { '<leader>cTI', ':checkhealth nvim-treesitter<CR>', desc = 'Info' },
