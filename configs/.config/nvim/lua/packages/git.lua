@@ -31,7 +31,7 @@ return {
         opts = {
             current_line_blame_formatter = ' <author_time:%Y-%m-%d %H:%M> (<author_time:%R>) • <summary> • <author> • [<abbrev_sha>]',
             current_line_blame_opts = {
-                delay = 400,
+                delay = 10,
             },
         },
         keys = {
