@@ -41,7 +41,7 @@ return {
             'f3fora/cmp-spell', -- Spelling recommendations
         },
         lazy = true,
-        opts = function() -- When opts is a function, it needs to return the table to be used for setup
+        opts = function()
             local cmp = require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             return {
@@ -142,6 +142,26 @@ return {
                     }),
                 },
             })
+        end,
+    },
+    {
+        'petertriho/cmp-git',
+        dependencies = {
+            'hrsh7th/nvim-cmp',
+        },
+        lazy = true,
+        ft = 'gitcommit',
+        config = function(_, opts)
+            local cmp = require('cmp')
+            cmp.setup.filetype('gitcommit', {
+                sources = cmp.config.sources({
+                    { name = 'git' },
+                }, {
+                    { name = 'buffer' },
+                }),
+            })
+
+            require('cmp_git').setup(opts)
         end,
     },
 }
