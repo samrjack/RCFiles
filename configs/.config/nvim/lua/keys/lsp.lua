@@ -132,3 +132,4 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 vim.keymap.set('n', '<leader>cLI', vim.cmd.LspInfo, { desc = 'LSP Info' })
+vim.keymap.set('n', '<leader>hiL', vim.cmd.LspInfo, { desc = 'LSP' })

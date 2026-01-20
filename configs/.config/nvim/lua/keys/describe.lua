@@ -33,7 +33,6 @@ local generic_groups = {
     { '<leader><Enter>', group = 'Bookmarks' },
     { '<leader>c', group = 'Code' },
     { '<leader>f', group = 'File' },
-    { '<leader>h', group = 'Help' },
     { '<leader>s', group = 'Search/Replace' },
     { '<leader>t', group = 'Toggle' },
     { '<leader>w', group = 'Windows', proxy = '<C-w>' },

@@ -5,15 +5,17 @@ local function check_treesitter()
     if vim.fn.executable(executable_name) == 1 then
         local out = vim.trim(vim.fn.system({ executable_name, '--version' }))
         local version = vim.version.parse(out)
-        return vim.version.ge(version, TREE_SITTER_MIN_VER)
+        return version ~= nil and vim.version.ge(version, TREE_SITTER_MIN_VER)
     end
     return false
 end
 
 DescribeKeys({
-    { '<leader>cT', group = 'Treesitter' },
     { '<leader>cTc', group = 'Treesitter context' },
 })
+
+DescribeKeys({ '<leader>cT', group = 'Treesitter' })
+vim.keymap.set('n', '<leader>cTi', '<cmd>InspectTree<cr>', { desc = 'Inspect tree' })
 
 return {
     {
@@ -83,6 +85,7 @@ return {
         end,
         keys = {
             { '<leader>cTI', ':checkhealth nvim-treesitter<CR>', desc = 'Info' },
+            { '<leader>hiT', ':checkhealth nvim-treesitter<CR>', desc = 'Treesitter' },
         },
     },
     {

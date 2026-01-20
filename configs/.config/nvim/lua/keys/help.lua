@@ -5,3 +5,8 @@ vim.api.nvim_create_autocmd('FileType', {
         vim.keymap.set('n', 'g==', 'g==', { buffer = args.buf, desc = 'Execute code block' })
     end,
 })
+
+DescribeKeys({
+    { '<leader>h', group = 'Help' },
+    { '<leader>hi', group = 'Info' },
+}, { 'n', 'v' })
